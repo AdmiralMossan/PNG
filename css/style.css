@@ -1,0 +1,19 @@
+.container{
+    text-align: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.btn-secondary{
+    width: 30vh;
+    height: 30vh;
+}
+
+
+#submit{
+    display: none ;
+    height: 50vh;
+    width: 50vh;
+}

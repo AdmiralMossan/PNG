@@ -45,7 +45,7 @@ function storeData(){
         category: category,
         username: username,
         group: group,
-        created: firebase.database.ServerValue.TIMESTAMP 
+        created: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -58,4 +58,22 @@ function storeData(){
 function getCategory(id){
     buttonId = id
     console.log(buttonId)
+}
+ async function logIn(){
+    console.log('fsdf');
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    docs = []
+    await db.collection("users").where( "username" , "==" , username ).where( "password" , "==" , password ).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            docs.push(doc);
+            console.log(doc.id, " => ", doc.data());
+        });
+    });
+    console.log(docs);
+    if(docs.length == 1)
+       location.replace("/Button.html");
+    else
+       alert("Incorrect username or password")
+    
 }

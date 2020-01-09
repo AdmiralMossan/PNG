@@ -5,12 +5,15 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
+        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
+        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
+        <script src = "js/firestore.js" > </script> 
+      </head>
 
     <body>
-        <form>
+        <!-- <form> -->
             <div class="form-group mx-auto align-middle pt-4" style="width: 700px;">
-              <label for="username">Username</label>
+              <!-- <label for="username">Username</label> -->
               <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Enter username">
               <small id="username_extra" class="form-text text-muted">Please input your username.</small>
             </div>
@@ -24,9 +27,9 @@
               <label class="form-check-label" for="rememberuser">Check to remember username.</label>
             </div>
             <div class="mx-auto align-middle" style="width: 700px;">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" onclick="logIn()">Submit</button>
             </div>
             
-          </form>
+          <!-- </form> -->
     </body>
 </html>

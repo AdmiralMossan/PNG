@@ -35,7 +35,28 @@ firebase.firestore().enablePersistence()
     });
 
 
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
 
+function populateReports(){
+    categories = ["A", "B", "C"]
+    groups = [1, 2, 3]
+    for(let i=0; i<20; i++){
+        db.collection("reports").doc().set({
+            category: categories[Math.floor((Math.random() * 3))],
+            username: Math.random().toString(36).slice(2),
+            group: groups[Math.floor((Math.random() * 3) )],
+            created: randomDate(new Date(2019, 12, 1), new Date())
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    }
+}
 
 function storeData(){
     category = buttonId;
@@ -59,20 +80,22 @@ function getCategory(id){
     buttonId = id
     console.log(buttonId)
 }
- async function logIn(){
+
+
+async function logIn(){
     console.log('fsdf');
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     docs = []
     await db.collection("users").where( "username" , "==" , username ).where( "password" , "==" , password ).get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            docs.push(doc);
+            docs.push(doc.data());
             console.log(doc.id, " => ", doc.data());
         });
     });
-    console.log(docs);
+    console.log(docs[0]);
     if(docs.length == 1)
-       location.replace("/Button.html");
+       location.href = "/Button.html";
     else
        alert("Incorrect username or password")
     

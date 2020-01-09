@@ -5,8 +5,19 @@ function custom(x, y) {
     return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
 }
 
+async function getData(x, y){
+    let count = 0;
+    categories = ["A", "B", "C"];
+    await db.collection("reports").where( "category" , "==" , categories[x] ).where( "group" , "==" , y+1 ).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            count+=1;
+        });
+    }); 
+    return count;
+    
+}
 // Called when the Visualization API is loaded.
-function drawVisualization() {
+async function drawVisualization() {
     var style = "bar";//document.getElementById("style").value;
     var withValue =
         ["bar-color", "bar-size", "dot-size", "dot-color"].indexOf(style) != -1;
@@ -24,18 +35,31 @@ function drawVisualization() {
     var yAxisMax = 3;
     var axisStep = axisMax / steps;
     var z = 0;
-    for (var x = 0; x < axisMax; x += axisStep) {
-        for (var y = 0; y < yAxisMax; y += axisStep) {
-            //var z = custom(x, y);
-            z+=5;
-            if (withValue) {
-                var value = y - x;
-                data.add({ x: x, y: y, z: z, style: value });
-            } else {
-                data.add({ x: x, y: y, z: z });
-            }
+
+    dataArray = []
+    for(let i=0; i<3; i+=axisStep){
+        for(let j=0; j<3; j+=axisStep){
+            z = await getData((i/axisStep),(j/axisStep));
+            console.log(z);
+            dataArray.push({x: i, y: j , z: z})
         }
     }
+
+    for(let i=0; i<dataArray.length; i++){
+        data.add(dataArray[i]);
+    }
+    // for (var x = 0; x < axisMax; x += axisStep) {
+    //     for (var y = 0; y < yAxisMax; y += axisStep) {
+    //         //var z = custom(x, y);
+    //         z+=5;
+    //         if (withValue) {
+    //             var value = y - x;
+    //             data.add({ x: x, y: y, z: z, style: value });
+    //         } else {
+    //             data.add({ x: x, y: y, z: z });
+    //         }
+    //     }
+    // }
     // -----------remove this part END-------
 
     // specify options

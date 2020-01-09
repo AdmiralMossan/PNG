@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
+    <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
+    <script src = "js/firestore.js" > </script> 
+</head>
+
+<body>
+        <h1 class="display-3">Select a report:</h1>
+        <div class="container">
+            <div class="row mx-auto w-50">
+                <button id="A" type="button" class=" col-sm btn btn-secondary w-50 mx-3 my-4" style="width: 120px; height: 120px;" onclick="getCategory(this.id)">Category A</button>
+                <button id="B" type="button" class="col-sm btn btn-secondary w-50 mx-3 my-4" style="width: 120px; height: 120px;"  onclick="getCategory(this.id)">Category B</button>
+                <button id="C" type="button" class="col-sm btn btn-secondary w-50 mx-3 my-4" style="width: 120px; height: 120px;"  onclick="getCategory(this.id)">Category C</button>
+            </div>
+            <div class="row" style="height: 100px;">
+
+            </div>
+            <div class="row">
+                <input type="image" src="Images\button.jpg" class="rounded mx-auto d-block bg-white text-dark " alt="Submit" onClick="storeData()">
+            </div>
+        </div>
+    </body>
+    
+</html>

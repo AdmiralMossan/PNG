@@ -12,6 +12,10 @@ let config = {
 firebase.initializeApp(config);
 let db = firebase.firestore();
 console.log("Cloud Firestores Loaded");
+let buttonId = -1
+
+var buttons = document.getElementsByTagName("button");
+var buttonsCount = buttons.length;
 
 // Enable offline capabilities
 firebase.firestore().enablePersistence()
@@ -30,11 +34,18 @@ firebase.firestore().enablePersistence()
         }
     });
 
+
+
+
 function storeData(){
-    db.collection("cities").doc("cs").set({
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA"
+    category = buttonId;
+    username = "Maria";
+    group = "B";
+    db.collection("reports").doc().set({
+        category: category,
+        username: username,
+        group: group,
+        created: firebase.database.ServerValue.TIMESTAMP 
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -42,4 +53,9 @@ function storeData(){
     .catch(function(error) {
         console.error("Error writing document: ", error);
     });
+}
+
+function getCategory(id){
+    buttonId = id
+    console.log(buttonId)
 }

@@ -7,10 +7,10 @@ let config = {
     storageBucket: "myfirstfirebaseproject-7cd16.appspot.com",
     messagingSenderId: "970304867141",
     appId: "1:970304867141:web:e8d354070d615e91504c2c",
-};
+}; 
 
 firebase.initializeApp(config);
-let firestore = firebase.firestore();
+let db = firebase.firestore();
 console.log("Cloud Firestores Loaded");
 
 // Enable offline capabilities
@@ -29,3 +29,17 @@ firebase.firestore().enablePersistence()
             // ...
         }
     });
+
+function storeData(){
+    db.collection("cities").doc("cs").set({
+        name: "Los Angeles",
+        state: "CA",
+        country: "USA"
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+}

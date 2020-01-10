@@ -29,8 +29,8 @@
         grid-column-gap: 2em;
         grid-row-gap: 1em;
         grid-template-areas:
-        'bar bar pie'
-        'bar bar stat';
+        'bar bar bar pie'
+        'bar bar bar stat';
     }
 
     #bar-container{

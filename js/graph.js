@@ -39,7 +39,6 @@ function drawVisualization() {
     var withValue =["bar-color", "bar-size", "dot-size", "dot-color"].indexOf(style) != -1;
 
     // Create and populate a data table.
-    colors = ["#A9B7AE", "orange", "yellow"];
     data = new vis.DataSet();
 
     //x: Category, y: Group, z: Number
@@ -54,6 +53,10 @@ function drawVisualization() {
     var z = 0;
 
     dataArray = []
+    colors = ["#A9B7AE", "orange", "yellow"];
+    categories = ["A", "B", "C"];
+    groups = ["I", "II", "III"];
+
     for(let i=0; i<3; i+=axisStep){
         for(let j=0; j<3; j+=axisStep){
             z = getData((i/axisStep),(j/axisStep));
@@ -101,25 +104,21 @@ function drawVisualization() {
         //tooltip: true,
         tooltip: function(point) {
             // parameter point contains properties x, y, z
-            return "Number: <b>" + point.z + "</b>";
+            return "Category: <b>"+ categories[point.x] + "</b> " + "Group: <b>" +  groups[point.y] +"</b> " + "Number: <b>" + point.z + "</b>";
         },
 
         xValueLabel: function(value) {
-            switch(value){
-                case 0: return "A";
-                case 1: return "B";
-                case 2: return "C";
-                default: return "";
+            if(value%1==0){
+                return categories[value];
             }
+            return "";
         },
 
         yValueLabel: function(value) {
-            switch(value){
-                case 0: return "Group I";
-                case 1: return "Group II";
-                case 2: return "Group III";
-                default: return "";
+            if(value%1==0){
+                return "Group " + groups[value];
             }
+            return "";
         },
 
         zValueLabel: function(value) {

@@ -26,9 +26,29 @@
             <div class="row" style="height: 100px;">
                 <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
             </div>
+
             <div class="row">
-                
-                <input id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark " alt="Submit" disabled>
+                <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit" disabled>
+            </div>
+              
+            <!-- Modal -->
+            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Report Successful!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your report has been successfully submitted!
+                </div>
+                <div class="modal-footer">
+                    <button id="closemodal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
             </div>
         </div>
     </body>

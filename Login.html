@@ -10,26 +10,32 @@
         <script src = "js/firestore.js" > </script> 
       </head>
 
-    <body>
-        <!-- <form> -->
-            <div class="form-group mx-auto align-middle pt-4" style="width: 700px;">
-              <!-- <label for="username">Username</label> -->
-              <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Enter username">
-              <small id="username_extra" class="form-text text-muted">Please input your username.</small>
-            </div>
-            <div class="form-group mx-auto align-middle" style="width: 700px;">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" aria-describedby="password_extra" placeholder="Password">
-              <small id="password_extra" class="form-text text-muted">Please input your password.</small>
-            </div>
-            <div class="form-check mx-auto align-middle" style="width: 700px;">
-              <input type="checkbox" class="form-check-input" id="rememberuser">
-              <label class="form-check-label" for="rememberuser">Check to remember username.</label>
-            </div>
-            <div class="mx-auto align-middle" style="width: 700px;">
-              <button type="submit" class="btn btn-primary" onclick="logIn()">Submit</button>
-            </div>
-            
-          <!-- </form> -->
+     <body>
+      <div class="container">
+        <div class="row" style="height:200px;"></div>
+        <div class="row">
+          <div class="col-md"></div>
+          <div class="col-sm mx-auto w-50 border pb-4">
+            <form>
+              <div class="form-group mx-auto align-middle pt-4" style="width: 500px;">
+                <label for="username">Login:</label>
+                <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Username">
+              </div>
+              <div class="form-group mx-auto align-middle" style="width: 500px;">
+                <input type="password" class="form-control" id="password" aria-describedby="password_extra" placeholder="Password">
+                <small id="password_extra" class="form-text text-muted">Please input your password.</small>
+              </div>
+              <div class="form-check mx-auto align-middle" style="width: 500px;">
+                <input type="checkbox" class="form-check-input" id="rememberuser">
+                <label class="form-check-label" for="rememberuser">Check to remember username.</label>
+              </div>
+              <div class="mx-auto align-middle pl-4 pt-4" style="width: 700px;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md"></div>
+        </div>
+      </div>
     </body>
 </html>

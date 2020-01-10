@@ -43,7 +43,7 @@ async function loadData() {
         data.add(dataArray[i]);
     }
 
-    return data;
+    return dataArray;
 }
 
 

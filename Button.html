@@ -7,28 +7,26 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="js/button.js">
-        
-
-        
-    </script>
+    <script src="js/button.js"></script>
+    <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
+    <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
+    <script src = "js/firestore.js" > </script> 
 </head>
 
 <body>
         <h1 class="display-3">Select a report:</h1>
         <div class="container">
             <div class="row mx-auto w-50">
-                <button type="button" id="btn1" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;">Category A</button>
-                <button type="button" id="btn2" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;">Category B</button>
-                <button type="button" id="btn3" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;">Category C</button>
-                
+                <button type="button" id="btn1" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("A")'>Category A</button>
+                <button type="button" id="btn2" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("B")'>Category B</button>
+                <button type="button" id="btn3" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("C")'>Category C</button>  
             </div>         
             <div class="row" style="height: 100px;">
                 <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
             </div>
 
             <div class="row">
-                <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit" disabled>
+                <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit"onclick="storeData()" disabled>
             </div>
               
             <!-- Modal -->

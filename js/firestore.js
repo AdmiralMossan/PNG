@@ -16,7 +16,6 @@ let buttonId = -1
 
 var buttons = document.getElementsByTagName("button");
 var buttonsCount = buttons.length;
-
 // Enable offline capabilities
 firebase.firestore().enablePersistence()
     .then(function() {
@@ -59,9 +58,12 @@ function populateReports(){
 }
 
 function storeData(){
+    disabled = document.getElementById('picture').getAttribute('disabled');
+    if(disabled === "disabled" || disabled === "") 
+       return
     category = buttonId;
     username = "Maria";
-    group = "B";
+    group = 1;
     db.collection("reports").doc().set({
         category: category,
         username: username,

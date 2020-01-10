@@ -45,7 +45,7 @@ $( document ).ready(function() {
                 }
             });
             $("#picture").click(function(){
-                if (jQuery('#picture1')[0].hasAttribute('disabled')) {
+                if (jQuery('#picture')[0].hasAttribute('disabled')) {
                     $('#picture').attr('src', "Images/buttonD.jpg");
                     $('#picture').attr('data-toggle', false);
                     $('#picture').attr('disabled', true);

@@ -1,28 +1,45 @@
 var data = null;
 var graph = null;
+var reports = [];
 
 function custom(x, y) {
     return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
 }
 
-async function getData(x, y){
-    let count = 0;
+async function getReports(){
+    let locReports = []
     categories = ["A", "B", "C"];
-    await db.collection("reports").where( "category" , "==" , categories[x] ).where( "group" , "==" , y+1 ).get().then(function(querySnapshot) {
+    await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            count+=1;
+           locReports.push(doc.data())
         });
     }); 
+    reports = locReports;
+    console.log(reports)
+}
+function getData(x, y){
+    let count = 0;
+    categories = ["A", "B", "C"];
+    // await db.collection("reports").where( "category" , "==" , categories[x] ).where( "group" , "==" , y+1 ).get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //         count+=1;
+    //     });
+    // }); 
+    // return count;
+    for(let i=0; i<reports.length; i++){
+        console.log(reports[i]);
+        if(reports[i].category == categories[x] && reports[i].group == y+1)
+            count+=1;
+    }
     return count;
-    
 }
 // Called when the Visualization API is loaded.
-async function drawVisualization() {
+function drawVisualization() {
     var style = "bar";//document.getElementById("style").value;
-    var withValue =
-        ["bar-color", "bar-size", "dot-size", "dot-color"].indexOf(style) != -1;
+    var withValue =["bar-color", "bar-size", "dot-size", "dot-color"].indexOf(style) != -1;
 
     // Create and populate a data table.
+    colors = ["#A9B7AE", "orange", "yellow"];
     data = new vis.DataSet();
 
     //x: Category, y: Group, z: Number
@@ -39,9 +56,12 @@ async function drawVisualization() {
     dataArray = []
     for(let i=0; i<3; i+=axisStep){
         for(let j=0; j<3; j+=axisStep){
-            z = await getData((i/axisStep),(j/axisStep));
+            z = getData((i/axisStep),(j/axisStep));
             console.log(z);
-            dataArray.push({x: i, y: j , z: z})
+            dataArray.push({x: i, y: j , z: z,  style: {
+                fill: colors[i / axisStep],
+                stroke: "#999"
+              }})
         }
     }
 
@@ -66,7 +86,7 @@ async function drawVisualization() {
     var options = {
         width: "600px",
         height: "600px",
-        style: style,
+        style: "bar-color",
         showPerspective: true,
         showGrid: true,
         showShadow: false,
@@ -109,19 +129,20 @@ async function drawVisualization() {
         keepAspectRatio: true,
         verticalRatio: 0.5
     };
-
+    
     var camera = graph ? graph.getCameraPosition() : null;
 
     // create our graph
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
-
+    graph.animationStart();
     if (camera) 
         graph.setCameraPosition(camera); // restore camera position
-
+    
     //document.getElementById("style").onchange = drawVisualization;
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
+    await getReports();
     drawVisualization();
 });

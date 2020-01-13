@@ -83,7 +83,11 @@
           <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Reports (by category/group)</h6>
+              Reports: 
+              <select class="form-control" id="bySelect">
+                <option value=1 selected="selected">by Category</option>
+                <option value=2>by Group</option>
+              </select>
             </div>
             <!-- Card Body -->  
             <div class="card-body">
@@ -104,7 +108,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2 d-flex justify-content-center">
-                  <h5 class="text-danger">10</h5>
+                  <h5 id="reportCount" class="text-danger">10</h5>
                 </div>
                 <div class="col-auto">
                   <i class="fas fa-comments fa-2x text-gray-300"></i>

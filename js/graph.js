@@ -3,6 +3,7 @@ var graph = null;
 var reports = [];
 var categoriesCount = [];
 var groupsCount = [];
+var myPieChart = null;
 function custom(x, y) {
     return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
 }
@@ -88,16 +89,28 @@ async function loadData() {
 }
 
 
-async function drawPie(data) {
-    categoriesLabel = ["A", "B", "C"];
-    groupsLabel = ["I", "II", "III"];
-    var myPieChart = new Chart(ctx, {
+async function drawPie(data, groupBy) {
+    let categoriesLabel = ["A", "B", "C"];
+    let groupsLabel = ["I", "II", "III"];
+    let displayData = []
+    let displayLabel = []
+    if(groupBy == 1){
+        displayData = categoriesCount;
+        displayLabel = categoriesLabel;
+    }else{
+        displayData = groupsCount;
+        displayLabel = groupsLabel;
+    }
+    if(myPieChart!=null){
+        myPieChart.destroy();
+    }
+    myPieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: categoriesLabel,
+            labels: displayLabel,
             datasets: [{
                 label: '# of Votes',
-                data: categoriesCount,
+                data: displayData,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -120,6 +133,7 @@ async function drawPie(data) {
         options: {
 
         }
+        
     });
 
 }
@@ -181,7 +195,12 @@ window.addEventListener("load", async () => {
     await getReports(); 
     loadData().then(function () {
         drawVisualization(data);
-        drawPie(data);
+        drawPie(data, 1);
+    });
+    $("#reportCount").text(reports.length);
+    $("#bySelect").change(function(){
+        var selectedOption = $(this).children("option:selected").val();
+        drawPie(data, selectedOption);
     });
 });
 

@@ -1,13 +1,16 @@
 var data = null;
 var graph = null;
 var reports = [];
-
+var categoriesCount = [];
+var groupsCount = [];
 function custom(x, y) {
     return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
 }
 
 async function getReports(){
     let locReports = []
+    let noOfGroups = 3;
+    initializeCounts();
     categories = ["A", "B", "C"];
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -15,17 +18,33 @@ async function getReports(){
         });
     }); 
     reports = locReports;
-    console.log(reports)
+    console.log(reports);
+
+    for(let i=0; i<reports.length; i++){
+        console.log(reports[i]);
+        for(let j=0; j<categories.length; j++){
+            if(reports[i].category == categories[j])
+                categoriesCount[j] += 1;
+        }
+
+        for(let k=0; k<noOfGroups; k++){
+            if(reports[i].group == k+1 )
+                groupsCount[k] += 1;
+        }
+    }
 }
+
+function initializeCounts(){
+    for(let i=0; i<3; i++){
+        categoriesCount[i] = 0;
+        groupsCount[i] = 0;
+    }
+
+}
+
 function getData(x, y){
     let count = 0;
     categories = ["A", "B", "C"];
-    // await db.collection("reports").where( "category" , "==" , categories[x] ).where( "group" , "==" , y+1 ).get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //         count+=1;
-    //     });
-    // }); 
-    // return count;
     for(let i=0; i<reports.length; i++){
         console.log(reports[i]);
         if(reports[i].category == categories[x] && reports[i].group == y+1)
@@ -70,15 +89,15 @@ async function loadData() {
 
 
 async function drawPie(data) {
+    categoriesLabel = ["A", "B", "C"];
+    groupsLabel = ["I", "II", "III"];
     var myPieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: categoriesLabel,
             datasets: [{
                 label: '# of Votes',
-                data: [
-                    
-                ],
+                data: categoriesCount,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -107,16 +126,11 @@ async function drawPie(data) {
 
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
-    console.log(data);
-    var style = "bar";//document.getElementById("style").value;
-    var withValue =
-        ["bar-color", "bar-size", "dot-size", "dot-color"].indexOf(style) != -1;
-
     // specify options
     var options = {
         width: "90%",
         height: "90%",
-        style: 'bar',
+        style: 'bar-color',
         showPerspective: true,
         showGrid: true,
         showShadow: true,
@@ -161,13 +175,11 @@ async function drawVisualization(data) {
     graph = new vis.Graph3d(container, data, options);
 
     graph.setCameraPosition({ horizontal: 0.0, vertical: 0.0, distance: 2 }); // restore camera position
-
-    //document.getElementById("style").onchange = drawVisualization;
 }
 
 window.addEventListener("load", async () => {
     await getReports(); 
-    loadData().then(function (data) {
+    loadData().then(function () {
         drawVisualization(data);
         drawPie(data);
     });

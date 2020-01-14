@@ -206,13 +206,12 @@ window.addEventListener("load", async () => {
         drawPie(data, 1);
     });
     $("#reportCount").text(reports.length);
-    $("#bySelect").change(function(){
-        var selectedOption = $(this).children("option:selected").val();
-        //drawPie(data, selectedOption);
-        generateColors(selectedOption);
-        loadData(selectedOption).then(function () {
-            drawVisualization(data);
-            drawPie(data, selectedOption);
-        });
+    $('#group').change(function(){
+        generateColors(2);
+        drawPie(data, 2);
+    });
+    $('#category').change(function(){
+        generateColors(1);
+        drawPie(data, 1);
     });
 });

@@ -4,25 +4,37 @@ var reports = [];
 var categoriesCount = [];
 var groupsCount = [];
 var myPieChart = null;
-function custom(x, y) {
-    return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
-}
+var categories = [];
+var groups = [];
+var colors = [];
+var pieColors = [];
 
 async function getReports(){
     let locReports = []
     let noOfGroups = 3;
     initializeCounts();
-    categories = ["A", "B", "C"];
+    
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            locReports.push(doc.data())
         });
     }); 
+
+    await db.collection("categories").orderBy("name").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+             categories.push(doc.data().name)
+        });
+    });
+
+    await db.collection("groups").orderBy("name").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+             groups.push(doc.data().name)
+        });
+    });
+    
     reports = locReports;
-    console.log(reports);
 
     for(let i=0; i<reports.length; i++){
-        console.log(reports[i]);
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
                 categoriesCount[j] += 1;
@@ -45,9 +57,7 @@ function initializeCounts(){
 
 function getData(x, y){
     let count = 0;
-    categories = ["A", "B", "C"];
     for(let i=0; i<reports.length; i++){
-        console.log(reports[i]);
         if(reports[i].category == categories[x] && reports[i].group == y+1)
             count+=1;
     }
@@ -55,24 +65,20 @@ function getData(x, y){
    
 }
 
-async function loadData() {
-    var steps = 3;
-    var axisMax = 3;    
-    var yAxisMax = 3;
+async function loadData(colorBy) {
+    var steps = categories.length;
+    var axisMax = steps;    
+    var yAxisMax = groups.length;
     var axisStep = axisMax / steps;
     var z = 0;
 
-    dataArray = []
-    colors = ["#A9B7AE", "rgb(255, 0, 0)", "yellow"];
-    categories = ["A", "B", "C"];
-    groups = ["I", "II", "III"];
-
-    for(let i=0; i<3; i+=axisStep){
-        for(let j=0; j<3; j+=axisStep){
+    dataArray = [];
+    for(let i=0; i<axisMax; i+=axisStep){
+        for(let j=0; j<yAxisMax; j+=axisStep){
             z = getData((i/axisStep),(j/axisStep));
-            console.log(z);
+            color = colorBy == 1 ? colors[i] : colors[j];
             dataArray.push({x: i, y: j , z: z,  style: {
-                fill: "rgb(" + Math.floor((Math.random() * 255)) + "," + Math.floor((Math.random() * 255)) + "," + Math.floor((Math.random() * 255)) + ")",
+                fill:  color,
                 stroke: "#999"
               }})
         }
@@ -89,18 +95,31 @@ async function loadData() {
     return dataArray;
 }
 
+function generateColors(sortBy){
+    colors = []
+    var r =  Math.floor((Math.random() *  255));
+    let sortLength = sortBy == 1 ? categories.length : groups.length;
+ 
+    for(let i=0; i<sortLength; i++){
+        var r =  Math.floor((Math.random() *  255));
+        var g =  Math.floor((Math.random() *  255));
+        var b =  Math.floor((Math.random() *  255));
+        stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
+        colors[i] =  stringColor + ",1)";
+        pieColors[i] = stringColor + ",0.2)";
+    }
+    
+}
 
 async function drawPie(data, groupBy) {
-    let categoriesLabel = ["A", "B", "C"];
-    let groupsLabel = ["I", "II", "III"];
     let displayData = []
     let displayLabel = []
     if(groupBy == 1){
         displayData = categoriesCount;
-        displayLabel = categoriesLabel;
+        displayLabel = categories;
     }else{
         displayData = groupsCount;
-        displayLabel = groupsLabel;
+        displayLabel = groups;
     }
     if(myPieChart!=null){
         myPieChart.destroy();
@@ -112,22 +131,8 @@ async function drawPie(data, groupBy) {
             datasets: [{
                 label: '# of Votes',
                 data: displayData,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: pieColors,
+                borderColor: colors,
                 borderWidth: 1
             }]
         },
@@ -150,7 +155,7 @@ async function drawVisualization(data) {
         showGrid: true,
         showShadow: true,
         animationPreload: true,
-        xLabel: "Category",
+        xLabel: "Categories",
         yLabel: "Groups",
         zLabel: "Number",
         xBarWidth: 0.5,
@@ -165,7 +170,7 @@ async function drawVisualization(data) {
 
         xValueLabel: function(value) {
             if(value%1==0){
-                return categories[value];
+                return "Category " + categories[value];
             }
             return "";
         },
@@ -194,14 +199,20 @@ async function drawVisualization(data) {
 
 window.addEventListener("load", async () => {
     await getReports(); 
-    loadData().then(function () {
+    generateColors(1);
+    console.log(colors);
+    loadData(1).then(function () {
         drawVisualization(data);
         drawPie(data, 1);
     });
     $("#reportCount").text(reports.length);
     $("#bySelect").change(function(){
         var selectedOption = $(this).children("option:selected").val();
-        drawPie(data, selectedOption);
+        //drawPie(data, selectedOption);
+        generateColors(selectedOption);
+        loadData(selectedOption).then(function () {
+            drawVisualization(data);
+            drawPie(data, selectedOption);
+        });
     });
 });
-

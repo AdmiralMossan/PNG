@@ -11,7 +11,7 @@ var pieColors = [];
 
 async function getReports(){
     let locReports = []
-    initializeCounts();
+   
     
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -32,7 +32,8 @@ async function getReports(){
     });
     
     reports = locReports;
-
+    initializeCounts();
+    console.log(groups);
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
@@ -40,18 +41,22 @@ async function getReports(){
         }
 
         for(let k=0; k<groups.length; k++){
-            if(reports[i].group == groups[k] )
+            if(reports[i].group - 1 == k ){
+                console.log(groups[k]);
                 groupsCount[k] += 1;
+            }
+                
         }
     }
 }
 
 function initializeCounts(){
-    for(let i=0; i<3; i++){
-        categoriesCount[i] = 0;
+    for(let i=0; i<categories.length; i++){
+        categoriesCount[i] = 0; 
+    }
+    for(let i=0; i<groups.length; i++){
         groupsCount[i] = 0;
     }
-
 }
 
 function getData(x, y){

@@ -12,12 +12,16 @@ async function getCategories(){
 
 function initializeButtons(){
     console.log(categories.length);
-    var Ctgcontainer = document.getElementById("categoryContainer");  
+    var Ctgcontainer = document.getElementById("categoryContainer"); 
+    var ctgDesc =  document.getElementById("ctgDesc"); 
     for(let i=0; i<categories.length; i++){
         Ctgcontainer.innerHTML += `<div class="col-sm">
              <button type="button" id="category` + categories[i] + `" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;" >
              Category ` + categories[i] + `</button>
            </div>`;
+
+           ctgDesc.innerHTML +=  '<h6 class="pt-4">Category ' + categories[i] + `:</h6>
+           <p><small>Category ` + categories[i] +  ` is a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</small></p>`;
     }
 }
 

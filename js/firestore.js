@@ -62,8 +62,8 @@ function storeData(){
     if(disabled === "disabled" || disabled === "") 
        return
     category = buttonId;
-    username = "Maria";
-    group = 1;
+    username = sessionStorage.getItem("username"); ;
+    group = sessionStorage.getItem("group"); ;
     db.collection("reports").doc().set({
         category: category,
         username: username,
@@ -86,7 +86,6 @@ function getCategory(id){
 
 async function logIn(e){
     e.preventDefault();
-    console.log('fsdf');
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     docs = []
@@ -98,11 +97,19 @@ async function logIn(e){
     });
     console.log(docs[0]);
     if(docs.length == 1){
-       if(docs[0].userType == 1) 
+       if(docs[0].userType == 1){
           location.href = "/admin.html";
-       else
+       }else{
           location.href = "/Button.html";
+          sessionStorage.setItem("username", docs[0].userType);
+          sessionStorage.setItem("group", docs[0].group);
+       }
     }else
        alert("Incorrect username or password")
     
+}
+
+function logOut(){  
+    location.href = "/Login.html";
+    sessionStorage.clear();
 }

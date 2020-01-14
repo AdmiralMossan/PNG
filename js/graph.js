@@ -11,7 +11,6 @@ var pieColors = [];
 
 async function getReports(){
     let locReports = []
-    let noOfGroups = 3;
     initializeCounts();
     
     await db.collection("reports").get().then(function(querySnapshot) {
@@ -40,8 +39,8 @@ async function getReports(){
                 categoriesCount[j] += 1;
         }
 
-        for(let k=0; k<noOfGroups; k++){
-            if(reports[i].group == k+1 )
+        for(let k=0; k<groups.length; k++){
+            if(reports[i].group == groups[k] )
                 groupsCount[k] += 1;
         }
     }

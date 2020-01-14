@@ -5,9 +5,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
-        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
-        <script src = "js/firestore.js" > </script>
     </head>
 
     <body>
@@ -16,14 +13,11 @@
         <div class="row">
           <div class="col-md"></div>
           <div class="col-sm mx-auto w-50 border pb-4">
-            <form onsubmit="logIn(event);">
-              <!-- Username field -->
+            <form>
               <div class="form-group mx-auto align-middle pt-4" style="width: 500px;">
                 <label for="username">Login:</label>
                 <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Username">
               </div>
-                
-              <!-- Password Field -->
               <div class="form-group mx-auto align-middle" style="width: 500px;">
                 <input type="password" class="form-control" id="password" aria-describedby="password_extra" placeholder="Password">
                 <small id="password_extra" class="form-text text-muted">Please input your password.</small>
@@ -32,13 +26,11 @@
                 <input type="checkbox" class="form-check-input" id="rememberuser">
                 <label class="form-check-label" for="rememberuser">Check to remember username.</label>
               </div>
-                
-              <!-- Submit Button -->
               <div class="mx-auto align-middle pl-4 pt-4 container" style="width: 500px;">
                 <div class="row">
                   <div class="col-sm"></div>
                   <div class="col-sm text-center">
-                    <button type="submit" class="btn btn-primary ">Login</button>
+                    <button type="submit" class="btn btn-primary ">Submit</button>
                   </div>
                   <div class="col-sm"></div>
                 </div>

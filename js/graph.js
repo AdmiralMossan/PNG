@@ -208,10 +208,16 @@ window.addEventListener("load", async () => {
     $("#reportCount").text(reports.length);
     $('#group').change(function(){
         generateColors(2);
-        drawPie(data, 2);
+        loadData(2).then(function () {
+            drawVisualization(data);
+            drawPie(data, 2);
+        });
     });
     $('#category').change(function(){
         generateColors(1);
-        drawPie(data, 1);
+        loadData(1).then(function () {
+            drawVisualization(data);
+            drawPie(data, 1);
+        });
     });
 });

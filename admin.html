@@ -83,11 +83,19 @@
           <div class="card shadow mb-2">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              Reports: 
-              <select class="form-control" id="bySelect" autocomplete="off">
-                <option value=1 selected="selected" >by Category</option>
-                <option value=2>by Group</option>
-              </select>
+              <div>
+                Reports (by:
+                <div class="form-check form-check-inline mr-0">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="category" value="1">
+                  <label class="form-check-label" for="category">Category</label>
+                </div>
+                |
+                <div class="form-check form-check-inline mr-0">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="group" value="2">
+                  <label class="form-check-label" for="group">Group</label>
+                </div>
+                )
+              </div>
             </div>
             <!-- Card Body -->  
             <div class="card-body">
@@ -100,7 +108,7 @@
 
         <!-- Stats Card Example -->
         <div id="stats-container">
-          <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card border-left-warning shadow py-2">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-uppercase text-primary">Total Number of Reports:</h6>

@@ -10,7 +10,7 @@
 
 #bar-container{
     grid-area:  bar;
-    height: 80vh;
+    height: 60vh;
 }
 
 #pie-container{
@@ -21,6 +21,7 @@
 #stats-container{
     grid-area: stat;
 }
+
 
 @media only screen and (min-width: 768px){
 
@@ -35,7 +36,7 @@
 
     #bar-container{
         grid-area:  bar;
-        height: 80vh;
+        height: 90vh;
     }
 
     #pie-container{

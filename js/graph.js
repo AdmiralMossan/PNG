@@ -52,6 +52,7 @@ function getData(x, y){
             count+=1;
     }
     return count;
+   
 }
 
 async function loadData() {

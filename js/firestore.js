@@ -84,7 +84,8 @@ function getCategory(id){
 }
 
 
-async function logIn(){
+async function logIn(e){
+    e.preventDefault();
     console.log('fsdf');
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
@@ -96,9 +97,12 @@ async function logIn(){
         });
     });
     console.log(docs[0]);
-    if(docs.length == 1)
-       location.href = "/Button.html";
-    else
+    if(docs.length == 1){
+       if(docs[0].userType == 1) 
+          location.href = "/admin.html";
+       else
+          location.href = "/Button.html";
+    }else
        alert("Incorrect username or password")
     
 }

@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html>
 
@@ -11,26 +10,78 @@
     <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
     <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
     <script src = "js/firestore.js" > </script> 
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
 <body>
-        <h1 class="display-3">Select a report:</h1>
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ">
+
+        <!-- Nav Heading -->
+        <div class="navbar-brand">
+          <h1 class="h3 mb-0 text-gray-800">Report Creation</h1>
+        </div>
+
+        <!-- Nav Item - User Information -->
+        <div class="ml-auto">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <h3 class="mr-2 d-none d-inline text-gray-600 ">User</h3>
+          </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+
         <div class="container">
-            <!-- Category Selection -->
-            <div class="row mx-auto w-50">
-                <button type="button" id="btn1" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("A")'>Category A</button>
-                <button type="button" id="btn2" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("B")'>Category B</button>
-                <button type="button" id="btn3" class="col-sm btn btn-secondary w-50 mx-3 my-4"  style="width: 120px; height: 120px;" onclick = 'getCategory("C")'>Category C</button>  
-            </div>         
-            <div class="row" style="height: 100px;">
-                <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
-            </div>
-            
-            <!-- Report Button -->
             <div class="row">
-                <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit"onclick="storeData()" disabled>
+            <div class="col-8">
+                <div class="row mx-auto w-50">
+                    <h2 class="mx-auto">Select a Report:</h2>
+                    <p class="lead text-center">
+                        Create a new report by pressing one of the report categories and pressing the report button below.
+                    </p>
+                </div>
+                <!-- Category Selection -->
+                <div class="row mx-auto  border">
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm">
+                            <button type="button" id="btn1" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;" onclick = 'getCategory("A")'>Category A</button>
+                          </div>
+                          <div class="col-sm">
+                            <button type="button" id="btn2" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;" onclick = 'getCategory("B")'>Category B</button>
+                          </div>
+                          <div class="col-sm">
+                            <button type="button" id="btn3" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;" onclick = 'getCategory("C")'>Category C</button>
+                          </div>
+                        </div>
+                      </div>
+                </div>         
+                <div class="row" style="height: 30px;">
+                    <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
+                </div>
+                
+                <!-- Report Button -->
+                <div class="row">
+                    <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit"onclick="storeData()" disabled>
+                </div>
+            </div> 
+            <div class="col-sm ">
+                <h5 class="pt-4">Categories:</h5>
+                <h6 class="pt-4">Category A:</h6>
+                    <p><small>Category A is a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</small></p>
+                <h6 class="pt-4">Category B:</h6>
+                    <p><small>Category B is a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</small></p>
+                <h6 class="pt-4">Category C:</h6>
+                    <p><small>Category C is a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</small></p>
             </div>
-              
+        </div>
+
             <!-- Modal -->
             <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

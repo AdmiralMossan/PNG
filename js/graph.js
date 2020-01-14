@@ -63,7 +63,7 @@ async function loadData() {
     var z = 0;
 
     dataArray = []
-    colors = ["#A9B7AE", "orange", "yellow"];
+    colors = ["#A9B7AE", "rgb(255, 0, 0)", "yellow"];
     categories = ["A", "B", "C"];
     groups = ["I", "II", "III"];
 
@@ -72,7 +72,7 @@ async function loadData() {
             z = getData((i/axisStep),(j/axisStep));
             console.log(z);
             dataArray.push({x: i, y: j , z: z,  style: {
-                fill: colors[i / axisStep],
+                fill: "rgb(" + Math.floor((Math.random() * 255)) + "," + Math.floor((Math.random() * 255)) + "," + Math.floor((Math.random() * 255)) + ")",
                 stroke: "#999"
               }})
         }

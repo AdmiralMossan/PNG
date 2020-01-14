@@ -4,25 +4,35 @@ var reports = [];
 var categoriesCount = [];
 var groupsCount = [];
 var myPieChart = null;
-function custom(x, y) {
-    return (-Math.sin(x / Math.PI) * Math.cos(y / Math.PI) * 10 + 10) * 100;
-}
+var categories = [];
+var groups = [];
 
 async function getReports(){
     let locReports = []
     let noOfGroups = 3;
     initializeCounts();
-    categories = ["A", "B", "C"];
+    
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            locReports.push(doc.data())
         });
     }); 
+
+    await db.collection("categories").orderBy("name").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+             categories.push(doc.data().name)
+        });
+    });
+
+    await db.collection("groups").orderBy("name").get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+             groups.push(doc.data().name)
+        });
+    });
+    
     reports = locReports;
-    console.log(reports);
 
     for(let i=0; i<reports.length; i++){
-        console.log(reports[i]);
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
                 categoriesCount[j] += 1;
@@ -45,9 +55,7 @@ function initializeCounts(){
 
 function getData(x, y){
     let count = 0;
-    categories = ["A", "B", "C"];
     for(let i=0; i<reports.length; i++){
-        console.log(reports[i]);
         if(reports[i].category == categories[x] && reports[i].group == y+1)
             count+=1;
     }
@@ -56,23 +64,20 @@ function getData(x, y){
 }
 
 async function loadData() {
-    var steps = 3;
-    var axisMax = 3;    
-    var yAxisMax = 3;
+    var steps = categories.length;
+    var axisMax = steps;    
+    var yAxisMax = groups.length;
     var axisStep = axisMax / steps;
     var z = 0;
 
-    dataArray = []
-    colors = ["#A9B7AE", "orange", "yellow"];
-    categories = ["A", "B", "C"];
-    groups = ["I", "II", "III"];
+    dataArray = [];
 
-    for(let i=0; i<3; i+=axisStep){
-        for(let j=0; j<3; j+=axisStep){
+    for(let i=0; i<axisMax; i+=axisStep){
+        var color = "rgb(" + Math.floor((Math.random() *  255)) + "," + Math.floor((Math.random() *  255)) + "," + Math.floor((Math.random() *  255)) + ")";
+        for(let j=0; j<yAxisMax; j+=axisStep){
             z = getData((i/axisStep),(j/axisStep));
-            console.log(z);
             dataArray.push({x: i, y: j , z: z,  style: {
-                fill: colors[i / axisStep],
+                fill: color,
                 stroke: "#999"
               }})
         }
@@ -91,16 +96,14 @@ async function loadData() {
 
 
 async function drawPie(data, groupBy) {
-    let categoriesLabel = ["A", "B", "C"];
-    let groupsLabel = ["I", "II", "III"];
     let displayData = []
     let displayLabel = []
     if(groupBy == 1){
         displayData = categoriesCount;
-        displayLabel = categoriesLabel;
+        displayLabel = categories;
     }else{
         displayData = groupsCount;
-        displayLabel = groupsLabel;
+        displayLabel = groups;
     }
     if(myPieChart!=null){
         myPieChart.destroy();
@@ -150,7 +153,7 @@ async function drawVisualization(data) {
         showGrid: true,
         showShadow: true,
         animationPreload: true,
-        xLabel: "Category",
+        xLabel: "Categories",
         yLabel: "Groups",
         zLabel: "Number",
         xBarWidth: 0.5,
@@ -165,7 +168,7 @@ async function drawVisualization(data) {
 
         xValueLabel: function(value) {
             if(value%1==0){
-                return categories[value];
+                return "Category " + categories[value];
             }
             return "";
         },

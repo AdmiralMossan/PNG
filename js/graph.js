@@ -106,7 +106,7 @@ function generateColors(sortBy){
         var b =  Math.floor((Math.random() *  255));
         stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
         colors[i] =  stringColor + ",1)";
-        pieColors[i] = stringColor + ",0.2)";
+        pieColors[i] = stringColor + ",0.4)";
     }
     
 }

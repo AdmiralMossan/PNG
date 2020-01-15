@@ -217,7 +217,6 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await getReports(); 
     generateColors(1);
-    console.log(colors);
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(data, 1);

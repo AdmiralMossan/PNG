@@ -37,26 +37,7 @@ firebase.firestore().enablePersistence()
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
-
-function populateReports(){
-    categories = ["A", "B", "C"]
-    groups = [1, 2, 3]
-    for(let i=0; i<20; i++){
-        db.collection("reports").doc().set({
-            category: categories[Math.floor((Math.random() * 3))],
-            username: Math.random().toString(36).slice(2),
-            group: groups[Math.floor((Math.random() * 3) )],
-            created: randomDate(new Date(2019, 12, 1), new Date())
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-}
-
+ 
 function storeData(){
     disabled = document.getElementById('picture').getAttribute('disabled');
     if(disabled === "disabled" || disabled === "") 
@@ -80,7 +61,6 @@ function storeData(){
 
 function getCategory(id){
     buttonId = id
-    console.log(buttonId)
 }
 
 
@@ -95,7 +75,6 @@ async function logIn(e){
             console.log(doc.id, " => ", doc.data());
         });
     });
-    console.log(docs[0]);
     if(docs.length == 1){
        if(docs[0].userType == 1){
           location.href = "/admin.html";

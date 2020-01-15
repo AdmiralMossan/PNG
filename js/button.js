@@ -7,11 +7,9 @@ async function getCategories(){
              categories.push(doc.data().name)
         });
     });
-    console.log(categories);
 }
 
 function initializeButtons(){
-    console.log(categories.length);
     var Ctgcontainer = document.getElementById("categoryContainer"); 
     var ctgDesc =  document.getElementById("ctgDesc"); 
     for(let i=0; i<categories.length; i++){
@@ -26,7 +24,6 @@ function initializeButtons(){
 }
 
 function disabledButtons(i, j){
-    console.log(j.hasAttribute('disabled'));
     if(j.hasAttribute('disabled')){
         $('#picture').attr('src', "Images/buttonD.jpg");
         $('#picture').attr('disabled', true);
@@ -34,7 +31,6 @@ function disabledButtons(i, j){
         for(let k=0; k<buttons.length; k++){
             if(k!=i)
                 buttons[k].removeAttribute("disabled");
-           
         }
     }else{
         $('#picture').attr('src', "Images/buttonA.jpg");

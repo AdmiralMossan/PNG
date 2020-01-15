@@ -45,7 +45,7 @@ async function getReports(){
     
     reports = locReports;
     initializeCounts();
-    console.log(groups);
+
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
@@ -54,7 +54,6 @@ async function getReports(){
 
         for(let k=0; k<groups.length; k++){
             if(reports[i].group - 1 == k ){
-                console.log(groups[k]);
                 groupsCount[k] += 1;
             }
                 
@@ -177,8 +176,6 @@ async function drawVisualization(data) {
         xBarWidth: 0.5,
         yBarWidth: 0.5,
 
-        // Option tooltip can be true, false, or a function returning a string with HTML contents
-        //tooltip: true,
         tooltip: function (point) {
             // parameter point contains properties x, y, z
             return "Category: <b>"+ categories[point.x] + "</b> " + "Group: <b>" +  groups[point.y] +"</b> " + "Number: <b>" + point.z + "</b>";

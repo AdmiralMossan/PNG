@@ -37,7 +37,7 @@ firebase.firestore().enablePersistence()
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
-
+ 
 function storeData(){
     disabled = document.getElementById('picture').getAttribute('disabled');
     if(disabled === "disabled" || disabled === "") 
@@ -61,7 +61,6 @@ function storeData(){
 
 function getCategory(id){
     buttonId = id
-    console.log(buttonId)
 }
 
 
@@ -76,7 +75,6 @@ async function logIn(e){
             console.log(doc.id, " => ", doc.data());
         });
     });
-    console.log(docs[0]);
     if(docs.length == 1){
        if(docs[0].userType == 1){
           location.href = "/admin.html";

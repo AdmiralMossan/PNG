@@ -244,7 +244,6 @@ window.addEventListener("load", async () => {
             generateColors(displayBy);
             $("#reportCount").text(reports.length);
             loadData(displayBy).then(function () {
-                alert("new report");
                 console.log(displayBy);
                 drawVisualization(data);
                 drawPie(data, displayBy);

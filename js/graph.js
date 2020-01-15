@@ -204,7 +204,6 @@ async function drawVisualization(data) {
 window.addEventListener("load", async () => {
     await getReports(); 
     generateColors(1);
-    console.log(colors);
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(data, 1);

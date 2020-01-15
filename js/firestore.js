@@ -80,7 +80,7 @@ async function logIn(e){
           location.href = "/admin.html";
        }else{
           location.href = "/Button.html";
-          sessionStorage.setItem("username", docs[0].userType);
+          sessionStorage.setItem("username", docs[0].username);
           sessionStorage.setItem("group", docs[0].group);
        }
     }else

@@ -55,6 +55,9 @@ function disableAll(){
 
 
 $(document).ready(function() {
+            if(sessionStorage.getItem("username") !== null){
+                document.getElementById("userName").innerHTML = sessionStorage.getItem("username");
+            }
             getCategories().then(function () {
                 initializeButtons();
                 buttons = $("button[id^='category']");

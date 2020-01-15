@@ -8,11 +8,23 @@ var categories = [];
 var groups = [];
 var colors = [];
 var pieColors = [];
+var loaded = false; 
+
+function clearValues(){
+    categoriesCount = [];
+    groupsCount = [];
+    categories = [];
+    groups = [];
+    reports = [];
+    groupsCount = [];
+    colors = [];
+    pieColors = [];
+}
 
 async function getReports(){
-    let locReports = []
-   
-    
+    let locReports = [];
+    clearValues();
+
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            locReports.push(doc.data())
@@ -202,6 +214,7 @@ async function drawVisualization(data) {
 }
 
 window.addEventListener("load", async () => {
+    isloaded = true;
     await getReports(); 
     generateColors(1);
     console.log(colors);
@@ -224,4 +237,23 @@ window.addEventListener("load", async () => {
             drawPie(data, 1);
         });
     });
+
+    db.collection("reports").onSnapshot(async function(querySnapshot) {   
+        if(loaded){
+            let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+            await getReports(); 
+            generateColors(displayBy);
+            $("#reportCount").text(reports.length);
+            loadData(displayBy).then(function () {
+                alert("new report");
+                console.log(displayBy);
+                drawVisualization(data);
+                drawPie(data, displayBy);
+            });
+        }else{
+            loaded = true;
+        }
+    });
+        
+   
 });

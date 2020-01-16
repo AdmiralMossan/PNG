@@ -95,7 +95,8 @@ async function loadData(colorBy) {
             dataArray.push({x: i, y: j , z: z,  style: {
                 fill:  color,
                 stroke: "#999"
-              }})
+              }
+            })
         }
     }
 
@@ -151,10 +152,6 @@ async function drawPie(data, groupBy) {
                 borderWidth: 1
             }]
         },
-        options: {
-
-        }
-        
     });
 
 }
@@ -170,11 +167,14 @@ async function drawVisualization(data) {
         showGrid: true,
         showShadow: true,
         animationPreload: true,
-        xLabel: "Categories",
-        yLabel: "Groups",
-        zLabel: "Number",
+        axisFontType: "courier",
+        axisFontSize: 35,
+        xLabel: "", //Categories
+        yLabel: "", //Groups
+        zLabel: "", //Number
         xBarWidth: 0.5,
         yBarWidth: 0.5,
+        rotateAxisLabels: true,
 
         tooltip: function (point) {
             // parameter point contains properties x, y, z
@@ -207,7 +207,7 @@ async function drawVisualization(data) {
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
 
-    graph.setCameraPosition({ horizontal: 0.0, vertical: 0.0, distance: 2 }); // restore camera position
+    graph.setCameraPosition({ horizontal: -1.1, vertical: 0.9, distance: 2 }); // restore camera position
 }
 
 window.addEventListener("load", async () => {

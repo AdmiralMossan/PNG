@@ -9,29 +9,30 @@
         <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
         <script src = "js/firestore.js" > </script>
         <link href="css/login.css" rel="stylesheet">
+
     </head>
 
     <body>
-      <div class="container ">
+      <div class="container align-self-center">
         <div class="row" style="height:200px;"></div>
         <div class="row">
           <div class="col-md"></div>
-          <div class="col-sm mx-auto w-50 border pb-4 bg-light">
+          <div id="logindiv" class="col-sm mx-auto w-50 border pb-4 bg-light rounded">
             <form onsubmit="logIn(event);">
               <!-- Username field -->
-              <div class="form-group mx-auto align-middle pt-4" style="width: 500px;">
+              <div class="form-group mx-auto align-middle pt-4">
                 <label for="username" class="h3">Login:</label>
                 <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Username">
               </div>
                 
               <!-- Password Field -->
-              <div class="form-group mx-auto align-middle" style="width: 500px;">
+              <div class="form-group mx-auto align-middle">
                 <input type="password" class="form-control" id="password" aria-describedby="password_extra" placeholder="Password">
                 <small id="password_extra" class="form-text text-muted">Please input your password.</small>
               </div>
                 
               <!-- Submit Button -->
-              <div class="mx-auto align-middle pl-4 pt-4 container" style="width: 500px;">
+              <div class="mx-auto align-middle pl-4 pt-4 container">
                 <div class="row">
                   <div class="col-sm"></div>
                   <div class="col-sm text-center">
@@ -40,6 +41,18 @@
                   <div class="col-sm"></div>
                 </div>
               </div>
+
+              <!-- Create Anonymous Report -->
+              <div class="pt-4">
+                <label for="submit" class="h3">Stay Anonymous:</label>
+                <div class="row">
+                  <div class="col-sm text-center">
+                    <button type="submit" class="btn btn-primary" onclick="logIn()">Create an Anonymous Report</button>
+                  </div>
+                </div>
+              </div>
+
+
             </form>
           </div>
           <div class="col-md"></div>

@@ -77,9 +77,9 @@ async function logIn(e){
     });
     if(docs.length == 1){
        if(docs[0].userType == 1){
-          location.href = "/admin.html";
+          location.href =  "/admin.html";
        }else{
-          location.href = "/Button.html";
+          location.href =  "/Button.html";
           sessionStorage.setItem("username", docs[0].username);
           sessionStorage.setItem("group", docs[0].group);
        }

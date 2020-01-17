@@ -111,14 +111,13 @@ async function loadData(colorBy) {
 }
 
 function generateColors(sortBy){
-    colors = []
-    var r =  Math.floor((Math.random() *  255));
+    colors = [];
     let sortLength = sortBy == 1 ? categories.length : groups.length;
  
     for(let i=0; i<sortLength; i++){
-        var r =  Math.floor((Math.random() *  255));
-        var g =  Math.floor((Math.random() *  255));
-        var b =  Math.floor((Math.random() *  255));
+        var r = Math.floor((Math.random() *  255));
+        var g = Math.floor((Math.random() *  255));
+        var b = Math.floor((Math.random() *  255));
         stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
         colors[i] =  stringColor + ",1)";
         pieColors[i] = stringColor + ",0.4)";

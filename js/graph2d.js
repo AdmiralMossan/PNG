@@ -1,8 +1,11 @@
 var barGraph = null;
+var search = 1;
 var reports = [];
 var categoriesCount = [];
 var categories = [];
 var groups = [];
+var barColors = [];
+var colors = [];
 
 function clearValues(){
     categoriesCount = [];
@@ -15,10 +18,10 @@ function clearValues(){
     pieColors = [];
 }
 
-async function getReports(){
+async function getReports(groupNum){
     clearValues();
 
-    await db.collection("reports").where("group", "==", 1).get().then(function(querySnapshot) {
+    await db.collection("reports").where("group", "==", 2).get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            reports.push(doc.data())
         });
@@ -45,13 +48,22 @@ async function getReports(){
             }
         }
     }
-
-    console.log(categoriesCount);
 }
 
 function initializeCounts(){
     for(let i=0; i<categories.length; i++){
         categoriesCount[i] = 0; 
+    }
+}
+
+function generateColors(){
+    for(let i=0; i<categories.length; i++){
+        var r = Math.floor((Math.random() *  255));
+        var g = Math.floor((Math.random() *  255));
+        var b = Math.floor((Math.random() *  255));
+        stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
+        colors[i] =  stringColor + ",1)";
+        barColors[i] = stringColor + ",0.6)";
     }
 }
 
@@ -71,19 +83,22 @@ function drawVisualization(){
         data: {
             labels: displayLabel,
             datasets: [{
+                label: 'Group ' + groups[search - 1], 
                 data: displayData,
+                backgroundColor: barColors,
+                borderColor: colors,
                 borderWidth: 1
             }]
         },
     });
 }
 
-function nextButton(){
-    var search = parseInt(document.getElementById("search").value);
-    
+async function nextButton(){
     $('#prev').attr('disabled', false);
     search += 1;
+    await getReports(search);
     document.getElementById("search").value = search.toString();
+    drawVisualization();
 }
 
 function prevButton(){
@@ -98,6 +113,7 @@ function prevButton(){
 
 window.addEventListener("load", async () => {
     isloaded = true;
-    await getReports();
+    await getReports(search);
+    generateColors();
     drawVisualization();      
 });

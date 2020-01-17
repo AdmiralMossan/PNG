@@ -17,7 +17,7 @@
         <div class="row" style="height:200px;"></div>
         <div class="row">
           <div class="col-md"></div>
-          <div id="logindiv" class="col-sm mx-auto w-50 border pb-4 bg-light rounded">
+          <div id="logindiv1" class="col-sm mx-auto w-50 border pb-4 bg-light rounded">
             <form onsubmit="logIn(event);">
               <!-- Username field -->
               <div class="form-group mx-auto align-middle pt-4">
@@ -41,19 +41,23 @@
                   <div class="col-sm"></div>
                 </div>
               </div>
-
-              <!-- Create Anonymous Report -->
-              <div class="pt-4">
-                <label for="submit" class="h3">Stay Anonymous:</label>
-                <div class="row">
-                  <div class="col-sm text-center">
-                    <button type="submit" class="btn btn-primary" onclick="logIn()">Create an Anonymous Report</button>
+            </form>
+          </div>
+          <div class="col-md">
+            <div id="logindiv2" class="col-sm mx-auto border pb-4 bg-light rounded">
+              <form onsubmit="logIn(event);">
+                <!-- Create Anonymous Report -->
+                <div class="pt-4">
+                  <label for="submit" class="h2 text-center pb-4 pt-4">Protect your privacy:</label>
+                  <div class="row">
+                    <div class="col-sm text-center">
+                      <small id="password_extra" class="form-text text-muted text-center pb-4">Creating an anonymous report will create a new report without getting information such as name or group from you.</small>
+                      <button type="submit" class="btn btn-primary" onclick="logIn()">Create an Anonymous Report</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-
-            </form>
+              </form>
+            </div>
           </div>
           <div class="col-md"></div>
         </div>

@@ -21,7 +21,7 @@ function clearValues(){
 async function getReports(groupNum){
     clearValues();
 
-    await db.collection("reports").where("group", "==", 2).get().then(function(querySnapshot) {
+    await db.collection("reports").where("group", "==", 1).get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            reports.push(doc.data())
         });

@@ -45,8 +45,7 @@ async function getReports(){
     
     reports = locReports;
     initializeCounts();
-    console.log(groups);
-    console.log(categories);
+    
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
@@ -210,7 +209,7 @@ async function drawVisualization(data) {
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
 
-    graph.setCameraPosition({ horizontal: -1.1, vertical: 0.9, distance: 2 }); // restore camera position
+    graph.setCameraPosition({ horizontal: -1.85, vertical: 0.6, distance: 2 }); // restore camera position
 }
 
 window.addEventListener("load", async () => {
@@ -232,15 +231,13 @@ window.addEventListener("load", async () => {
     $('#category').change(function(){
         generateColors(1);
         loadData(1).then(function () {
+            console.log(graph.getCameraPosition());
             drawVisualization(data);
             drawPie(data, 1);
         });
     });
 
-    
-
-    db.collection("reports").orderBy("created", "desc").onSnapshot(async function(querySnapshot) {   
-        
+    db.collection("reports").orderBy("created", "desc").onSnapshot(async function(querySnapshot) {
         if(loaded){
             let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
             await getReports(); 

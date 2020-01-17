@@ -22,12 +22,11 @@ function clearValues(){
 }
 
 async function getReports(){
-    let locReports = [];
     clearValues();
 
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-           locReports.push(doc.data())
+           reports.push(doc.data())
         });
     }); 
 
@@ -43,13 +42,13 @@ async function getReports(){
         });
     });
     
-    reports = locReports;
     initializeCounts();
     
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
-            if(reports[i].category == categories[j])
+            if(reports[i].category == categories[j]){
                 categoriesCount[j] += 1;
+            }
         }
 
         for(let k=0; k<groups.length; k++){

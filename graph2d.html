@@ -3,13 +3,22 @@
     <head>
         <script type="text/javascript" src="js/graph2d.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        
+        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
+        <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
+        <script src = "js/firestore.js" > </script> 
     </head>
 
     <body>
         <p>
             Bar-Graph
         </p>
-          
+        
+        <div>
+            <input type="button" value="&lt;">
+            <input type="text" size="1" style="text-align: center;" value="1">
+            <input type="button" value="&gt;">
+        </div>
         <canvas id="graph2d"></canvas>
         
         <script>

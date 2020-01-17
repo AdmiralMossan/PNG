@@ -22,12 +22,11 @@ function clearValues(){
 }
 
 async function getReports(){
-    let locReports = [];
     clearValues();
 
     await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-           locReports.push(doc.data())
+           reports.push(doc.data())
         });
     }); 
 
@@ -43,13 +42,13 @@ async function getReports(){
         });
     });
     
-    reports = locReports;
     initializeCounts();
     
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
-            if(reports[i].category == categories[j])
+            if(reports[i].category == categories[j]){
                 categoriesCount[j] += 1;
+            }
         }
 
         for(let k=0; k<groups.length; k++){
@@ -112,14 +111,13 @@ async function loadData(colorBy) {
 }
 
 function generateColors(sortBy){
-    colors = []
-    var r =  Math.floor((Math.random() *  255));
+    colors = [];
     let sortLength = sortBy == 1 ? categories.length : groups.length;
  
     for(let i=0; i<sortLength; i++){
-        var r =  Math.floor((Math.random() *  255));
-        var g =  Math.floor((Math.random() *  255));
-        var b =  Math.floor((Math.random() *  255));
+        var r = Math.floor((Math.random() *  255));
+        var g = Math.floor((Math.random() *  255));
+        var b = Math.floor((Math.random() *  255));
         stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
         colors[i] =  stringColor + ",1)";
         pieColors[i] = stringColor + ",0.4)";

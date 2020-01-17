@@ -45,8 +45,7 @@ async function getReports(){
     
     reports = locReports;
     initializeCounts();
-    console.log(groups);
-    console.log(categories);
+    
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
             if(reports[i].category == categories[j])
@@ -96,7 +95,8 @@ async function loadData(colorBy) {
             dataArray.push({x: i, y: j , z: z,  style: {
                 fill:  color,
                 stroke: "#999"
-              }})
+              }
+            })
         }
     }
 
@@ -152,10 +152,6 @@ async function drawPie(data, groupBy) {
                 borderWidth: 1
             }]
         },
-        options: {
-
-        }
-        
     });
 
 }
@@ -171,14 +167,15 @@ async function drawVisualization(data) {
         showGrid: true,
         showShadow: true,
         animationPreload: true,
-        xLabel: "Categories",
-        yLabel: "Groups",
-        zLabel: "Number",
+        axisFontType: "courier",
+        axisFontSize: 35,
+        xLabel: "", //Categories
+        yLabel: "", //Groups
+        zLabel: "", //Number
         xBarWidth: 0.5,
         yBarWidth: 0.5,
+        rotateAxisLabels: true,
 
-        // Option tooltip can be true, false, or a function returning a string with HTML contents
-        //tooltip: true,
         tooltip: function (point) {
             // parameter point contains properties x, y, z
             return "Category: <b>"+ categories[point.x] + "</b> " + "Group: <b>" +  groups[point.y] +"</b> " + "Number: <b>" + point.z + "</b>";
@@ -210,7 +207,7 @@ async function drawVisualization(data) {
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
 
-    graph.setCameraPosition({ horizontal: 0.0, vertical: 0.0, distance: 2 }); // restore camera position
+    graph.setCameraPosition({ horizontal: -1.85, vertical: 0.6, distance: 2 }); // restore camera position
 }
 
 
@@ -237,7 +234,9 @@ window.addEventListener("load", async () => {
         drawVisualization(data);
         drawPie(data, 1);
     });
+
     $("#reportCount").text(reports.length);
+    
     $('#group').change(function(){
         generateColors(2);
         loadData(2).then(function () {
@@ -245,6 +244,7 @@ window.addEventListener("load", async () => {
             drawPie(data, 2);
         });
     });
+    
     $('#category').change(function(){
         generateColors(1);
         loadData(1).then(function () {
@@ -253,14 +253,12 @@ window.addEventListener("load", async () => {
         });
     });
 
-    
-
-    db.collection("reports").orderBy("created", "desc").onSnapshot(async function(querySnapshot) {   
-        
+    db.collection("reports").orderBy("created", "desc").onSnapshot(async function(querySnapshot) {
         if(loaded){
             let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
             await getReports(); 
             generateColors(displayBy);
+            
             $("#reportCount").text(reports.length);
             loadData(displayBy).then(function () {
                 let newRep = querySnapshot.docs[0].data();
@@ -269,10 +267,10 @@ window.addEventListener("load", async () => {
                 drawVisualization(data);
                 drawPie(data, displayBy);
             });
+        
         }else{
             loaded = true;
         }
     });
         
-   
 });

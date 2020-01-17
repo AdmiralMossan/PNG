@@ -127,7 +127,7 @@ function generateColors(sortBy){
     
 }
 
-async function drawPie(data, groupBy) {
+async function drawPie(groupBy) {
     let displayData = []
     let displayLabel = []
     if(groupBy == 1){
@@ -233,7 +233,7 @@ window.addEventListener("load", async () => {
     generateColors(1);
     loadData(1).then(function () {
         drawVisualization(data);
-        drawPie(data, 1);
+        drawPie(1);
     });
 
     $("#reportCount").text(reports.length);
@@ -242,7 +242,7 @@ window.addEventListener("load", async () => {
         generateColors(2);
         loadData(2).then(function () {
             drawVisualization(data);
-            drawPie(data, 2);
+            drawPie(2);
         });
     });
     
@@ -250,7 +250,7 @@ window.addEventListener("load", async () => {
         generateColors(1);
         loadData(1).then(function () {
             drawVisualization(data);
-            drawPie(data, 1);
+            drawPie(1);
         });
     });
 
@@ -264,7 +264,7 @@ window.addEventListener("load", async () => {
             loadData(displayBy).then(function () {
                 newReport(querySnapshot.docs);
                 drawVisualization(data);
-                drawPie(data, displayBy);
+                drawPie(displayBy);
             });
         
         }else{

@@ -195,6 +195,20 @@
   <!-- Page Custom script-->
   <script src="js/sb-admin-2.js"></script>
   <script type="text/javascript" src="js/graph.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/pnotify@4.0.0/lib/umd/PNotify.min.js,npm/pnotify@4.0.0/lib/umd/PNotifyAnimate.min.js,npm/pnotify@4.0.0/lib/umd/PNotifyButtons.min.js"></script>
+<script type="text/javascript">
+const notice = PNotify.alert({
+  title: 'New Repot',
+  text: 'Category: A , Group: B',
+  hide: false,
+  styling: 'brighttheme',
+  modules: {
+    Confirm: {
+      confirm: true
+    }
+  }
+});
+</script>
 
 
   <!-- Page Chart plugin -->

@@ -77,6 +77,7 @@ function drawVisualization(search){
     if(barGraph!=null){
         barGraph.destroy();
     }
+    console.log(categoriesCount[search]);
     console.log(groups);
     console.log(search);
     barGraph = new Chart(ctx, {

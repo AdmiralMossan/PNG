@@ -78,6 +78,24 @@ function drawVisualization(){
     });
 }
 
+function nextButton(){
+    var search = parseInt(document.getElementById("search").value);
+    
+    $('#prev').attr('disabled', false);
+    search += 1;
+    document.getElementById("search").value = search.toString();
+}
+
+function prevButton(){
+    var search = parseInt(document.getElementById("search").value);
+    
+    search -= 1;
+    if(search == 1){
+        $('#prev').attr('disabled', true);
+    }
+    document.getElementById("search").value = search.toString();
+}
+
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();

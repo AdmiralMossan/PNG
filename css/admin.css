@@ -1,3 +1,18 @@
-body {
-    background: #e6f0ff;
+.recents {
+    animation: slide-left 0.4s;
+}
+
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    50% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
 }

@@ -176,8 +176,6 @@ async function drawVisualization(data) {
         yBarWidth: 0.5,
         rotateAxisLabels: true,
 
-        // Option tooltip can be true, false, or a function returning a string with HTML contents
-        //tooltip: true,
         tooltip: function (point) {
             // parameter point contains properties x, y, z
             return "Category: <b>"+ categories[point.x] + "</b> " + "Group: <b>" +  groups[point.y] +"</b> " + "Number: <b>" + point.z + "</b>";
@@ -220,7 +218,9 @@ window.addEventListener("load", async () => {
         drawVisualization(data);
         drawPie(data, 1);
     });
+
     $("#reportCount").text(reports.length);
+    
     $('#group').change(function(){
         generateColors(2);
         loadData(2).then(function () {
@@ -228,10 +228,10 @@ window.addEventListener("load", async () => {
             drawPie(data, 2);
         });
     });
+    
     $('#category').change(function(){
         generateColors(1);
         loadData(1).then(function () {
-            console.log(graph.getCameraPosition());
             drawVisualization(data);
             drawPie(data, 1);
         });
@@ -242,6 +242,7 @@ window.addEventListener("load", async () => {
             let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
             await getReports(); 
             generateColors(displayBy);
+            
             $("#reportCount").text(reports.length);
             loadData(displayBy).then(function () {
                 let newRep = querySnapshot.docs[0].data();
@@ -249,10 +250,10 @@ window.addEventListener("load", async () => {
                 drawVisualization(data);
                 drawPie(data, displayBy);
             });
+        
         }else{
             loaded = true;
         }
     });
         
-   
 });

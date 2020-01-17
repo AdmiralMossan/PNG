@@ -217,7 +217,8 @@ function newReport(recentReports){
     var list = document.getElementById("recentReports");
     list.innerHTML = "";
     for(let i=0; i<3; i++){   
-        list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start">
+        let active = loaded && i==0 ? "active" : "";
+        list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start ` + active +`">
         <div class=\"d-flex w-100 justify-content-between\">
           <h6 class=\"mb-1\">Username: ` + recentReports[i].data().username + ` Category: ` + recentReports[i].data().category +  ` Group: ` + recentReports[i].data().group + `
           <small>` + recentReports[i].data().created.toDate().toLocaleString() +`</small></h6>
@@ -261,16 +262,17 @@ window.addEventListener("load", async () => {
             
             $("#reportCount").text(reports.length);
             loadData(displayBy).then(function () {
-                let newRep = querySnapshot.docs[0].data();
                 newReport(querySnapshot.docs);
-                alert("New Report: " + "Category : " + newRep.category + " Group : " + newRep.group + " (" + newRep.created.toDate() + ")" );
                 drawVisualization(data);
                 drawPie(data, displayBy);
             });
         
         }else{
-            loaded = true;
+            newReport(querySnapshot.docs);
+            loaded = true;        
         }
     });
+
+
         
 });

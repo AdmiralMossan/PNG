@@ -1,11 +1,21 @@
+
 body {
 		background: #e6f0ff;
 	}
 
 #logindiv1 {
 		box-shadow: 10px 10px 5px grey;
+		min-width: 275px;
 	}
 
 #logindiv2 {
 	box-shadow: 10px 10px 5px grey;
+	min-width: 275px;
+}
+
+#anonlabel {
+	background-image: url("../Images/shield.png");
+	background-position: left top;
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
 }

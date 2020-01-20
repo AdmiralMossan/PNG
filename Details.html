@@ -58,7 +58,7 @@
               </div>
             </div>
             <!--form panels-->
-            <form class="multisteps-form__form">
+            <form class="multisteps-form__form" onsubmit="storeData(event)">
               <!--single form panel-->
               <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="fadeIn">
                 <h3 class="multisteps-form__title">Date Information</h3>
@@ -112,11 +112,11 @@
                 <p><small>Attach a file that could help support the report being made.</small></p>
                 <div class="multisteps-form__content">
                   <div class="form-row mt-4">
-                    <input type="file" name="attachement" accept="audio/*,video/*,image/*" />
+                    <input type="file" name="attachment" accept="audio/*,video/*,image/*" />
                   </div>
                   <div class="button-row d-flex mt-4">
                     <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
+                    <button class="btn btn-success ml-auto" type="submit" title="Send">Send</button>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@
 
           <!-- Right Side -->
           <div class="col-sm-5">
-            <form onsubmit="">
+            <form onsubmit="storeData(event)">
               <!-- Create Anonymous Report -->
               <div class="pt-4 rounded bg-white shadow">
                 <div class="col-sm text-center pt-4">
@@ -136,7 +136,7 @@
                       <input type="hidden" class="form-control" name="date" value="NA">
                       <input type="hidden" class="form-control" name="person" value="NA">
                       <h6 class="py-4 text-center">Submit the report without any additional details.</h6>
-                      <button id="quickreport" type="submit" class="btn btn-primary py-4 px-4" onclick="">Report</button>
+                      <button id="quickreport" type="submit" class="btn btn-primary py-4 px-4">Report</button>
                     </div>
                   </div>
                 </div>
@@ -169,8 +169,16 @@
   </div>
 </div>
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'></script>
+<script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
+<script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
+<script src = "js/firestore.js" > </script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'></script>
 <script  src="js/Details.js"></script>
+<script>
+window.addEventListener("load", async () => {
+    console.log(buttonId);        
+});
+</script>
 
 </body >
 </html>

@@ -37,11 +37,16 @@ firebase.firestore().enablePersistence()
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
- 
-function storeData(){
+
+function toDetails(){
     disabled = document.getElementById('picture').getAttribute('disabled');
     if(disabled === "disabled" || disabled === "") 
        return
+    location.href =  "/Details.html";
+}
+ 
+function storeData(){
+    e.preventDefault();
     category = buttonId;
     username = sessionStorage.getItem("username"); ;
     group = sessionStorage.getItem("group"); ;
@@ -60,6 +65,7 @@ function storeData(){
 }
 
 function getCategory(id){
+    sessionStorage.setItem("category", id);
     buttonId = id
 }
 

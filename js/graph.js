@@ -258,8 +258,23 @@ async function reportsTable() {
     let cCtr = {}
     let gCtr = {}
     //Add Head
-    let head = "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'><thead class='thead-inverse bg-custom text-custom'><tr><th style='width:7em;'>User</th><th style='width:5em;'>Group</th><th style='width:5em;'>Category</th><th style='width:7em;'>Date "+ "</td>" +
-    "<td style='width:0.5em;'><div class='btn-group'><button type='button' class='btn btn-secondary dropdown-toggle p-0 m-0' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button><div class='dropdown-menu'><a class='dropdown-item' onClick='download()' style='display: block;width: 20px;padding-bottom: 0px;'><i class='fa fa-download'></i></a></div></div> </td>" +
+    let head = "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>"+
+    "<thead class='thead-inverse bg-custom text-custom'>"+
+    "<tr>"+
+    "<th style='width:8em; text-align:center;'>User</th>"+
+    "<th style='width:6em; text-align:center;'>Group</th>"+
+    "<th style='width:6em; text-align:center;'>Category</th>"+
+    "<th style='width:12em; text-align:center;'>Date "+"</th>" +
+    "<td style='width:0.5em;'>"+
+        "<div class='btn-group'>"+
+            "<button type='button' class='btn btn-secondary dropdown-toggle p-0 m-0' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>"+
+            "<div class='dropdown-menu'>"+
+            "<button class='dropdown-item' onClick='download()' style='display: block;width: 20px;padding-bottom: 0px;'>"+
+            "<i class='fa fa-download'></i>"+
+            "</button>"+
+            "</div>"+
+            "</div>"+
+    "</td>" +
     "</th></tr></thead>"
     //Add body
     let body = '<tbody class="scroll-secondary">';
@@ -275,12 +290,11 @@ async function reportsTable() {
             gCtr[report.group] += 1;
         }
         let date = new Date((report.created.seconds * 1000));
-        let formatedDate = (date.getMonth() + 1) + "-" + date.getDay() + "-" + date.getFullYear() + "<span>" + date.getHours() + ":" + date.getMinutes() + "</span>"
         body += "<tr>" +
-            "<td style='width:7em;'>" + report.username + "</td>" +
-            "<td style='width:5em;'>" + report.group + "</td>" +
-            "<td style='width:5em;'>" + report.category + "</td>" +
-            "<td style='width:7em;display:flex;justify-content:space-between;'>" + formatedDate + "</td><td style='width:0.5em;'></td>"+
+            "<td style='width:8em;'>" + report.username + "</td>" +
+            "<td style='width:6em;'>" + report.group + "</td>" +
+            "<td style='width:6em;'>" + report.category + "</td>" +
+            "<td style='width:12em;display:flex;justify-content:space-between;'>" + date.toLocaleString('en') + "</td><td style='width:0.5em;'></td>"+
             "</tr>"
 
         csvData.push({

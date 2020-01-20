@@ -58,70 +58,71 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <div id="container">
-
-
-        <!-- Bar Chart -->
-        <div id="bar-container">
-          <div class="card shadow mb-4 h-100">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
-              <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports Overview</h5>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body h-100 w-100">
-              <div class="chart-area">
-                <div id="mygraph" class="d-flex justify-content-center h-100 "></div>
-                <div id="info"></div>
+      <div id="container" class="row">
+        <div class="col-12 col-md-8 p-0 mb-4 mb-md-0">
+          <!-- Bar Chart -->
+          <div id="bar-container">
+            <div class="card shadow mb-4 h-100 mx-2 mx-md-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports Overview</h5>
               </div>
-            </div>
-          </div>
-        </div>
-        <!-- Pie Chart -->
-        <div id="pie-container">
-          <div class="card shadow mb-2 h-100">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex bg-custom flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary ">
-                Reports (by:
-                <div class="form-check form-check-inline mr-0">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="category" value="1"
-                    checked="checked">
-                  <label class="form-check-label" for="category">Category</label>
+              <!-- Card Body -->
+              <div class="card-body h-100 w-100">
+                <div class="chart-area">
+                  <div id="mygraph" class="d-flex justify-content-center h-100 "></div>
+                  <div id="info"></div>
                 </div>
-                |
-                <div class="form-check form-check-inline mr-0">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="group" value="2">
-                  <label class="form-check-label" for="group">Group</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-0">
+          <!-- Pie Chart -->
+          <div id="pie-container" class="mx-2 mb-4">
+            <div class="card shadow mb-2 h-100">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex bg-custom flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary ">
+                  Reports (by:
+                  <div class="form-check form-check-inline mr-0">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="category" value="1"
+                      checked="checked">
+                    <label class="form-check-label" for="category">Category</label>
+                  </div>
+                  |
+                  <div class="form-check form-check-inline mr-0">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="group" value="2">
+                    <label class="form-check-label" for="group">Group</label>
+                  </div>
+                  )
+                </h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <div class="sub-chart pt-4 pb-2">
+                  <canvas id="myPieChart" class="w-100 h-100"></canvas>
                 </div>
-                )
-              </h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <div class="sub-chart pt-4 pb-2">
-                <canvas id="myPieChart" class="w-100 h-100"></canvas>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Stats Card Example -->
-        <div id="stats-container">
-          <div class="card shadow h-100">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase text-primary">Total Number of Reports:</h6>
-            </div>
-            <div class="card-body p-0">
-              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                <h3 id="reportCount" class="text-danger"></h3>
+          <!-- Stats Card Example -->
+          <div id="stats-container" class="mb-4 mx-2">
+            <div class="card shadow h-100 mb-4">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-uppercase text-primary">Total Number of Reports:</h6>
               </div>
-            </div>
+              <div class="card-body p-0">
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                  <h3 id="reportCount" class="text-danger"></h3>
+                </div>
+              </div>
 
+            </div>
           </div>
         </div>
-
       </div>
       <!-- /.container-fluid -->
       <div id="showAll" class="mb-4 mt-1">

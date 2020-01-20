@@ -76,6 +76,7 @@ function getData(x, y){
             count+=1;
     }
     return count;
+   
 }
 
 async function loadData(colorBy) {
@@ -214,8 +215,7 @@ function newReport(recentReports){
     var list = document.getElementById("recentReports");
     list.innerHTML = "";
     for(let i=0; i<3; i++){   
-        let active = loaded && i==0 ? "active" : "";
-        list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start ` + active +`">
+        list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start">
         <div class=\"d-flex w-100 justify-content-between\">
           <h6 class=\"mb-1\">Username: ` + recentReports[i].data().username + ` Category: ` + recentReports[i].data().category +  ` Group: ` + recentReports[i].data().group + `
           <small>` + recentReports[i].data().created.toDate().toLocaleString() +`</small></h6>
@@ -227,7 +227,7 @@ function newReport(recentReports){
 function notifyReport(report){
     PNotify.info({
         title: 'New Report',
-        text: 'Username: ' +  report.data().username  + ' Category: ' + report.data().category + ' Group: ' + report.data().username + " " + report.data().created.toDate().toLocaleString(),
+        text: 'Username: ' +  report.data().username  + ' Category: ' + report.data().category + ' Group: ' + report.data().group + " " + report.data().created.toDate().toLocaleString(),
         hide: false,
         modules: {
           Buttons: {
@@ -242,7 +242,7 @@ function notifyReport(report){
           },
           Mobile: {
             swipeDismiss: true,
-            styling: true
+            styling: true   
           }
 
         }

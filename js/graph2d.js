@@ -128,6 +128,7 @@ function nextButton(){
 
 function prevButton(){
     search -= 1;
+    $('#next').attr('disabled', false);
     if(search == 1){
         $('#prev').attr('disabled', true);
     }

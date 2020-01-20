@@ -58,6 +58,11 @@ async function getReports() {
             }     
         }
     }
+
+    initArray();
+    byGroup();
+    byCategory();
+    findMax();
 }
 
 function initializeCounts() {
@@ -209,23 +214,6 @@ async function drawVisualization(data) {
     graph.setCameraPosition({ horizontal: -1.85, vertical: 0.6, distance: 2 }); // restore camera position
 }
 
-
-
-// function newReport(recentReports){
-//     var today = new Date();
-//     var list = document.getElementById("recentReports");
-//     list.innerHTML = "";
-//     for(let i=0; i<3; i++){   
-//         let active = loaded && i==0 ? "active" : "";
-//         list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start ` + active +`">
-//         <div class=\"d-flex w-100 justify-content-between\">
-//           <h6 class=\"mb-1\">Username: ` + recentReports[i].data().username + ` Category: ` + recentReports[i].data().category +  ` Group: ` + recentReports[i].data().group + `
-//           <small>` + recentReports[i].data().created.toDate().toLocaleString() +`</small></h6>
-//         </div>    
-//       </li>`;
-//     }
-// }
-
 function notifyReport(report) {
     PNotify.info({
         title: 'New Report',
@@ -305,8 +293,6 @@ async function reportsTable() {
         })
     })
 
-    console.log(csvData)
-
     $.each(cCtr, function (key, value) {
         if (cat["value"] < value || typeof cat["value"] === "undefined") {
             cat = { key, value }
@@ -333,6 +319,7 @@ window.addEventListener("load", async () => {
     await getReports();
     await reportsTable();
     generateColors(1);
+    
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
@@ -374,7 +361,9 @@ window.addEventListener("load", async () => {
         }
     });
 
-
+    generateColors2d();
+    initSearchValue();
+    drawVisualization2d2(search);
 
 });
 

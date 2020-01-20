@@ -1,5 +1,5 @@
 var barGraph = null;
-var search = 1;
+var search = 0;
 var reports = [];
 var categoriesCount = [];
 var categories = [];
@@ -18,10 +18,10 @@ function clearValues(){
     pieColors = [];
 }
 
-async function getReports(groupNum){
+async function getReports(){
     clearValues();
 
-    await db.collection("reports").where("group", "==", 2).get().then(function(querySnapshot) {
+    await db.collection("reports").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
            reports.push(doc.data())
         });
@@ -67,7 +67,7 @@ function generateColors(){
     }
 }
 
-function drawVisualization(){
+function drawVisualization(search){
     let displayLabel = [];
     let displayData = [];
 
@@ -77,13 +77,15 @@ function drawVisualization(){
     if(barGraph!=null){
         barGraph.destroy();
     }
-
+    console.log(reports[search]);
+    console.log(groups);
+    console.log(search);
     barGraph = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: displayLabel,
             datasets: [{
-                label: 'Group ' + groups[search - 1], 
+                label: 'Group ' + groups[search], 
                 data: displayData,
                 backgroundColor: barColors,
                 borderColor: colors,
@@ -96,9 +98,8 @@ function drawVisualization(){
 async function nextButton(){
     $('#prev').attr('disabled', false);
     search += 1;
-    await getReports(search);
     document.getElementById("search").value = search.toString();
-    drawVisualization();
+    drawVisualization(search);
 }
 
 function prevButton(){
@@ -113,7 +114,7 @@ function prevButton(){
 
 window.addEventListener("load", async () => {
     isloaded = true;
-    await getReports(search);
+    await getReports();
     generateColors();
-    drawVisualization();      
+    drawVisualization(search);      
 });

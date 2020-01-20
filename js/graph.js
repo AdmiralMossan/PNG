@@ -225,6 +225,31 @@ function newReport(recentReports){
     }
 }
 
+function notifyReport(report){
+    PNotify.info({
+        title: 'New Report',
+        text: 'Username: ' +  report.data().username  + ' Category: ' + report.data().category + ' Group: ' + report.data().username + " " + report.data().created.toDate().toLocaleString(),
+        hide: false,
+        modules: {
+          Buttons: {
+             closer: true,
+             closerHover: true,
+             sticker: false,
+          },
+          Desktop: {
+            desktop: true,
+            fallback: true,
+            icon: null,
+          },
+          Mobile: {
+            swipeDismiss: true,
+            styling: true
+          }
+
+        }
+    });
+}
+
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports(); 
@@ -260,6 +285,7 @@ window.addEventListener("load", async () => {
             
             $("#reportCount").text(reports.length);
             loadData(displayBy).then(function () {
+                notifyReport(querySnapshot.docs[0]);
                 newReport(querySnapshot.docs);
                 drawVisualization(data);
                 drawPie(displayBy);

@@ -65,27 +65,33 @@ function getCategory(id){
 
 
 async function logIn(e){
-    e.preventDefault();
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-    docs = []
-    await db.collection("users").where( "username" , "==" , username ).where( "password" , "==" , password ).get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            docs.push(doc.data());
-            console.log(doc.id, " => ", doc.data());
+    if(e==0){
+        location.href =  "/Button.html";
+        sessionStorage.setItem("username", "anonymous");
+        sessionStorage.setItem("group", e);
+
+    }else{
+        e.preventDefault();
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        docs = []
+        await db.collection("users").where( "username" , "==" , username ).where( "password" , "==" , password ).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                docs.push(doc.data());
+                console.log(doc.id, " => ", doc.data());
+            });
         });
-    });
-    if(docs.length == 1){
-       if(docs[0].userType == 1){
-          location.href =  "/admin.html";
-       }else{
-          location.href =  "/Button.html";
-          sessionStorage.setItem("username", docs[0].username);
-          sessionStorage.setItem("group", docs[0].group);
-       }
-    }else
-       alert("Incorrect username or password")
-    
+        if(docs.length == 1){
+        if(docs[0].userType == 1){
+            location.href =  "/admin.html";
+        }else{
+            location.href =  "/Button.html";
+            sessionStorage.setItem("username", docs[0].username);
+            sessionStorage.setItem("group", docs[0].group);
+        }
+        }else
+        alert("Incorrect username or password")
+    }
 }
 
 function logOut(){  

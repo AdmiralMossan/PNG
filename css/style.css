@@ -2,6 +2,10 @@ html{
  scroll-behavior: smooth;
 }
 
+#page-top {
+    background: #e6f0ff;
+}
+
 .bg-custom{
     background: #ccccff;
 }

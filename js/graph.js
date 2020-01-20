@@ -54,8 +54,7 @@ async function getReports(){
         for(let k=0; k<groups.length; k++){
             if(reports[i].group - 1 == k ){
                 groupsCount[k] += 1;
-            }
-                
+            }     
         }
     }
 }
@@ -88,7 +87,7 @@ async function loadData(colorBy) {
     dataArray = [];
     for(let i=0; i<axisMax; i+=axisStep){
         for(let j=0; j<yAxisMax; j+=axisStep){
-            z = getData((i/axisStep),(j/axisStep));
+            z = getData((i),(j));
             color = colorBy == 1 ? colors[i] : colors[j];
             dataArray.push({x: i, y: j , z: z,  style: {
                 fill:  color,

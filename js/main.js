@@ -1,14 +1,29 @@
-var password = document.getElementById("password")
-  , confirm_password = document.getElementById("confirmPassword");
-
-function validatePassword(){
-  if(password.value != confirmPassword.value) {
-       confirmPassword.setCustomValidity("Passwords Don't Match");
-  } else {
-       alert("Successully Registered");
-       window.location.replace("http://127.0.0.1:5500/login.html");
+$("#showReports").click(function () {
+  if($('#allReports').css("display") === "none"){
+    $("#allReports").show();
+    $('#showReports').text("Hide Reports")
+  }else if ($('#allReports').css("display") === "block"){
+    $("#allReports").hide();
+    $('#showReports').text("All Reports");
   }
-}
+});
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
+$(document).ready(function () {
+  $(window).scroll(function () {
+    var height = $(window).scrollTop();
+    if (height > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
+  $(document).ready(function () {
+    $(".scroll-to-top").click(function (event) {
+      event.preventDefault();
+      $("html, body").animate({ scrollTop: 0 }, "fast");
+      return false;
+    });
+
+  });
+
+})

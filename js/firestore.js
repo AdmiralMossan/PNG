@@ -45,23 +45,41 @@ function toDetails(){
     location.href =  "/Details.html";
 }
  
-function storeData(){
+function storeData(e, skip){
     e.preventDefault();
-    category = buttonId;
-    username = sessionStorage.getItem("username"); ;
-    group = sessionStorage.getItem("group"); ;
+    category = sessionStorage.getItem("category");
+    username = sessionStorage.getItem("username"); 
+    group = sessionStorage.getItem("group"); 
+    console.log($("input[name='date']").is(':checked'));
+    var dateInfo = "NA";
+    var personInfo = "NA";
+    var otherDetails = "";
+    var attachFile =  "NA";
+    if(!skip){
+        var dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
+        var personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
+        var otherDetails = $.trim($("#comment").val());
+        var attachFile =  $("#fileInput").val();    
+    }
+    
     db.collection("reports").doc().set({
         category: category,
         username: username,
         group: group,
-        created: firebase.firestore.FieldValue.serverTimestamp()
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+        dateInfo: dateInfo,
+        personInfo: personInfo,
+        otherDetails: otherDetails,
+        attachFile: attachFile
     })
     .then(function() {
         console.log("Document successfully written!");
+        sessionStorage.removeItem("category");
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
     });
+    
 }
 
 function getCategory(id){

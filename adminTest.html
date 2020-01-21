@@ -85,25 +85,21 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content h-100 w-75">
-                <div id="home" class="container tab-pane active h-100">
-                    <div id="mygraph" class="justify-content-center mx-auto h-75"></div>
-                </div>
-                <div id="menu1" class="container tab-pane fade border">
-                    <div>
-                        <input id="prev" type="button" value="&lt;" onclick="prevButton()" disabled="true">
-                        <input id="search" type="text" size="1" style="text-align: center;" value="1">
-                        <input id="next" type="button" value="&gt;" onclick="nextButton()">
+                    <div id="home" class="container tab-pane active h-100">
+                        <div id="mygraph" class="justify-content-center mx-auto h-75"></div>
                     </div>
-                    <canvas id="graph2d" class="w-100 h-100"></canvas>
-                </div>
-                <div id="menu2" class="container tab-pane fade">
+                    <div id="menu1" class="container tab-pane fade border">
+                        <div>
+                            <canvas id="graph2d" class="w-100 h-100"></canvas>
+                            <input id="prev" type="button" value="&lt;" onclick="prevButton()" disabled="true">
+                            <input id="search" type="text" size="1" style="text-align: center;" value="1">
+                            <input id="next" type="button" value="&gt;" onclick="nextButton()">
+                        </div>
+                    </div>
+                    <div id="menu2" class="container tab-pane fade">
                     ...
+                    </div>
                 </div>
-                </div>
-                <!-- <div class="chart-area">
-                    <div id="mygraph" class="d-flex justify-content-center h-100"></div>
-                    <div id="info"></div>
-                </div> -->
 
               </div>
             </div>

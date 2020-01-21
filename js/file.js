@@ -28,3 +28,20 @@ function isVideo(filename) {
     }
     return false;
 }
+
+function isAudio(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+    case 'wav':
+    case 'mp3':
+    case 'wma':
+        // etc
+        return true;
+    }
+    return false;
+}
+
+
+
+
+

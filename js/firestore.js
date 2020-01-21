@@ -55,13 +55,16 @@ function storeData(e, skip){
     var personInfo = "NA";
     var otherDetails = "";
     var attachFile =  "NA";
+    var file_data = $("#fileInput").prop("files")[0];
+    var storageRef = firebase.storage().ref("images/" + file_data.name);
+    console.log(file_data);
     if(!skip){
         var dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
         var personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
         var otherDetails = $.trim($("#comment").val());
         var attachFile =  $("#fileInput").val();    
     }
-    
+    storageRef.put(file_data);
     db.collection("reports").doc().set({
         category: category,
         username: username,

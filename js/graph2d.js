@@ -185,11 +185,3 @@ function prevButton(){
     document.getElementById("search").value = search.toString();
     drawVisualization2d2(search);
 }
-
-// window.addEventListener("load", async () => {
-//     isloaded = true;
-//     await getReports();
-//     generateColors();
-//     initSearchValue();
-//     drawVisualization2d2(search);      
-// });

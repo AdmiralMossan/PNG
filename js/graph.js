@@ -157,6 +157,9 @@ async function drawPie(groupBy) {
   }
   myPieChart = new Chart(ctx, {
     type: "pie",
+    options: {
+      maintainAspectRatio: false
+    },
     data: {
       labels: displayLabel,
       datasets: [

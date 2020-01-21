@@ -68,11 +68,43 @@
                 <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports Overview</h5>
               </div>
               <!-- Card Body -->
-              <div class="card-body h-100 w-100">
-                <div class="chart-area">
-                  <div id="mygraph" class="d-flex justify-content-center h-100 "></div>
-                  <div id="info"></div>
+              <div class="card-body h-100 w-80">
+                
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content h-100 w-75">
+                <div id="home" class="container tab-pane active h-100">
+                    <div id="mygraph" class="justify-content-center mx-auto h-75"></div>
                 </div>
+                <div id="menu1" class="container tab-pane fade border">
+                    <div>
+                        <input id="prev" type="button" value="&lt;" onclick="prevButton()" disabled="true">
+                        <input id="search" type="text" size="1" style="text-align: center;" value="1">
+                        <input id="next" type="button" value="&gt;" onclick="nextButton()">
+                    </div>
+                    <canvas id="graph2d" class="w-100 h-100"></canvas>
+                </div>
+                <div id="menu2" class="container tab-pane fade">
+                    ...
+                </div>
+                </div>
+                <!-- <div class="chart-area">
+                    <div id="mygraph" class="d-flex justify-content-center h-100"></div>
+                    <div id="info"></div>
+                </div> -->
+
               </div>
             </div>
           </div>
@@ -99,10 +131,8 @@
                 </h6>
               </div>
               <!-- Card Body -->
-              <div class="card-body">
-                <div class="sub-chart pt-4 pb-2">
-                  <canvas id="myPieChart" class="w-100 h-100"></canvas>
-                </div>
+              <div class="card-body h-100">
+                  <canvas id="myPieChart" class="w-100 my-4" style="height:90%;"></canvas>
               </div>
             </div>
           </div>
@@ -252,11 +282,13 @@
   <!-- Page Custom script-->
   <script src="js/sb-admin-2.js"></script>
   <script type="text/javascript" src="js/graph.js"></script>
+  <script type="text/javascript" src="js/graph2d.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 
   <!-- Page Chart plugin -->
   <script>
     var ctx = document.getElementById('myPieChart').getContext('2d');
+    var ctx2d = document.getElementById('graph2d').getContext('2d');
   </script>
 
 

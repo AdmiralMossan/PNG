@@ -45,16 +45,15 @@ function toDetails(){
     location.href =  "/Details.html";
 }
 
-async function fileUpload(file_data){
+async function fileUpload(file_data, reportData){
     var fileUrl = "";
     var timestamp = Number(new Date());
     if(isImage(file_data.name)){
-        var storageRef = firebase.storage().ref("images/" + file_data.name + timestamp.toString());
-        console.log('image');
+        var storageRef = firebase.storage().ref("images/" + timestamp.toString() + file_data.name  );
     }else if(isVideo(file_data.name)){
-        var storageRef = firebase.storage().ref("videos/" + file_data.name + timestamp.toString());
+        var storageRef = firebase.storage().ref("videos/" + timestamp.toString() + file_data.name  );
     }else if(isAudio(file_data.name)){
-        var storageRef = firebase.storage().ref("audios/" + file_data.name + timestamp.toString());
+        var storageRef = firebase.storage().ref("audios/" + timestamp.toString() + file_data.name );
     }else{
         return "";
     }
@@ -64,11 +63,12 @@ async function fileUpload(file_data){
         console.log(progress);     
     }, function(error){
         console.log(error.message);
-    });
-
-    await task.snapshot.ref.getDownloadURL().then(function(downloadURL){
-        console.log(downloadURL);
-        fileUrl = "" + downloadURL;
+    }, function(){
+        task.snapshot.ref.getDownloadURL().then(function(downloadURL){
+            reportData.attachFile = downloadURL;
+            sendReport(reportData);
+        });
+        
     });
    
     return fileUrl;
@@ -84,36 +84,32 @@ async function storeData(e, skip){
     var personInfo = "NA";
     var otherDetails = "";
     var attachFile =  "";
-   
+    var created = "";
+    var reportData = {category, username,group,created,dateInfo,personInfo,otherDetails, attachFile}
     if(!skip){
-        dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
-        personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
-        otherDetails = $.trim($("#comment").val());
+        reportData.dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
+        reportData.personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
+        reportData.otherDetails = $.trim($("#comment").val());
         if( $("#fileInput").val()!=""){
             file_data = $("#fileInput").prop("files")[0];
-            attachFile = await fileUpload(file_data);
-            console.log(attachFile);
+            fileUpload(file_data, reportData);
         }
+    }else{
+        sendReport(reportData);
     }
-    
-    db.collection("reports").doc().set({
-        category: category,
-        username: username,
-        group: group,
-        created: firebase.firestore.FieldValue.serverTimestamp(),
-        dateInfo: dateInfo,
-        personInfo: personInfo,
-        otherDetails: otherDetails,
-        attachFile: attachFile
-    })
+}
+
+function sendReport(reportData){
+    reportData.created = firebase.firestore.FieldValue.serverTimestamp();
+    db.collection("reports").doc().set(reportData)
     .then(function() {
         console.log("Document successfully written!");
         sessionStorage.removeItem("category");
+        $('#successModal').modal('show') 
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
     });
-    
 }
 
 function getCategory(id){

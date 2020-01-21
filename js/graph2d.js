@@ -89,25 +89,25 @@ function byGroup(){
     }
 }
 
-function generateColors2d(){
-    for(let i=0; i<categories.length; i++){
-        var r = Math.floor((Math.random() *  255));
-        var g = Math.floor((Math.random() *  255));
-        var b = Math.floor((Math.random() *  255));
-        stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
-        colors2d[i] =  stringColor + ",1)";
-        barColors[i] = stringColor + ",0.6)";
-    }
-}
-
-function drawVisualization2d(search){
+function drawVisualization2d(search, sortBy){
     let displayLabel = [];
     let displayData = [];
+    let arrayLabel = [];
+    let displayMax = 0;
     let index = search - 1; 
 
-    displayLabel = categories;
-    displayData = byGroupCount[index];
-    
+    let stringLabel = sortBy == 1 ? 'Category ' : 'Group ';
+
+    let labelStr = sortBy == 1 ? 'Group' : 'Category';
+
+    arrayLabel = sortBy == 1 ? categories : groups;
+
+    displayLabel = sortBy == 1 ? groups : categories;
+
+    displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
+
+    displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
+
     if(barGraph!=null){
         barGraph.destroy();
     }
@@ -117,38 +117,10 @@ function drawVisualization2d(search){
         data: {
             labels: displayLabel,
             datasets: [{
-                label: 'Group ' + groups[index], 
+                label: stringLabel + arrayLabel[index], 
                 data: displayData,
-                backgroundColor: barColors,
-                borderColor: colors2d,
-                borderWidth: 1,
-            }]
-        },
-    });
-}
-
-function drawVisualization2d2(search){
-    let displayLabel = [];
-    let displayData = [];
-    let index = search - 1;
-
-    displayLabel = groups;
-    displayData = byCategoryCount[index];
-    
-    if(barGraph!=null){
-        barGraph.destroy();
-    }
-    
-    barGraph = new Chart(ctx2d, {
-        type: 'bar',
-        data: {
-            labels: displayLabel,
-            datasets: [{
-                barPercentage: 0.5,
-                label: 'Category ' + categories[index], 
-                data: displayData,
-                backgroundColor: barColors,
-                borderColor: colors2d,
+                backgroundColor: pieColors,
+                borderColor: colors,
                 borderWidth: 1,
             }]
         },
@@ -158,9 +130,19 @@ function drawVisualization2d2(search){
                         display: true,
                         ticks: {
                             beginAtZero: true,
-                            max: maxCategoryCount
+                            max: displayMax
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number'
                         }
-                    }]
+                }],
+                xAxes : [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: labelStr
+                    }
+                }]
             }
         }
     });
@@ -169,11 +151,14 @@ function drawVisualization2d2(search){
 function nextButton(){
     $('#prev').attr('disabled', false);
     search += 1;
-    if(search == categories.length){
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    let len = sortBy == 1 ? categories.length : groups.length;
+    if(search == len){
         $('#next').attr('disabled', true);
     }
     document.getElementById("search").value = search.toString();
-    drawVisualization2d2(search);
+    
+    drawVisualization2d(search, sortBy);
 }
 
 function prevButton(){
@@ -183,5 +168,6 @@ function prevButton(){
         $('#prev').attr('disabled', true);
     }
     document.getElementById("search").value = search.toString();
-    drawVisualization2d2(search);
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    drawVisualization2d(search, sortBy);
 }

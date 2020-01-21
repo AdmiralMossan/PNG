@@ -62,21 +62,21 @@
         <div class="col-12 col-md-8 p-0 mb-4 mb-md-0">
           <!-- Bar Chart -->
           <div id="bar-container">
-            <div class="card shadow mb-4 h-100 mx-2 mx-md-4">
+            <div class="card shadow mb-0 h-100 mx-2 mx-md-4">
               <!-- Card Header - Dropdown -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
+              <div class="card-header bg-custom py-2 d-flex flex-row align-items-center justify-content-between">
                 <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports Overview</h5>
               </div>
               <!-- Card Body -->
-              <div class="card-body h-100 w-80">
+              <div class="card-body h-100 w-80 py-0">
                 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+                        <a class="nav-link active" data-toggle="tab" href="#graph3d">3D Graph</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+                        <a class="nav-link" data-toggle="tab" href="#bargraph">Bar Graph</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
@@ -84,19 +84,23 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content h-100 w-75">
-                    <div id="home" class="container tab-pane active h-100">
-                        <div id="mygraph" class="justify-content-center mx-auto h-75"></div>
+                <div class="tab-content">
+                    <div id="graph3d" class="container tab-pane active px-0">
+                        <div id="mygraph"></div>
                     </div>
-                    <div id="menu1" class="container tab-pane fade border">
+                    <div id="bargraph" class="container tab-pane fade px-0">
                         <div>
                             <canvas id="graph2d" class="w-100 h-100"></canvas>
-                            <input id="prev" type="button" value="&lt;" onclick="prevButton()" disabled="true">
-                            <input id="search" type="text" size="1" style="text-align: center;" value="1">
-                            <input id="next" type="button" value="&gt;" onclick="nextButton()">
+                        </div>
+                        <div class="row">
+                            <div id="buttons" class="mx-auto p-2 row">
+                                <input id="prev" class="material-icons" type="button" value="chevron_left" onclick="prevButton()" disabled="true">
+                                <input id="search" type="text" size="1" style="text-align: center;" value="1">
+                                <input id="next" class="material-icons"type="button" value="chevron_right" onclick="nextButton()">
+                            </div>
                         </div>
                     </div>
-                    <div id="menu2" class="container tab-pane fade">
+                    <div id="menu2" class="container tab-pane fade px-0">
                     ...
                     </div>
                 </div>

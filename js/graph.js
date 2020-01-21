@@ -164,21 +164,22 @@ async function drawPie(groupBy) {
 async function drawVisualization(data) {
     // specify options
     var options = {
-        width: "90%",
-        height: "90%",
+        width: '100%',
         style: 'bar-color',
         showPerspective: true,
         showGrid: true,
         showShadow: true,
         animationPreload: true,
-        axisFontType: "courier",
+        axisFontType: 'courier',
         axisFontSize: 35,
-        xLabel: "", //Categories
-        yLabel: "", //Groups
-        zLabel: "", //Number
+        xLabel: '', //Categories
+        yLabel: '', //Groups
+        zLabel: '', //Number
         xBarWidth: 0.5,
         yBarWidth: 0.5,
         rotateAxisLabels: true,
+        xCenter: '45%',
+        yCenter: '34%',
 
         tooltip: function (point) {
             // parameter point contains properties x, y, z
@@ -204,14 +205,13 @@ async function drawVisualization(data) {
         },
 
         keepAspectRatio: true,
-        verticalRatio: 0.5
     };
 
     // create our graph
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
-
-    graph.setCameraPosition({ horizontal: -1.85, vertical: 0.6, distance: 2 }); // restore camera position
+    
+    graph.setCameraPosition({ horizontal: 1.2, vertical: 0.3, distance: 2.3 }); // restore camera position
 }
 
 function notifyReport(report) {
@@ -317,7 +317,6 @@ async function reportsTable() {
 
 }
 
-
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();
@@ -327,23 +326,34 @@ window.addEventListener("load", async () => {
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
+        drawVisualization2d(search, 1);
     });
 
     $("#reportCount").text(reports.length);
-
-    $('#group').change(function () {
-        generateColors(2);
-        loadData(2).then(function () {
-            drawVisualization(data);
-            drawPie(2);
-        });
-    });
 
     $('#category').change(function () {
         generateColors(1);
         loadData(1).then(function () {
             drawVisualization(data);
             drawPie(1);
+            search = 1;
+            document.getElementById("search").value = search.toString();
+            $('#next').attr('disabled', false);
+            $('#prev').attr('disabled', true);
+            drawVisualization2d(search, 1);
+        });
+    });
+
+    $('#group').change(function () {
+        generateColors(2);
+        loadData(2).then(function () {
+            drawVisualization(data);
+            drawPie(2);
+            search = 1;
+            document.getElementById("search").value = search.toString();
+            $('#next').attr('disabled', false);
+            $('#prev').attr('disabled', true);
+            drawVisualization2d(search, 2);
         });
     });
 
@@ -358,6 +368,7 @@ window.addEventListener("load", async () => {
                 notifyReport(querySnapshot.docs[0]);
                 drawVisualization(data);
                 drawPie(displayBy);
+                drawVisualization2d(search, displayBy);
             });
 
         } else {
@@ -365,10 +376,7 @@ window.addEventListener("load", async () => {
         }
     });
 
-    generateColors2d();
     initSearchValue();
-    drawVisualization2d2(search);
-
 });
 
 function convertToCSV(objArray) {

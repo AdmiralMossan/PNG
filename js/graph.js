@@ -58,6 +58,11 @@ async function getReports() {
             }     
         }
     }
+
+    initArray();
+    byGroup();
+    byCategory();
+    findMax();
 }
 
 function initializeCounts() {
@@ -209,23 +214,6 @@ async function drawVisualization(data) {
     graph.setCameraPosition({ horizontal: -1.85, vertical: 0.6, distance: 2 }); // restore camera position
 }
 
-
-
-// function newReport(recentReports){
-//     var today = new Date();
-//     var list = document.getElementById("recentReports");
-//     list.innerHTML = "";
-//     for(let i=0; i<3; i++){   
-//         let active = loaded && i==0 ? "active" : "";
-//         list.innerHTML +=   `<li  class="list-group-item list-group-item-action flex-column align-items-start ` + active +`">
-//         <div class=\"d-flex w-100 justify-content-between\">
-//           <h6 class=\"mb-1\">Username: ` + recentReports[i].data().username + ` Category: ` + recentReports[i].data().category +  ` Group: ` + recentReports[i].data().group + `
-//           <small>` + recentReports[i].data().created.toDate().toLocaleString() +`</small></h6>
-//         </div>    
-//       </li>`;
-//     }
-// }
-
 function notifyReport(report) {
     PNotify.info({
         title: 'New Report',
@@ -257,6 +245,7 @@ async function reportsTable() {
     let group = {};
     let cCtr = {}
     let gCtr = {}
+    
     //Add Head
     let head = "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>"+
     "<thead class='thead-inverse bg-custom text-custom'>"+
@@ -276,6 +265,7 @@ async function reportsTable() {
             "</div>"+
     "</td>" +
     "</th></tr></thead>"
+    
     //Add body
     let body = '<tbody class="scroll-secondary">';
     reports.forEach(function (report) {
@@ -289,12 +279,14 @@ async function reportsTable() {
         } else {
             gCtr[report.group] += 1;
         }
-        let date = new Date((report.created.seconds * 1000));
+        
+        let date = new Date(report.created["seconds"] * 1000);
+        
         body += "<tr>" +
             "<td style='width:8em;'>" + report.username + "</td>" +
             "<td style='width:6em;'>" + report.group + "</td>" +
             "<td style='width:6em;'>" + report.category + "</td>" +
-            "<td style='width:12em;display:flex;justify-content:space-between;'>" + date.toLocaleString('en') + "</td><td style='width:0.5em;'></td>"+
+            "<td style='width:12em;display:flex;justify-content:space-between;'>" + report.created.toDate() + "</td><td style='width:0.5em;'></td>"+
             "</tr>"
 
         csvData.push({
@@ -304,8 +296,6 @@ async function reportsTable() {
             date: (date.getMonth() + 1) + "-" + date.getDay() + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
         })
     })
-
-    console.log(csvData)
 
     $.each(cCtr, function (key, value) {
         if (cat["value"] < value || typeof cat["value"] === "undefined") {
@@ -333,6 +323,7 @@ window.addEventListener("load", async () => {
     await getReports();
     await reportsTable();
     generateColors(1);
+    
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
@@ -374,7 +365,9 @@ window.addEventListener("load", async () => {
         }
     });
 
-
+    generateColors2d();
+    initSearchValue();
+    drawVisualization2d2(search);
 
 });
 

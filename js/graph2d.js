@@ -3,10 +3,10 @@ var search = 0;
 var reports = [];
 var byGroupCount = [];
 var byCategoryCount = [];
-var categories = [];
-var groups = [];
+//var categories = [];
+//var groups = [];
 var barColors = [];
-var colors = [];
+var colors2d = [];
 var maxCategoryCount = 0;
 var maxGroupCount = 0;
 
@@ -65,33 +65,6 @@ function findMax(){
     }
 }
 
-async function getReports(){
-    clearValues();
-
-    await db.collection("reports").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-           reports.push(doc.data())
-        });
-    }); 
-
-    await db.collection("categories").orderBy("name").get().then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-             categories.push(doc.data().name)
-        });
-    });
-
-    await db.collection("groups").orderBy("name").get().then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-             groups.push(doc.data().name)
-        });
-    });
-
-    initArray();
-    byGroup();
-    byCategory();
-    findMax();
-}
-
 function byCategory(){
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<categories.length; j++){
@@ -116,18 +89,18 @@ function byGroup(){
     }
 }
 
-function generateColors(){
+function generateColors2d(){
     for(let i=0; i<categories.length; i++){
         var r = Math.floor((Math.random() *  255));
         var g = Math.floor((Math.random() *  255));
         var b = Math.floor((Math.random() *  255));
         stringColor =  "rgba(" +  r  + "," +  g  + "," + b ;
-        colors[i] =  stringColor + ",1)";
+        colors2d[i] =  stringColor + ",1)";
         barColors[i] = stringColor + ",0.6)";
     }
 }
 
-function drawVisualization(search){
+function drawVisualization2d(search){
     let displayLabel = [];
     let displayData = [];
     let index = search - 1; 
@@ -139,7 +112,7 @@ function drawVisualization(search){
         barGraph.destroy();
     }
     
-    barGraph = new Chart(ctx, {
+    barGraph = new Chart(ctx2d, {
         type: 'bar',
         data: {
             labels: displayLabel,
@@ -147,14 +120,14 @@ function drawVisualization(search){
                 label: 'Group ' + groups[index], 
                 data: displayData,
                 backgroundColor: barColors,
-                borderColor: colors,
+                borderColor: colors2d,
                 borderWidth: 1,
             }]
         },
     });
 }
 
-function drawVisualization2(search){
+function drawVisualization2d2(search){
     let displayLabel = [];
     let displayData = [];
     let index = search - 1;
@@ -166,7 +139,7 @@ function drawVisualization2(search){
         barGraph.destroy();
     }
     
-    barGraph = new Chart(ctx, {
+    barGraph = new Chart(ctx2d, {
         type: 'bar',
         data: {
             labels: displayLabel,
@@ -175,7 +148,7 @@ function drawVisualization2(search){
                 label: 'Category ' + categories[index], 
                 data: displayData,
                 backgroundColor: barColors,
-                borderColor: colors,
+                borderColor: colors2d,
                 borderWidth: 1,
             }]
         },
@@ -200,7 +173,7 @@ function nextButton(){
         $('#next').attr('disabled', true);
     }
     document.getElementById("search").value = search.toString();
-    drawVisualization2(search);
+    drawVisualization2d2(search);
 }
 
 function prevButton(){
@@ -210,13 +183,13 @@ function prevButton(){
         $('#prev').attr('disabled', true);
     }
     document.getElementById("search").value = search.toString();
-    drawVisualization2(search);
+    drawVisualization2d2(search);
 }
 
-window.addEventListener("load", async () => {
-    isloaded = true;
-    await getReports();
-    generateColors();
-    initSearchValue();
-    drawVisualization2(search);      
-});
+// window.addEventListener("load", async () => {
+//     isloaded = true;
+//     await getReports();
+//     generateColors();
+//     initSearchValue();
+//     drawVisualization2d2(search);      
+// });

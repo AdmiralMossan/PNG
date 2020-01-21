@@ -85,9 +85,11 @@
                     <input type="radio" name="date" value="Today"> Today<br>
                     <input type="radio" name="date" value="Week"> This Week<br>
                     <input type="radio" name="date" value="Month+"> This Month or older
+                    <!-- Navigation Button -->
                     <div class="button-row d-flex mt-4">
                       <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
                     </div>
+                    <!-- End of Navigation Button -->
                   </div>
                 </div>
                 <!--single form panel-->
@@ -99,10 +101,12 @@
                     <input type="radio" name="person" value="Self"> Myself<br>
                     <input type="radio" name="person" value="Other"> It happened to someone I know<br>
                     <input type="radio" name="person" value="OtherAcq"> It happened to an acquaintance of someone I know
+                    <!-- Navigation Buttons -->
                     <div class="button-row d-flex mt-4">
                       <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
                       <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
                     </div>
+                    <!-- End of Navigation Buttons -->
                   </div>
                 </div>
                 <!--single form panel-->
@@ -115,10 +119,12 @@
                         placeholder="Additional Details regarding the Report"></textarea>
                     </div>
                     <div class="row">
+                      <!-- Navigation Buttons -->
                       <div class="button-row d-flex mt-4 col-12">
                         <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
                         <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
                       </div>
+                      <!-- End of Navigation Buttons -->
                     </div>
                   </div>
                 </div>
@@ -130,14 +136,17 @@
                     <div class="form-row mt-4">
                       <input type="file" name="attachement" accept="audio/*,video/*,image/*" />
                     </div>
+                    <!-- Navigation Buttons -->
                     <div class="button-row d-flex mt-4">
                       <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
                       <button class="btn btn-success ml-auto" type="button" data-target="#successModal" data-toggle="modal" title="Send">Send</button>
                     </div>
+                    <!-- End of Navigation Buttons -->
                   </div>
                 </div>
               </form>
             </div>
+            <!-- End of Left Side -->
 
             <!-- Right Side -->
             <div class="col-sm-5">
@@ -161,14 +170,15 @@
                 </div>
               </form>
             </div>
-
+            <!-- End of Right Side -->
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Submit Report Modal -->
   <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -188,7 +198,9 @@
       </div>
     </div>
   </div>
+  <!-- End of Submit Report Modal -->
 
+  <!-- Logout Modal -->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -207,6 +219,8 @@
       </div>
     </div>
   </div>
+  <!-- End of Logout Modal -->
+  
   <!-- partial -->
   <script src="js/Details.js"></script>
 

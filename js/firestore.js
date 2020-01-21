@@ -47,13 +47,14 @@ function toDetails(){
 
 async function fileUpload(file_data){
     var fileUrl = "";
+    var timestamp = Number(new Date());
     if(isImage(file_data.name)){
-        var storageRef = firebase.storage().ref("images/" + file_data.name);
+        var storageRef = firebase.storage().ref("images/" + file_data.name + timestamp.toString());
         console.log('image');
     }else if(isVideo(file_data.name)){
-        var storageRef = firebase.storage().ref("videos/" + file_data.name);
+        var storageRef = firebase.storage().ref("videos/" + file_data.name + timestamp.toString());
     }else if(isAudio(file_data.name)){
-        var storageRef = firebase.storage().ref("audios/" + file_data.name);
+        var storageRef = firebase.storage().ref("audios/" + file_data.name + timestamp.toString());
     }else{
         return "";
     }

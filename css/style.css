@@ -37,6 +37,13 @@ html {
   height: 100%;
 }
 
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 20vw;
+}
+
 #showAll {
   width: 100%;
   color: #ccccff;

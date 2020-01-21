@@ -84,11 +84,11 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content h-100 w-75">
-                <div id="home" class="container tab-pane active h-100">
-                    <div id="mygraph" class="justify-content-center mx-auto h-75"></div>
+                <div class="tab-content h-100 w-100">
+                <div id="home" class="container tab-pane active h-100 w-90">
+                    <div id="mygraph" class="justify-content-center mx-auto h-100"></div>
                 </div>
-                <div id="menu1" class="container tab-pane fade border">
+                <div id="menu1" class="container tab-pane fade border w-90" style="width:90%;">
                     <div>
                         <input id="prev" type="button" value="&lt;" onclick="prevButton()" disabled="true">
                         <input id="search" type="text" size="1" style="text-align: center;" value="1">
@@ -131,8 +131,8 @@
                 </h6>
               </div>
               <!-- Card Body -->
-              <div class="card-body h-100">
-                  <canvas id="myPieChart" class="w-100 my-4" style="height:90%;"></canvas>
+              <div class="card-body chart-container">
+                  <canvas id="myPieChart"></canvas>
               </div>
             </div>
           </div>

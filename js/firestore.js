@@ -44,8 +44,37 @@ function toDetails(){
        return
     location.href =  "/Details.html";
 }
+
+async function fileUpload(file_data){
+    var fileUrl = "";
+    var timestamp = Number(new Date());
+    if(isImage(file_data.name)){
+        var storageRef = firebase.storage().ref("images/" + file_data.name + timestamp.toString());
+        console.log('image');
+    }else if(isVideo(file_data.name)){
+        var storageRef = firebase.storage().ref("videos/" + file_data.name + timestamp.toString());
+    }else if(isAudio(file_data.name)){
+        var storageRef = firebase.storage().ref("audios/" + file_data.name + timestamp.toString());
+    }else{
+        return "";
+    }
+    var task = storageRef.put(file_data);
+    task.on('state_changed', function(snapshot){
+        var progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+        console.log(progress);     
+    }, function(error){
+        console.log(error.message);
+    });
+
+    await task.snapshot.ref.getDownloadURL().then(function(downloadURL){
+        console.log(downloadURL);
+        fileUrl = "" + downloadURL;
+    });
+   
+    return fileUrl;
+}
  
-function storeData(e, skip){
+async function storeData(e, skip){
     e.preventDefault();
     category = sessionStorage.getItem("category");
     username = sessionStorage.getItem("username"); 
@@ -54,12 +83,17 @@ function storeData(e, skip){
     var dateInfo = "NA";
     var personInfo = "NA";
     var otherDetails = "";
-    var attachFile =  "NA";
+    var attachFile =  "";
+   
     if(!skip){
-        var dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
-        var personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
-        var otherDetails = $.trim($("#comment").val());
-        var attachFile =  $("#fileInput").val();    
+        dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
+        personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
+        otherDetails = $.trim($("#comment").val());
+        if( $("#fileInput").val()!=""){
+            file_data = $("#fileInput").prop("files")[0];
+            attachFile = await fileUpload(file_data);
+            console.log(attachFile);
+        }
     }
     
     db.collection("reports").doc().set({

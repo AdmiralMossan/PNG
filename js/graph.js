@@ -245,6 +245,7 @@ async function reportsTable() {
     let group = {};
     let cCtr = {}
     let gCtr = {}
+    
     //Add Head
     let head = "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>"+
     "<thead class='thead-inverse bg-custom text-custom'>"+
@@ -264,6 +265,7 @@ async function reportsTable() {
             "</div>"+
     "</td>" +
     "</th></tr></thead>"
+    
     //Add body
     let body = '<tbody class="scroll-secondary">';
     reports.forEach(function (report) {
@@ -277,12 +279,14 @@ async function reportsTable() {
         } else {
             gCtr[report.group] += 1;
         }
-        let date = new Date((report.created.seconds * 1000));
+        
+        let date = new Date(report.created["seconds"] * 1000);
+        
         body += "<tr>" +
             "<td style='width:8em;'>" + report.username + "</td>" +
             "<td style='width:6em;'>" + report.group + "</td>" +
             "<td style='width:6em;'>" + report.category + "</td>" +
-            "<td style='width:12em;display:flex;justify-content:space-between;'>" + date.toLocaleString('en') + "</td><td style='width:0.5em;'></td>"+
+            "<td style='width:12em;display:flex;justify-content:space-between;'>" + report.created.toDate() + "</td><td style='width:0.5em;'></td>"+
             "</tr>"
 
         csvData.push({

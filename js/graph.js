@@ -400,6 +400,8 @@ async function reportsTable() {
 }
 
 window.addEventListener("load", async () => {
+  if(!sessionStorage.getItem("username"))
+    location.href =  "/Login.html";
   isloaded = true;
   await getReports();
   await reportsTable();

@@ -17,8 +17,15 @@ html {
 #container {
   margin-left: 0.2rem;
   margin-right: 0.2rem;
+  display: grid;
+  row-gap: 1rem;
+  grid-template-areas:
+    "stat"
+    "charts";
 }
-
+#charts-container {
+  grid-area: charts;
+}
 #bar-container {
   grid-area: bar;
   height: 60vh;
@@ -32,11 +39,10 @@ html {
 #stats-container {
   display: grid;
   grid-area: stat;
-  height: 30vh;
+  height: 50vh;
   row-gap: 0.5rem;
   grid-template-areas:
     "card4 card4 card4"
-    ". . ."
     "card1 card2 card3";
 }
 #card1 {
@@ -131,16 +137,13 @@ html {
 @media only screen and (min-width: 768px) {
   #container {
     display: grid;
+    row-gap: 1rem;
     grid-template-areas:
       "stat"
       "charts";
   }
 
-  #charts-container {
-    grid-area: charts;
-  }
   #bar-container {
-    grid-area: bar;
     height: 70vh;
   }
 

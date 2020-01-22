@@ -120,9 +120,9 @@ function getCategory(id){
 
 async function logIn(e){
     if(e==0){
-        location.href =  "/Button.html";
         sessionStorage.setItem("username", "anonymous");
         sessionStorage.setItem("group", e);
+        location.href =  "/Button.html";
 
     }else{
         e.preventDefault();
@@ -137,11 +137,14 @@ async function logIn(e){
         });
         if(docs.length == 1){
         if(docs[0].userType == 1){
-            location.href =  "/admin.html";
-        }else{
-            location.href =  "/Button.html";
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
+            location.href =  "/adminTest.html"; 
+            // location.href =  "/admin.html";
+        }else{
+            sessionStorage.setItem("username", docs[0].username);
+            sessionStorage.setItem("group", docs[0].group);
+            location.href =  "/Button.html";
         }
         }else
         alert("Incorrect username or password")

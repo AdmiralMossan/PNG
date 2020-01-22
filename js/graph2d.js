@@ -134,7 +134,7 @@ function drawVisualization2d(search, sortBy){
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Number'
+                            labelString: 'Number of Reports'
                         }
                 }],
                 xAxes : [{

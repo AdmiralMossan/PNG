@@ -1,25 +1,9 @@
 var barGraph = null;
 var search = 0;
-var reports = [];
 var byGroupCount = [];
 var byCategoryCount = [];
-//var categories = [];
-//var groups = [];
-var barColors = [];
-var colors2d = [];
 var maxCategoryCount = 0;
 var maxGroupCount = 0;
-
-function clearValues(){
-    categoriesCount = [];
-    groupsCount = [];
-    categories = [];
-    groups = [];
-    reports = [];
-    groupsCount = [];
-    colors = [];
-    pieColors = [];
-}
 
 function initArray(){
     for(let i=0; i<groups.length; i++){
@@ -97,15 +81,11 @@ function drawVisualization2d(search, sortBy){
     let index = search - 1; 
 
     let stringLabel = sortBy == 1 ? 'Category ' : 'Group ';
-
     let labelStr = sortBy == 1 ? 'Group' : 'Category';
 
     arrayLabel = sortBy == 1 ? categories : groups;
-
     displayLabel = sortBy == 1 ? groups : categories;
-
     displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
-
     displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
 
     if(barGraph!=null){
@@ -156,6 +136,7 @@ function nextButton(){
     if(search == len){
         $('#next').attr('disabled', true);
     }
+    
     document.getElementById("search").value = search.toString();
     
     drawVisualization2d(search, sortBy);
@@ -167,7 +148,9 @@ function prevButton(){
     if(search == 1){
         $('#prev').attr('disabled', true);
     }
+    
     document.getElementById("search").value = search.toString();
     let sortBy = document.getElementById('category').checked ? 1 : 2;
+    
     drawVisualization2d(search, sortBy);
 }

@@ -403,17 +403,21 @@ window.addEventListener("load", async () => {
 
     db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
         if (loaded) {
-            let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-            await getReports();
-            generateColors(displayBy);
-
-            $("#reportCount").text(reports.length);
-            loadData(displayBy).then(function () {
-                notifyReport(querySnapshot.docs[0]);
-                drawVisualization(data);
-                drawPie(displayBy);
-                drawVisualization2d(search, displayBy);
-            });
+            querySnapshot.docChanges().forEach(async function(change) {
+                if (change.type === "added") {
+                    let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+                    await getReports();
+                    generateColors(displayBy);
+      
+                    $("#reportCount").text(reports.length);
+                    loadData(displayBy).then(function () {
+                        notifyReport(querySnapshot.docs[0]);
+                        drawVisualization(data);
+                        drawPie(displayBy);
+                        drawVisualization2d(search, displayBy);
+                    });
+                  }
+            });   
 
         } else {
             loaded = true;

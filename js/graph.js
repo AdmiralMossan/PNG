@@ -294,12 +294,7 @@ async function reportsTable() {
     "</th>" +
     "<td style='width:0.5em;'>" +
     "<div class='btn-group'>" +
-    "<button type='button' class='btn btn-secondary dropdown-toggle p-0 m-0' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>" +
-    "<div class='dropdown-menu'>" +
-    "<button class='material-icons' value='cloud_download' onClick='download()' style='display: block;width: 20px;padding-bottom: 0px;'>" +
-    "<i class='fa fa-download'></i>" +
-    "</button>" +
-    "</div>" +
+    "<a href='javascript:download()' title='Download as CSV' class='material-icons' style='text-decoration:none'>cloud_download</a>" +
     "</div>" +
     "</td>" +
     "</th></tr></thead>";
@@ -400,8 +395,6 @@ async function reportsTable() {
 }
 
 window.addEventListener("load", async () => {
-  if(!sessionStorage.getItem("username"))
-    location.href =  "/Login.html";
   isloaded = true;
   await getReports();
   await reportsTable();

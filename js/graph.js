@@ -287,10 +287,10 @@ async function reportsTable() {
     "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>" +
     "<thead class='thead-inverse bg-custom text-custom'>" +
     "<tr>" +
-    "<th style='width:8em; text-align:center;'>User</th>" +
-    "<th style='width:6em; text-align:center;'>Group</th>" +
-    "<th style='width:6em; text-align:center;'>Category</th>" +
-    "<th style='width:12em; text-align:center;'>Date " +
+    "<th style='width:4em; text-align:center;'>User</th>" +
+    "<th style='width:8em; text-align:center;'>Group</th>" +
+    "<th style=' text-align:center;'>Category</th>" +
+    "<th style='width:16em; text-align:center;'>Date " +
     "</th>" +
     "<td style='width:0.5em;'>" +
     "<div class='btn-group'>" +
@@ -308,9 +308,9 @@ async function reportsTable() {
     "<table id='reportsTable2' class='table m-0 table-responsive' style='display:block;'>" +
     "<thead class='bg-custom text-custom'>" +
     "<tr>" +
-    "<th style='width:8em; text-align:center;' class='p-0'>User</th>" +
-    "<th style='width:6em; text-align:center;' class='p-0'>Group</th>" +
-    "<th style='width:6em; text-align:center;' class='p-0'>Category</th>" +
+    "<th style='width:4em; text-align:center;' class='p-0'>User</th>" +
+    "<th style='width:10em; text-align:center;' class='p-0'>Group</th>" +
+    "<th style='width:2em; text-align:center;' class='p-0'>Category</th>" +
     "</td>" +
     "</th></tr></thead>";
 
@@ -350,10 +350,10 @@ async function reportsTable() {
     if (ctr <= 5) {
       body2 +=
         "<tr>" +
-        "<td style='width:8em;'>" +
+        "<td style='width:12em;'>" +
         report.username +
         "</td>" +
-        "<td style='width:6em;'>" +
+        "<td style='width:14em;'>" +
         report.group +
         "</td>" +
         "<td style='width:6em;'>" +

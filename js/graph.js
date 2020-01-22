@@ -296,7 +296,7 @@ async function reportsTable() {
     "<div class='btn-group'>" +
     "<button type='button' class='btn btn-secondary dropdown-toggle p-0 m-0' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>" +
     "<div class='dropdown-menu'>" +
-    "<button class='dropdown-item' onClick='download()' style='display: block;width: 20px;padding-bottom: 0px;'>" +
+    "<button class='material-icons' value='cloud_download' onClick='download()' style='display: block;width: 20px;padding-bottom: 0px;'>" +
     "<i class='fa fa-download'></i>" +
     "</button>" +
     "</div>" +

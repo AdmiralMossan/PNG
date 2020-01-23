@@ -292,11 +292,11 @@ async function reportsTable() {
     "<th style=' text-align:center;'>Category</th>" +
     "<th style='width:16em; text-align:center;'>Date " +
     "</th>" +
-    "<td style='width:0.5em;'>" +
+    "<th style='width:0.5em;'>" +
     "<div class='btn-group'>" +
     "<a href='javascript:download()' title='Download as CSV' class='material-icons' style='text-decoration:none'>cloud_download</a>" +
     "</div>" +
-    "</td>" +
+    "</th>" +
     "</th></tr></thead>";
 
   let head2 =

@@ -543,3 +543,63 @@ function download() {
 
   exportCSVFile(headers, csvDataFormated, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
 }
+
+async function addCategory(){
+    let name = document.getElementById("catName").value;
+    let desc = document.getElementById("catdesc").value;
+    if(name == "" || desc == "")
+        return
+    let size = 0;
+
+    await db.collection("ids").get().then(function(querySnapshot) {
+        size = querySnapshot.docs[0].data().categoryID + 1;
+        querySnapshot.forEach(function(doc) {
+            let newID = doc.data().categoryID + 1
+            db.collection("ids").doc(doc.id).update({
+                categoryID: newID
+            });
+        });
+    });
+
+    db.collection("categories").doc().set({
+        id: size, 
+        name: name,
+        description: desc
+    })
+    .then(async function() {
+        console.log("Document successfully written!");
+        sessionStorage.removeItem("category");
+        PNotify.success({
+            title: "Successfully added Category",
+            delay: 2000,
+            modules: {
+              Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+              },
+               Mobile: {
+                swipeDismiss: true,
+                styling: true
+              }
+            }
+          });
+          let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+          await getReports();
+          generateColors(displayBy);
+
+          $("#reportCount").text(reports.length);
+          loadData(displayBy).then(function () {
+              drawVisualization(data);
+              drawPie(displayBy);
+              drawVisualization2d(search, displayBy);
+          });
+          document.getElementById("catName").value = "";
+          document.getElementById("catdesc").value = "";
+          
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+    
+}

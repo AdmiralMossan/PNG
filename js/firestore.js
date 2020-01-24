@@ -100,11 +100,11 @@ async function storeData(e, skip){
 
 async function sendReport(reportData){
     reportData.created = firebase.firestore.FieldValue.serverTimestamp();
-    await db.collection("reportID").get().then(function(querySnapshot) {
-        reportData.id = querySnapshot.docs[0].data().id + 1;
+    await db.collection("ids").get().then(function(querySnapshot) {
+        reportData.id = querySnapshot.docs[0].data().reportID + 1;
         querySnapshot.forEach(function(doc) {
             db.collection("reportID").doc(doc.id).set({
-                id: reportData.id
+                reportID: reportData.id
             }, { merge: true });
         });
     });
@@ -149,8 +149,8 @@ async function logIn(e){
                 sessionStorage.setItem("username", docs[0].username);
                 sessionStorage.setItem("group", docs[0].group);
                 sessionStorage.setItem("userType", docs[0].userType);
-                location.href =  "/adminTest.html"; 
-                // location.href =  "/admin.html";
+                // location.href =  "/adminTest.html"; 
+                location.href =  "/admin.html";
             }else{
                 sessionStorage.setItem("username", docs[0].username);
                 sessionStorage.setItem("group", docs[0].group);
@@ -174,8 +174,13 @@ async function addCategory(){
     let desc = document.getElementById("catdesc").value;
     let size = 0;
 
-    await db.collection("categories").get().then(function(querySnapshot) {
-        size = querySnapshot.size;
+    await db.collection("ids").get().then(function(querySnapshot) {
+        size = querySnapshot.docs[0].data().categoryID + 1;
+        querySnapshot.forEach(function(doc) {
+            db.collection("reportID").doc(doc.id).set({
+                categoryID: size
+            }, { merge: true });
+        });
     });
 
     db.collection("categories").doc().set({

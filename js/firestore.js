@@ -77,7 +77,7 @@ async function fileUpload(file_data, reportData){
 async function storeData(e, skip){
     e.preventDefault();
     category = sessionStorage.getItem("category");
-    username = sessionStorage.getItem("username"); 
+    username = sessionStorage.getItem("isAnonymous") ? "anonymous" : sessionStorage.getItem("username"); 
     group = sessionStorage.getItem("group"); 
     var dateInfo = "NA";
     var personInfo = "NA";
@@ -118,15 +118,16 @@ function getCategory(id){
 
 
 async function logIn(e){
+    var anon = false;
     if(e==0){
-        sessionStorage.setItem("username", "anonymous");
-        sessionStorage.setItem("group", e);
-        location.href =  "/Button.html";
-
+        var username = document.getElementById("usernameanon").value;
+        var password = document.getElementById("passwordanon").value;
+        anon = true;
     }else{
         e.preventDefault();
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+    }
         docs = []
         await db.collection("users").where( "username" , "==" , username ).where( "password" , "==" , password ).get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
@@ -135,21 +136,23 @@ async function logIn(e){
             });
         });
         if(docs.length == 1){
-        if(docs[0].userType == 1){
-            sessionStorage.setItem("username", docs[0].username);
-            sessionStorage.setItem("group", docs[0].group);
-            sessionStorage.setItem("userType", docs[0].userType);
-            location.href =  "/adminTest.html"; 
-            // location.href =  "/admin.html";
-        }else{
-            sessionStorage.setItem("username", docs[0].username);
-            sessionStorage.setItem("group", docs[0].group);
-            sessionStorage.setItem("userType", docs[0].userType);
-            location.href =  "/Button.html";
-        }
+            if(docs[0].userType == 1){
+                sessionStorage.setItem("username", docs[0].username);
+                sessionStorage.setItem("group", docs[0].group);
+                sessionStorage.setItem("userType", docs[0].userType);
+                location.href =  "/adminTest.html"; 
+                // location.href =  "/admin.html";
+            }else{
+                sessionStorage.setItem("username", docs[0].username);
+                sessionStorage.setItem("group", docs[0].group);
+                sessionStorage.setItem("userType", docs[0].userType);
+                if(anon)
+                    sessionStorage.setItem("isAnonymous", true);
+                location.href =  "/Button.html";
+            }
         }else
-        alert("Incorrect username or password")
-    }
+            alert("Incorrect username or password")
+    
 }
 
 function logOut(){  

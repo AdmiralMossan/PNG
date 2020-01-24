@@ -88,7 +88,7 @@
         <div class="col-sm pt-4 pt-md-0">
           <div class="row">
             <div id="logindiv2" class="col-md w-50 mx-auto border px-4 pb-4 bg-light rounded" >
-              <form onsubmit="logIn(event);">
+              <form onsubmit="event.preventDefault();">
                 <!-- Create Anonymous Report -->
                 <div class="pt-4">
                   <label
@@ -118,7 +118,7 @@
           </div>
           <div id ="anonlogin" class="row pt-4" style="display: none;">
             <div id="logindiv3" class="d-block col-md mx-auto w-50 border px-4  pt-4 pb-4 bg-light rounded">
-              <form onsubmit="logIn(event);">
+              <form onsubmit="event.preventDefault();">
                 <!-- Username field -->
                 <div class="">
                   <button type="button" class="btn btn-link" onclick="displayLogin()"><i class="fa fa-arrow-circle-left align-middle" style="font-size:35px;"></i></button>
@@ -158,7 +158,7 @@
                       <button
                         type="submit"
                         class="btn btn-primary "
-                        onclick="logIn(event)"
+                        onclick="logIn(0);"
                       >
                         Submit
                       </button>

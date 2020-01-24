@@ -25,99 +25,151 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="js/firestore.js"></script>
+    <script src="js/login.js"></script>
     <link href="css/login.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
     <div class="container align-self-center">
       <div class="row" style="height:200px;"></div>
       <div class="row">
-        <div class="col-md "></div>
-        <div
-          id="logindiv1"
-          class="d-block col-md mx-auto w-50 border px-4 pb-4 bg-light rounded"
-        >
-          <form onsubmit="logIn(event);">
-            <!-- Username field -->
-            <div class="form-group mx-auto align-middle pt-4">
-              <label for="username" class="h3">Login:</label>
-              <input
-                type="username"
-                class="form-control"
-                id="username"
-                aria-describedby="username_extra"
-                placeholder="Username"
-              />
-            </div>
-
-            <!-- Password Field -->
-            <div class="form-group mx-auto align-middle">
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                aria-describedby="password_extra"
-                placeholder="Password"
-              />
-              <small id="password_extra" class="form-text text-muted"
-                >Please input your password.</small
-              >
-            </div>
-
-            <!-- Submit Button -->
-            <div class="mx-auto align-middle pl-4 pt-4 container">
-              <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-primary "
-                    onclick="logIn(event)"
-                  >
-                    Submit
-                  </button>
-                </div>
-                <div class="col-sm"></div>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="col-sm pt-4 pt-md-0">
-          <div
-            id="logindiv2"
-            class="col-md mx-auto border px-4 pb-4 bg-light rounded"
-          >
+        <div class="col-md"></div>
+        <div id="login1container">
+          <div id="logindiv1" class="col-md mx-auto w-50 h-100 border px-4 pb-4 bg-light rounded">
             <form onsubmit="logIn(event);">
-              <!-- Create Anonymous Report -->
-              <div class="pt-4">
-                <label
-                  id="anonlabel"
-                  for="submit"
-                  class=" d-block h2 text-center pb-4 pt-4"
-                  >Protect your privacy:</label
+              <!-- Username field -->
+              <div class="form-group mx-auto align-middle pt-4">
+                <label for="username" class="h3">Login:</label>
+                <input
+                  type="username"
+                  class="form-control"
+                  id="username"
+                  aria-describedby="username_extra"
+                  placeholder="Username"
+                />
+              </div>
+
+              <!-- Password Field -->
+              <div class="form-group mx-auto align-middle">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  aria-describedby="password_extra"
+                  placeholder="Password"
+                />
+                <small id="password_extra" class="form-text text-muted"
+                  >Please input your password.</small
                 >
+              </div>
+
+              <!-- Submit Button -->
+              <div class="mx-auto align-middle pl-4 pt-4 container">
                 <div class="row">
+                  <div class="col-sm"></div>
                   <div class="col-sm text-center">
-                    <small
-                      id="password_extra"
-                      class="form-text text-muted text-center pb-4"
-                      >Creating an anonymous report will create a new report
-                      without getting information such as name or group from
-                      you.</small
-                    >
                     <button
                       type="submit"
-                      class="btn btn-primary"
-                      onclick="logIn(0)"
+                      class="btn btn-primary "
+                      onclick="logIn(event)"
                     >
-                      Create an Anonymous Report
+                      Submit
                     </button>
                   </div>
+                  <div class="col-sm"></div>
                 </div>
               </div>
             </form>
           </div>
+        </div>
+        
+
+        <div class="col-sm pt-4 pt-md-0">
+          <div class="row">
+            <div id="logindiv2" class="col-md w-50 mx-auto border px-4 pb-4 bg-light rounded" >
+              <form onsubmit="event.preventDefault();">
+                <!-- Create Anonymous Report -->
+                <div class="pt-4">
+                  <label
+                    id="anonlabel"
+                    for="submit"
+                    class=" d-block h2 text-center pb-4 pt-4">Protect your privacy:</label>
+                  <div class="row">
+                    <div class="col-sm text-center">
+                      <small class="form-text text-muted text-center pb-4">
+                        Creating an anonymous report will create a new report
+                        without getting information such as name or group from
+                        you.
+                      </small>
+                      <button
+                        id="displaybutton"
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="displayLogin()"
+                      >
+                        Create an Anonymous Report
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id ="anonlogin" class="row pt-4" style="display: none;">
+            <div id="logindiv3" class="d-block col-md mx-auto w-50 border px-4  pt-4 pb-4 bg-light rounded">
+              <form onsubmit="event.preventDefault();">
+                <!-- Username field -->
+                <div class="">
+                  <button type="button" class="btn btn-link" onclick="displayLogin()"><i class="fa fa-arrow-circle-left align-middle" style="font-size:35px;"></i></button>
+                </div>  
+                <div class="form-group mx-auto align-middle">
+                  <label for="username" class="h3">Login to Report Anonymously:</label>
+                  <small class="form-text text-muted text-center pb-4">
+                    Your user information will not be recorded upon submitting your report.
+                  </small>
+                  <input
+                    type="username"
+                    class="form-control"
+                    id="usernameanon"
+                    aria-describedby="username_extra"
+                    placeholder="Username"
+                  />
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group mx-auto align-middle">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="passwordanon"
+                    aria-describedby="password_extra"
+                    placeholder="Password"
+                  />
+                  <small id="password_extra" class="form-text text-muted">
+                    Please input your password.</small>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mx-auto align-middle pl-4 pt-4 container">
+                  <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm text-center">
+                      <button
+                        type="submit"
+                        class="btn btn-primary "
+                        onclick="logIn(0);"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                    <div class="col-sm"></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
         </div>
         <div class="col-md"></div>
       </div>

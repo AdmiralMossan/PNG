@@ -74,38 +74,38 @@ function disableAll(){
 
 
 $(document).ready(function() {
-            if(sessionStorage.getItem("username") !== null){
-                document.getElementById("userName").innerHTML = sessionStorage.getItem("username");
-            }
-            getCategories().then(function () {
-                initializeButtons();
-                buttons = $("button[id^='category']");
-                for(let i=0; i<buttons.length; i++){
-                    let j = i==buttons.length - 1 ? 0 : i+1;
-                    buttons[i].onclick = function(){disabledButtons(i, buttons[j])};
-                    buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
-                    buttons[i].onmouseout = function(){removeDesc()};
-                }
-            });;
-            
-            $("#picture").click(function(){
-                if (jQuery('#picture')[0].hasAttribute('disabled')) {
-                    $('#picture').attr('src', "Images/buttonD.jpg");
-                    $('#picture').attr('data-toggle', false);
-                    $('#picture').attr('disabled', true);
-                    disableAll();
-                }else{
-                    $('#picture').attr('data-toggle', "modal");
-                    $('#picture').attr('src', "Images/buttonD.jpg");
-                    $('#picture').attr('disabled', true);
-                    disableAll();
-                }
-            });
+    if(sessionStorage.getItem("username") !== null){
+        document.getElementById("userName").innerHTML = sessionStorage.getItem("username");
+    }
+    getCategories().then(function () {
+        initializeButtons();
+        buttons = $("button[id^='category']");
+        for(let i=0; i<buttons.length; i++){
+            let j = i==buttons.length - 1 ? 0 : i+1;
+            buttons[i].onclick = function(){disabledButtons(i, buttons[j])};
+            buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
+            buttons[i].onmouseout = function(){removeDesc()};
+        }
+    });;
+    
+    $("#picture").click(function(){
+        if (jQuery('#picture')[0].hasAttribute('disabled')) {
+            $('#picture').attr('src', "Images/buttonD.jpg");
+            $('#picture').attr('data-toggle', false);
+            $('#picture').attr('disabled', true);
+            disableAll();
+        }else{
+            $('#picture').attr('data-toggle', "modal");
+            $('#picture').attr('src', "Images/buttonD.jpg");
+            $('#picture').attr('disabled', true);
+            disableAll();
+        }
+    });
 
-            $("#closemodal").click(function(){
-                $('#picture').attr('src', "Images/buttonD.jpg");
-                $('#picture').attr('data-toggle', false);
-                $('#picture').attr('disabled', true);
-                disableAll();
-            });
-        });
+    $("#closemodal").click(function(){
+        $('#picture').attr('src', "Images/buttonD.jpg");
+        $('#picture').attr('data-toggle', false);
+        $('#picture').attr('disabled', true);
+        disableAll();
+    });
+});

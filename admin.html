@@ -10,7 +10,9 @@
   <meta name="author" content="">
   <script>
     if(!sessionStorage.getItem("username"))
-       location.href =  "/Login.html";
+      location.href =  "/Login.html";
+    if(!sessionStorage.getItem("userType") == 2)
+      location.href =  "/Button.html";
   </script>
 
   <title>Report Admin - Dashboard</title>
@@ -183,7 +185,7 @@
                         </div>
                         <div class="row pl-4 w-100">
                           <div class="row w-100">
-                            <form action="" class="w-100">
+                            <form action="" onsubmit="event.preventDefault();" class="w-100">
                               <div class="row pl-4 pb-2">
                                 <label for="catName" class="h6">Category Name:</label>
                               </div>
@@ -192,20 +194,20 @@
                                   type="text"
                                   id="catName"
                                   aria-describedby="catname_extra"
-                                  placeholder="Category Name"/>
+                                  placeholder="Category Name" required/>
                               </div>
                               <div class="row pl-4 w-100">
                                 <label for="catdesc" class="h6">Category Description:</label>
-                              </div>
+                              </div>  
                               <div class="form-row row pl-3 h-100 w-75">
                                   <textarea class="w-100" id="catdesc"
-                                    placeholder="Input Description for the new Category to be added."></textarea>
+                                    placeholder="Input Description for the new Category to be added." required></textarea>
                               </div>
                               <div class="row pl-4 pt-4">
                                 <button
                                 type="submit"
-                                class="btn btn-primary "
-                                onclick=""
+                                class="btn btn-primary"
+                                onclick="addCategory();"
                                 >
                                 Add Category
                                 </button>

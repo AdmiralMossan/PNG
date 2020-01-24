@@ -79,7 +79,6 @@ async function storeData(e, skip){
     category = sessionStorage.getItem("category");
     username = sessionStorage.getItem("username"); 
     group = sessionStorage.getItem("group"); 
-    console.log($("input[name='date']").is(':checked'));
     var dateInfo = "NA";
     var personInfo = "NA";
     var otherDetails = "";
@@ -139,11 +138,13 @@ async function logIn(e){
         if(docs[0].userType == 1){
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
+            sessionStorage.setItem("userType", docs[0].userType);
             location.href =  "/adminTest.html"; 
             // location.href =  "/admin.html";
         }else{
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
+            sessionStorage.setItem("userType", docs[0].userType);
             location.href =  "/Button.html";
         }
         }else
@@ -154,4 +155,45 @@ async function logIn(e){
 function logOut(){  
     location.href = "/Login.html";
     sessionStorage.clear();
+}
+
+async function addCategory(){
+    let name = document.getElementById("catName").value;
+    let desc = document.getElementById("catdesc").value;
+    let size = 0;
+
+    await db.collection("categories").get().then(function(querySnapshot) {
+        size = querySnapshot.size;
+    });
+
+    db.collection("categories").doc().set({
+        id: size, 
+        name: name,
+        description: desc
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+        sessionStorage.removeItem("category");
+        PNotify.success({
+            title: "Successfully added Category",
+            delay: 2000,
+            modules: {
+              Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+              },
+               Mobile: {
+                swipeDismiss: true,
+                styling: true
+              }
+            }
+          });
+          document.getElementById("catName").value = "";
+          document.getElementById("catdesc").value = "";
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+    
 }

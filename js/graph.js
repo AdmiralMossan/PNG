@@ -100,6 +100,7 @@ async function loadData(colorBy) {
   var axisMax = steps;
   var yAxisMax = groups.length;
   var axisStep = axisMax / steps;
+  console.log(steps);
   var z = 0;
 
   dataArray = [];

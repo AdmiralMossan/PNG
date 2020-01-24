@@ -98,8 +98,17 @@ async function storeData(e, skip){
     }
 }
 
-function sendReport(reportData){
+async function sendReport(reportData){
     reportData.created = firebase.firestore.FieldValue.serverTimestamp();
+    await db.collection("reportID").get().then(function(querySnapshot) {
+        reportData.id = querySnapshot.docs[0].data().id + 1;
+        querySnapshot.forEach(function(doc) {
+            db.collection("reportID").doc(doc.id).set({
+                id: reportData.id
+            }, { merge: true });
+        });
+    });
+
     db.collection("reports").doc().set(reportData)
     .then(function() {
         console.log("Document successfully written!");

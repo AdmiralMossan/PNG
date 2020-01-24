@@ -15,6 +15,7 @@
     <script src = "js/firestore.js" > </script>
     <script src="js/button.js"></script>
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/Button.css" rel="stylesheet">
 </head>
 
 <body>
@@ -42,7 +43,7 @@
       </nav>
   <div class="container">
     <div class="row">
-      <div class="col-8">
+      <div id="maincontainer" class="col-8 rounded mx-3 py-4">
         <div class="row mx-auto w-50">
           <h2 class="mx-auto">Select a Report:</h2>
           <p class="lead text-center">
@@ -61,10 +62,10 @@
         </div> 
         <!-- Report Button -->
         <div class="row">
-          <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit" onclick="toDetails()" disabled>
+          <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block px-4 bg-white text-dark" data-target="#successModal" alt="Submit" onclick="toDetails()" disabled>
         </div>
       </div> 
-        <div class="col-sm ">
+        <div id="categorydiv" class="col-sm rounded">
           <h5 class="pt-4">Categories:</h5>
           <div id="ctgDesc"> </div>   
         </div>

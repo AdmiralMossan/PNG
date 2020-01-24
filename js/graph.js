@@ -197,6 +197,8 @@ async function drawVisualization(data) {
     rotateAxisLabels: true,
     xCenter: "45%",
     yCenter: "34%",
+    xStep: 1,
+    yStep: 1,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z

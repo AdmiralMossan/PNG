@@ -80,7 +80,7 @@ function drawVisualization2d(search, sortBy){
     let displayMax = 0;
     let index = search - 1; 
 
-    let stringLabel = sortBy == 1 ? 'Category ' : 'Group ';
+    let stringLabel = sortBy == 1 ? ' Category ' : ' Group ';
     let labelStr = sortBy == 1 ? 'Group' : 'Category';
 
     arrayLabel = sortBy == 1 ? categories : groups;
@@ -97,7 +97,7 @@ function drawVisualization2d(search, sortBy){
         data: {
             labels: displayLabel,
             datasets: [{
-                label: stringLabel + arrayLabel[index], 
+                label: arrayLabel[index] + stringLabel, 
                 data: displayData,
                 backgroundColor: pieColors,
                 borderColor: colors,
@@ -129,6 +129,7 @@ function drawVisualization2d(search, sortBy){
 }
 
 function nextButton(){
+    initSearchValue();
     $('#prev').attr('disabled', false);
     search += 1;
     let sortBy = document.getElementById('category').checked ? 1 : 2;
@@ -142,7 +143,36 @@ function nextButton(){
     drawVisualization2d(search, sortBy);
 }
 
+function searchField(element){
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    let len = sortBy == 1 ? categories.length : groups.length;
+    let value = parseInt(element.value);
+    
+    if(event.key === 'Enter' && Number.isInteger(value)){
+        if(value > len){
+            $('#next').attr('disabled', true);
+            $('#prev').attr('disabled', false);
+            document.getElementById("search").value = len.toString();
+            drawVisualization2d(len, sortBy);
+        }else if(value < 1){
+            $('#prev').attr('disabled', true);
+            $('#next').attr('disabled', false);
+            document.getElementById("search").value = 1;
+            drawVisualization2d(1, sortBy);
+        }else{
+            $('#prev').attr('disabled', false);
+            drawVisualization2d(value, sortBy);
+        }
+    }else if(event.key === 'Enter'){
+        $('#prev').attr('disabled', true);
+        $('#next').attr('disabled', false);
+        document.getElementById("search").value = 1;
+        drawVisualization2d(1, sortBy);
+    }
+}
+
 function prevButton(){
+    initSearchValue();
     search -= 1;
     $('#next').attr('disabled', false);
     if(search == 1){

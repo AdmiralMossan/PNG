@@ -37,7 +37,7 @@ async function getReports() {
 
   await db
     .collection("categories")
-    .orderBy("name")
+    .orderBy("id")
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
@@ -47,7 +47,7 @@ async function getReports() {
 
   await db
     .collection("groups")
-    .orderBy("name")
+    .orderBy("id")
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
@@ -100,6 +100,7 @@ async function loadData(colorBy) {
   var axisMax = steps;
   var yAxisMax = groups.length;
   var axisStep = axisMax / steps;
+  console.log(steps);
   var z = 0;
 
   dataArray = [];
@@ -186,16 +187,18 @@ async function drawVisualization(data) {
     showGrid: true,
     showShadow: true,
     animationPreload: true,
-    axisFontType: "courier",
-    axisFontSize: 35,
-    xLabel: "", //Categories
-    yLabel: "", //Groups
-    zLabel: "", //Number
+    axisFontType: "arial",
+    axisFontSize: 30,
+    xLabel: "    Category    ", //Categories
+    yLabel: "    Group    ", //Groups
+    zLabel: "  Number  ", //Number
     xBarWidth: 0.5,
     yBarWidth: 0.5,
     rotateAxisLabels: true,
     xCenter: "45%",
     yCenter: "34%",
+    xStep: 1,
+    yStep: 1,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z
@@ -214,14 +217,14 @@ async function drawVisualization(data) {
 
     xValueLabel: function (value) {
       if (value % 1 == 0) {
-        return "Category " + categories[value];
+        return "  " + categories[value];
       }
       return "";
     },
 
     yValueLabel: function (value) {
       if (value % 1 == 0) {
-        return "Group " + groups[value];
+        return "  " + groups[value];
       }
       return "";
     },

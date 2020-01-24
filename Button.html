@@ -40,80 +40,73 @@
           </div>
         </div>
       </nav>
-
-        <div class="container">
-            <div class="row">
-            <div class="col-8">
-                <div class="row mx-auto w-50">
-                    <h2 class="mx-auto">Select a Report:</h2>
-                    <p class="lead text-center">
-                        Create a new report by pressing one of the report categories and pressing the report button below.
-                    </p>
-                </div>
-                <!-- Category Selection -->
-                <div class="row mx-auto  border">
-                    <div class="container">
-                        <div id="categoryContainer" class="row">
-                          
-                        </div>
-                      </div>
-                </div>         
-                <div class="row" style="height: 30px;">
-                    <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
-                </div>
-                
-                <!-- Report Button -->
-                <div class="row">
-                    <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit" onclick="toDetails()" disabled>
-                </div>
-            </div> 
-            <div class="col-sm ">
-                <h5 class="pt-4">Categories:</h5>
-                <div id="ctgDesc"> </div>
-                
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="row mx-auto w-50">
+          <h2 class="mx-auto">Select a Report:</h2>
+          <p class="lead text-center">
+            Create a new report by pressing one of the report categories and pressing the report button below.
+          </p>
         </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Report Successful!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Your report has been successfully submitted!
-                </div>
-                <div class="modal-footer">
-                    <button id="closemodal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
+        <!-- Category Selection -->
+        <div class="row mx-auto  border">
+          <div class="container">
+            <div id="categoryContainer" class="row">
             </div>
+          </div>
+        </div>         
+        <div class="row" style="height: 30px;">
+            <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
+        </div> 
+        <!-- Report Button -->
+        <div class="row">
+          <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block bg-white text-dark" data-target="#successModal" alt="Submit" onclick="toDetails()" disabled>
+        </div>
+      </div> 
+        <div class="col-sm ">
+          <h5 class="pt-4">Categories:</h5>
+          <div id="ctgDesc"> </div>   
+        </div>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Report Successful!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                  <a class="btn btn-primary" href="login.html" onclick="logOut()">Logout</a>
-                </div>
-              </div>
+            <div class="modal-body">
+              Your report has been successfully submitted!
+            </div>
+            <div class="modal-footer">
+              <button id="closemodal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
-    </body>
-
+      </div>
+      <!-- Logout Modal-->
+      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="login.html" onclick="logOut()">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

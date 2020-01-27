@@ -524,14 +524,14 @@ async function selectReport(reportID) {
   })
 }
 async function loadReportDetails(reportSelected) {
-  $("#reportTitle").text(reportSelected.username + " " + reportSelected.created.toDate());
+  $("#reportTitle").text(reportSelected.username.toUpperCase() + " " + reportSelected.created.toDate().toLocaleString("en-US"));
   $("#sgroup").text("Group: " + reportSelected.group);
   console.log(reportSelected.group)
   $("#scategory").text("Category: " + reportSelected.category);
   $("#sdateInfo").text("Occance: " + reportSelected.datInfo);
   $("#sotherDetails").text("Other Details: " + reportSelected.otherDetails);
   $("#spersonInfo").text("Subject: " + reportSelected.personInfo);
-  $("#sattachment").append('<a href= ' + reportSelected.attachFile + '>Link</a>');
+  $("#sattachment").html('Attachment: <a href= ' + reportSelected.attachFile + '>Link</a>');
 }
 function download() {
   let headers = {

@@ -199,6 +199,7 @@ async function drawVisualization(data) {
     yCenter: "34%",
     xStep: 1,
     yStep: 1,
+    zStep: 1,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z

@@ -11,8 +11,8 @@
   <script>
     if(!sessionStorage.getItem("username"))
       location.href =  "/Login.html";
-    if(!sessionStorage.getItem("userType") == 2)
-      location.href =  "/Button.html";
+    if(sessionStorage.getItem("userType") == 2)
+      location.href =  "/403.html";
   </script>
 
   <title>Report Admin - Dashboard</title>

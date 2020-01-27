@@ -109,7 +109,7 @@ async function sendReport(reportData){
             });
         });
     });
-
+    console.log(reportData);
     db.collection("reports").doc().set(reportData)
     .then(function() {
         console.log("Document successfully written!");

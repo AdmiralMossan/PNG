@@ -99,6 +99,7 @@ async function storeData(e, skip){
 }
 
 async function sendReport(reportData){
+
     reportData.created = firebase.firestore.FieldValue.serverTimestamp();
     await db.collection("ids").get().then(function(querySnapshot) {
         reportData.id = querySnapshot.docs[0].data().reportID + 1;
@@ -109,7 +110,7 @@ async function sendReport(reportData){
             });
         });
     });
-
+    console.log(reportData);
     db.collection("reports").doc().set(reportData)
     .then(function() {
         console.log("Document successfully written!");

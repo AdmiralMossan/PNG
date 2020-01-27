@@ -42,7 +42,7 @@ function toDetails(){
     disabled = document.getElementById('picture').getAttribute('disabled');
     if(disabled === "disabled" || disabled === "") 
        return
-    location.href =  "/Details.html";
+    location.href =  "/details.html";
 }
 
 async function fileUpload(file_data, reportData){
@@ -158,7 +158,7 @@ async function logIn(e){
                 sessionStorage.setItem("userType", docs[0].userType);
                 if(anon)
                     sessionStorage.setItem("isAnonymous", true);
-                location.href =  "/Button.html";
+                location.href =  "/user.html";
             }
         }else
             alert("Incorrect username or password")
@@ -166,7 +166,7 @@ async function logIn(e){
 }
 
 function logOut(){  
-    location.href = "/Login.html";
+    location.href = "/login.html";
     sessionStorage.clear();
 }
 

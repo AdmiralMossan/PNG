@@ -11,8 +11,8 @@
   <script>
     if (!sessionStorage.getItem("username"))
       location.href = "/Login.html";
-    if (!sessionStorage.getItem("userType") == 2)
-      location.href = "/Button.html";
+    if (sessionStorage.getItem("userType") == 2)
+      location.href = "/403.html";
   </script>
 
   <title>Report Admin - Dashboard</title>
@@ -42,7 +42,7 @@
 
         <!-- Nav Heading -->
         <div class="navbar-brand">
-          <h1 class="h3 mb-0 text-gray-800">REPORT</h1>
+          <h1 class="h3 mb-0 text-gray-800">iREPORT</h1>
         </div>
 
         <!-- Nav Item - User Information -->
@@ -154,18 +154,18 @@
                       <div id="mygraph"></div>
                     </div>
                     <div id="bargraph" class="container tab-pane fade px-0">
-                      <div>
-                        <canvas id="graph2d" class="w-100 h-100"></canvas>
-                      </div>
                       <div class="row">
-                        <div id="buttons" class="mx-auto p-2 row">
+                        <div id="buttons" class="p-2 row">
+                          <input id="search" type="text" size="15" style="text-align: left;" placeholder="Search" value="1"
+                            onkeypress="searchField(this)">
                           <input id="prev" class="material-icons" type="button" value="chevron_left"
                             onclick="prevButton()" disabled="true">
-                          <input id="search" type="text" size="1" style="text-align: center;" value="1"
-                            onkeypress="searchField(this)">
                           <input id="next" class="material-icons" type="button" value="chevron_right"
                             onclick="nextButton()">
                         </div>
+                      </div>
+                      <div>
+                        <canvas id="graph2d" class="w-100 h-100"></canvas>
                       </div>
                     </div>
                     <div id="tableTab" class="container tab-pane fade px-0">
@@ -265,22 +265,26 @@
       arrow_upward
     </i>
   </a>
-
-
-  <!--Report Details Modal-->
-
   <!-- Modal -->
   <div class="modal fade" id="reportDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="modal-body">
-          <ul>
-            <li id="dateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">Occurance:
+          <ul class="list-unstyled">
+            <li id="sgroup">Group: </li>
+            <li id="scategory">Category: </li>
+            <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">Occurance:
             </li>
-            <li id="otherDetails">Subject: </li>
-            <li id="personInfo"></li>
-            <li id="attachedFile">Files: </li>
+            <li id="sotherDetails">Other Details: </li>
+            <li id="spersonInfo">Subject: </li>
+            <li id="sattachment">Link to attachment: </li>
           </ul>
         </div>
         <div class="modal-footer">
@@ -302,7 +306,7 @@
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
           <button class="btn btn-primary"  onclick="logOut()" >Logout</button>
         </div>
       </div>
@@ -350,6 +354,9 @@
   </script>
   <!-- Page Custom script-->
   <script src="js/sb-admin-2.js"></script>
+  <script src="js/onLoad.js"></script>
+  <script src="js/reporting.js"></script>
+  <script src="js/graphGlobals.js"></script>
   <script type="text/javascript" src="js/graph.js"></script>
   <script type="text/javascript" src="js/graph2d.js"></script>
   <script type="text/javascript" src="js/main.js"></script>

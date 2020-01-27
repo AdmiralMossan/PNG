@@ -1,36 +1,3 @@
-var barGraph = null;
-var search = 0;
-var byGroupCount = [];
-var byCategoryCount = [];
-var maxCategoryCount = 0;
-var maxGroupCount = 0;
-
-function initArray(){
-    for(let i=0; i<groups.length; i++){
-        byGroupCount[i] = [];
-    }
-
-    for(let i=0; i<categories.length; i++){
-        byCategoryCount[i] = [];
-    }
-
-    for(let i=0; i<categories.length; i++){
-        for(let j=0; j<groups.length; j++){
-            byCategoryCount[i][j] = 0;
-        }
-    }
-
-    for(let i=0; i<groups.length; i++){
-        for(let j=0; j<categories.length; j++){
-            byGroupCount[i][j] = 0;
-        }
-    }
-}
-
-function initSearchValue(){
-    search = parseInt(document.getElementById("search").value);
-}
-
 function findMax(){
     for(let i=0; i<categories.length; i++){
         for(let j=0; j<groups.length; j++){
@@ -86,7 +53,7 @@ function drawVisualization2d(search, sortBy){
     arrayLabel = sortBy == 1 ? categories : groups;
     displayLabel = sortBy == 1 ? groups : categories;
     displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
-    displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
+    displayMax = sortBy == 1 ? maxCategoryCount + 5 : maxGroupCount + 5;
 
     if(barGraph!=null){
         barGraph.destroy();
@@ -105,6 +72,12 @@ function drawVisualization2d(search, sortBy){
             }]
         },
         options: {
+            legend: {
+                labels: {
+                    fontColor: 'black',
+                    fontSize: 16
+                }
+            },
             scales: {
                 yAxes: [{
                         display: true,
@@ -113,12 +86,14 @@ function drawVisualization2d(search, sortBy){
                             max: displayMax
                         },
                         scaleLabel: {
+                            fontSize: 14,
                             display: true,
                             labelString: 'Number'
                         }
                 }],
                 xAxes : [{
                     scaleLabel: {
+                        fontSize: 14,
                         display: true,
                         labelString: labelStr
                     }

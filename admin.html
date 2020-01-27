@@ -9,10 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <script>
-    if(!sessionStorage.getItem("username"))
-      location.href =  "/Login.html";
-    if(sessionStorage.getItem("userType") == 2)
-      location.href =  "/403.html";
+    if (!sessionStorage.getItem("username"))
+      location.href = "/Login.html";
+    if (sessionStorage.getItem("userType") == 2)
+      location.href = "/403.html";
   </script>
 
   <title>Report Admin - Dashboard</title>
@@ -161,7 +161,8 @@
                         <div id="buttons" class="mx-auto p-2 row">
                           <input id="prev" class="material-icons" type="button" value="chevron_left"
                             onclick="prevButton()" disabled="true">
-                          <input id="search" type="text" size="1" style="text-align: center;" value="1" onkeypress="searchField(this)">
+                          <input id="search" type="text" size="1" style="text-align: center;" value="1"
+                            onkeypress="searchField(this)">
                           <input id="next" class="material-icons" type="button" value="chevron_right"
                             onclick="nextButton()">
                         </div>
@@ -190,37 +191,30 @@
                                 <label for="catName" class="h6">Category Name:</label>
                               </div>
                               <div class="row pl-4 pb-4">
-                                <input
-                                  type="text"
-                                  id="catName"
-                                  aria-describedby="catname_extra"
-                                  placeholder="Category Name" required/>
+                                <input type="text" id="catName" aria-describedby="catname_extra"
+                                  placeholder="Category Name" required />
                               </div>
                               <div class="row pl-4 w-100">
                                 <label for="catdesc" class="h6">Category Description:</label>
-                              </div>  
+                              </div>
                               <div class="form-row row pl-3 h-100 w-75">
-                                  <textarea class="w-100" id="catdesc"
-                                    placeholder="Input Description for the new Category to be added." required></textarea>
+                                <textarea class="w-100" id="catdesc"
+                                  placeholder="Input Description for the new Category to be added." required></textarea>
                               </div>
                               <div class="row pl-4 pt-4">
-                                <button
-                                type="submit"
-                                class="btn btn-primary"
-                                onclick="addCategory();"
-                                >
-                                Add Category
+                                <button type="submit" class="btn btn-primary" onclick="addCategory();">
+                                  Add Category
                                 </button>
                               </div>
                             </form>
                           </div>
                         </div>
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
 
@@ -271,7 +265,34 @@
       arrow_upward
     </i>
   </a>
-
+  <!-- Modal -->
+  <div class="modal fade" id="reportDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-unstyled">
+            <li id="sgroup">Group: </li>
+            <li id="scategory">Category: </li>
+            <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">Occurance:
+            </li>
+            <li id="sotherDetails">Other Details: </li>
+            <li id="spersonInfo">Subject: </li>
+            <li id="sattachment">Link to attachment: </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -286,7 +307,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="logOut()">Cancel</button>
-          <a class="btn btn-primary" href="Login.html" >Logout</a>
+          <a class="btn btn-primary" href="login.html">Logout</a>
         </div>
       </div>
     </div>

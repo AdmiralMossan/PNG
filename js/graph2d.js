@@ -161,6 +161,7 @@ function searchField(element){
             drawVisualization2d(1, sortBy);
         }else{
             $('#prev').attr('disabled', false);
+            $('#next').attr('disabled', false);
             drawVisualization2d(value, sortBy);
         }
     }else if(event.key === 'Enter'){

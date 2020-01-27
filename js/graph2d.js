@@ -159,6 +159,14 @@ function searchField(element){
             $('#next').attr('disabled', false);
             document.getElementById("search").value = 1;
             drawVisualization2d(1, sortBy);
+        }else if(value == 1){
+            $('#prev').attr('disabled', true);
+            $('#next').attr('disabled', false);
+            drawVisualization2d(value, sortBy);
+        }else if(value == len){
+            $('#next').attr('disabled', true);
+            $('#prev').attr('disabled', false);
+            drawVisualization2d(value, sortBy);
         }else{
             $('#prev').attr('disabled', false);
             $('#next').attr('disabled', false);

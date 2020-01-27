@@ -104,7 +104,7 @@ async function sendReport(reportData){
         reportData.id = querySnapshot.docs[0].data().reportID + 1;
         querySnapshot.forEach(function(doc) {
             let newID = doc.data().reportID + 1;
-            db.collection("reportID").doc(doc.id).update({
+            db.collection("ids").doc(doc.id).update({
                 reportID: newID
             });
         });

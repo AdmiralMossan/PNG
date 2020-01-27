@@ -60,6 +60,7 @@ async function fileUpload(file_data, reportData){
     var task = storageRef.put(file_data);
     task.on('state_changed', function(snapshot){
         var progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+        document.getElementById('progress').innerHTML = Math.round(progress);
         console.log(progress);     
     }, function(error){
         console.log(error.message);
@@ -115,7 +116,7 @@ async function sendReport(reportData){
     .then(function() {
         console.log("Document successfully written!");
         sessionStorage.removeItem("category");
-        $('#successModal').modal('show') 
+        //$('#successModal').modal('show') 
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);

@@ -58,8 +58,10 @@ async function fileUpload(file_data, reportData){
         return "";
     }
     var task = storageRef.put(file_data);
+    var progress = 0;
     task.on('state_changed', function(snapshot){
-        var progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+        progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+        document.getElementById('progress').innerHTML = Math.round(progress) + "\%";
         console.log(progress);     
     }, function(error){
         console.log(error.message);
@@ -71,7 +73,6 @@ async function fileUpload(file_data, reportData){
         
     });
    
-    return fileUrl;
 }
  
 async function storeData(e, skip){
@@ -90,10 +91,12 @@ async function storeData(e, skip){
         reportData.personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
         reportData.otherDetails = $.trim($("#comment").val());
         if( $("#fileInput").val()!=""){
+            console.log('in');
             file_data = $("#fileInput").prop("files")[0];
             fileUpload(file_data, reportData);
         }
     }else{
+        console.log("out");
         sendReport(reportData);
     }
 }

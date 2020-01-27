@@ -103,9 +103,10 @@ async function sendReport(reportData){
     await db.collection("ids").get().then(function(querySnapshot) {
         reportData.id = querySnapshot.docs[0].data().reportID + 1;
         querySnapshot.forEach(function(doc) {
-            db.collection("reportID").doc(doc.id).set({
-                reportID: reportData.id
-            }, { merge: true });
+            let newID = doc.data().reportID + 1;
+            db.collection("reportID").doc(doc.id).update({
+                reportID: newID
+            });
         });
     });
 
@@ -169,48 +170,3 @@ function logOut(){
     sessionStorage.clear();
 }
 
-async function addCategory(){
-    let name = document.getElementById("catName").value;
-    let desc = document.getElementById("catdesc").value;
-    let size = 0;
-
-    await db.collection("ids").get().then(function(querySnapshot) {
-        size = querySnapshot.docs[0].data().categoryID + 1;
-        querySnapshot.forEach(function(doc) {
-            db.collection("reportID").doc(doc.id).set({
-                categoryID: size
-            }, { merge: true });
-        });
-    });
-
-    db.collection("categories").doc().set({
-        id: size, 
-        name: name,
-        description: desc
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-        sessionStorage.removeItem("category");
-        PNotify.success({
-            title: "Successfully added Category",
-            delay: 2000,
-            modules: {
-              Buttons: {
-                closer: true,
-                closerHover: true,
-                sticker: false
-              },
-               Mobile: {
-                swipeDismiss: true,
-                styling: true
-              }
-            }
-          });
-          document.getElementById("catName").value = "";
-          document.getElementById("catdesc").value = "";
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
-    
-}

@@ -12,7 +12,6 @@ async function loadData(colorBy) {
   var axisMax = steps;
   var yAxisMax = groups.length;
   var axisStep = axisMax / steps;
-  console.log(steps);
   var z = 0;
 
   dataArray = [];
@@ -111,7 +110,8 @@ async function drawVisualization(data) {
     yCenter: "34%",
     xStep: 1,
     yStep: 1,
-    zStep: 1,
+    zStep: 5,
+    zMin: 0,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z
@@ -143,7 +143,7 @@ async function drawVisualization(data) {
     },
 
     zValueLabel: function (value) {
-      return (value + 5);
+      return value;
     },
 
     keepAspectRatio: true

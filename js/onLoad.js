@@ -41,17 +41,20 @@ window.addEventListener("load", async () => {
   db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
     if (loaded) {
       querySnapshot.docChanges().forEach(async function (change) {
-        if (change.type === "added") {
+        if (change.type === "added" || change.type === "modified") {
           let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
           await getReports();
           generateColors(displayBy);
 
           $("#reportCount").text(reports.length);
           loadData(displayBy).then(function () {
-            notifyReport(querySnapshot.docs[0]);
+            if (change.type === "added") {
+              notifyReport(querySnapshot.docs[0]);
+            }
             drawVisualization(data);
             drawPie(displayBy);
             drawVisualization2d(search, displayBy);
+            reportsTable();
           });
         }
       });

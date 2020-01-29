@@ -128,7 +128,7 @@ async function reportsTable() {
 
   $('#allReports div').html("");
   $('#notifDropdown').html('<i class="material-icons">notifications</i>')
-  $('#notifItem').html('<div class="dropdown-item py-0"><div class="row"><p class="col-12 m-0 text-success">All reports are read.</p></div><hr></div>')
+  $('#notifItem').html('<div class="dropdown-item py-0"><hr><div class="row"><p class="col-12 m-0 text-success p-0">All reports are read.</p></div><hr></div>')
 
   let cat = {};
   let group = {};
@@ -228,7 +228,7 @@ async function reportsTable() {
     if (report.read === false) {
       notif = true;
       if (ctr === 0) {
-        $('#notifItem').html('');
+        $('#notifItem').html('<hr>');
       }
       ctr += 1;
       $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i>')

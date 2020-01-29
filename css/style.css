@@ -167,23 +167,31 @@ html {
   }
 
   #bar-container {
-    height: 70vh;
+    height: 100%;
   }
 
   #pie-container {
     grid-area: pie;
-    height: 70vh;
+    height: 100%;
   }
 
   #stats-container {
     display: grid;
     grid-area: stat;
-    height: 17vh;
+    height: 10vh;
     grid-template-areas: "card1 card2 card3 card4";
+  }
+
+  #charts-container {
+    height: 70vh;
   }
 
   .chart-container {
     width: 70%;
     height: 100%;
+  }
+
+  .main-card {
+    height: 98%;
   }
 }

@@ -10,6 +10,7 @@ var colors = [];
 var pieColors = [];
 var loaded = false;
 var csvData = [];
+var notif = false;
 
 function clearValues() {
   categoriesCount = [];

@@ -32,6 +32,11 @@ html {
   color: #4e73df !important;
 }
 
+#notifDropdown:hover span,
+#notifDropdown:focus span {
+  background-color: #4e73df !important;
+}
+
 #notifItem {
   max-height: 20vh;
   overflow-y: auto;
@@ -50,15 +55,20 @@ html {
 }
 #charts-container {
   grid-area: charts;
+  height: 60vh;
 }
 #bar-container {
   grid-area: bar;
+  height: 100%;
 }
 
 #pie-container {
   grid-area: pie;
+  height: 100%;
 }
-
+.main-card {
+  height: 98%;
+}
 #stats-container {
   display: grid;
   grid-area: stat;
@@ -93,7 +103,7 @@ html {
   position: relative;
   margin: auto;
   width: 70%;
-  height: 100%;
+  height: 90%;
 }
 
 .chart-container {
@@ -166,13 +176,8 @@ html {
       "charts";
   }
 
-  #bar-container {
-    height: 100%;
-  }
-
   #pie-container {
     grid-area: pie;
-    height: 100%;
   }
 
   #stats-container {
@@ -189,9 +194,5 @@ html {
   .chart-container {
     width: 70%;
     height: 100%;
-  }
-
-  .main-card {
-    height: 98%;
   }
 }

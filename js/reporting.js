@@ -1,37 +1,41 @@
 async function getReports() {
-    clearValues();
+  clearValues();
+  let locCat = [];
+  let locReps = [];
+  let locGrps = []
+  await db
+    .collection("reports")
+    .orderBy("created", "desc")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        locReps.push(doc.data());
+      });
+    });
 
-    await db
-        .collection("reports")
-        .orderBy("created", "desc")
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                reports.push(doc.data());
-            });
-        });
+  await db
+    .collection("categories")
+    .orderBy("id")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        locCat.push(doc.data().name);
+      });
+    });
 
-    await db
-        .collection("categories")
-        .orderBy("id")
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                categories.push(doc.data().name);
-            });
-        });
-
-    await db
-        .collection("groups")
-        .orderBy("id")
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                groups.push(doc.data().name);
-            });
-        });
-
-    initializeCounts();
+  await db
+    .collection("groups")
+    .orderBy("id")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        locGrps.push(doc.data().name);
+      });
+    });
+  reports = locReps;
+  categories = locCat;
+  groups = locGrps;
+  initializeCounts();
 
     for (let i = 0; i < reports.length; i++) {
         for (let j = 0; j < categories.length; j++) {
@@ -47,10 +51,11 @@ async function getReports() {
         }
     }
 
-    initArray();
-    byGroup();
-    byCategory();
-    findMax();
+  initArray();
+  byGroup();
+  byCategory();
+  findMax();
+  return;
 }
 
 function notifyReport(report) {

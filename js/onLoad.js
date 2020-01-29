@@ -37,12 +37,14 @@ window.addEventListener("load", async () => {
       drawVisualization2d(search, 2);
     });
   });
+  
 
-  db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
+  await db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
     if (loaded) {
       querySnapshot.docChanges().forEach(async function (change) {
         if (change.type === "added" || change.type === "modified") {
           let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+          await clearValues(); 
           await getReports();
           generateColors(displayBy);
 
@@ -56,6 +58,7 @@ window.addEventListener("load", async () => {
             drawVisualization2d(search, displayBy);
             reportsTable();
           });
+          return;
         }
       });
 
@@ -65,4 +68,5 @@ window.addEventListener("load", async () => {
   });
 
   initSearchValue();
+
 });

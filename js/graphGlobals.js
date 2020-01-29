@@ -30,6 +30,7 @@ function clearValues() {
   groupsCount = [];
   colors = [];
   pieColors = [];
+  return; 
 }
 
 //Array initializations

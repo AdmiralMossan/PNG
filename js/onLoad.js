@@ -37,22 +37,28 @@ window.addEventListener("load", async () => {
       drawVisualization2d(search, 2);
     });
   });
+  
 
-  db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
+  await db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
     if (loaded) {
-      querySnapshot.docChanges().forEach(async function (change) {
+      await clearValues(); 
+      await querySnapshot.docChanges().forEach(async function (change) {
+        let ci= 0;
         if (change.type === "added") {
+          console.log(ci+=1);
           let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+          await clearValues(); 
           await getReports();
           generateColors(displayBy);
 
           $("#reportCount").text(reports.length);
-          loadData(displayBy).then(function () {
+          loadData(displayBy).then(async function () {
             notifyReport(querySnapshot.docs[0]);
-            drawVisualization(data);
-            drawPie(displayBy);
-            drawVisualization2d(search, displayBy);
+            await drawVisualization(data);
+            await drawPie(displayBy);
+            await drawVisualization2d(search, displayBy);
           });
+          return;
         }
       });
 
@@ -62,4 +68,5 @@ window.addEventListener("load", async () => {
   });
 
   initSearchValue();
+
 });

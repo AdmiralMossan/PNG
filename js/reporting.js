@@ -1,13 +1,15 @@
 async function getReports() {
   clearValues();
-
+  let locCat = [];
+  let locReps = [];
+  let locGrps = []
   await db
     .collection("reports")
     .orderBy("created", "desc")
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
-        reports.push(doc.data());
+        locReps.push(doc.data());
       });
     });
 
@@ -17,7 +19,7 @@ async function getReports() {
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
-        categories.push(doc.data().name);
+        locCat.push(doc.data().name);
       });
     });
 
@@ -27,10 +29,12 @@ async function getReports() {
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
-        groups.push(doc.data().name);
+        locGrps.push(doc.data().name);
       });
     });
-
+  reports = locReps;
+  categories = locCat;
+  groups = locGrps;
   initializeCounts();
 
   for (let i = 0; i < reports.length; i++) {
@@ -51,6 +55,7 @@ async function getReports() {
   byGroup();
   byCategory();
   findMax();
+  return;
 }
 
 function notifyReport(report) {

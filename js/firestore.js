@@ -85,7 +85,8 @@ async function storeData(e, skip){
     var otherDetails = "";
     var attachFile =  "";
     var created = "";
-    var reportData = {category, username,group,created,dateInfo,personInfo,otherDetails, attachFile}
+    var read = false;
+    var reportData = {category, username,group,created,dateInfo,personInfo,otherDetails, attachFile, read}
     if(!skip){
         reportData.dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
         reportData.personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
@@ -163,10 +164,21 @@ async function logIn(e){
                     sessionStorage.setItem("isAnonymous", true);
                 location.href =  "/user.html";
             }
+            requestNotificationsPermissions();
         }else
             alert("Incorrect username or password")
     
 }
+
+function requestNotificationsPermissions() {
+    console.log('Requesting notifications permission...');
+    firebase.messaging().requestPermission().then(function() {
+      // Notification permission granted.
+      //saveMessagingDeviceToken();
+    }).catch(function(error) {
+      console.error('Unable to get permission to notify.', error);
+    });
+  }
 
 function logOut(){  
     location.href = "/login.html";

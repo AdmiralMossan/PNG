@@ -68,14 +68,14 @@ async function drawVisualization(data) {
     animationPreload: true,
     axisFontType: "arial",
     axisFontSize: 26,
-    xLabel: "    Category    ", //Categories
-    yLabel: "    Group    ", //Groups
-    zLabel: "  Number  ", //Number
+    xLabel: "Category", //Categories
+    yLabel: "Group", //Groups
+    zLabel: "Number", //Number
     xBarWidth: 0.5,
     yBarWidth: 0.5,
     rotateAxisLabels: true,
-    xCenter: "45%",
-    yCenter: "34%",
+    xCenter: "50%",
+    yCenter: "50%",
     xStep: 1,
     yStep: 1,
     zStep: 5,
@@ -121,7 +121,7 @@ async function drawVisualization(data) {
   var container = document.getElementById("mygraph");
   graph = new vis.Graph3d(container, data, options);
 
-  graph.setCameraPosition({ horizontal: 1.2, vertical: 0.3, distance: 2.3 }); // restore camera position
+  graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
 }
 
 async function reportsTable() {

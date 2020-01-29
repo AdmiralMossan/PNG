@@ -144,39 +144,6 @@ function generateColors(sortBy) {
   }
 }
 
-async function drawPie(groupBy) {
-  let displayData = [];
-  let displayLabel = [];
-  if (groupBy == 1) {
-    displayData = categoriesCount;
-    displayLabel = categories;
-  } else {
-    displayData = groupsCount;
-    displayLabel = groups;
-  }
-  if (myPieChart != null) {
-    myPieChart.destroy();
-  }
-  myPieChart = new Chart(ctx, {
-    type: "pie",
-    options: {
-      maintainAspectRatio: false
-    },
-    data: {
-      labels: displayLabel,
-      datasets: [
-        {
-          label: "# of Votes",
-          data: displayData,
-          backgroundColor: pieColors,
-          borderColor: colors,
-          borderWidth: 1
-        }
-      ]
-    }
-  });
-}
-
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
   // specify options
@@ -403,62 +370,62 @@ window.addEventListener("load", async () => {
   await getReports();
   await reportsTable();
   generateColors(1);
-  
+
   loadData(1).then(function () {
-      drawVisualization(data);
-      drawPie(1);
-      drawVisualization2d(search, 1);
+    drawVisualization(data);
+    drawPie(1);
+    drawVisualization2d(search, 1);
   });
 
   $("#reportCount").text(reports.length);
 
   $('#category').change(function () {
-      generateColors(1);
-      loadData(1).then(function () {
-          drawVisualization(data);
-          drawPie(1);
-          search = 1;
-          document.getElementById("search").value = search.toString();
-          $('#next').attr('disabled', false);
-          $('#prev').attr('disabled', true);
-          drawVisualization2d(search, 1);
-      });
+    generateColors(1);
+    loadData(1).then(function () {
+      drawVisualization(data);
+      drawPie(1);
+      search = 1;
+      document.getElementById("search").value = search.toString();
+      $('#next').attr('disabled', false);
+      $('#prev').attr('disabled', true);
+      drawVisualization2d(search, 1);
+    });
   });
 
   $('#group').change(function () {
-      generateColors(2);
-      loadData(2).then(function () {
-          drawVisualization(data);
-          drawPie(2);
-          search = 1;
-          document.getElementById("search").value = search.toString();
-          $('#next').attr('disabled', false);
-          $('#prev').attr('disabled', true);
-          drawVisualization2d(search, 2);
-      });
+    generateColors(2);
+    loadData(2).then(function () {
+      drawVisualization(data);
+      drawPie(2);
+      search = 1;
+      document.getElementById("search").value = search.toString();
+      $('#next').attr('disabled', false);
+      $('#prev').attr('disabled', true);
+      drawVisualization2d(search, 2);
+    });
   });
 
   db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
-      if (loaded) {
-          querySnapshot.docChanges().forEach(async function(change) {
-              if (change.type === "added") {
-                  let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-                  await getReports();
-                  generateColors(displayBy);
-    
-                  $("#reportCount").text(reports.length);
-                  loadData(displayBy).then(function () {
-                      notifyReport(querySnapshot.docs[0]);
-                      drawVisualization(data);
-                      drawPie(displayBy);
-                      drawVisualization2d(search, displayBy);
-                  });
-                }
-          });   
+    if (loaded) {
+      querySnapshot.docChanges().forEach(async function (change) {
+        if (change.type === "added") {
+          let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+          await getReports();
+          generateColors(displayBy);
 
-      } else {
-          loaded = true;
-      }
+          $("#reportCount").text(reports.length);
+          loadData(displayBy).then(function () {
+            notifyReport(querySnapshot.docs[0]);
+            drawVisualization(data);
+            drawPie(displayBy);
+            drawVisualization2d(search, displayBy);
+          });
+        }
+      });
+
+    } else {
+      loaded = true;
+    }
   });
 
   initSearchValue();
@@ -548,62 +515,62 @@ function download() {
   exportCSVFile(headers, csvDataFormated, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
 }
 
-async function addCategory(){
-    let name = document.getElementById("catName").value;
-    let desc = document.getElementById("catdesc").value;
-    if(name == "" || desc == "")
-        return
-    let size = 0;
+async function addCategory() {
+  let name = document.getElementById("catName").value;
+  let desc = document.getElementById("catdesc").value;
+  if (name == "" || desc == "")
+    return
+  let size = 0;
 
-    await db.collection("ids").get().then(function(querySnapshot) {
-        size = querySnapshot.docs[0].data().categoryID + 1;
-        querySnapshot.forEach(function(doc) {
-            let newID = doc.data().categoryID + 1
-            db.collection("ids").doc(doc.id).update({
-                categoryID: newID
-            });
-        });
+  await db.collection("ids").get().then(function (querySnapshot) {
+    size = querySnapshot.docs[0].data().categoryID + 1;
+    querySnapshot.forEach(function (doc) {
+      let newID = doc.data().categoryID + 1
+      db.collection("ids").doc(doc.id).update({
+        categoryID: newID
+      });
+    });
+  });
+
+  db.collection("categories").doc().set({
+    id: size,
+    name: name,
+    description: desc
+  })
+    .then(async function () {
+      console.log("Document successfully written!");
+      sessionStorage.removeItem("category");
+      PNotify.success({
+        title: "Successfully added Category",
+        delay: 2000,
+        modules: {
+          Buttons: {
+            closer: true,
+            closerHover: true,
+            sticker: false
+          },
+          Mobile: {
+            swipeDismiss: true,
+            styling: true
+          }
+        }
+      });
+      let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+      await getReports();
+      generateColors(displayBy);
+
+      $("#reportCount").text(reports.length);
+      loadData(displayBy).then(function () {
+        drawVisualization(data);
+        drawPie(displayBy);
+        drawVisualization2d(search, displayBy);
+      });
+      document.getElementById("catName").value = "";
+      document.getElementById("catdesc").value = "";
+
+    })
+    .catch(function (error) {
+      console.error("Error writing document: ", error);
     });
 
-    db.collection("categories").doc().set({
-        id: size, 
-        name: name,
-        description: desc
-    })
-    .then(async function() {
-        console.log("Document successfully written!");
-        sessionStorage.removeItem("category");
-        PNotify.success({
-            title: "Successfully added Category",
-            delay: 2000,
-            modules: {
-              Buttons: {
-                closer: true,
-                closerHover: true,
-                sticker: false
-              },
-               Mobile: {
-                swipeDismiss: true,
-                styling: true
-              }
-            }
-          });
-          let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-          await getReports();
-          generateColors(displayBy);
-
-          $("#reportCount").text(reports.length);
-          loadData(displayBy).then(function () {
-              drawVisualization(data);
-              drawPie(displayBy);
-              drawVisualization2d(search, displayBy);
-          });
-          document.getElementById("catName").value = "";
-          document.getElementById("catdesc").value = "";
-          
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
-    
 }

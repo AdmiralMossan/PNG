@@ -55,39 +55,6 @@ function generateColors(sortBy) {
   }
 }
 
-async function drawPie(groupBy) {
-  let displayData = [];
-  let displayLabel = [];
-  if (groupBy == 1) {
-    displayData = categoriesCount;
-    displayLabel = categories;
-  } else {
-    displayData = groupsCount;
-    displayLabel = groups;
-  }
-  if (myPieChart != null) {
-    myPieChart.destroy();
-  }
-  myPieChart = new Chart(ctx, {
-    type: "pie",
-    options: {
-      maintainAspectRatio: false
-    },
-    data: {
-      labels: displayLabel,
-      datasets: [
-        {
-          label: "# of Votes",
-          data: displayData,
-          backgroundColor: pieColors,
-          borderColor: colors,
-          borderWidth: 1
-        }
-      ]
-    }
-  });
-}
-
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
   // specify options

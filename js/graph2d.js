@@ -40,6 +40,39 @@ function byGroup(){
     }
 }
 
+async function drawPie(groupBy) {
+    let displayData = [];
+    let displayLabel = [];
+    if (groupBy == 1) {
+      displayData = categoriesCount;
+      displayLabel = categories;
+    } else {
+      displayData = groupsCount;
+      displayLabel = groups;
+    }
+    if (myPieChart != null) {
+      myPieChart.destroy();
+    }
+    myPieChart = new Chart(ctx, {
+      type: "pie",
+      options: {
+        maintainAspectRatio: false
+      },
+      data: {
+        labels: displayLabel,
+        datasets: [
+          {
+            label: "# of Votes",
+            data: displayData,
+            backgroundColor: pieColors,
+            borderColor: colors,
+            borderWidth: 1
+          }
+        ]
+      }
+    });
+  }
+
 function drawVisualization2d(search, sortBy){
     let displayLabel = [];
     let displayData = [];
@@ -53,7 +86,7 @@ function drawVisualization2d(search, sortBy){
     arrayLabel = sortBy == 1 ? categories : groups;
     displayLabel = sortBy == 1 ? groups : categories;
     displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
-    displayMax = sortBy == 1 ? maxCategoryCount + 5 : maxGroupCount + 5;
+    displayMax = sortBy == 1 ? Math.ceil((maxCategoryCount + 1) / 10) * 10 : Math.ceil((maxGroupCount + 1) / 10) * 10;
 
     if(barGraph!=null){
         barGraph.destroy();
@@ -83,6 +116,7 @@ function drawVisualization2d(search, sortBy){
                         display: true,
                         ticks: {
                             beginAtZero: true,
+                            stepSize: 5,
                             max: displayMax
                         },
                         scaleLabel: {

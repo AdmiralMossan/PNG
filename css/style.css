@@ -14,6 +14,36 @@ html {
   color: #4e73df;
 }
 
+#brand {
+  cursor: pointer;
+}
+
+#brand:hover {
+  color: #4e73df !important;
+}
+#notifDropdown:hover,
+#notifDropdown:focus,
+#notifDropdown:hover i,
+#notifDropdown:focus i,
+#userDropdown:hover,
+#userDropdown:focus,
+#userDropdown:hover h3,
+#userDropdown:focus h3 {
+  color: #4e73df !important;
+}
+
+#notifDropdown:hover span,
+#notifDropdown:focus span {
+  background-color: #4e73df !important;
+}
+
+#notifItem {
+  max-height: 20vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 60%;
+}
+
 #container {
   margin-left: 0.2rem;
   margin-right: 0.2rem;
@@ -25,21 +55,24 @@ html {
 }
 #charts-container {
   grid-area: charts;
+  height: 60vh;
 }
 #bar-container {
   grid-area: bar;
-  height: 60vh;
+  height: 100%;
 }
 
 #pie-container {
   grid-area: pie;
-  height: 60vh;
+  height: 100%;
 }
-
+.main-card {
+  height: 98%;
+}
 #stats-container {
   display: grid;
   grid-area: stat;
-  height: 50vh;
+  height: 20vh;
   row-gap: 0.5rem;
   grid-template-areas:
     "card4 card4 card4"
@@ -62,53 +95,45 @@ html {
   height: 100%;
 }
 
+#bargraph {
+  height: 80%;
+}
+
+.barContainer {
+  position: relative;
+  margin: auto;
+  width: 70%;
+  height: 90%;
+}
+
 .chart-container {
   position: relative;
   margin: auto;
-  height: 80vh;
-  width: 20vw;
+  width: 70%;
+  height: 40vh;
 }
 
-#showAll {
-  width: 100%;
-  color: #ccccff;
-  text-decoration: none;
-  overflow: hidden;
-  text-align: center;
-}
-#showAll:before,
-#showAll:after {
-  background-color: #e3e6f0;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-#showAll:before {
-  margin-left: -50%;
-}
-#showAll:after {
-  margin-right: -50%;
-}
-
-#showAll:hover,
-#showAll:focus {
-  color: #4e73df;
-  text-decoration: double;
-  cursor: pointer;
+#allReports {
+  height: 95%;
 }
 
 .stats-card {
   margin-left: 1rem;
 }
 
+.tab-content {
+  height: 90%;
+}
+#reportsTable {
+  overflow: hidden;
+  height: 100%;
+}
+
 #reportsTable tbody {
   display: block;
   overflow: auto;
-  height: 40vh;
   width: 100%;
+  height: 80%;
 }
 
 #latestReport tbody {
@@ -120,6 +145,7 @@ html {
 #latestReport thead {
   display: block;
 }
+
 #reportsTable thead {
   display: block;
 }
@@ -139,6 +165,9 @@ html {
 }
 
 @media only screen and (min-width: 768px) {
+  #notifItem {
+    max-width: 30%;
+  }
   #container {
     display: grid;
     row-gap: 1rem;
@@ -147,19 +176,23 @@ html {
       "charts";
   }
 
-  #bar-container {
-    height: 70vh;
-  }
-
   #pie-container {
     grid-area: pie;
-    height: 70vh;
   }
 
   #stats-container {
     display: grid;
     grid-area: stat;
-    height: 17vh;
+    height: 10vh;
     grid-template-areas: "card1 card2 card3 card4";
+  }
+
+  #charts-container {
+    height: 70vh;
+  }
+
+  .chart-container {
+    width: 70%;
+    height: 100%;
   }
 }

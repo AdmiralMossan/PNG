@@ -156,10 +156,11 @@
                     <div id="bargraph" class="container tab-pane fade px-0">
                       <div class="row">
                         <div id="buttons" class="p-2 row">
-                          <input id="search" type="text" size="15" style="text-align: left;" placeholder="Search" value="1"
-                            onkeypress="searchField(this)">
+                          <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
+                            onkeypress="searchBoxField(this)">
                           <input id="prev" class="material-icons" type="button" value="chevron_left"
                             onclick="prevButton()" disabled="true">
+                          <input id="search" type="text" size="1" disabled style="text-align: center;" placeholder="Search" value="1">
                           <input id="next" class="material-icons" type="button" value="chevron_right"
                             onclick="nextButton()">
                         </div>
@@ -314,6 +315,8 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>

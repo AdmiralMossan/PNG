@@ -12,6 +12,7 @@ var pieColors = [];
 var loaded = false;
 var csvData = [];
 var reportSelected = {};
+var maxZvalue = 0;
 
 //2D Graph Globals
 var barGraph = null;

@@ -32,7 +32,7 @@ function byGroup(){
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<groups.length; j++){
             for(let k=0; k<categories.length; k++){
-                if(reports[i].category == categories[k] && reports[i].group == j + 1){  
+                if(reports[i].category == categories[k] && reports[i].group == j + 1){
                     byGroupCount[j][k] += 1;
                 }
             }
@@ -86,7 +86,8 @@ function drawVisualization2d(search, sortBy){
     arrayLabel = sortBy == 1 ? categories : groups;
     displayLabel = sortBy == 1 ? groups : categories;
     displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
-    displayMax = sortBy == 1 ? Math.ceil((maxCategoryCount + 1) / 10) * 10 : Math.ceil((maxGroupCount + 1) / 10) * 10;
+    displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
+    displayMax = Math.ceil((displayMax + 1) / 10) * 10;
 
     if(barGraph!=null){
         barGraph.destroy();
@@ -116,7 +117,6 @@ function drawVisualization2d(search, sortBy){
                         display: true,
                         ticks: {
                             beginAtZero: true,
-                            stepSize: 5,
                             max: displayMax
                         },
                         scaleLabel: {
@@ -135,6 +135,36 @@ function drawVisualization2d(search, sortBy){
             }
         }
     });
+}
+
+function findString(value){
+    let test = ['some','bs','sexual harra', 'other two', 'another one', 'something'];
+    let len = test.length;
+
+    // test.forEach(function(a){
+    //     if (typeof(a) == 'string' && a.indexOf(value)>-1) {
+    //         console.log(a);
+    //     } 
+    // });
+    // for(let i = 0;i < len;i++){
+    //     if(value.match(test[i])){
+    //         console.log(value.search(/test[i]/));
+    //     }
+    // }
+}
+
+function prevButton(){
+    initSearchValue();
+    search -= 1;
+    $('#next').attr('disabled', false);
+    if(search == 1){
+        $('#prev').attr('disabled', true);
+    }
+    
+    document.getElementById("search").value = search.toString();
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    
+    drawVisualization2d(search, sortBy);
 }
 
 function nextButton(){
@@ -189,16 +219,20 @@ function searchField(element){
     }
 }
 
-function prevButton(){
-    initSearchValue();
-    search -= 1;
-    $('#next').attr('disabled', false);
-    if(search == 1){
-        $('#prev').attr('disabled', true);
-    }
-    
-    document.getElementById("search").value = search.toString();
+function searchBoxField(element){
     let sortBy = document.getElementById('category').checked ? 1 : 2;
+    //let len = sortBy == 1 ? categories.length : groups.length;
+    let value = parseInt(document.getElementById("search").value)
+    let searchString = element.value;
+
+    let test = ['some','bs','sexual harra', 'other two', 'another one', 'something'];
+    let len = test.length;
     
-    drawVisualization2d(search, sortBy);
+    $('#searchBox').autocomplete({
+        source: test
+    });
+
+    if(event.key === 'Enter'){
+        findString(searchString);
+    }
 }

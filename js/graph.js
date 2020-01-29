@@ -18,6 +18,9 @@ async function loadData(colorBy) {
   for (let i = 0; i < axisMax; i += axisStep) {
     for (let j = 0; j < yAxisMax; j += axisStep) {
       z = getData(i, j);
+      
+      maxZvalue = z > maxZvalue ? z : maxZvalue;
+
       color = colorBy == 1 ? colors[i] : colors[j];
       dataArray.push({
         x: i,
@@ -58,6 +61,8 @@ function generateColors(sortBy) {
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
   // specify options
+  maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
+  
   var options = {
     width: "100%",
     style: "bar-color",
@@ -74,11 +79,11 @@ async function drawVisualization(data) {
     yBarWidth: 0.5,
     rotateAxisLabels: true,
     xCenter: "45%",
-    yCenter: "34%",
+    yCenter: "50%",
     xStep: 1,
     yStep: 1,
-    zStep: 5,
     zMin: 0,
+    zMax: maxZvalue,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z

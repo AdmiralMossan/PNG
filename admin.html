@@ -42,21 +42,35 @@
 
         <!-- Nav Heading -->
         <div class="navbar-brand">
-          <h1 class="h3 mb-0 text-gray-800">iREPORT</h1>
+          <h1 class="h3 mb-0 text-gray-800" id="brand">iREPORT</h1>
         </div>
 
         <!-- Nav Item - User Information -->
-        <div class="ml-auto">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <h3 class="mr-2 d-none d-inline text-gray-600 ">Admin</h3>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Logout
+        <div class="ml-auto d-flex">
+          <div class="my-auto">
+            <a class="my-auto btn dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">
+                notifications
+              </i>
             </a>
+            <!-- Dropdown - Notif Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="notifDropdown"
+              id="notifItem">
+            </div>
+          </div>
+          <div>
+            <a class="my-auto btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <h3 class="mr-2 d-none d-inline text-gray-600 ">Admin</h3>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Logout
+              </a>
+            </div>
           </div>
         </div>
 
@@ -66,8 +80,8 @@
       <!-- Begin Page Content -->
       <div id="container">
         <!-- Stats Card -->
-        <div id="stats-container" class="row w-100 pb-4">
-          <div id="card1" class="stats-card">
+        <div id="stats-container" class="row w-100 pb-4 justify-content-center">
+          <div id="card1" class="stats-card ">
             <div class="card shadow h-100">
               <!-- Card Header - Dropdown -->
               <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
@@ -106,9 +120,8 @@
               </div>
             </div>
           </div>
-          <div id="card4" class="stats-card row mx-auto" style="width:20rem;">
+          <!-- <div id="card4" class="stats-card row mx-auto" style="width:20rem;">
             <div class="card shadow h-100 ">
-              <!-- Card Header - Dropdown -->
               <div class="card-header bg-custom d-flex flex-row align-items-center">
                 <h6 class="m-0 font-weight-bold text-uppercase text-primary m-auto">Latest Reports</h6>
               </div>
@@ -118,7 +131,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div id="charts-container" class="row">
           <div class="col-12 col-md-8 p-0 mb-4 mb-md-0">
@@ -149,13 +162,13 @@
                   </ul>
 
                   <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div id="graph3d" class="container tab-pane active px-0">
-                      <div id="mygraph"></div>
+                  <div class="tab-content reportstab">
+                    <div id="graph3d" class="container tab-pane active px-0 h-100">
+                      <div id="mygraph" class="h-100"></div>
                     </div>
-                    <div id="bargraph" class="container tab-pane fade px-0">
-                      <div>
-                        <canvas id="graph2d" class="w-100 h-100"></canvas>
+                    <div id="bargraph" class="container tab-pane fade px-0 h-100">
+                      <div class="barContainer">
+                        <canvas id="graph2d" class=""></canvas>
                       </div>
                       <div class="row">
                         <div id="buttons" class="mx-auto p-2 row">
@@ -168,14 +181,14 @@
                         </div>
                       </div>
                     </div>
-                    <div id="tableTab" class="container tab-pane fade px-0">
+                    <div id="tableTab" class="container tab-pane fade px-0 h-100">
                       <div id="allReports" class="pt-4">
-                        <div class="d-flex justify-content-center align-items-center w-90">
+                        <div class="d-flex justify-content-center align-items-center w-90 h-100">
                         </div>
                       </div>
                     </div>
                     <!-- Add Category Tab -->
-                    <div id="addCategory" class="container tab-pane fade px-0">
+                    <div id="addCategory" class="container tab-pane fade px-0 reportstab">
                       <div id="addCategoryContainer" class="pt-4 px-2 w-100">
                         <div class="row pl-4 w-100">
                           <div class="col">
@@ -197,8 +210,8 @@
                               <div class="row pl-4 w-100">
                                 <label for="catdesc" class="h6">Category Description:</label>
                               </div>
-                              <div class="form-row row pl-3 h-100 w-75">
-                                <textarea class="w-100" id="catdesc"
+                              <div class="form-row row pl-3 w-75">
+                                <textarea class="w-100" rows="3" style="resize: none;" id="catdesc"
                                   placeholder="Input Description for the new Category to be added." required></textarea>
                               </div>
                               <div class="row pl-4 pt-4">
@@ -306,8 +319,8 @@
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
-          <button class="btn btn-primary"  onclick="logOut()" >Logout</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" onclick="logOut()">Logout</button>
         </div>
       </div>
     </div>

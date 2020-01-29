@@ -37,19 +37,19 @@ async function getReports() {
   groups = locGrps;
   initializeCounts();
 
-  for (let i = 0; i < reports.length; i++) {
-    for (let j = 0; j < categories.length; j++) {
-      if (reports[i].category == categories[j]) {
-        categoriesCount[j] += 1;
-      }
-    }
+    for (let i = 0; i < reports.length; i++) {
+        for (let j = 0; j < categories.length; j++) {
+            if (reports[i].category == categories[j]) {
+                categoriesCount[j] += 1;
+            }
+        }
 
-    for (let k = 0; k < groups.length; k++) {
-      if (reports[i].group - 1 == k) {
-        groupsCount[k] += 1;
-      }
+        for (let k = 0; k < groups.length; k++) {
+            if (reports[i].group - 1 == k) {
+                groupsCount[k] += 1;
+            }
+        }
     }
-  }
 
   initArray();
   byGroup();
@@ -60,39 +60,39 @@ async function getReports() {
 
 function notifyReport(report) {
     PNotify.info({
-    title: "New Report",
-    text:
-    "Username: " +
-    report.data().username +
-    " Category: " +
-    report.data().category +
-    " Group: " +
-    report.data().group +
-    " " +
-    report
-        .data()
-        .created.toDate()
-        .toLocaleString(),
-    delay: 3000,
-    modules: {
-    Buttons: {
-        closer: true,
-        closerHover: true,
-        sticker: false
-    },
-    Desktop: {
-        desktop: true,
-        fallback: true,
-        icon: null
-    },
-    Mobile: {
-        swipeDismiss: true,
-        styling: true
-    }
-    }
-});
+        title: "New Report",
+        text:
+            "Username: " +
+            report.data().username +
+            " Category: " +
+            report.data().category +
+            " Group: " +
+            report.data().group +
+            " " +
+            report
+                .data()
+                .created.toDate()
+                .toLocaleString(),
+        delay: 3000,
+        modules: {
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Desktop: {
+                desktop: true,
+                fallback: true,
+                icon: null
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
 }
-  
+
 async function reportsTable() {
     let cat = {};
     let group = {};
@@ -133,74 +133,74 @@ async function reportsTable() {
     reports.forEach(function (report) {
         ctr += 1;
         if (typeof cCtr[report.category] === "undefined") {
-        cCtr[report.category] = 0;
+            cCtr[report.category] = 0;
         } else {
-        cCtr[report.category] += 1;
+            cCtr[report.category] += 1;
         }
         if (typeof gCtr[report.group] === "undefined") {
-        gCtr[report.group] = 0;
+            gCtr[report.group] = 0;
         } else {
-        gCtr[report.group] += 1;
+            gCtr[report.group] += 1;
         }
 
         let date = new Date(report.created["seconds"] * 1000);
 
         body +=
-        "<tr>" +
-        "<td style='width:8em;'>" +
-        report.username +
-        "</td>" +
-        "<td style='width:6em;'>" +
-        report.group +
-        "</td>" +
-        "<td style='width:6em;'>" +
-        report.category +
-        "</td>" +
-        "<td style='width:12em;display:flex;justify-content:space-between;'>" +
-        report.created.toDate().toLocaleString("en-US") +
-        "</td><td style='width:0.5em;'><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
-        "</tr>";
-        if (ctr <= 5) {
-        body2 +=
             "<tr>" +
-            "<td style='width:12em;'>" +
+            "<td style='width:8em;'>" +
             report.username +
             "</td>" +
-            "<td style='width:14em;'>" +
+            "<td style='width:6em;'>" +
             report.group +
             "</td>" +
             "<td style='width:6em;'>" +
             report.category +
             "</td>" +
+            "<td style='width:12em;display:flex;justify-content:space-between;'>" +
+            report.created.toDate().toLocaleString("en-US") +
+            "</td><td style='width:0.5em;'><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
+        if (ctr <= 5) {
+            body2 +=
+                "<tr>" +
+                "<td style='width:12em;'>" +
+                report.username +
+                "</td>" +
+                "<td style='width:14em;'>" +
+                report.group +
+                "</td>" +
+                "<td style='width:6em;'>" +
+                report.category +
+                "</td>" +
+                "</tr>";
         }
         csvData.push({
-        user: report.username,
-        group: report.group,
-        category: report.category,
-        date:
-            date.getMonth() +
-            1 +
-            "-" +
-            date.getDay() +
-            "-" +
-            date.getFullYear() +
-            " " +
-            date.getHours() +
-            ":" +
-            date.getMinutes()
+            user: report.username,
+            group: report.group,
+            category: report.category,
+            date:
+                date.getMonth() +
+                1 +
+                "-" +
+                date.getDay() +
+                "-" +
+                date.getFullYear() +
+                " " +
+                date.getHours() +
+                ":" +
+                date.getMinutes()
         });
     });
 
     $.each(cCtr, function (key, value) {
         if (cat["value"] < value || typeof cat["value"] === "undefined") {
-        cat = { key, value };
+            cat = { key, value };
         }
     });
 
     $.each(gCtr, function (key, value) {
         if (group["value"] < value || typeof group["value"] === "undefined") {
-        group = { key, value };
+            group = { key, value };
         }
     });
 
@@ -219,9 +219,9 @@ function convertToCSV(objArray) {
     for (var i = 0; i < array.length; i++) {
         var line = "";
         for (var index in array[i]) {
-        if (line != "") line += ",";
+            if (line != "") line += ",";
 
-        line += array[i][index];
+            line += array[i][index];
         }
 
         str += line + "\r\n";
@@ -249,25 +249,32 @@ function exportCSVFile(headers, items, fileTitle) {
     } else {
         var link = document.createElement("a");
         if (link.download !== undefined) {
-        // feature detection
-        // Browsers that support HTML5 download attribute
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", exportedFilenmae);
-        link.style.visibility = "hidden";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+            // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", exportedFilenmae);
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     }
 }
-  
+
 async function selectReport(reportID) {
-    reports.forEach(function (report) {
+    reports.forEach(async function (report) {
         if (report.id === reportID) {
-        loadReportDetails(report).then(() => {
-            $('#reportDetails').modal('show');
-        })
+            await db.collection("reports").where('id', '==', report.id).get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    db.collection("reports").doc(doc.id).update({
+                        read: true
+                    });
+                });
+            });
+            loadReportDetails(report).then(() => {
+                $('#reportDetails').modal('show');
+            })
         }
     })
 }
@@ -275,13 +282,17 @@ async function selectReport(reportID) {
 async function loadReportDetails(reportSelected) {
     $("#reportTitle").text(reportSelected.username + " " + reportSelected.created.toDate());
     $("#sgroup").text("Group: " + reportSelected.group);
-    console.log(reportSelected.group)
     $("#scategory").text("Category: " + reportSelected.category);
-    $("#sdateInfo").text("Occance: " + reportSelected.datInfo);
+    $("#sdateInfo").text("Occurence: " + reportSelected.datInfo);
     $("#sotherDetails").text("Other Details: " + reportSelected.otherDetails);
     $("#spersonInfo").text("Subject: " + reportSelected.personInfo);
-    $("#sattachment").append('<a href= ' + reportSelected.attachFile + '>Link</a>');
+    if (reportSelected.attachFile === "") {
+        $("#sattachment").html('Link to attachment: No attachment');
+    } else {
+        $("#sattachment").html('Link to attachment: <a target=_blank href= ' + reportSelected.attachFile + '>Link</a>');
+    }
 }
+
 function download() {
     let headers = {
         user: "Username",
@@ -293,10 +304,10 @@ function download() {
     // format the data
     csvData.forEach(item => {
         csvDataFormated.push({
-        user: item.user,
-        group: item.group,
-        category: item.category,
-        date: item.date
+            user: item.user,
+            group: item.group,
+            category: item.category,
+            date: item.date
         });
     });
 
@@ -316,7 +327,7 @@ function download() {
 
     exportCSVFile(headers, csvDataFormated, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
 }
-  
+
 async function addCategory() {
     let name = document.getElementById("catName").value;
     let desc = document.getElementById("catdesc").value;
@@ -327,10 +338,10 @@ async function addCategory() {
     await db.collection("ids").get().then(function (querySnapshot) {
         size = querySnapshot.docs[0].data().categoryID + 1;
         querySnapshot.forEach(function (doc) {
-        let newID = doc.data().categoryID + 1
-        db.collection("ids").doc(doc.id).update({
-            categoryID: newID
-        });
+            let newID = doc.data().categoryID + 1
+            db.collection("ids").doc(doc.id).update({
+                categoryID: newID
+            });
         });
     });
 
@@ -339,43 +350,43 @@ async function addCategory() {
         name: name,
         description: desc
     })
-    .then(async function () {
-    console.log("Document successfully written!");
-    sessionStorage.removeItem("category");
-    
-    PNotify.success({
-        title: "Successfully added Category",
-        delay: 2000,
-        modules: {
-        Buttons: {
-            closer: true,
-            closerHover: true,
-            sticker: false
-        },
-        Mobile: {
-            swipeDismiss: true,
-            styling: true
-        }
-        }
-    });
-    
-    let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-    await getReports();
-    generateColors(displayBy);
+        .then(async function () {
+            console.log("Document successfully written!");
+            sessionStorage.removeItem("category");
 
-    $("#reportCount").text(reports.length);
-    
-    loadData(displayBy).then(function () {
-        drawVisualization(data);
-        drawPie(displayBy);
-        drawVisualization2d(search, displayBy);
-    });
-    
-    document.getElementById("catName").value = "";
-    document.getElementById("catdesc").value = "";
+            PNotify.success({
+                title: "Successfully added Category",
+                delay: 2000,
+                modules: {
+                    Buttons: {
+                        closer: true,
+                        closerHover: true,
+                        sticker: false
+                    },
+                    Mobile: {
+                        swipeDismiss: true,
+                        styling: true
+                    }
+                }
+            });
 
-    })
-    .catch(function (error) {
-        console.error("Error writing document: ", error);
-    });
+            let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
+            await getReports();
+            generateColors(displayBy);
+
+            $("#reportCount").text(reports.length);
+
+            loadData(displayBy).then(function () {
+                drawVisualization(data);
+                drawPie(displayBy);
+                drawVisualization2d(search, displayBy);
+            });
+
+            document.getElementById("catName").value = "";
+            document.getElementById("catdesc").value = "";
+
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
 }

@@ -23,5 +23,4 @@ $(document).ready(function () {
       $('#showReports').text("All Reports");
     }
   });
-
 })

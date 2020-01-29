@@ -41,22 +41,22 @@ window.addEventListener("load", async () => {
 
   await db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
     if (loaded) {
-      await clearValues(); 
-      await querySnapshot.docChanges().forEach(async function (change) {
-        let ci= 0;
-        if (change.type === "added") {
-          console.log(ci+=1);
+      querySnapshot.docChanges().forEach(async function (change) {
+        if (change.type === "added" || change.type === "modified") {
           let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
           await clearValues(); 
           await getReports();
           generateColors(displayBy);
 
           $("#reportCount").text(reports.length);
-          loadData(displayBy).then(async function () {
-            notifyReport(querySnapshot.docs[0]);
-            await drawVisualization(data);
-            await drawPie(displayBy);
-            await drawVisualization2d(search, displayBy);
+          loadData(displayBy).then(function () {
+            if (change.type === "added") {
+              notifyReport(querySnapshot.docs[0]);
+            }
+            drawVisualization(data);
+            drawPie(displayBy);
+            drawVisualization2d(search, displayBy);
+            reportsTable();
           });
           return;
         }

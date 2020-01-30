@@ -1,3 +1,92 @@
+var data = null;
+var graph = null;
+var reports = [];
+var categoriesCount = [];
+var groupsCount = [];
+var myPieChart = null;
+var categories = [];
+var groups = [];
+var colors = [];
+var pieColors = [];
+var loaded = false;
+var csvData = [];
+var notif = false;
+
+function clearValues() {
+  categoriesCount = [];
+  groupsCount = [];
+  categories = [];
+  groups = [];
+  reports = [];
+  groupsCount = [];
+  colors = [];
+  pieColors = [];
+}
+
+async function getReports() {
+  clearValues();
+
+  await db
+    .collection("reports")
+    .orderBy("created", "desc")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        reports.push(doc.data());
+      });
+    });
+
+  await db
+    .collection("categories")
+    .orderBy("id")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        categories.push(doc.data().name);
+      });
+    });
+
+  await db
+    .collection("groups")
+    .orderBy("id")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        groups.push(doc.data().name);
+      });
+    });
+
+  initializeCounts();
+
+  for (let i = 0; i < reports.length; i++) {
+    for (let j = 0; j < categories.length; j++) {
+      if (reports[i].category == categories[j]) {
+        categoriesCount[j] += 1;
+      }
+    }
+
+    for (let k = 0; k < groups.length; k++) {
+      if (reports[i].group - 1 == k) {
+        groupsCount[k] += 1;
+      }
+    }
+  }
+
+  initArray();
+  byGroup();
+  byCategory();
+  findMax();
+}
+
+function initializeCounts() {
+  for (let i = 0; i < categories.length; i++) {
+    categoriesCount[i] = 0;
+  }
+  for (let i = 0; i < groups.length; i++) {
+    groupsCount[i] = 0;
+  }
+}
+
 function getData(x, y) {
   let count = 0;
   for (let i = 0; i < reports.length; i++) {

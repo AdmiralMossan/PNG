@@ -1,41 +1,41 @@
 async function getReports() {
-  clearValues();
-  let locCat = [];
-  let locReps = [];
-  let locGrps = []
-  await db
-    .collection("reports")
-    .orderBy("created", "desc")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        locReps.push(doc.data());
-      });
-    });
+    clearValues();
+    let locCat = [];
+    let locReps = [];
+    let locGrps = []
+    await db
+        .collection("reports")
+        .orderBy("created", "desc")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locReps.push(doc.data());
+            });
+        });
 
-  await db
-    .collection("categories")
-    .orderBy("id")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        locCat.push(doc.data().name);
-      });
-    });
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locCat.push(doc.data().name);
+            });
+        });
 
-  await db
-    .collection("groups")
-    .orderBy("id")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        locGrps.push(doc.data().name);
-      });
-    });
-  reports = locReps;
-  categories = locCat;
-  groups = locGrps;
-  initializeCounts();
+    await db
+        .collection("groups")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locGrps.push(doc.data().name);
+            });
+        });
+    reports = locReps;
+    categories = locCat;
+    groups = locGrps;
+    initializeCounts();
 
     for (let i = 0; i < reports.length; i++) {
         for (let j = 0; j < categories.length; j++) {
@@ -51,11 +51,11 @@ async function getReports() {
         }
     }
 
-  initArray();
-  byGroup();
-  byCategory();
-  findMax();
-  return;
+    initArray();
+    byGroup();
+    byCategory();
+    findMax();
+    return;
 }
 
 function notifyReport(report) {
@@ -94,6 +94,11 @@ function notifyReport(report) {
 }
 
 async function reportsTable() {
+
+    $('#allReports div').html("");
+    $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+    $('#notifItem').html('<div class="dropdown-item py-0"><hr><div class="row"><p class="col-12 m-0 text-success p-0">All reports are read.</p></div><hr></div>')
+
     let cat = {};
     let group = {};
     let cCtr = {};
@@ -102,28 +107,26 @@ async function reportsTable() {
 
     //Add Head
     let head =
-        "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>" +
+        "<table id='reportsTable' class='table table-striped table-responsive h-100 scroll-secondary'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
-        "<th style='width:4em; text-align:center;'>User</th>" +
-        "<th style='width:8em; text-align:center;'>Group</th>" +
-        "<th style=' text-align:center;'>Category</th>" +
-        "<th style='width:16em; text-align:center;'>Date " +
+        "<th style='width:20%;'>User</th>" +
+        "<th style='width:10%;'>Group</th>" +
+        "<th style='width:30%;'>Category</th>" +
+        "<th style='width:30%;'>Date " +
         "</th>" +
-        "<th style='width:0.5em;'>" +
-        "<div class='btn-group'>" +
+        "<th style='width:10%;'>" +
         "<a href='javascript:download()' title='Download as CSV' class='material-icons' style='text-decoration:none'>cloud_download</a>" +
-        "</div>" +
         "</th>" +
         "</th></tr></thead>";
 
     let head2 =
-        "<table id='reportsTable2' class='table m-0 table-responsive' style='display:block;'>" +
+        "<table id='reportsTable2' class='table m-0 table-responsive' style='display:table;'>" +
         "<thead class='bg-custom text-custom'>" +
         "<tr>" +
-        "<th style='width:4em; text-align:center;' class='p-0'>User</th>" +
-        "<th style='width:10em; text-align:center;' class='p-0'>Group</th>" +
-        "<th style='width:2em; text-align:center;' class='p-0'>Category</th>" +
+        "<th style='width:4rem; text-align:center;' class='p-0'>User</th>" +
+        "<th style='width:10rem; text-align:center;' class='p-0'>Group</th>" +
+        "<th style='width:2rem; text-align:center;' class='p-0'>Category</th>" +
         "</td>" +
         "</th></tr></thead>";
 
@@ -131,7 +134,6 @@ async function reportsTable() {
     let body2 = '<tbody class="scroll-secondary">';
     let body = '<tbody class="scroll-secondary">';
     reports.forEach(function (report) {
-        ctr += 1;
         if (typeof cCtr[report.category] === "undefined") {
             cCtr[report.category] = 0;
         } else {
@@ -144,32 +146,32 @@ async function reportsTable() {
         }
 
         let date = new Date(report.created["seconds"] * 1000);
-
         body +=
+
             "<tr>" +
-            "<td style='width:8em;'>" +
+            "<td>" +
             report.username +
             "</td>" +
-            "<td style='width:6em;'>" +
+            "<td>" +
             report.group +
             "</td>" +
-            "<td style='width:6em;'>" +
+            "<td>" +
             report.category +
             "</td>" +
-            "<td style='width:12em;display:flex;justify-content:space-between;'>" +
+            "<td>" +
             report.created.toDate().toLocaleString("en-US") +
-            "</td><td style='width:0.5em;'><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
+            "</td><td><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
         if (ctr <= 5) {
             body2 +=
                 "<tr>" +
-                "<td style='width:12em;'>" +
+                "<td style='width:12rem;'>" +
                 report.username +
                 "</td>" +
-                "<td style='width:14em;'>" +
+                "<td style='width:14rem;'>" +
                 report.group +
                 "</td>" +
-                "<td style='width:6em;'>" +
+                "<td style='width:6rem;'>" +
                 report.category +
                 "</td>" +
                 "</tr>";
@@ -190,7 +192,20 @@ async function reportsTable() {
                 ":" +
                 date.getMinutes()
         });
+        if (report.read === false) {
+            notif = true;
+            if (ctr === 0) {
+                $('#notifItem').html('<div class="px-4 py-0"><hr class="m-2 mb-3"></div>');
+            }
+            ctr += 1;
+            $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i><span class="badge badge-pill badge-danger p-1">' + ctr + '</span>')
+            $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0"> (' + report.created.toDate().toLocaleString("en-US") + ')</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr class="mt-1"></div>')
+        }
     });
+    if (notif === false) {
+
+        $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+    }
 
     $.each(cCtr, function (key, value) {
         if (cat["value"] < value || typeof cat["value"] === "undefined") {
@@ -211,6 +226,7 @@ async function reportsTable() {
     $("#reportCount").text(reports.length);
     $("#latestReport").append(head2 + body2 + "</tbody></table>");
 }
+
 
 function convertToCSV(objArray) {
     var array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
@@ -396,4 +412,6 @@ async function addCategory() {
         .catch(function (error) {
             console.error("Error writing document: ", error);
         });
+
+    $('#addCategoryModal').modal('hide')
 }

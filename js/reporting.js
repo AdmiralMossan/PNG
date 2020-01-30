@@ -329,6 +329,11 @@ function download() {
 }
 
 async function addCategory() {
+    var addCatg = document.getElementById('addCatg');
+    if(addCatg.classList.contains("disabled"))
+        return;
+    addCatg.classList.remove("btn-primary");
+    addCatg.classList.add("btn-secondary", "disabled");
     let name = document.getElementById("catName").value;
     let desc = document.getElementById("catdesc").value;
     if (name == "" || desc == "")
@@ -384,6 +389,8 @@ async function addCategory() {
 
             document.getElementById("catName").value = "";
             document.getElementById("catdesc").value = "";
+            addCatg.classList.remove("btn-secondary", "disabled");
+            addCatg.classList.add("btn-primary");
 
         })
         .catch(function (error) {

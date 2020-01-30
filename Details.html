@@ -4,8 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <script>
-    if(!sessionStorage.getItem("username"))
-       location.href =  "/login.html";
+    if(!sessionStorage.getItem("username")){
+      location.href =  "/login.html";
+    }
+    if(!sessionStorage.getItem("category")){
+      location.href =  "/user.html";
+    }
   </script>
   <title>Report Details</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -141,7 +145,7 @@
                     <!-- Navigation Buttons -->
                     <div class="button-row d-flex mt-4">
                       <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                      <button class="btn btn-success ml-auto" type="submit"  title="Send">Send</button>
+                      <button id="sendButton" class="btn btn-success ml-auto" type="submit"  title="Send">Send</button>
                     </div>
                     <!-- End of Navigation Buttons -->
                   </div>

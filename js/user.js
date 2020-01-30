@@ -10,8 +10,9 @@ function initializeButtons(){
     var Ctgcontainer = document.getElementById("categoryContainer"); 
     
     for(let i=0; i<categories.length; i++){
-        Ctgcontainer.innerHTML += `<div id="buttonRows" class="col-sm text-center px-0">
-             <button type="button" id="category` + i + `" class="w-50 btn btn-secondary w-75 my-2 text-center"  style=" height: 120px;">` + categories[i] + `</button>
+        Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
+             <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center"  style=" height: 120px;">
+             ` + categories[i] + `</button>
            </div>`;
     }
 }
@@ -120,7 +121,7 @@ function findString(value){
 
 function searchBoxField(){
     let searchString = document.getElementById('searchBox').value;
-    
+
     $('#searchBox').autocomplete({
         source: categories
     });

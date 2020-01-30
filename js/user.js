@@ -11,8 +11,8 @@ function initializeButtons(){
     var ctgDesc =  document.getElementById("ctgDesc"); 
     var jBoxes = []
     for(let i=0; i<categories.length; i++){
-        Ctgcontainer.innerHTML += `<div class="col-sm">
-             <button type="button" id="category` + categories[i] + `" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;">
+        Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
+             <button type="button" id="category` + categories[i] + `" class="w-50 btn btn-secondary w-75 my-2 text-center"  style=" height: 120px;">
              Category ` + categories[i] + `</button>
            </div>`;
     }

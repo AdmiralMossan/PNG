@@ -8,12 +8,10 @@ async function getCategories(){
 
 function initializeButtons(){
     var Ctgcontainer = document.getElementById("categoryContainer"); 
-    var ctgDesc =  document.getElementById("ctgDesc"); 
-    var jBoxes = []
+    
     for(let i=0; i<categories.length; i++){
-        Ctgcontainer.innerHTML += `<div class="col-sm">
-             <button type="button" id="category` + categories[i] + `" class="col-sm btn btn-secondary w-75 mx-4 my-2"  style=" height: 120px;">
-             Category ` + categories[i] + `</button>
+        Ctgcontainer.innerHTML += `<div id="buttonRows" class="col-sm text-center px-0">
+             <button type="button" id="category` + i + `" class="w-50 btn btn-secondary w-75 my-2 text-center"  style=" height: 120px;">` + categories[i] + `</button>
            </div>`;
     }
 }
@@ -101,3 +99,33 @@ $(document).ready(function() {
         disableAll();
     });
 });
+
+function findString(value){
+    let displayData = [];
+    
+    displayData = categories.slice();
+    
+    for(i = 0; i < displayData.length ;i++){
+        displayData[i] = displayData[i].toLowerCase();
+    }
+
+    displayData.forEach(function(a){
+        if (typeof(a) === 'string' && a.indexOf(value)>-1) {
+            let index = displayData.indexOf(value);
+            let element = document.getElementById("category"+index);
+            element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+        }
+    });
+}
+
+function searchBoxField(){
+    let searchString = document.getElementById('searchBox').value;
+    
+    $('#searchBox').autocomplete({
+        source: categories
+    });
+    
+    if(event.key === 'Enter' || event.type === 'click'){
+        findString(searchString.toLowerCase());
+    }
+}

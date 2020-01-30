@@ -9,20 +9,34 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/user.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
     <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js" ></script> 
     <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js" > </script> 
     <script src = "https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script> 
     <script src = "js/firestore.js"></script>
+    
     <script src="js/userGlobals.js"></script>
     <script src="js/user.js"></script>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ">
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top py-0 ">
 
         <!-- Nav Heading -->
         <div class="navbar-brand">
@@ -45,49 +59,63 @@
         </div>
       </nav>
   <div class="container">
-    <div class="row">
-      <div id="maincontainer" class="col-8 rounded mx-3 py-4">
-        <div class="row mx-auto w-50">
-          <h2 class="mx-auto">Select a Report:</h2>
-          <p class="lead text-center">
-            Create a new report by pressing one of the report categories and pressing the report button below.
-          </p>
+    <div class="row py-1">
+      <div id="maincontainer" class="col-md rounded pt-2 pb-4">
+        <div class="row">
+          <div class="col-md h-25">
+            <h2 class="text-center display-4 my-0">Select a Report:</h2>
+            <p class="lead text-center">
+              Create a new report by pressing one of the report categories and pressing the report button below.
+            </p>
+            <div class="row mx-auto min-vh-50 w-80 pb-2" style="max-width: 500px;">
+              <label id="searchBoxLabel" for="searchBox"></label>
+              <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
+                onkeypress="searchBoxField()" onfocus="this.value=''">
+              <input id="searchButton" class="material-icons" type="button" value="search"
+                onclick="searchBoxField()">
+            </div>
+            <div id="categoryContainer" class="row mx-auto min-vh-50 w-80 border" style="max-width: 500px;">
+            </div>
+          </div>
+          
         </div>
         <!-- Category Selection -->
-        <div class="row mx-auto  border">
+        <div class="row mx-auto">
           <div class="container">
-            <div id="categoryContainer" class="row">
-            </div>
           </div>
         </div>         
         <div class="row" style="height: 30px;">
-            <h6 class="text-muted mx-auto">Press the chosen category again to cancel selection.</h6>
+            <h6 class="text-muted text-center mx-auto py-4">Press the chosen category again to cancel selection.</h6>
         </div> 
+        <div class="row py-4"></div>
         <!-- Report Button -->
-        <div class="row">
-          <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block px-4 bg-white text-dark" data-target="#successModal" alt="Submit" onclick="toDetails()" disabled>
+        <div class="row pt-2">
+          <img id="picture" type="image" src="Images/buttonD.jpg" class="rounded mx-auto d-block px-4 bg-white text-dark" data-target="#detailsModal" alt="Submit"  disabled>
         </div>
-      </div> 
+
+      <!-- </div> 
         <div id="categorydiv" class="col-sm rounded">
           <h5 class="pt-4">Categories:</h5>
           <div id="ctgDesc"> </div>   
-        </div>
+        </div>  -->
       </div>
+
       <!-- Modal -->
-      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
+      <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Report Successful!</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Report Details</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Your report has been successfully submitted!
+              <small class="text-muted">Would you like to add details to your report?</small>
             </div>
             <div class="modal-footer">
-              <button id="closemodal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="closemodal" type="button" class="btn btn-primary" onclick="toDetails()" alt="Submit">Add Details</button>
+              <button id="closemodal" type="button" class="btn btn-secondary" data-dismiss="modal">Skip</button>
             </div>
           </div>
         </div>

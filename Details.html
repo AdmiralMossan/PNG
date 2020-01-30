@@ -25,12 +25,13 @@
     crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/details.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
 <body>
   <!-- partial:index.partial.html -->
 
-  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ">
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top py-0 ">
 
     <!-- Nav Heading -->
     <div class="navbar-brand">
@@ -54,9 +55,9 @@
   </nav>
 
   <!--PEN CONTENT     -->
-  <div class="content ">
+  <div class="content" id="maincontent">
     <!--content inner-->
-    <div class="content__inner border py-4 bg-light rounded">
+    <div class="content__inner border py-4 bg-light rounded" id="maincontainer">
       <div class="container overflow-hidden">
         <!--multisteps-form-->
         <div class="multisteps-form">
@@ -82,7 +83,7 @@
               <!--form panels-->
               <form class="multisteps-form__form" onsubmit="storeData(event, false)">
                 <!--single form panel-->
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="fadeIn">
+                <div class="multisteps-form__panel pb-4 p-4 rounded bg-white js-active" data-animation="fadeIn">
                   <h3 class="multisteps-form__title">Date Information</h3>
                   <p><small>When did the matter take place at the time of making this report?</small></p>
                   <div class="multisteps-form__content">
@@ -99,7 +100,7 @@
                   </div>
                 </div>
                 <!--single form panel-->
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                <div class="multisteps-form__panel p-4 rounded bg-white" data-animation="fadeIn">
                   <h3 class="multisteps-form__title">Person Information</h3>
                   <p><small>Who was involved in the matter that is being reported?</small></p>
                   <div class="multisteps-form__content">
@@ -115,7 +116,7 @@
                   </div>
                 </div>
                 <!--single form panel-->
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                <div class="multisteps-form__panel p-4 rounded bg-white" data-animation="fadeIn">
                   <h3 class="multisteps-form__title">Other Details</h3>
                   <p><small>Input additional details regarding the matter being reported.</small></p>
                   <div class="multisteps-form__content">
@@ -134,7 +135,7 @@
                   </div>
                 </div>
                 <!--single form panel-->
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="fadeIn">
+                <div class="multisteps-form__panel p-4 rounded bg-white" data-animation="fadeIn">
                   <h3 class="multisteps-form__title">Attach a File</h3>
                   <p><small>Attach a file that could help support the report being made.</small></p>
                   <div class="multisteps-form__content">
@@ -153,28 +154,6 @@
               </form>
             </div>
             <!-- End of Left Side -->
-
-            <!-- Right Side -->
-            <div class="col-sm-5">
-              <form onsubmit="storeData(event, true)">
-                <!-- Create Anonymous Report -->
-                <div class="pt-4 rounded bg-white shadow">
-                  <div class="col-sm text-center pt-4">
-                    <small class="text-muted">-------OR-------</small>
-                    <label id="anonlabel" for="submit" class=" d-block h2 text-center pb-4 pt-4">Skip Report
-                      Details</label>
-                    <div id="Rightdiv" class="row py-4">
-                      <div class="col-sm text-center">
-                        <h6 class="py-4 text-center">Submit the report without any additional details.</h6>
-                        <button id="quickreport" type="submit" class="btn btn-primary py-4 px-4"
-                          >Report</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <!-- End of Right Side -->
             
           </div>
         </div>

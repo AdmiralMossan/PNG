@@ -33,10 +33,10 @@
 
   <body>
     <div id="backgroundimage"></div>
-    <div id="maincontent">
+    <div id="maincontent" class="pb-4">
       <!-- Logo and Title -->
-      <div class="d-flex justify-content-center row">
-        <div class="col-sm text-center py-4" >
+      <div class="d-flex w-100 mx-0 justify-content-center row" >
+        <div class="col text-center w-100 py-4 px-0">
           <div class="container py-4"  id="title">
             <h1 class="display-4">Report Application</h1>
             <p class="lead">This application allows you to create reports of your choice!</p>
@@ -45,13 +45,13 @@
       </div>
       <!-- End of Logo and Title -->
 
-      <div class="d-flex justify-content-center row">
+      <div class="d-flex w-100 justify-content-center row">
         <!-- Empty div -->
         <div class="col-md h-100"></div>
         <!-- End of Empty div -->
  
         <!-- Normal Login Div -->
-        <div id="logindiv1" class="card bg-light mb-3 pt-3 col-xs h-100 px-4 rounded" style="max-width: 18rem;">
+        <div id="logindiv1" class="card bg-light mb-3 pt-3 col-xs px-4 rounded" style="max-width: 18rem;">
           <div class="card-body pt-4">
             <h2 class="card-title">Login:</h2>
             <form onsubmit="logIn(event);">
@@ -95,9 +95,9 @@
         </div>
         <!-- End of Normal Login Div -->
 
-        <div class="col-md pt-4 h-100 pt-md-0">
+        <div class="col-md pt-4 pt-md-0">
           <div class="row">
-            <div id="logindiv2" class="card h-100 shadow-lg col-md w-50 mx-auto px-4 pb-3 bg-light rounded" style="max-width: 18rem;">
+            <div id="logindiv2" class="card shadow-lg col-md w-50 mx-auto px-4 pb-3 bg-light rounded" style="max-width: 18rem;">
               <form onsubmit="event.preventDefault();">
                 <!-- Create Anonymous Report -->
                 <div class="pt-4">
@@ -126,8 +126,8 @@
               </form>
             </div>
           </div>
-          <div id ="anonlogin" class="row pt-1" style="display: none;">
-            <div id="logindiv3" class="shadow-lg card bg-dark text-white bg-dark d-block col-md mx-auto w-50 border px-4  pt-4 pb-4 bg-light rounded">
+          <div id ="anonlogin" class="row pt-1 pb-4" style="display: none;">
+            <div id="logindiv3" class="shadow-sm card bg-dark text-white bg-dark d-block col-md mx-auto w-50 px-4  py-4 bg-light rounded">
               <form onsubmit="event.preventDefault();">
                 <!-- Username field -->
                 <div class="">

@@ -6,14 +6,13 @@
 	z-index: -1;
 	
 	display: block;
-	background-image: url("../Images/BG.png");
-	width: 100%;
+	background-image: url("../Images/BG.jpg");
 	height: 100%;
 	
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
+	-webkit-filter: blur(8px);
+	-moz-filter: blur(8px);
+	-o-filter: blur(8px);
+	-ms-filter: blur(8px);
 	filter: blur(8px);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -25,14 +24,11 @@
 }
 
 #logindiv1 {
-		box-shadow: 10px 10px 5px grey;
-		min-width: 275px;
-	}
+	box-shadow: 5px 5px 5px grey;
+}
 
 #logindiv2 {
-	box-shadow: 10px 10px 5px grey;
-	min-width: 275px;
-	box-shadow: 10px 10px 5px grey;
+	box-shadow: 5px 5px 5px grey;
 	min-width: 275px;
     overflow: hidden;
 }
@@ -46,7 +42,7 @@
 }
 
 #logindiv3 {
-	box-shadow: 10px 10px 5px grey;
+	box-shadow: 5px 5px 5px grey;
 	min-width: 275px;
     height: 0;
     overflow: hidden;

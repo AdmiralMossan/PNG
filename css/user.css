@@ -1,3 +1,7 @@
+:root {
+    --gutter: 20px;
+  }
+
 body {
     background: #e6f0ff;
 }
@@ -11,9 +15,45 @@ body {
 #maincontainer {
     background: white;
     box-shadow: 10px 10px 5px grey;
-    min-width: 275px;
+    min-width: 50px;
 }
+
+#maincontainer> * {
+    grid-column: 2 / -2;
+  }
+
+#maincontainer:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    
+    display: block;
+    background-image: url("../Images/BG.jpg");
+    height: 100%;
+    
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    -ms-filter: blur(8px);
+    filter: blur(8px);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
 #picture{
     height: 175px;
+}
+
+#categoryContainer{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(10000, 140px);
+    grid-template-rows: minmax(150px);
+    
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * var(--gutter));
+    margin-bottom: calc(-.25 * var(--gutter));
 }

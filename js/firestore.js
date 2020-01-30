@@ -39,9 +39,6 @@ function randomDate(start, end) {
 }
 
 function toDetails() {
-    disabled = document.getElementById('picture').getAttribute('disabled');
-    if (disabled === "disabled" || disabled === "")
-        return
     location.href = "/details.html";
 }
 

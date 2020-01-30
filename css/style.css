@@ -49,6 +49,7 @@ html {
   margin-right: 0.2rem;
   display: grid;
   row-gap: 1rem;
+  justify-content: center;
   grid-template-areas:
     "stat"
     "charts";
@@ -56,6 +57,7 @@ html {
 #charts-container {
   grid-area: charts;
   height: 60vh;
+  width: 95vw;
 }
 #bar-container {
   grid-area: bar;
@@ -73,11 +75,21 @@ html {
   display: grid;
   grid-area: stat;
   height: 20vh;
+  width: 95vw;
   row-gap: 0.5rem;
   grid-template-areas:
     "card4 card4 card4"
     "card1 card2 card3";
 }
+
+#stats-container > .stats-card > .card > .card-header {
+  height: 60%;
+}
+
+#stats-container > .stats-card > .card > .card-body {
+  height: 40%;
+}
+
 #card1 {
   grid-area: card1;
 }
@@ -89,6 +101,15 @@ html {
 }
 #card4 {
   grid-area: card4;
+}
+
+#reportsTab {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+td {
+  word-break: break-all;
 }
 
 #myPieChart {
@@ -133,17 +154,7 @@ html {
   display: block;
   overflow: auto;
   width: 100%;
-  height: 80%;
-}
-
-#latestReport tbody {
-  display: block;
-  overflow: auto;
-  height: 4.5rem;
-}
-
-#latestReport thead {
-  display: block;
+  height: 85%;
 }
 
 #reportsTable thead {
@@ -155,7 +166,6 @@ html {
 }
 
 .scroll-secondary {
-  overflow-y: scroll;
   scrollbar-color: #4e73df #ccccff;
   scrollbar-width: thin;
 }

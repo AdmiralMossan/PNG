@@ -178,16 +178,24 @@ function findString(value){
     let sortBy = document.getElementById('category').checked ? 1 : 2;
     let displayData = [];
     
-    displayData = sortBy == 1 ? categories : groups;
+    displayData = sortBy == 1 ? categories.slice() : groups.slice();
     
+    for(i = 0; i < displayData.length ;i++){
+        displayData[i] = displayData[i].toLowerCase();
+    }
+
     displayData.forEach(function(a){
-        if (typeof(a) == 'string' && a.indexOf(value)>-1) {
+        if (typeof(a) === 'string' && a.indexOf(value)>-1) {
             let index = displayData.indexOf(value) + 1;
-            document.getElementById("search").value = index.toString();
-            search = index;
-            buttonEnabler(index);
-            drawVisualization2d(index, sortBy);
-        } 
+            if(index === 0){
+                
+            } else {
+                document.getElementById("search").value = index.toString();
+                search = index;
+                buttonEnabler(index);
+                drawVisualization2d(index, sortBy);
+            }
+        }
     });
 }
 
@@ -211,16 +219,9 @@ function prevButton(){
     search -= 1;
     buttonEnabler(search);
 
-    let displayData = [];
-    let index = search - 1;
-
     document.getElementById("search").value = search.toString();
     
     let sortBy = document.getElementById('category').checked ? 1 : 2;
-    
-    displayData = sortBy == 1 ? categories : groups;
-    
-    document.getElementById("searchBox").value = displayData[index];
     
     drawVisualization2d(search, sortBy);
 }
@@ -229,69 +230,25 @@ function nextButton(){
     search += 1;
     buttonEnabler(search);
 
-    let displayData = [];
-    let index = search - 1;
-
     document.getElementById("search").value = search.toString();
 
     let sortBy = document.getElementById('category').checked ? 1 : 2;
-
-    displayData = sortBy == 1 ? categories : groups;
-    
-    document.getElementById("searchBox").value = displayData[index];
     
     drawVisualization2d(search, sortBy);
 }
 
-function searchField(element) {
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let len = sortBy == 1 ? categories.length : groups.length;
-    let value = parseInt(element.value);
-
-    if (event.key === 'Enter' && Number.isInteger(value)) {
-        if (value > len) {
-            $('#next').attr('disabled', true);
-            $('#prev').attr('disabled', false);
-            document.getElementById("search").value = len.toString();
-            drawVisualization2d(len, sortBy);
-        } else if (value < 1) {
-            $('#prev').attr('disabled', true);
-            $('#next').attr('disabled', false);
-            document.getElementById("search").value = 1;
-            drawVisualization2d(1, sortBy);
-        } else if (value == 1) {
-            $('#prev').attr('disabled', true);
-            $('#next').attr('disabled', false);
-            drawVisualization2d(value, sortBy);
-        } else if (value == len) {
-            $('#next').attr('disabled', true);
-            $('#prev').attr('disabled', false);
-            drawVisualization2d(value, sortBy);
-        } else {
-            $('#prev').attr('disabled', false);
-            $('#next').attr('disabled', false);
-            drawVisualization2d(value, sortBy);
-        }
-    } else if (event.key === 'Enter') {
-        $('#prev').attr('disabled', true);
-        $('#next').attr('disabled', false);
-        document.getElementById("search").value = 1;
-        drawVisualization2d(1, sortBy);
-    }
-}
-
-function searchBoxField(element){
+function searchBoxField(){
     let sortBy = document.getElementById('category').checked ? 1 : 2;
     let displayData = [];
-    let searchString = element.value;
+    let searchString = document.getElementById('searchBox').value;
     
     displayData = sortBy == 1 ? categories : groups;
 
     $('#searchBox').autocomplete({
         source: displayData
     });
-
-    if(event.key === 'Enter'){
-        findString(searchString);
+    
+    if(event.key === 'Enter' || event.type === 'click'){
+        findString(searchString.toLowerCase());
     }
 }

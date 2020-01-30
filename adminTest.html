@@ -175,7 +175,9 @@
                           <div id="buttons" class="p-2 row">
                             <label id="searchBoxLabel" for="searchBox"></label>
                             <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
-                              onkeypress="searchBoxField(this)">
+                              onkeypress="searchBoxField()" onfocus="this.value=''">
+                            <input id="searchButton" class="material-icons" type="button" value="search"
+                            onclick="searchBoxField()">
                             <input id="prev" class="material-icons" type="button" value="chevron_left"
                               onclick="prevButton()" disabled="true">
                             <input id="search" type="text" hidden size="1" disabled style="text-align: center;" placeholder="Search" value="1">

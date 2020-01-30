@@ -149,7 +149,7 @@ async function sendReport(reportData) {
 }
 
 function getCategory(id) {
-    sessionStorage.setItem("category", id);
+    sessionStorage.setItem("category",id);
     buttonId = id
 }
 

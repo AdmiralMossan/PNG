@@ -41,6 +41,8 @@ function disabledButtons(i, j){
             if(k!=i)
                 buttons[k].removeAttribute("disabled");
         }
+        buttons[i].classList.remove("btn-primary");
+        buttons[i].classList.add("btn-outline-primary");
         isClicked = false;
     }else{
         $('#picture').attr('src', "Images/buttonA.jpg");
@@ -49,7 +51,9 @@ function disabledButtons(i, j){
         for(let k=0; k<buttons.length; k++){
             if(k!=i){
                 buttons[k].setAttribute("disabled", "disabled");
-                getCategory(buttons[i].id.replace('category',''));
+                buttons[i].classList.remove("btn-outline-primary");
+                buttons[i].classList.add("btn-primary");
+                getCategory(categories[buttons[i].id.replace('category','')]);
             }        
         }
         isClicked = true;

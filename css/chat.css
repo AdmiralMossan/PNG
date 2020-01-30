@@ -1,0 +1,230 @@
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: rgb(34, 154, 175);
+  border-radius: 50%;
+  color: blue;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  border-radius: 5%;
+  border-color: teal;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  bottom: 23px;
+  right: 28px;  
+  z-index: 9;
+  height: 50vh;
+  width: 25vw;
+  background-color: white;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.search{
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    width: 50%;
+    color:rgb(10, 5, 5) !important;
+}
+.search:focus{
+    box-shadow:none !important;
+   outline:0px !important;
+}
+
+.search_btn{
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    color: white !important;
+    cursor: pointer;
+}
+.contacts_body{
+    padding:  0.75rem 0 !important;
+    overflow-y: auto;
+    height: 30vh;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.contacts{
+    list-style: none;
+    padding: 0;
+}
+.contacts li{
+    width: 100% !important;
+    padding: 5px 10px;
+    margin-bottom: 15px !important;
+}
+
+#peopleIcon i{
+    font-size: 2em;
+    padding-top : 10px;
+}
+
+.user_img{
+    height: 70px;
+    width: 70px;
+    border:1.5px solid #f5f6fa;
+
+}
+.user_img_msg{
+    height: 40px;
+    width: 40px;
+    border:1.5px solid #f5f6fa;
+
+}
+.img_cont{
+    position: relative;
+    height: 70px;
+    width: 70px;
+}
+
+.img_cont_msg{
+    height: 40px;
+    width: 40px;
+}
+.online_icon{
+position: absolute;
+height: 15px;
+width:15px;
+background-color: #4cd137;
+border-radius: 50%;
+bottom: 0.2em;
+right: 0.4em;
+border:1.5px solid white;
+}
+.offline{
+    background-color: #c23616 !important;
+}
+.user_info{
+margin-top: auto;
+margin-bottom: auto;
+margin-left: 15px;
+}
+.user_info span{
+font-size: 20px;
+color: rgb(24, 23, 23);
+}
+.user_info p{
+font-size: 10px;
+color: rgba(22, 21, 21, 0.6);
+}
+.video_cam{
+margin-left: 50px;
+margin-top: 5px;
+}
+.video_cam span{
+color: white;
+font-size: 20px;
+cursor: pointer;
+margin-right: 20px;
+}
+.msg_cotainer{
+margin-top: auto;
+margin-bottom: auto;
+margin-left: 10px;
+border-radius: 25px;
+background-color: #82ccdd;
+padding: 10px;
+position: relative;
+}
+.msg_cotainer_send{
+margin-top: auto;
+margin-bottom: auto;
+margin-right: 10px;
+border-radius: 25px;
+background-color: #78e08f;
+padding: 10px;
+position: relative;
+}
+.msg_time{
+position: absolute;
+left: 0;
+bottom: -15px;
+color: rgba(255,255,255,0.5);
+font-size: 10px;
+}
+.msg_time_send{
+    position: absolute;
+    right:0;
+    bottom: -15px;
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+}
+.msg_head{
+position: relative;
+}
+
+@media(max-width: 576px){
+    .contacts_card{
+    margin-bottom: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 9;
+        height: 100vh;
+        width: 100vw;
+        background-color: white;
+      }
+}

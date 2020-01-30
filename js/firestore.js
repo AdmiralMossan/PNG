@@ -180,8 +180,8 @@ async function logIn(e) {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
             sessionStorage.setItem("userType", docs[0].userType);
-            // location.href =  "/adminTest.html"; 
-            location.href = "/admin.html";
+            location.href =  "/adminTest.html"; 
+            // location.href = "/admin.html";
         } else {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);

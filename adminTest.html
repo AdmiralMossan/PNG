@@ -19,11 +19,9 @@
 
   <!-- Custom styles for this template-->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/chat.css" rel="stylesheet">
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <!-- Custom fonts for this template-->
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -171,19 +169,17 @@
                     </div>
                     <div id="bargraph" class="container tab-pane fade px-0 h-100">
                       <div class="barContainer">
-                        <div class="row justify-content-center">
-                          <div id="buttons" class="p-2 row">
-                            <label id="searchBoxLabel" for="searchBox"></label>
-                            <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
-                              onkeypress="searchBoxField(this)">
-                            <input id="prev" class="material-icons" type="button" value="chevron_left"
-                              onclick="prevButton()" disabled="true">
-                            <input id="search" type="text" hidden size="1" disabled style="text-align: center;" placeholder="Search" value="1">
-                            <input id="next" class="material-icons" type="button" value="chevron_right"
-                              onclick="nextButton()">
-                          </div>
+                        <canvas id="graph2d" class=""></canvas>
+                      </div>
+                      <div class="row">
+                        <div id="buttons" class="mx-auto p-2 row">
+                          <input id="prev" class="material-icons" type="button" value="chevron_left"
+                            onclick="prevButton()" disabled="true">
+                          <input id="search" type="text" size="1" style="text-align: center;" value="1"
+                            onkeypress="searchField(this)">
+                          <input id="next" class="material-icons" type="button" value="chevron_right"
+                            onclick="nextButton()">
                         </div>
-                        <canvas id="graph2d"></canvas>
                       </div>
                     </div>
                     <div id="tableTab" class="container tab-pane fade px-0 h-100">
@@ -220,7 +216,7 @@
                                   placeholder="Input Description for the new Category to be added." required></textarea>
                               </div>
                               <div class="row pl-4 pt-4">
-                                <button type="submit" class="btn btn-primary" onclick="addCategory();">
+                                <button id="addCatg" type="submit" class="btn btn-primary" onclick="addCategory();">
                                   Add Category
                                 </button>
                               </div>
@@ -331,10 +327,91 @@
     </div>
   </div>
 
+  <div class="open-button" onclick="openForm()"><i class="material-icons">
+message
+</i></div>
+
+  <div class="chat-popup" id="myForm">
+    <div class="card-header">
+      
+      <div class="input-group">
+        <div id="peopleIcon">
+          <i class="material-icons">people</i>
+        </div>
+        <input type="text" placeholder="Search..." name="" class="form-control search">
+        <div class="input-group-prepend">
+          <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body contacts_body">
+      <ui class="contacts">
+      <li class="active">
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+            <span class="online_icon"></span>
+          </div>
+          <div class="user_info">
+            <span>Khalid</span>
+            <p>Kalid is online</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+            <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
+            <span class="online_icon offline"></span>
+          </div>
+          <div class="user_info">
+            <span>Taherah Big</span>
+            <p>Taherah left 7 mins ago</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+            <img src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg" class="rounded-circle user_img">
+            <span class="online_icon"></span>
+          </div>
+          <div class="user_info">
+            <span>Sami Rafi</span>
+            <p>Sami is online</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+            <img src="http://profilepicturesdp.com/wp-content/uploads/2018/07/sweet-girl-profile-pictures-9.jpg" class="rounded-circle user_img">
+            <span class="online_icon offline"></span>
+          </div>
+          <div class="user_info">
+            <span>Nargis Hawa</span>
+            <p>Nargis left 30 mins ago</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+            <img src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg" class="rounded-circle user_img">
+            <span class="online_icon offline"></span>
+          </div>
+          <div class="user_info">
+            <span>Rashid Samim</span>
+            <p>Rashid left 50 mins ago</p>
+          </div>
+        </div>
+      </li>
+      </ui>
+    </div>     
+  </div>
+
   <!-- Bootstrap core JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -381,6 +458,8 @@
   <script type="text/javascript" src="js/graph.js"></script>
   <script type="text/javascript" src="js/graph2d.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/chat.js"></script>
+
 
   <!-- Page Chart plugin -->
   <script>

@@ -2,6 +2,7 @@
 var data = null;
 var graph = null;
 var reports = [];
+var notif = false;
 var categoriesCount = [];
 var groupsCount = [];
 var myPieChart = null;
@@ -12,6 +13,8 @@ var pieColors = [];
 var loaded = false;
 var csvData = [];
 var reportSelected = {};
+var maxZvalue = 0;
+
 
 //2D Graph Globals
 var barGraph = null;
@@ -22,15 +25,16 @@ var maxCategoryCount = 0;
 var maxGroupCount = 0;
 
 function clearValues() {
-  categoriesCount = [];
-  groupsCount = [];
-  categories = [];
-  groups = [];
-  reports = [];
-  groupsCount = [];
-  colors = [];
-  pieColors = [];
-  return; 
+    categoriesCount = [];
+    groupsCount = [];
+    categories = [];
+    groups = [];
+    reports = [];
+    groupsCount = [];
+    colors = [];
+    pieColors = [];
+    notif = false;
+    return;
 }
 
 //Array initializations
@@ -44,28 +48,28 @@ function initializeCounts() {
     }
 }
 
-function initArray(){
-    for(let i=0; i<groups.length; i++){
+function initArray() {
+    for (let i = 0; i < groups.length; i++) {
         byGroupCount[i] = [];
     }
 
-    for(let i=0; i<categories.length; i++){
+    for (let i = 0; i < categories.length; i++) {
         byCategoryCount[i] = [];
     }
 
-    for(let i=0; i<categories.length; i++){
-        for(let j=0; j<groups.length; j++){
+    for (let i = 0; i < categories.length; i++) {
+        for (let j = 0; j < groups.length; j++) {
             byCategoryCount[i][j] = 0;
         }
     }
 
-    for(let i=0; i<groups.length; i++){
-        for(let j=0; j<categories.length; j++){
+    for (let i = 0; i < groups.length; i++) {
+        for (let j = 0; j < categories.length; j++) {
             byGroupCount[i][j] = 0;
         }
     }
 }
 
-function initSearchValue(){
+function initSearchValue() {
     search = parseInt(document.getElementById("search").value);
 }

@@ -1,93 +1,3 @@
-var data = null;
-var graph = null;
-var reports = [];
-var categoriesCount = [];
-var groupsCount = [];
-var myPieChart = null;
-var categories = [];
-var groups = [];
-var colors = [];
-var pieColors = [];
-var loaded = false;
-var csvData = [];
-var reportSelected = {};
-var notif = false;
-
-function clearValues() {
-  categoriesCount = [];
-  groupsCount = [];
-  categories = [];
-  groups = [];
-  reports = [];
-  groupsCount = [];
-  colors = [];
-  pieColors = [];
-}
-
-async function getReports() {
-  clearValues();
-
-  await db
-    .collection("reports")
-    .orderBy("created", "desc")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        reports.push(doc.data());
-      });
-    });
-
-  await db
-    .collection("categories")
-    .orderBy("id")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        categories.push(doc.data().name);
-      });
-    });
-
-  await db
-    .collection("groups")
-    .orderBy("id")
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        groups.push(doc.data().name);
-      });
-    });
-
-  initializeCounts();
-
-  for (let i = 0; i < reports.length; i++) {
-    for (let j = 0; j < categories.length; j++) {
-      if (reports[i].category == categories[j]) {
-        categoriesCount[j] += 1;
-      }
-    }
-
-    for (let k = 0; k < groups.length; k++) {
-      if (reports[i].group - 1 == k) {
-        groupsCount[k] += 1;
-      }
-    }
-  }
-
-  initArray();
-  byGroup();
-  byCategory();
-  findMax();
-}
-
-function initializeCounts() {
-  for (let i = 0; i < categories.length; i++) {
-    categoriesCount[i] = 0;
-  }
-  for (let i = 0; i < groups.length; i++) {
-    groupsCount[i] = 0;
-  }
-}
-
 function getData(x, y) {
   let count = 0;
   for (let i = 0; i < reports.length; i++) {
@@ -108,6 +18,9 @@ async function loadData(colorBy) {
   for (let i = 0; i < axisMax; i += axisStep) {
     for (let j = 0; j < yAxisMax; j += axisStep) {
       z = getData(i, j);
+      
+      maxZvalue = z > maxZvalue ? z : maxZvalue;
+
       color = colorBy == 1 ? colors[i] : colors[j];
       dataArray.push({
         x: i,
@@ -148,6 +61,8 @@ function generateColors(sortBy) {
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
   // specify options
+  maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
+  
   var options = {
     height: "100%",
     width: "100%",
@@ -158,18 +73,18 @@ async function drawVisualization(data) {
     animationPreload: true,
     axisFontType: "arial",
     axisFontSize: 26,
-    xLabel: "    Category    ", //Categories
-    yLabel: "    Group    ", //Groups
-    zLabel: "  Number  ", //Number
+    xLabel: "Category", //Categories
+    yLabel: "Group", //Groups
+    zLabel: "Number", //Number
     xBarWidth: 0.5,
     yBarWidth: 0.5,
     rotateAxisLabels: true,
     xCenter: "45%",
-    yCenter: "34%",
+    yCenter: "50%",
     xStep: 1,
     yStep: 1,
-    zStep: 5,
     zMin: 0,
+    zMax: maxZvalue,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z
@@ -211,49 +126,14 @@ async function drawVisualization(data) {
   var container = document.getElementById("mygraph");
   graph = new vis.Graph3d(container, data, options);
 
-  graph.setCameraPosition({ horizontal: 1.2, vertical: 0.3, distance: 2.3 }); // restore camera position
-}
-
-function notifyReport(report) {
-  PNotify.info({
-    title: "New Report",
-    text:
-      "Username: " +
-      report.data().username +
-      " Category: " +
-      report.data().category +
-      " Group: " +
-      report.data().group +
-      " " +
-      report
-        .data()
-        .created.toDate()
-        .toLocaleString(),
-    delay: 3000,
-    modules: {
-      Buttons: {
-        closer: true,
-        closerHover: true,
-        sticker: false
-      },
-      Desktop: {
-        desktop: true,
-        fallback: true,
-        icon: null
-      },
-      Mobile: {
-        swipeDismiss: true,
-        styling: true
-      }
-    }
-  });
+  graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
 }
 
 async function reportsTable() {
 
   $('#allReports div').html("");
   $('#notifDropdown').html('<i class="material-icons">notifications</i>')
-  $('#notifItem').html('<div class="dropdown-item py-0"><div class="row"><p class="col-12 m-0 text-success">All reports are read.</p></div><hr></div>')
+  $('#notifItem').html('<div class="dropdown-item py-0"><hr><div class="row"><p class="col-12 m-0 text-success p-0">All reports are read.</p></div><hr></div>')
 
   let cat = {};
   let group = {};
@@ -353,11 +233,11 @@ async function reportsTable() {
     if (report.read === false) {
       notif = true;
       if (ctr === 0) {
-        $('#notifItem').html('');
+        $('#notifItem').html('<div class="px-4 py-0"><hr class="m-2 mb-3"></div>');
       }
       ctr += 1;
-      $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i>')
-      $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0 text-right"> date: ' + report.created.toDate().toLocaleString("en-US") + '</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr></div>')
+      $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i><span class="badge badge-pill badge-danger p-1">' + ctr + '</span>')
+      $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0"> (' + report.created.toDate().toLocaleString("en-US") + ')</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr class="mt-1"></div>')
     }
   });
   if (notif === false) {

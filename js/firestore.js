@@ -74,9 +74,30 @@ async function fileUpload(file_data, reportData) {
     });
 
 }
+function disableButtons(){
+    var sendButton = document.getElementById('sendButton');
+    var quickReport = document.getElementById('quickreport');
+    sendButton.classList.remove("btn-success");
+    sendButton.classList.add("btn-secondary", "disabled");
+    quickReport.classList.remove("btn-primary");
+    quickReport.classList.add("btn-secondary", "disabled");
+}
+
+function enableButtons(){
+    var sendButton = document.getElementById('sendButton');
+    var quickReport = document.getElementById('quickreport');
+    sendButton.classList.remove("btn-secondary", "disabled");
+    sendButton.classList.add("btn-success");
+    quickReport.classList.remove("btn-secondary", "disabled");
+    quickReport.classList.add("btn-primary");
+}
 
 async function storeData(e, skip) {
     e.preventDefault();
+    var sendButton = document.getElementById('sendButton');
+    var quickReport = document.getElementById('quickreport');
+    if(sendButton.classList.contains("disabled") || quickReport.classList.contains("disabled"))
+        return;
     category = sessionStorage.getItem("category");
     username = sessionStorage.getItem("isAnonymous") ? "anonymous" : sessionStorage.getItem("username");
     group = sessionStorage.getItem("group");
@@ -88,6 +109,7 @@ async function storeData(e, skip) {
     var read = false;
     var reportData = { category, username, group, created, dateInfo, personInfo, otherDetails, attachFile, read }
     if (!skip) {
+        disableButtons();
         reportData.dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
         reportData.personInfo = $("input[name='person']").is(':checked') ? $("input[name='person']:checked").val() : "NA";
         reportData.otherDetails = $.trim($("#comment").val());
@@ -95,8 +117,11 @@ async function storeData(e, skip) {
             console.log('in');
             file_data = $("#fileInput").prop("files")[0];
             fileUpload(file_data, reportData);
+        }else{
+            sendReport(reportData);
         }
     } else {
+        disableButtons();
         console.log("out");
         sendReport(reportData);
     }
@@ -118,7 +143,8 @@ async function sendReport(reportData) {
         .then(function () {
             console.log("Document successfully written!");
             sessionStorage.removeItem("category");
-            $('#successModal').modal('show')
+            $('#successModal').modal('show');
+            enableButtons();
         })
         .catch(function (error) {
             console.error("Error writing document: ", error);
@@ -134,12 +160,12 @@ function getCategory(id) {
 async function logIn(e) {
     var anon = false;
     if (e == 0) {
-        var username = document.getElementById("usernameanon").value;
+        var username = document.getElementById("usernameanon").value.trim();
         var password = document.getElementById("passwordanon").value;
         anon = true;
     } else {
         e.preventDefault();
-        var username = document.getElementById("username").value;
+        var username = document.getElementById("username").value.trim();
         var password = document.getElementById("password").value;
     }
     docs = []

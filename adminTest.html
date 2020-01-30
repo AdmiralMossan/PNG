@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <script>
     if (!sessionStorage.getItem("username"))
-      location.href = "/Login.html";
+      location.href = "/login.html";
     if (sessionStorage.getItem("userType") == 2)
       location.href = "/403.html";
   </script>
@@ -21,6 +21,9 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
   <!-- Custom fonts for this template-->
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -42,21 +45,35 @@
 
         <!-- Nav Heading -->
         <div class="navbar-brand">
-          <h1 class="h3 mb-0 text-gray-800">iREPORT</h1>
+          <h1 class="h3 mb-0 text-gray-800" id="brand">iREPORT</h1>
         </div>
 
         <!-- Nav Item - User Information -->
-        <div class="ml-auto">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <h3 class="mr-2 d-none d-inline text-gray-600 ">Admin</h3>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Logout
+        <div class="ml-auto d-flex">
+          <div class="my-auto">
+            <a class="my-auto btn dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">
+                notifications
+              </i>
             </a>
+            <!-- Dropdown - Notif Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="notifDropdown"
+              id="notifItem">
+            </div>
+          </div>
+          <div>
+            <a class="my-auto btn dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <h3 class="mr-2 d-none d-inline text-gray-600 ">Admin</h3>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Logout
+              </a>
+            </div>
           </div>
         </div>
 
@@ -66,8 +83,8 @@
       <!-- Begin Page Content -->
       <div id="container">
         <!-- Stats Card -->
-        <div id="stats-container" class="row w-100 pb-4">
-          <div id="card1" class="stats-card">
+        <div id="stats-container" class="row w-100 pb-4 justify-content-center">
+          <div id="card1" class="stats-card ">
             <div class="card shadow h-100">
               <!-- Card Header - Dropdown -->
               <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
@@ -106,9 +123,8 @@
               </div>
             </div>
           </div>
-          <div id="card4" class="stats-card row mx-auto" style="width:20rem;">
+          <!-- <div id="card4" class="stats-card row mx-auto" style="width:20rem;">
             <div class="card shadow h-100 ">
-              <!-- Card Header - Dropdown -->
               <div class="card-header bg-custom d-flex flex-row align-items-center">
                 <h6 class="m-0 font-weight-bold text-uppercase text-primary m-auto">Latest Reports</h6>
               </div>
@@ -118,13 +134,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div id="charts-container" class="row">
-          <div class="col-12 col-md-8 p-0 mb-4 mb-md-0">
+        <div id="charts-container" class="row mx-0">
+          <div class="col-12 col-md-8 p-0 mb-4 mb-md-0 h-100">
             <!-- Bar Chart -->
             <div id="bar-container">
-              <div class="card shadow mb-0 h-100 mx-2 mx-md-4">
+              <div class="main-card card shadow mx-2 mx-md-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header bg-custom py-2 d-flex flex-row align-items-center justify-content-between">
                   <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports</h5>
@@ -149,33 +165,37 @@
                   </ul>
 
                   <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div id="graph3d" class="container tab-pane active px-0">
-                      <div id="mygraph"></div>
+                  <div class="tab-content reportstab">
+                    <div id="graph3d" class="container tab-pane active px-0 h-100">
+                      <div id="mygraph" class="h-100"></div>
                     </div>
-                    <div id="bargraph" class="container tab-pane fade px-0">
-                      <div class="row">
-                        <div id="buttons" class="p-2 row">
-                          <input id="search" type="text" size="15" style="text-align: left;" placeholder="Search" value="1"
-                            onkeypress="searchField(this)">
-                          <input id="prev" class="material-icons" type="button" value="chevron_left"
-                            onclick="prevButton()" disabled="true">
-                          <input id="next" class="material-icons" type="button" value="chevron_right"
-                            onclick="nextButton()">
+                    <div id="bargraph" class="container tab-pane fade px-0 h-100">
+                      <div class="barContainer">
+                        <div class="row justify-content-center">
+                          <div id="buttons" class="p-2 row">
+                            <label id="searchBoxLabel" for="searchBox"></label>
+                            <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
+                              onkeypress="searchBoxField()" onfocus="this.value=''">
+                            <input id="searchButton" class="material-icons" type="button" value="search"
+                            onclick="searchBoxField()">
+                            <input id="prev" class="material-icons" type="button" value="chevron_left"
+                              onclick="prevButton()" disabled="true">
+                            <input id="search" type="text" hidden size="1" disabled style="text-align: center;" placeholder="Search" value="1">
+                            <input id="next" class="material-icons" type="button" value="chevron_right"
+                              onclick="nextButton()">
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <canvas id="graph2d" class="w-100 h-100"></canvas>
+                        <canvas id="graph2d"></canvas>
                       </div>
                     </div>
-                    <div id="tableTab" class="container tab-pane fade px-0">
+                    <div id="tableTab" class="container tab-pane fade px-0 h-100">
                       <div id="allReports" class="pt-4">
-                        <div class="d-flex justify-content-center align-items-center w-90">
+                        <div class="d-flex justify-content-center align-items-center w-90 h-100">
                         </div>
                       </div>
                     </div>
                     <!-- Add Category Tab -->
-                    <div id="addCategory" class="container tab-pane fade px-0">
+                    <div id="addCategory" class="container tab-pane fade px-0 reportstab">
                       <div id="addCategoryContainer" class="pt-4 px-2 w-100">
                         <div class="row pl-4 w-100">
                           <div class="col">
@@ -197,8 +217,8 @@
                               <div class="row pl-4 w-100">
                                 <label for="catdesc" class="h6">Category Description:</label>
                               </div>
-                              <div class="form-row row pl-3 h-100 w-75">
-                                <textarea class="w-100" id="catdesc"
+                              <div class="form-row row pl-3 w-75">
+                                <textarea class="w-100" rows="3" style="resize: none;" id="catdesc"
                                   placeholder="Input Description for the new Category to be added." required></textarea>
                               </div>
                               <div class="row pl-4 pt-4">
@@ -218,10 +238,10 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-4 p-0">
+          <div class="col-12 col-md-4 p-0 h-100">
             <!-- Pie Chart -->
-            <div id="pie-container" class="mx-2 mb-4">
-              <div class="card shadow mb-2 h-100">
+            <div id="pie-container" class="mx-2">
+              <div class="main-card card shadow mb-2 mb-md-0">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex bg-custom flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary ">
@@ -280,10 +300,11 @@
           <ul class="list-unstyled">
             <li id="sgroup">Group: </li>
             <li id="scategory">Category: </li>
-            <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">Occurence:</li>
+            <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">Occurance:
+            </li>
             <li id="sotherDetails">Other Details: </li>
             <li id="spersonInfo">Subject: </li>
-            <li id="sattachment"></li>
+            <li id="sattachment">Link to attachment: </li>
           </ul>
         </div>
         <div class="modal-footer">
@@ -305,8 +326,8 @@
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal" >Cancel</button>
-          <button class="btn btn-primary"  onclick="logOut()" >Logout</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" onclick="logOut()">Logout</button>
         </div>
       </div>
     </div>
@@ -314,6 +335,8 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -331,6 +354,7 @@
   <!-- Firebase core Javascript-->
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
   <script src="js/firestore.js"> </script>
   <!-- PNotify Javascript-->
   <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>

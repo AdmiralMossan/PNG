@@ -4,10 +4,12 @@ window.addEventListener("load", async () => {
   await reportsTable();
   generateColors(1);
 
+  initSearchValue();
   loadData(1).then(function () {
     drawVisualization(data);
     drawPie(1);
     drawVisualization2d(search, 1);
+    $('#searchBoxLabel').text("Search by Category: ");
   });
 
   $("#reportCount").text(reports.length);
@@ -19,8 +21,8 @@ window.addEventListener("load", async () => {
       drawPie(1);
       search = 1;
       document.getElementById("search").value = search.toString();
-      $('#next').attr('disabled', false);
-      $('#prev').attr('disabled', true);
+      buttonEnabler(search);
+      $('#searchBoxLabel').text("Search by Category: ");
       drawVisualization2d(search, 1);
     });
   });
@@ -32,19 +34,19 @@ window.addEventListener("load", async () => {
       drawPie(2);
       search = 1;
       document.getElementById("search").value = search.toString();
-      $('#next').attr('disabled', false);
-      $('#prev').attr('disabled', true);
+      buttonEnabler(search);
+      $('#searchBoxLabel').text("Search by Group: ");
       drawVisualization2d(search, 2);
     });
   });
-  
+
 
   await db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
     if (loaded) {
       querySnapshot.docChanges().forEach(async function (change) {
         if (change.type === "added" || change.type === "modified") {
           let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-          await clearValues(); 
+          await clearValues();
           await getReports();
           generateColors(displayBy);
 
@@ -52,10 +54,10 @@ window.addEventListener("load", async () => {
           loadData(displayBy).then(function () {
             if (change.type === "added") {
               notifyReport(querySnapshot.docs[0]);
+              drawVisualization(data);
+              drawPie(displayBy);
+              drawVisualization2d(search, displayBy);
             }
-            drawVisualization(data);
-            drawPie(displayBy);
-            drawVisualization2d(search, displayBy);
             reportsTable();
           });
           return;
@@ -66,7 +68,5 @@ window.addEventListener("load", async () => {
       loaded = true;
     }
   });
-
-  initSearchValue();
 
 });

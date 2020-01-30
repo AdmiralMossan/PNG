@@ -10,6 +10,7 @@ var colors = [];
 var pieColors = [];
 var loaded = false;
 var csvData = [];
+var notif = false;
 
 function clearValues() {
   categoriesCount = [];
@@ -100,7 +101,6 @@ async function loadData(colorBy) {
   var axisMax = steps;
   var yAxisMax = groups.length;
   var axisStep = axisMax / steps;
-  console.log(steps);
   var z = 0;
 
   dataArray = [];
@@ -148,6 +148,7 @@ function generateColors(sortBy) {
 async function drawVisualization(data) {
   // specify options
   var options = {
+    height: "100%",
     width: "100%",
     style: "bar-color",
     showPerspective: true,
@@ -155,7 +156,7 @@ async function drawVisualization(data) {
     showShadow: true,
     animationPreload: true,
     axisFontType: "arial",
-    axisFontSize: 30,
+    axisFontSize: 26,
     xLabel: "    Category    ", //Categories
     yLabel: "    Group    ", //Groups
     zLabel: "  Number  ", //Number
@@ -166,7 +167,8 @@ async function drawVisualization(data) {
     yCenter: "34%",
     xStep: 1,
     yStep: 1,
-    zStep: 1,
+    zStep: 5,
+    zMin: 0,
 
     tooltip: function (point) {
       // parameter point contains properties x, y, z
@@ -211,42 +213,12 @@ async function drawVisualization(data) {
   graph.setCameraPosition({ horizontal: 1.2, vertical: 0.3, distance: 2.3 }); // restore camera position
 }
 
-function notifyReport(report) {
-  PNotify.info({
-    title: "New Report",
-    text:
-      "Username: " +
-      report.data().username +
-      " Category: " +
-      report.data().category +
-      " Group: " +
-      report.data().group +
-      " " +
-      report
-        .data()
-        .created.toDate()
-        .toLocaleString(),
-    delay: 3000,
-    modules: {
-      Buttons: {
-        closer: true,
-        closerHover: true,
-        sticker: false
-      },
-      Desktop: {
-        desktop: true,
-        fallback: true,
-        icon: null
-      },
-      Mobile: {
-        swipeDismiss: true,
-        styling: true
-      }
-    }
-  });
-}
-
 async function reportsTable() {
+
+  $('#allReports div').html("");
+  $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+  $('#notifItem').html('<div class="dropdown-item py-0"><div class="row"><p class="col-12 m-0 text-success">All reports are read.</p></div><hr></div>')
+
   let cat = {};
   let group = {};
   let cCtr = {};
@@ -255,7 +227,7 @@ async function reportsTable() {
 
   //Add Head
   let head =
-    "<table id='reportsTable' class='table table-striped table-responsive' style='display:block;'>" +
+    "<table id='reportsTable' class='table table-striped table-responsive h-100' style='display:block;'>" +
     "<thead class='thead-inverse bg-custom text-custom'>" +
     "<tr>" +
     "<th style='width:4em; text-align:center;'>User</th>" +
@@ -284,7 +256,6 @@ async function reportsTable() {
   let body2 = '<tbody class="scroll-secondary">';
   let body = '<tbody class="scroll-secondary">';
   reports.forEach(function (report) {
-    ctr += 1;
     if (typeof cCtr[report.category] === "undefined") {
       cCtr[report.category] = 0;
     } else {
@@ -311,7 +282,7 @@ async function reportsTable() {
       "</td>" +
       "<td style='width:12em;display:flex;justify-content:space-between;'>" +
       report.created.toDate().toLocaleString("en-US") +
-      "</td><td style='width:0.5em;'></td>" +
+      "</td><td style='width:0.5em;'><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
       "</tr>";
     if (ctr <= 5) {
       body2 +=
@@ -343,7 +314,20 @@ async function reportsTable() {
         ":" +
         date.getMinutes()
     });
+    if (report.read === false) {
+      notif = true;
+      if (ctr === 0) {
+        $('#notifItem').html('');
+      }
+      ctr += 1;
+      $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i>')
+      $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0 text-right"> date: ' + report.created.toDate().toLocaleString("en-US") + '</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr></div>')
+    }
   });
+  if (notif === false) {
+
+    $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+  }
 
   $.each(cCtr, function (key, value) {
     if (cat["value"] < value || typeof cat["value"] === "undefined") {
@@ -363,214 +347,4 @@ async function reportsTable() {
   $("#groupCount").text(group["key"]);
   $("#reportCount").text(reports.length);
   $("#latestReport").append(head2 + body2 + "</tbody></table>");
-}
-
-window.addEventListener("load", async () => {
-  isloaded = true;
-  await getReports();
-  await reportsTable();
-  generateColors(1);
-
-  loadData(1).then(function () {
-    drawVisualization(data);
-    drawPie(1);
-    drawVisualization2d(search, 1);
-  });
-
-  $("#reportCount").text(reports.length);
-
-  $('#category').change(function () {
-    generateColors(1);
-    loadData(1).then(function () {
-      drawVisualization(data);
-      drawPie(1);
-      search = 1;
-      document.getElementById("search").value = search.toString();
-      $('#next').attr('disabled', false);
-      $('#prev').attr('disabled', true);
-      drawVisualization2d(search, 1);
-    });
-  });
-
-  $('#group').change(function () {
-    generateColors(2);
-    loadData(2).then(function () {
-      drawVisualization(data);
-      drawPie(2);
-      search = 1;
-      document.getElementById("search").value = search.toString();
-      $('#next').attr('disabled', false);
-      $('#prev').attr('disabled', true);
-      drawVisualization2d(search, 2);
-    });
-  });
-
-  db.collection("reports").orderBy("created", "desc").onSnapshot(async function (querySnapshot) {
-    if (loaded) {
-      querySnapshot.docChanges().forEach(async function (change) {
-        if (change.type === "added") {
-          let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-          await getReports();
-          generateColors(displayBy);
-
-          $("#reportCount").text(reports.length);
-          loadData(displayBy).then(function () {
-            notifyReport(querySnapshot.docs[0]);
-            drawVisualization(data);
-            drawPie(displayBy);
-            drawVisualization2d(search, displayBy);
-          });
-        }
-      });
-
-    } else {
-      loaded = true;
-    }
-  });
-
-  initSearchValue();
-});
-function convertToCSV(objArray) {
-  var array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
-  var str = "";
-
-  for (var i = 0; i < array.length; i++) {
-    var line = "";
-    for (var index in array[i]) {
-      if (line != "") line += ",";
-
-      line += array[i][index];
-    }
-
-    str += line + "\r\n";
-  }
-
-  return str;
-}
-
-function exportCSVFile(headers, items, fileTitle) {
-  if (headers) {
-    items.unshift(headers);
-  }
-
-  // Convert Object to JSON
-  var jsonObject = JSON.stringify(items);
-
-  var csv = this.convertToCSV(jsonObject);
-
-  var exportedFilenmae = fileTitle + ".csv" || "export.csv";
-
-  var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  if (navigator.msSaveBlob) {
-    // IE 10+
-    navigator.msSaveBlob(blob, exportedFilenmae);
-  } else {
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-      // feature detection
-      // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
-      link.setAttribute("download", exportedFilenmae);
-      link.style.visibility = "hidden";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }
-}
-
-function download() {
-  let headers = {
-    user: "Username",
-    group: "Group",
-    category: "Category",
-    date: "Date"
-  };
-  let csvDataFormated = [];
-  // format the data
-  csvData.forEach(item => {
-    csvDataFormated.push({
-      user: item.user,
-      group: item.group,
-      category: item.category,
-      date: item.date
-    });
-  });
-
-  let date = new Date(Date.now());
-  let formatedDate =
-    date.getMonth() +
-    1 +
-    "-" +
-    date.getDay() +
-    "-" +
-    date.getFullYear() +
-    " " +
-    date.getHours() +
-    ":" +
-    date.getMinutes();
-  var fileTitle = "reports(" + formatedDate + ")";
-
-  exportCSVFile(headers, csvDataFormated, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
-}
-
-async function addCategory() {
-  let name = document.getElementById("catName").value;
-  let desc = document.getElementById("catdesc").value;
-  if (name == "" || desc == "")
-    return
-  let size = 0;
-
-  await db.collection("ids").get().then(function (querySnapshot) {
-    size = querySnapshot.docs[0].data().categoryID + 1;
-    querySnapshot.forEach(function (doc) {
-      let newID = doc.data().categoryID + 1
-      db.collection("ids").doc(doc.id).update({
-        categoryID: newID
-      });
-    });
-  });
-
-  db.collection("categories").doc().set({
-    id: size,
-    name: name,
-    description: desc
-  })
-    .then(async function () {
-      console.log("Document successfully written!");
-      sessionStorage.removeItem("category");
-      PNotify.success({
-        title: "Successfully added Category",
-        delay: 2000,
-        modules: {
-          Buttons: {
-            closer: true,
-            closerHover: true,
-            sticker: false
-          },
-          Mobile: {
-            swipeDismiss: true,
-            styling: true
-          }
-        }
-      });
-      let displayBy = $('input[name="inlineRadioOptions"]:checked').val();
-      await getReports();
-      generateColors(displayBy);
-
-      $("#reportCount").text(reports.length);
-      loadData(displayBy).then(function () {
-        drawVisualization(data);
-        drawPie(displayBy);
-        drawVisualization2d(search, displayBy);
-      });
-      document.getElementById("catName").value = "";
-      document.getElementById("catdesc").value = "";
-
-    })
-    .catch(function (error) {
-      console.error("Error writing document: ", error);
-    });
-
 }

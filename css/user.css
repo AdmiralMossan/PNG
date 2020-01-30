@@ -12,6 +12,11 @@ body {
     min-width: 275px;
 }
 
+#pagetitle{
+    font-size: 40px;
+    color: #002db3;
+}
+
 #maincontainer {
     background: white;
     box-shadow: 10px 10px 5px grey;

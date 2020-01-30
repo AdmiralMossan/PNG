@@ -100,15 +100,32 @@ $(document).ready(function() {
     });
 });
 
+function findString(value){
+    let displayData = [];
+    
+    displayData = categories.slice();
+    
+    for(i = 0; i < displayData.length ;i++){
+        displayData[i] = displayData[i].toLowerCase();
+    }
+
+    displayData.forEach(function(a){
+        if (typeof(a) === 'string' && a.indexOf(value)>-1) {
+            let index = displayData.indexOf(value);
+            let element = document.getElementById("category"+index);
+            element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+        }
+    });
+}
+
 function searchBoxField(){
+    let searchString = document.getElementById('searchBox').value;
+    
     $('#searchBox').autocomplete({
         source: categories
     });
     
-    var elmnt = document.getElementById("category0");
-    elmnt.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-    
     if(event.key === 'Enter' || event.type === 'click'){
-        
+        findString(searchString.toLowerCase());
     }
 }

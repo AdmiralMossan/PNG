@@ -8,12 +8,10 @@ async function getCategories(){
 
 function initializeButtons(){
     var Ctgcontainer = document.getElementById("categoryContainer"); 
-    var ctgDesc =  document.getElementById("ctgDesc"); 
-    var jBoxes = []
+    
     for(let i=0; i<categories.length; i++){
-        Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
-             <button type="button" id="category` + categories[i] + `" class="w-50 btn btn-secondary w-75 my-2 text-center"  style=" height: 120px;">
-             Category ` + categories[i] + `</button>
+        Ctgcontainer.innerHTML += `<div id="buttonRows" class="col-sm text-center px-0">
+             <button type="button" id="category` + i + `" class="w-50 btn btn-secondary w-75 my-2 text-center"  style=" height: 120px;">` + categories[i] + `</button>
            </div>`;
     }
 }
@@ -101,3 +99,16 @@ $(document).ready(function() {
         disableAll();
     });
 });
+
+function searchBoxField(){
+    $('#searchBox').autocomplete({
+        source: categories
+    });
+    
+    var elmnt = document.getElementById("category0");
+    elmnt.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    
+    if(event.key === 'Enter' || event.type === 'click'){
+        
+    }
+}

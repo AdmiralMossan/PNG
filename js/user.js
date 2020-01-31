@@ -26,8 +26,11 @@ async function getCategories(){
 }
 
 function initializeButtons(){
+    
     var Ctgcontainer = document.getElementById("categoryContainer"); 
+    
     Ctgcontainer.innerHTML = "";
+    
     for(let i=0; i<categories.length; i++){
         Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
              <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center"  style=" height: 120px;">
@@ -36,6 +39,7 @@ function initializeButtons(){
     }
 
     buttons = $("button[id^='category']");
+    
     for(let i=0; i<buttons.length; i++){
         let j = i==buttons.length - 1 ? 0 : i+1;
         buttons[i].onclick = function(){disabledButtons(i, buttons[j])};

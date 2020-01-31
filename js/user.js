@@ -127,6 +127,27 @@ function initializeCategoryArray(){
     }   
 }
 
+function sortAlphabeticalAscending(){
+    categories.sort();
+}
+
+function sortAlphabeticalDescending(){
+    categories.reverse();
+}
+
+function sortByVotesAscending(){
+    
+    categoryArray.sort(function(a, b){
+        return a[Object.keys(a)] - b[Object.keys(b)];
+    });
+
+    categories.length = 0;
+
+    for(let i = 0 ; i < categoryArray.length ; i++){
+        categories.push( Object.keys(categoryArray[i]) );
+    }
+}
+
 function sortByVotesDescending(){
     
     categoryArray.sort(function(a, b){
@@ -151,7 +172,7 @@ function countReports(locReps){
     }
 }
 
-function findString(value){
+function findCategory(value){
     let displayData = [];
     
     displayData = categories.slice();
@@ -177,6 +198,6 @@ function searchBoxField(){
     });
     
     if(event.key === 'Enter' || event.type === 'click'){
-        findString(searchString.toLowerCase());
+        findCategory(searchString.toLowerCase());
     }
 }

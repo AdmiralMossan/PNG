@@ -31,23 +31,22 @@
 <body>
   <!-- partial:index.partial.html -->
 
-  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top py-0 ">
-
+  <nav id="navbar" class="navbar navbar-expand shadow-sm navbar-light topbar mb-2 static-top pb-0">
     <!-- Nav Heading -->
     <div class="navbar-brand">
-      <h1 class="h3 mb-0 text-gray-800">Report Details</h1>
+      <h1 class="h3 mb-0 whitetext" style="font-family: sans-serif; font-weight: 400; line-height:33.6px; font-size: 28px;">Report Details</h1>
     </div>
 
     <!-- Nav Item - User Information -->
     <div class="ml-auto">
-      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+      <a class="nav-link dropdown-toggle whitetext" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <h3 id="userName" class="mr-2 d-none d-inline text-gray-600 ">User</h3>
+        <h3 id="userName" class="mr-2 d-none d-inline whitetext" style="font-family: sans-serif; font-weight: 400; line-height:33.6px; font-size: 28px;">User</h3>
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
           Logout
         </a>
       </div>
@@ -58,12 +57,12 @@
   <div class="content" id="maincontent">
     <!--content inner-->
     <div class="content__inner border py-4 bg-light rounded" id="maincontainer">
-      <div class="container overflow-hidden">
+      <div class="container">
         <!--multisteps-form-->
         <div class="multisteps-form">
           <div class="row">
             <!-- Left side -->
-            <div class="col-12 col-sm-7 m-auto">
+            <div class="col-sm-7 m-auto">
               <!--progress bar-->
               <div class="row">
                 <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">

@@ -1,9 +1,28 @@
 async function getCategories(){
-    await db.collection("categories").orderBy("name").get().then(function(querySnapshot){
+    let locReps = [];
+
+    await db
+        .collection("reports")
+        .orderBy("created", "desc")
+        .get()
+        .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            locReps.push(doc.data());
+        });
+    });
+
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
              categories.push(doc.data().name)
         });
     });
+
+    initializeCategoryArray();
+    countReports(locReps);
 }
 
 function initializeButtons(){
@@ -104,6 +123,37 @@ $(document).ready(function() {
         disableAll();
     });
 });
+
+function initializeCategoryArray(){
+
+    for(let i = 0 ; i < categories.length ; i++){
+        categoryArray.push({[categories[i]] : 0});
+    }   
+}
+
+function sortByVotesDescending(){
+    
+    categoryArray.sort(function(a, b){
+        return b[Object.keys(b)] - a[Object.keys(a)];
+    });
+
+    categories.length = 0;
+
+    for(let i = 0 ; i < categoryArray.length ; i++){
+        categories.push( Object.keys(categoryArray[i]) );
+    }
+}
+
+function countReports(locReps){
+
+    for(let i = 0 ; i < locReps.length ; i++){
+        for(let j = 0 ; j < categoryArray.length ; j++){
+            if( locReps[i].category == Object.keys(categoryArray[j]) ){
+                categoryArray[j][locReps[i].category] += 1;
+            }
+        }
+    }
+}
 
 function findString(value){
     let displayData = [];

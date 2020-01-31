@@ -25,15 +25,8 @@
   overflow-x: hidden;
 }
 .send-msg{
-  float: right;
   display: block;
-}
-
-.receive-msg .receive-msg-desc{
-	display: inline-block;
-}
-.receive-msg .receive-msg-desc p{
-	background: #c1c1c1;
+  float: right;
 }
 
 .message-box input{

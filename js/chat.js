@@ -171,21 +171,21 @@ function deleteMessage(id) {
 }
 
 // Template for messages.
-var SENDER_MESSAGE_TEMPLATE ='<div class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">' +
+var SENDER_MESSAGE_TEMPLATE ='<li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">' +
 '<p class="messageDisplay"></p>'+
-'</div>';
+'</li>';
 
 
 var RECEIVER_MESSAGE_TEMPLATE =
-'<div class="p-1 rounded mb-1">' +
+'<li class="p-1 rounded mb-1">' +
 '<div class="receive-msg">'+
-    '<div class="nameDisplay"></div>'
-    '<img src="http://nicesnippets.com/demo/image1.jpg">' +
+    '<div class="nameDisplay"></div>'+
+    // '<img src="http://nicesnippets.com/demo/image1.jpg">' +
     '<div class="receive-msg-desc text-center mt-1 ml-1 pl-2 pr-2">' +
        '<p class="messageDisplay pl-2 pr-2 rounded"></p>' +
     '</div>'+
 '</div>'+
-'</div>';
+'</li>';
 
 function createAndInsertMessage(id, timestamp, sender) {
     const container = document.createElement('div');

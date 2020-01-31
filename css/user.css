@@ -53,3 +53,8 @@ nav{
     padding-bottom: calc(.75 * var(--gutter));
     margin-bottom: calc(-.25 * var(--gutter));
 }
+
+#dropdownMenuButton{
+    color: white;
+    background-color:#BD9BFF;
+}

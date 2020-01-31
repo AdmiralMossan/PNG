@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/user.css" rel="stylesheet">
-
+    <link href="css/chat.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -66,14 +66,15 @@
             <p class="lead text-center">
               Create a new report by pressing one of the report categories and pressing the report button below.
             </p>
-            <div class="d-flex flex-column mx-auto min-vh-50 w-80 pb-2" style="max-width: 500px;">
-              <div class="d-flex col text-center align-middle justify-content-center">
+            <div class="d-flex flex-column mx-auto min-vh-50 w-100 pb-2" style="max-width: 500px;">
+              <div class="d-flex row text-center align-middle justify-content-center">
+                <div class="d-flex text-center">
                   <label id="searchBoxLabel" for="searchBox"></label>
                   <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
                     onkeypress="searchBoxField()" onfocus="this.value=''">
                   <input id="searchButton" class="material-icons" type="button" value="search"
                     onclick="searchBoxField()">
-
+                </div>
                   <div class="dropdown pl-4">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Sort Categories
@@ -149,5 +150,46 @@
         </div>
       </div>
     </div>
+
+    <div class="open-button" onclick="openForm(2)"><i class="material-icons">
+      message
+      </i></div>
+
+    <div class="chat-popup" id="messageBox">
+      <div class="card-header">
+        <div id="minimize" onclick="closeForm(2);">
+          <i class="material-icons">minimize</i>
+        </div>
+        <div class="input-group">
+          <div>
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png" class="rounded-circle user_img">
+          </div>
+          <div class="user_info">
+             <span id="user_name"> Admin </span>
+          </div>
+        </div>
+      </div>
+      <div id="messagesList">
+        <!-- <li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">
+          hiii
+        </li>
+        <li class="p-1 rounded mb-1">
+            <div class="receive-msg">
+                <img src="http://nicesnippets.com/demo/image1.jpg">
+                <div class="receive-msg-desc  text-center mt-1 ml-1 pl-2 pr-2">
+                    <p class="pl-2 pr-2 rounded">hello</p>
+                </div>
+            </div>
+        </li> -->
+      </div>
+      <div class="message-box ">
+        <form id="message-form" action="#" autocomplete="off">
+          <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />        
+          <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+        </form>
+    </div>
+    </div>
+
   </body>
+  <script src="js/chat.js"></script>
 </html>

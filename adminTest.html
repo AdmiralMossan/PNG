@@ -19,10 +19,9 @@
 
   <!-- Custom styles for this template-->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/chat.css" rel="stylesheet">
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- Custom fonts for this template-->
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -57,8 +56,8 @@
               </i>
             </a>
             <!-- Dropdown - Notif Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="notifDropdown"
-              id="notifItem">
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
+              aria-labelledby="notifDropdown" id="notifItem">
             </div>
           </div>
           <div>
@@ -68,6 +67,14 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addCategoryModal">
+                <i class="fas fa-plus-circle fa-sm fa-fw mr-2 text-gray-400"></i>
+                Add Category
+              </a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#manageUsers">
+                <i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>
+                Manage Users
+              </a>
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
@@ -82,7 +89,7 @@
       <!-- Begin Page Content -->
       <div id="container">
         <!-- Stats Card -->
-        <div id="stats-container" class="row w-100 pb-4 justify-content-center">
+        <div id="stats-container" class="row pb-4 justify-content-center">
           <div id="card1" class="stats-card ">
             <div class="card shadow h-100">
               <!-- Card Header - Dropdown -->
@@ -90,8 +97,8 @@
                 <h6 class="m-0 font-weight-bold text-uppercase text-primary">Most Reported Category</h6>
               </div>
               <div class="card-body p-0">
-                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                  <h3 id="categoryCount" class="text-danger"></h3>
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100 ">
+                  <h3 id="categoryCount" class="text-danger m-auto"></h3>
                 </div>
               </div>
             </div>
@@ -104,7 +111,7 @@
               </div>
               <div class="card-body p-0">
                 <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                  <h3 id="groupCount" class="text-danger"></h3>
+                  <h3 id="groupCount" class="text-danger m-auto"></h3>
                 </div>
               </div>
             </div>
@@ -117,7 +124,7 @@
               </div>
               <div class="card-body p-0">
                 <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                  <h3 id="reportCount" class="text-danger"></h3>
+                  <h3 id="reportCount" class="text-danger m-auto"></h3>
                 </div>
               </div>
             </div>
@@ -135,32 +142,33 @@
             </div>
           </div> -->
         </div>
-        <div id="charts-container" class="row mx-0">
+        <div id="charts-container" class="row mx-0 justify-content-center">
           <div class="col-12 col-md-8 p-0 mb-4 mb-md-0 h-100">
             <!-- Bar Chart -->
-            <div id="bar-container">
-              <div class="main-card card shadow mx-2 mx-md-4">
+            <div id="bar-container" class="mx-2">
+              <div class="main-card card shadow">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header bg-custom py-2 d-flex flex-row align-items-center justify-content-between">
                   <h5 class="m-0 font-weight-bold text-primary text-uppercase">Reports</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body h-100 w-80 py-0">
+                <div class="card-body py-0" style="height: 90%;">
 
                   <!-- Nav tabs -->
-                  <ul class="nav nav-tabs" role="tablist">
+                  <ul class="nav nav-tabs" role="tablist" id="reportsTab">
                     <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#graph3d">3D Graph</a>
+                      <a class="nav-link active" data-toggle="tab" href="#graph3d"><i class="fas fa-cube"
+                          data-toggle="tooltip" data-placement="top" title="3d"></i></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#bargraph">Bar Graph</a>
+                      <a class="nav-link" data-toggle="tab" href="#bargraph"><i class="far fa-chart-bar"
+                          data-toggle="tooltip" data-placement="top" title="Bar"></i></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#tableTab">Table</a>
+                      <a class="nav-link" data-toggle="tab" href="#tableTab"><i class="fas fa-table"
+                          data-toggle="tooltip" data-placement="top" title="Table"></i></a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#addCategory">Add Category</a>
-                    </li>
+
                   </ul>
 
                   <!-- Tab panes -->
@@ -170,67 +178,25 @@
                     </div>
                     <div id="bargraph" class="container tab-pane fade px-0 h-100">
                       <div class="barContainer">
-                        <div class="row justify-content-center">
-                          <div id="buttons" class="p-2 row">
-                            <label id="searchBoxLabel" for="searchBox"></label>
-                            <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
-                              onkeypress="searchBoxField()" onfocus="this.value=''">
-                            <input id="searchButton" class="material-icons" type="button" value="search"
-                            onclick="searchBoxField()">
-                            <input id="prev" class="material-icons" type="button" value="chevron_left"
-                              onclick="prevButton()" disabled="true">
-                            <input id="search" type="text" hidden size="1" disabled style="text-align: center;" placeholder="Search" value="1">
-                            <input id="next" class="material-icons" type="button" value="chevron_right"
-                              onclick="nextButton()">
-                          </div>
+                        <canvas id="graph2d" class=""></canvas>
+                      </div>
+                      <div class="row">
+                        <div id="buttons" class="mx-auto p-2 row">
+                          <input id="prev" class="material-icons" type="button" value="chevron_left"
+                            onclick="prevButton()" disabled="true">
+                          <input id="search" type="text" size="1" style="text-align: center;" value="1"
+                            onkeypress="searchField(this)">
+                          <input id="next" class="material-icons" type="button" value="chevron_right"
+                            onclick="nextButton()">
                         </div>
-                        <canvas id="graph2d"></canvas>
                       </div>
                     </div>
                     <div id="tableTab" class="container tab-pane fade px-0 h-100">
                       <div id="allReports" class="pt-4">
-                        <div class="d-flex justify-content-center align-items-center w-90 h-100">
+                        <div class="d-flex justify-content-center align-items-center h-100">
                         </div>
                       </div>
                     </div>
-                    <!-- Add Category Tab -->
-                    <div id="addCategory" class="container tab-pane fade px-0 reportstab">
-                      <div id="addCategoryContainer" class="pt-4 px-2 w-100">
-                        <div class="row pl-4 w-100">
-                          <div class="col">
-                            <div class="row">
-                              <h3 class="">Add Category</h3>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row pl-4 w-100">
-                          <div class="row w-100">
-                            <form action="" onsubmit="event.preventDefault();" class="w-100">
-                              <div class="row pl-4 pb-2">
-                                <label for="catName" class="h6">Category Name:</label>
-                              </div>
-                              <div class="row pl-4 pb-4">
-                                <input type="text" id="catName" aria-describedby="catname_extra"
-                                  placeholder="Category Name" required />
-                              </div>
-                              <div class="row pl-4 w-100">
-                                <label for="catdesc" class="h6">Category Description:</label>
-                              </div>
-                              <div class="form-row row pl-3 w-75">
-                                <textarea class="w-100" rows="3" style="resize: none;" id="catdesc"
-                                  placeholder="Input Description for the new Category to be added." required></textarea>
-                              </div>
-                              <div class="row pl-4 pt-4">
-                                <button type="submit" class="btn btn-primary" onclick="addCategory();">
-                                  Add Category
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
@@ -284,7 +250,7 @@
       arrow_upward
     </i>
   </a>
-  <!-- Modal -->
+  <!-- Report Detail Modal -->
   <div class="modal fade" id="reportDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -312,13 +278,64 @@
       </div>
     </div>
   </div>
+
+  <!-- Add Category Modal-->
+  <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="" onsubmit="event.preventDefault();" class="w-100">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Category</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row pl-4 w-100">
+              <div class="col">
+                <div class="row">
+                  <h3 class="">Add Category</h3>
+                </div>
+              </div>
+            </div>
+            <div class="row pl-4 w-100">
+              <div class="row w-100">
+                <div class="row pl-4 pb-2">
+                  <label for="catName" class="h6">Name:</label>
+                </div>
+                <div class="row pl-4 pb-4">
+                  <input type="text" id="catName" aria-describedby="catname_extra" placeholder="Category Name"
+                    required />
+                </div>
+                <div class="row pl-4 w-100">
+                  <label for="catdesc" class="h6">Category Description:</label>
+                </div>
+                <div class="form-row row pl-3 w-75">
+                  <textarea class="w-100" rows="3" style="resize: none;" id="catdesc"
+                    placeholder="Input Description for the new Category to be added." required></textarea>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" onclick="addCategory();">Add Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title">Ready to Leave?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -332,10 +349,73 @@
     </div>
   </div>
 
+  <div class="open-button" onclick="openForm(1)"><i class="material-icons">
+    message
+    </i></div>
+    
+      <div class="chat-popup" id="myForm">
+        <div class="card-header">
+          <div id="minimize" onclick="closeForm(1);">
+            <i class="material-icons">minimize</i>
+          </div>
+          <div class="input-group">
+            <div id="peopleIcon">
+              <i class="material-icons">people</i>
+            </div>
+            <input type="text" placeholder="Search..." name="" class="form-control search">
+            <div class="input-group-prepend">
+              <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body contacts_body">
+          <ui id="users" class="contacts">
+          </ui>
+        </div>     
+      </div>
+
+      <div class="chat-popup" id="messageBox">
+        <div class="card-header">
+          <div id="minimize" onclick="closeForm(1);">
+            <i class="material-icons">minimize</i>
+          </div>
+          <div onclick="backToContacts();" >
+            <i class="material-icons">keyboard_backspace</i>
+          </div>
+          <div class="input-group">
+            <div>
+              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png" class="rounded-circle user_img">
+            </div>
+            <div class="user_info">
+               <span id="user_name"></span>
+               <p id="user_group"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="messagesList">
+          <!-- <li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">
+            hiii
+          </li>
+          <li class="p-1 rounded mb-1">
+              <div class="receive-msg">
+                  <img src="http://nicesnippets.com/demo/image1.jpg">
+                  <div class="receive-msg-desc  text-center mt-1 ml-1 pl-2 pr-2">
+                      <p class="pl-2 pr-2 rounded">hello</p>
+                  </div>
+              </div>
+          </li> -->
+        </div>
+        <div class="message-box ">
+          <form id="message-form" action="#" autocomplete="off>
+            <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />        
+            <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+          </form>
+      </div>
+      </div>
+
   <!-- Bootstrap core JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -382,7 +462,7 @@
   <script type="text/javascript" src="js/graph.js"></script>
   <script type="text/javascript" src="js/graph2d.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-
+  <script type="text/javascript" src="js/chat.js"></script>
   <!-- Page Chart plugin -->
   <script>
     var ctx = document.getElementById('myPieChart').getContext('2d');

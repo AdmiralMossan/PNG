@@ -28,7 +28,7 @@ body:before {
   z-index: -1;
 	
 	display: block;
-	background-image: linear-gradient(180deg, #F5D1FF, white);
+	background-image: linear-gradient(180deg, #EFA4F6, white);
   color: #013F2A;
 }
 

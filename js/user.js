@@ -118,7 +118,7 @@ function findString(value){
         if (typeof(a) === 'string' && a.indexOf(value)>-1) {
             let index = displayData.indexOf(value);
             let element = document.getElementById("category"+index);
-            element.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+            element.scrollIntoView({behavior: "smooth", inline: "center"});
         }
     });
 }

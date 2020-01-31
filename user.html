@@ -66,14 +66,15 @@
             <p class="lead text-center">
               Create a new report by pressing one of the report categories and pressing the report button below.
             </p>
-            <div class="d-flex flex-column mx-auto min-vh-50 w-80 pb-2" style="max-width: 500px;">
-              <div class="d-flex col text-center align-middle justify-content-center">
+            <div class="d-flex flex-column mx-auto min-vh-50 w-100 pb-2" style="max-width: 500px;">
+              <div class="d-flex row text-center align-middle justify-content-center">
+                <div class="d-flex text-center">
                   <label id="searchBoxLabel" for="searchBox"></label>
                   <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
                     onkeypress="searchBoxField()" onfocus="this.value=''">
                   <input id="searchButton" class="material-icons" type="button" value="search"
                     onclick="searchBoxField()">
-
+                </div>
                   <div class="dropdown pl-4">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Sort Categories

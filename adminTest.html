@@ -349,13 +349,13 @@
     </div>
   </div>
 
-  <div class="open-button" onclick="openForm()"><i class="material-icons">
+  <div class="open-button" onclick="openForm(1)"><i class="material-icons">
     message
     </i></div>
     
       <div class="chat-popup" id="myForm">
         <div class="card-header">
-          <div id="minimize" onclick="closeForm();">
+          <div id="minimize" onclick="closeForm(1);">
             <i class="material-icons">minimize</i>
           </div>
           <div class="input-group">
@@ -376,7 +376,7 @@
 
       <div class="chat-popup" id="messageBox">
         <div class="card-header">
-          <div id="minimize" onclick="closeForm();">
+          <div id="minimize" onclick="closeForm(1);">
             <i class="material-icons">minimize</i>
           </div>
           <div onclick="backToContacts();" >
@@ -388,13 +388,13 @@
             </div>
             <div class="user_info">
                <span id="user_name"></span>
-               <p id = "user_group"></p>
+               <p id="user_group"></p>
             </div>
           </div>
         </div>
 
-        <ul id="messagesList">
-          <li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">
+        <div id="messagesList">
+          <!-- <li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">
             hiii
           </li>
           <li class="p-1 rounded mb-1">
@@ -404,13 +404,13 @@
                       <p class="pl-2 pr-2 rounded">hello</p>
                   </div>
               </div>
-          </li>
-        </ul>
+          </li> -->
+        </div>
         <div class="message-box ">
-          <input type="text" class="pl-0 pr-0" placeholder="Type a message..." />
-          <div class="tools">
-            <i class="material-icons">send</i>
-          </div>
+          <form id="message-form" action="#">
+            <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />        
+            <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+          </form>
       </div>
       </div>
 

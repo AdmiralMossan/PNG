@@ -21,19 +21,14 @@
 #messagesList{
   height: 25vh;
   border-bottom: 1px darkgray solid;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .send-msg{
-	float: right;
+  float: right;
+  display: block;
 }
 
-.receive-msg img{
-	border-radius: 100%;
-	height: 30px;
-	width: 12%;
-}
-.receive-msg-img{
-	display: inline;
-}
 .receive-msg .receive-msg-desc{
 	display: inline-block;
 }
@@ -50,12 +45,24 @@
 .message-box input:focus{
 	outline: none;
 }
-.tools i{
-	color: #a1a1a1;
+.message-box button{
+  color: #428BCA;
 	cursor: pointer;
 	font-size: 20px;
   margin-right: 6px;
-  float: right
+  position: absolute;
+  border: none; 
+  outline:none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+}
+
+.message-box button:disabled i{
+	color: #a1a1a1;
+}
+
+.message-box button:not([disabled]){
+  color: #428BCA;
 }
 /* The popup chat - hidden by default */
 .chat-popup {

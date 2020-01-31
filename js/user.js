@@ -1,14 +1,33 @@
 async function getCategories(){
-    await db.collection("categories").orderBy("name").get().then(function(querySnapshot){
+    let locReps = [];
+
+    await db
+        .collection("reports")
+        .orderBy("created", "desc")
+        .get()
+        .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            locReps.push(doc.data());
+        });
+    });
+
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
              categories.push(doc.data().name)
         });
     });
+
+    initializeCategoryArray();
+    countReports(locReps);
 }
 
 function initializeButtons(){
     var Ctgcontainer = document.getElementById("categoryContainer"); 
-    
+    Ctgcontainer.innerHTML = "";
     for(let i=0; i<categories.length; i++){
         Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
              <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center"  style=" height: 120px;">
@@ -99,9 +118,74 @@ $(document).ready(function() {
         $('#picture').attr('disabled', true);
         disableAll();
     });
+
+    $("#categoryContainer").on('mousewheel DOMMouseScroll', function(e){
+
+        let delta = Math.max(-1, Math.min(1, (e.originalEvent.wheelDelta || -e.originalEvent.detail)));
+
+        $(this).scrollLeft( $(this).scrollLeft() - ( delta * 40 ) );
+        e.preventDefault();
+    });
+
 });
 
-function findString(value){
+function initializeCategoryArray(){
+
+    for(let i = 0 ; i < categories.length ; i++){
+        categoryArray.push({[categories[i]] : 0});
+    }   
+}
+
+function sortAlphabeticalAscending(){
+    categories.sort(function(a, b){
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+}
+
+function sortAlphabeticalDescending(){
+    categories.sort(function(a, b){
+        return b.toLowerCase().localeCompare(a.toLowerCase());
+    });
+}
+
+// function sortByVotesAscending(){
+    
+//     categoryArray.sort(function(a, b){
+//         return a[Object.keys(a)] - b[Object.keys(b)];
+//     });
+
+//     categories.length = 0;
+
+//     for(let i = 0 ; i < categoryArray.length ; i++){
+//         categories.push( Object.keys(categoryArray[i]) );
+//     }
+// }
+
+function sortByVotesDescending(){
+    
+    categoryArray.sort(function(a, b){
+        return b[Object.keys(b)] - a[Object.keys(a)];
+    });
+
+    categories.length = 0;
+
+    for(let i = 0 ; i < categoryArray.length ; i++){
+        categories.push( Object.keys(categoryArray[i])[0] );
+    }
+}
+
+function countReports(locReps){
+
+    for(let i = 0 ; i < locReps.length ; i++){
+        for(let j = 0 ; j < categoryArray.length ; j++){
+            if( locReps[i].category == Object.keys(categoryArray[j]) ){
+                categoryArray[j][locReps[i].category] += 1;
+            }
+        }
+    }
+}
+
+function findCategory(value){
     let displayData = [];
     
     displayData = categories.slice();
@@ -127,6 +211,26 @@ function searchBoxField(){
     });
     
     if(event.key === 'Enter' || event.type === 'click'){
-        findString(searchString.toLowerCase());
+        findCategory(searchString.toLowerCase());
+    }
+}
+
+function changeDropdownLabel(value){
+    switch(value){
+        case 0:
+            document.getElementById('dropdownMenuButton').innerHTML = "Sort Alphabetically (A-Z)";
+            sortAlphabeticalAscending();
+            initializeButtons();
+            break;
+        case 1:
+            document.getElementById('dropdownMenuButton').innerHTML = "Sort Alphabetically (Z-A)";
+            sortAlphabeticalDescending();
+            initializeButtons();
+            break;
+        case 2:
+            document.getElementById('dropdownMenuButton').innerHTML = "Sort by Most Reported";
+            sortByVotesDescending();
+            initializeButtons();
+            break;
     }
 }

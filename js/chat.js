@@ -82,9 +82,9 @@ function onMessageFormSubmit(e) {
     e.preventDefault();
     // Check that the user entered a message and is signed in.
     if (messageInputElement.value) {
-        resetMaterialTextfield();
       saveMessage(messageInputElement.value).then(function() {
         // Clear message text field and re-enable the SEND button.
+        resetMaterialTextfield();
         toggleButton();
       });
     }

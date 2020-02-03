@@ -1,0 +1,8 @@
+#container {
+  height: 55vh;
+}
+
+#allReports {
+  scrollbar-color: #ad85fc #ccccff;
+  scrollbar-width: thin;
+}

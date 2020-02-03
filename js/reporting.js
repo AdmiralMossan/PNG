@@ -390,11 +390,68 @@ async function addCategory() {
     $('#addCategoryModal').modal('hide')
 }
 
-async function removeCategory(){
-    let value = "somethign";
-    db.collection("categories").where(value).delete().then(function() {
-        console.log()
-    }).catch(function (error){
-        console.error("Error category deletion: ", error);
+async function showCategories(){
+    let tempCategories = [];
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                tempCategories.push(doc.data());
+            });
+        });
+    //Add body
+    let head = 
+    "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
+    "<thead class='thead-inverse bg-custom text-custom'>" +
+    "<tr>" +
+    "<th style='width:10%;'>Category</th>" +
+    "<th style='width:85%;'>Details</th>" +
+    "<th style='width:5%;'>Actions</th>" +
+    "</tr>" +
+    "</thead>";
+    
+    let body = '<tbody class="scroll-secondary">';
+
+    tempCategories.forEach(function (category){
+        body +=
+            "<tr>" +
+            "<td>" +
+            category.name +
+            "</td>" +
+            "<td style='line-height: 1em;'>" +
+            category.description +
+            "</td>" +
+            "<td class='d-flex'>" +
+            "<div class='bg-custom p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=editCategory" + category.id + " onClick= updateCategory(" + category.id + ")><i class='fas fa-edit'></i></a></div>" +
+            "<div class='bg-danger p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=deleteCategory" + category.id + " onClick= removeCategory(" + category.id + ")><i class='fas fa-trash-alt'></i></a></div>" +
+            "</td>";
     });
+    
+    $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
+}
+
+// async function updateCategory(){
+//     db.collection("categories").where(value).update({
+//        name: 
+//        description:
+//     })
+//    .then(function() {
+//        console.log("Document successfully updated!");
+//    })
+//    .catch(function(error) {
+//        // The document probably doesn't exist.
+//        console.error("Error updating document: ", error);
+//    });
+// }
+
+async function removeCategory(value){
+    console.log(value);
+    // let value = "somethign";
+    // db.collection("categories").where(value).delete().then(function() {
+    //     console.log()
+    // }).catch(function (error){
+    //     console.error("Error category deletion: ", error);
+    // });
 }

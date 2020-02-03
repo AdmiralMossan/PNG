@@ -177,9 +177,8 @@ async function logIn(e) {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
             sessionStorage.setItem("userType", docs[0].userType);
-            sessionStorage.setItem("userId", docs[0].id);
-            location.href =  "/adminTest.html"; 
-            // location.href = "/admin.html";
+            // location.href =  "/adminTest.html"; 
+            location.href = "/reportsummary.html";
         } else {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);

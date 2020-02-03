@@ -2,6 +2,7 @@ window.addEventListener("load", async () => {
   isloaded = true;
   await getReports();
   await reportsTable();
+  $('#reportsTable').DataTable();
   generateColors(1);
 
   initSearchValue();
@@ -58,7 +59,9 @@ window.addEventListener("load", async () => {
               drawPie(displayBy);
               drawVisualization2d(search, displayBy);
             }
-            reportsTable();
+            reportsTable().then(function () {
+              $('#reportsTable').DataTable();
+            });
           });
           return;
         }

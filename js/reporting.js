@@ -110,12 +110,12 @@ async function reportsTable() {
         "<table id='reportsTable' class='table table-striped table-responsive h-100 scroll-secondary'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
-        "<th style='width:20%;'>User</th>" +
-        "<th style='width:10%;'>Group</th>" +
+        "<th style='width:15%;'>User</th>" +
+        "<th style='width:16%;'>Group</th>" +
         "<th style='width:30%;'>Category</th>" +
-        "<th style='width:30%;'>Date " +
+        "<th style='width:30%;'>Date" +
         "</th>" +
-        "<th style='width:10%;'>" +
+        "<th style='width:4%;' class='cursor-pointer'>" +
         "<a href='javascript:download()' title='Download as CSV' class='material-icons' style='text-decoration:none'>cloud_download</a>" +
         "</th>" +
         "</th></tr></thead>";
@@ -150,7 +150,7 @@ async function reportsTable() {
             report.created.toDate().toLocaleString("en-US") +
             "</td><td><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
-        
+
         csvData.push({
             user: report.username,
             group: report.group,
@@ -320,7 +320,7 @@ function download() {
 
 async function addCategory() {
     var addCatg = document.getElementById('addCatg');
-    if(addCatg.classList.contains("disabled"))
+    if (addCatg.classList.contains("disabled"))
         return;
     addCatg.classList.remove("btn-primary");
     addCatg.classList.add("btn-secondary", "disabled");
@@ -390,9 +390,9 @@ async function addCategory() {
     $('#addCategoryModal').modal('hide')
 }
 
-async function showCategories(){
+async function showCategories() {
     let tempCategories = [];
-    
+
     $('#showCategoriesModal div').html("");
 
     await db
@@ -405,19 +405,19 @@ async function showCategories(){
             });
         });
     //Add body
-    let head = 
-    "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
-    "<thead class='thead-inverse bg-custom text-custom'>" +
-    "<tr>" +
-    "<th style='width:25%;'>Category</th>" +
-    "<th style='width:70%;'>Details</th>" +
-    "<th style='width:5%;'>Actions</th>" +
-    "</tr>" +
-    "</thead>";
-    
+    let head =
+        "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
+        "<thead class='thead-inverse bg-custom text-custom'>" +
+        "<tr>" +
+        "<th style='width:25%;'>Category</th>" +
+        "<th style='width:70%;'>Details</th>" +
+        "<th style='width:5%;'>Actions</th>" +
+        "</tr>" +
+        "</thead>";
+
     let body = '<tbody class="scroll-secondary">';
 
-    tempCategories.forEach(function (category){
+    tempCategories.forEach(function (category) {
         body +=
             "<tr>" +
             "<td>" +
@@ -431,26 +431,26 @@ async function showCategories(){
             "<div class='bg-danger p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=deleteCategory" + category.id + " onClick= removeCategory(" + category.id + ")><i class='fas fa-trash-alt'></i></a></div>" +
             "</td>";
     });
-    
+
     $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
 }
 
-async function updateCategory(value){
+async function updateCategory(value) {
     console.log(value);
-//     db.collection("categories").where(value).update({
-//        name: 
-//        description:
-//     })
-//    .then(function() {
-//        console.log("Document successfully updated!");
-//    })
-//    .catch(function(error) {
-//        // The document probably doesn't exist.
-//        console.error("Error updating document: ", error);
-//    });
+    //     db.collection("categories").where(value).update({
+    //        name: 
+    //        description:
+    //     })
+    //    .then(function() {
+    //        console.log("Document successfully updated!");
+    //    })
+    //    .catch(function(error) {
+    //        // The document probably doesn't exist.
+    //        console.error("Error updating document: ", error);
+    //    });
 }
 
-async function removeCategory(value){
+async function removeCategory(value) {
     console.log(value);
     // let value = "somethign";
     // db.collection("categories").where(value).delete().then(function() {

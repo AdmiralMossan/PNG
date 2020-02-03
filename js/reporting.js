@@ -392,6 +392,9 @@ async function addCategory() {
 
 async function showCategories(){
     let tempCategories = [];
+    
+    $('#showCategoriesModal div').html("");
+
     await db
         .collection("categories")
         .orderBy("id")
@@ -406,8 +409,8 @@ async function showCategories(){
     "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
     "<thead class='thead-inverse bg-custom text-custom'>" +
     "<tr>" +
-    "<th style='width:10%;'>Category</th>" +
-    "<th style='width:85%;'>Details</th>" +
+    "<th style='width:25%;'>Category</th>" +
+    "<th style='width:70%;'>Details</th>" +
     "<th style='width:5%;'>Actions</th>" +
     "</tr>" +
     "</thead>";
@@ -424,7 +427,7 @@ async function showCategories(){
             category.description +
             "</td>" +
             "<td class='d-flex'>" +
-            "<div class='bg-custom p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=editCategory" + category.id + " onClick= updateCategory(" + category.id + ")><i class='fas fa-edit'></i></a></div>" +
+            "<div class='bg-custom p-1 m-1 cursor-pointer'><a class='cursor-pointer' data-toggle='modal' data-target='#addCategoryModal' id=editCategory" + category.id + " ><i class='fas fa-edit'></i></a></div>" + //onClick= updateCategory(" + category.id + ")
             "<div class='bg-danger p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=deleteCategory" + category.id + " onClick= removeCategory(" + category.id + ")><i class='fas fa-trash-alt'></i></a></div>" +
             "</td>";
     });
@@ -432,7 +435,8 @@ async function showCategories(){
     $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
 }
 
-// async function updateCategory(){
+async function updateCategory(value){
+    console.log(value);
 //     db.collection("categories").where(value).update({
 //        name: 
 //        description:
@@ -444,7 +448,7 @@ async function showCategories(){
 //        // The document probably doesn't exist.
 //        console.error("Error updating document: ", error);
 //    });
-// }
+}
 
 async function removeCategory(value){
     console.log(value);

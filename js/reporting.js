@@ -120,18 +120,7 @@ async function reportsTable() {
         "</th>" +
         "</th></tr></thead>";
 
-    let head2 =
-        "<table id='reportsTable2' class='table m-0 table-responsive' style='display:table;'>" +
-        "<thead class='bg-custom text-custom'>" +
-        "<tr>" +
-        "<th style='width:4rem; text-align:center;' class='p-0'>User</th>" +
-        "<th style='width:10rem; text-align:center;' class='p-0'>Group</th>" +
-        "<th style='width:2rem; text-align:center;' class='p-0'>Category</th>" +
-        "</td>" +
-        "</th></tr></thead>";
-
     //Add body
-    let body2 = '<tbody class="scroll-secondary">';
     let body = '<tbody class="scroll-secondary">';
     reports.forEach(function (report) {
         if (typeof cCtr[report.category] === "undefined") {
@@ -147,7 +136,6 @@ async function reportsTable() {
 
         let date = new Date(report.created["seconds"] * 1000);
         body +=
-
             "<tr>" +
             "<td>" +
             report.username +
@@ -162,20 +150,7 @@ async function reportsTable() {
             report.created.toDate().toLocaleString("en-US") +
             "</td><td><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
-        if (ctr <= 5) {
-            body2 +=
-                "<tr>" +
-                "<td style='width:12rem;'>" +
-                report.username +
-                "</td>" +
-                "<td style='width:14rem;'>" +
-                report.group +
-                "</td>" +
-                "<td style='width:6rem;'>" +
-                report.category +
-                "</td>" +
-                "</tr>";
-        }
+        
         csvData.push({
             user: report.username,
             group: report.group,
@@ -224,7 +199,6 @@ async function reportsTable() {
     $("#categoryCount").text(cat["key"]);
     $("#groupCount").text(group["key"]);
     $("#reportCount").text(reports.length);
-    $("#latestReport").append(head2 + body2 + "</tbody></table>");
 }
 
 
@@ -414,4 +388,13 @@ async function addCategory() {
         });
 
     $('#addCategoryModal').modal('hide')
+}
+
+async function removeCategory(){
+    let value = "somethign";
+    db.collection("categories").where(value).delete().then(function() {
+        console.log()
+    }).catch(function (error){
+        console.error("Error category deletion: ", error);
+    });
 }

@@ -120,18 +120,7 @@ async function reportsTable() {
         "</th>" +
         "</th></tr></thead>";
 
-    let head2 =
-        "<table id='reportsTable2' class='table m-0 table-responsive' style='display:table;'>" +
-        "<thead class='bg-custom text-custom'>" +
-        "<tr>" +
-        "<th style='width:4rem; text-align:center;' class='p-0'>User</th>" +
-        "<th style='width:10rem; text-align:center;' class='p-0'>Group</th>" +
-        "<th style='width:2rem; text-align:center;' class='p-0'>Category</th>" +
-        "</td>" +
-        "</th></tr></thead>";
-
     //Add body
-    let body2 = '<tbody class="scroll-secondary">';
     let body = '<tbody class="scroll-secondary">';
     reports.forEach(function (report) {
         if (typeof cCtr[report.category] === "undefined") {
@@ -147,7 +136,6 @@ async function reportsTable() {
 
         let date = new Date(report.created["seconds"] * 1000);
         body +=
-
             "<tr>" +
             "<td>" +
             report.username +
@@ -162,20 +150,7 @@ async function reportsTable() {
             report.created.toDate().toLocaleString("en-US") +
             "</td><td><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
-        if (ctr <= 5) {
-            body2 +=
-                "<tr>" +
-                "<td style='width:12rem;'>" +
-                report.username +
-                "</td>" +
-                "<td style='width:14rem;'>" +
-                report.group +
-                "</td>" +
-                "<td style='width:6rem;'>" +
-                report.category +
-                "</td>" +
-                "</tr>";
-        }
+        
         csvData.push({
             user: report.username,
             group: report.group,
@@ -224,7 +199,6 @@ async function reportsTable() {
     $("#categoryCount").text(cat["key"]);
     $("#groupCount").text(group["key"]);
     $("#reportCount").text(reports.length);
-    $("#latestReport").append(head2 + body2 + "</tbody></table>");
 }
 
 
@@ -414,4 +388,74 @@ async function addCategory() {
         });
 
     $('#addCategoryModal').modal('hide')
+}
+
+async function showCategories(){
+    let tempCategories = [];
+    
+    $('#showCategoriesModal div').html("");
+
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                tempCategories.push(doc.data());
+            });
+        });
+    //Add body
+    let head = 
+    "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
+    "<thead class='thead-inverse bg-custom text-custom'>" +
+    "<tr>" +
+    "<th style='width:25%;'>Category</th>" +
+    "<th style='width:70%;'>Details</th>" +
+    "<th style='width:5%;'>Actions</th>" +
+    "</tr>" +
+    "</thead>";
+    
+    let body = '<tbody class="scroll-secondary">';
+
+    tempCategories.forEach(function (category){
+        body +=
+            "<tr>" +
+            "<td>" +
+            category.name +
+            "</td>" +
+            "<td style='line-height: 1em;'>" +
+            category.description +
+            "</td>" +
+            "<td class='d-flex'>" +
+            "<div class='bg-custom p-1 m-1 cursor-pointer'><a class='cursor-pointer' data-toggle='modal' data-target='#addCategoryModal' id=editCategory" + category.id + " ><i class='fas fa-edit'></i></a></div>" + //onClick= updateCategory(" + category.id + ")
+            "<div class='bg-danger p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=deleteCategory" + category.id + " onClick= removeCategory(" + category.id + ")><i class='fas fa-trash-alt'></i></a></div>" +
+            "</td>";
+    });
+    
+    $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
+}
+
+async function updateCategory(value){
+    console.log(value);
+//     db.collection("categories").where(value).update({
+//        name: 
+//        description:
+//     })
+//    .then(function() {
+//        console.log("Document successfully updated!");
+//    })
+//    .catch(function(error) {
+//        // The document probably doesn't exist.
+//        console.error("Error updating document: ", error);
+//    });
+}
+
+async function removeCategory(value){
+    console.log(value);
+    // let value = "somethign";
+    // db.collection("categories").where(value).delete().then(function() {
+    //     console.log()
+    // }).catch(function (error){
+    //     console.error("Error category deletion: ", error);
+    // });
 }

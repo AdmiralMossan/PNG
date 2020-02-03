@@ -185,16 +185,14 @@ function findString(value){
     }
 
     displayData.forEach(function(a){
+
         if (typeof(a) === 'string' && a.indexOf(value)>-1) {
             let index = displayData.indexOf(value) + 1;
-            if(index === 0){
-                
-            } else {
-                document.getElementById("search").value = index.toString();
-                search = index;
-                buttonEnabler(index);
-                drawVisualization2d(index, sortBy);
-            }
+            
+            document.getElementById("search").value = index.toString();
+            search = index;
+            buttonEnabler(index);
+            drawVisualization2d(index, sortBy);
         }
     });
 }

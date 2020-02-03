@@ -26,13 +26,25 @@ async function getCategories(){
 }
 
 function initializeButtons(){
+    
     var Ctgcontainer = document.getElementById("categoryContainer"); 
+    
     Ctgcontainer.innerHTML = "";
+    
     for(let i=0; i<categories.length; i++){
         Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
              <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center"  style=" height: 120px;">
              ` + categories[i] + `</button>
            </div>`;
+    }
+
+    buttons = $("button[id^='category']");
+    
+    for(let i=0; i<buttons.length; i++){
+        let j = i==buttons.length - 1 ? 0 : i+1;
+        buttons[i].onclick = function(){disabledButtons(i, buttons[j])};
+        buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
+        buttons[i].onmouseout = function(){removeDesc()};
     }
 }
 
@@ -60,6 +72,8 @@ function disabledButtons(i, j){
             if(k!=i)
                 buttons[k].removeAttribute("disabled");
         }
+        buttons[i].classList.remove("btn-primary");
+        buttons[i].classList.add("btn-outline-primary");
         isClicked = false;
     }else{
         $('#picture').attr('src', "Images/buttonA.jpg");
@@ -68,7 +82,9 @@ function disabledButtons(i, j){
         for(let k=0; k<buttons.length; k++){
             if(k!=i){
                 buttons[k].setAttribute("disabled", "disabled");
-                getCategory(buttons[i].id.replace('category',''));
+                buttons[i].classList.remove("btn-outline-primary");
+                buttons[i].classList.add("btn-primary");
+                getCategory(categories[buttons[i].id.replace('category','')]);
             }        
         }
         isClicked = true;
@@ -87,16 +103,10 @@ $(document).ready(function() {
     if(sessionStorage.getItem("username") !== null){
         document.getElementById("userName").innerHTML = sessionStorage.getItem("username");
     }
-    getCategories().then(function () {
+
+    getCategories().then(function() {
         initializeButtons();
-        buttons = $("button[id^='category']");
-        for(let i=0; i<buttons.length; i++){
-            let j = i==buttons.length - 1 ? 0 : i+1;
-            buttons[i].onclick = function(){disabledButtons(i, buttons[j])};
-            buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
-            buttons[i].onmouseout = function(){removeDesc()};
-        }
-    });;
+    });
     
     $("#picture").click(function(){
         if (jQuery('#picture')[0].hasAttribute('disabled')) {
@@ -121,7 +131,7 @@ $(document).ready(function() {
 
     $("#categoryContainer").on('mousewheel DOMMouseScroll', function(e){
 
-        let delta = Math.max(-1, Math.min(1, (e.originalEvent.wheelDelta || -e.originalEvent.detail)));
+        let delta = Math.max(-1, Math.min(1, (e.originalEvent.wheelDelta || -e.originalEvent.detail)) );
 
         $(this).scrollLeft( $(this).scrollLeft() - ( delta * 40 ) );
         e.preventDefault();

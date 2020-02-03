@@ -96,14 +96,20 @@ function saveMessage(messageText) {
     var to = -1;
     var admin = false;
     var from = -1;
+    var sender = '';
+    var receiver = ''
     if (sessionStorage.getItem("userType") == 1){
       admin = true;
       to = user.id;
       from = "admin";
+      sender = "admin";
+      receiver = user.username;
     }else{
         admin = false;
         to = "admin";
         from = parseInt(sessionStorage.getItem("userId"), 10);
+        sender = sessionStorage.getItem("username");
+        receiver = "admin";
     } 
 
     return firebase.firestore().collection('messages').add({
@@ -112,6 +118,8 @@ function saveMessage(messageText) {
       from: from,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       admin: admin,
+      sender: sender,
+      receiver: receiver
     }).catch(function(error) {
       console.error('Error writing new message to Firebase Database', error);
     });
@@ -121,7 +129,7 @@ function saveMessage(messageText) {
 function loadMessages() {
     // Create the query to load the last 12 messages and listen for new ones.
     var from = -1;
-    var to = -1
+    var to = -1;
     if(sessionStorage.getItem("userType") == 2){
         from = "admin";
         to =  parseInt(sessionStorage.getItem("userId"),10);
@@ -140,7 +148,7 @@ function loadMessages() {
             deleteMessage(change.doc.id);
             } else {
             var message = change.doc.data();
-            displayMessage(change.doc.id, message.timestamp, message.text,
+            displayMessage(change.doc.id, message.timestamp, message.sender,
                             message.text, false);
             }
         });
@@ -155,7 +163,7 @@ function loadMessages() {
           deleteMessage(change.doc.id);
         } else {
           var message = change.doc.data();
-          displayMessage(change.doc.id, message.timestamp, message.name,
+          displayMessage(change.doc.id, message.timestamp, message.sender,
                         message.text, true );
         }
       });
@@ -179,8 +187,7 @@ var SENDER_MESSAGE_TEMPLATE ='<li class="pl-2 pr-2 bg-primary rounded text-white
 var RECEIVER_MESSAGE_TEMPLATE =
 '<li class="p-1 rounded mb-1">' +
 '<div class="receive-msg">'+
-    '<div class="nameDisplay"></div>'+
-    // '<img src="http://nicesnippets.com/demo/image1.jpg">' +
+    '<i class="fas fa-user-circle"></i>' +
     '<div class="receive-msg-desc text-center mt-1 ml-1 pl-2 pr-2">' +
        '<p class="messageDisplay pl-2 pr-2 rounded"></p>' +
     '</div>'+

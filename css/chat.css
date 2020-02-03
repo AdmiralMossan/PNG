@@ -29,6 +29,22 @@
   float: right;
 }
 
+.receive-msg i{
+	border-radius: 100%;
+	height: 30px;
+	width: 12%;
+}
+
+.receive-msg i{
+	display: inline;
+}
+.receive-msg .receive-msg-desc{
+	display: inline-block;
+}
+.receive-msg .receive-msg-desc p{
+	background: #c1c1c1;
+}
+
 .message-box input{
   border: none;
   width: 90%;

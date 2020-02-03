@@ -70,7 +70,7 @@
                 <i class="fas fa-plus-circle fa-sm fa-fw mr-2 text-gray-400"></i>
                 Add Category
               </a>
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#manageUsers">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#manageUsersModal">
                 <i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>
                 Manage Users
               </a>
@@ -177,17 +177,22 @@
                     </div>
                     <div id="bargraph" class="container tab-pane fade px-0 h-100">
                       <div class="barContainer">
-                        <canvas id="graph2d" class=""></canvas>
-                      </div>
-                      <div class="row">
-                        <div id="buttons" class="mx-auto p-2 row">
-                          <input id="prev" class="material-icons" type="button" value="chevron_left"
-                            onclick="prevButton()" disabled="true">
-                          <input id="search" type="text" size="1" style="text-align: center;" value="1"
-                            onkeypress="searchField(this)">
-                          <input id="next" class="material-icons" type="button" value="chevron_right"
-                            onclick="nextButton()">
+                        <div class="row justify-content-center">
+                          <div id="buttons" class="p-2 row">
+                            <label id="searchBoxLabel" for="searchBox"></label>
+                            <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search"
+                              value="" onkeypress="searchBoxField()" onfocus="this.value=''">
+                            <input id="searchButton" class="material-icons" type="button" value="search"
+                              onclick="searchBoxField()">
+                            <input id="prev" class="material-icons" type="button" value="chevron_left"
+                              onclick="prevButton()" disabled="true">
+                            <input id="search" type="text" hidden size="1" disabled style="text-align: center;"
+                              placeholder="Search" value="1">
+                            <input id="next" class="material-icons" type="button" value="chevron_right"
+                              onclick="nextButton()">
+                          </div>
                         </div>
+                        <canvas id="graph2d"></canvas>
                       </div>
                     </div>
                     <div id="tableTab" class="container tab-pane fade px-0 h-100">
@@ -286,6 +291,56 @@
         <form action="" onsubmit="event.preventDefault();" class="w-100">
           <div class="modal-header">
             <h5 class="modal-title">Add Category</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row pl-4 w-100">
+              <div class="col">
+                <div class="row">
+                  <h3 class="">Add Category</h3>
+                </div>
+              </div>
+            </div>
+            <div class="row pl-4 w-100">
+              <div class="row w-100">
+                <div class="row pl-4 pb-2">
+                  <label for="catName" class="h6">Name:</label>
+                </div>
+                <div class="row pl-4 pb-4">
+                  <input type="text" id="catName" aria-describedby="catname_extra" placeholder="Category Name"
+                    required />
+                </div>
+                <div class="row pl-4 w-100">
+                  <label for="catdesc" class="h6">Category Description:</label>
+                </div>
+                <div class="form-row row pl-3 w-75">
+                  <textarea class="w-100" rows="3" style="resize: none;" id="catdesc"
+                    placeholder="Input Description for the new Category to be added." required></textarea>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" onclick="addCategory();">Add Category</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manage Users Modal-->
+  <div class="modal fade" id="manageUsersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="" onsubmit="event.preventDefault();" class="w-100">
+          <div class="modal-header">
+            <h5 class="modal-title">User Management</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>

@@ -1,6 +1,14 @@
 window.addEventListener("load", async () => {
     isloaded = true;
-    showCategories.apply();
+    await showCategories();
+    
+    $("#categoriesTable").DataTable({
+        scrollY: 400
+    });
+    
+    showCategories().then(function() {
+        $("#categoriesTable").DataTable();
+    });
 });
 
 async function showCategories() {
@@ -16,7 +24,7 @@ async function showCategories() {
             });
         });
     
-    $('#showCategoriesModal div').html("");
+    $('#showCategoriesTable div').html("");
     
     //Add body
     let head =
@@ -46,7 +54,7 @@ async function showCategories() {
             "</td>";
     });
 
-    $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
+    $("#showCategoriesTable").append(head + body + "</tbody></table>");
 }
 
 async function addCategory() {

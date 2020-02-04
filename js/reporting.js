@@ -52,9 +52,9 @@ async function getReports() {
     }
 
     initArray();
-    byGroup();
-    byCategory();
-    findMax();
+    // byGroup();
+    // byCategory();
+    // findMax();
     return;
 }
 

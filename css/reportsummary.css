@@ -1,12 +1,18 @@
 /*
     DEMO STYLE
 */
+html{
+  height:100vh;
+}
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
+  height: 100vh;
 }
+
+
 
 p {
   font-family: "Poppins", sans-serif;
@@ -68,6 +74,7 @@ span {
   transition: all 0.3s;
   border-right: 1px solid #47748b !important;
 }
+
 
 #sidebar.active {
   min-width: 80px;
@@ -224,8 +231,20 @@ a.article:hover {
   padding: 20px;
   height: 100vh;
   transition: all 0.3s;
-  background-image: linear-gradient(180deg, #efa4f6, white);
 }
+
+#content:after{
+  content:"";
+	position:fixed;
+	z-index:-1;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+  background-image: linear-gradient(180deg, #efa4f6, white);
+  background-size: cover;
+}
+
 #container {
   height: 80vh;
 }
@@ -244,6 +263,7 @@ a.article:hover {
     max-width: 95px;
     text-align: center;
     margin-left: -95px !important;
+    border-bottom: 1px solid #47748b !important;
   }
   .dropdown-toggle::after {
     top: auto;

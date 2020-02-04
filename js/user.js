@@ -33,7 +33,7 @@ function initializeButtons(){
     
     for(let i=0; i<categories.length; i++){
         Ctgcontainer.innerHTML += `<div class="col-sm text-center px-0">
-             <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center"  style=" height: 120px;">
+             <button type="button" id="category` + i + `" class="w-50 btn btn-outline-primary w-75 my-2 text-center" data-toggle="popover" data-placement="top" data-content="test" style=" height: 120px;">
              ` + categories[i] + `</button>
            </div>`;
     }

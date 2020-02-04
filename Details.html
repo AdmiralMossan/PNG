@@ -26,6 +26,7 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/details.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -55,14 +56,17 @@
 
   <!--PEN CONTENT     -->
   <div class="content" id="maincontent">
+    <div class="row mx-auto w-100">
     <!--content inner-->
-    <div class="content__inner border py-4 bg-light rounded" id="maincontainer">
+    <div class="col-2"></div>
+    <div class="content__inner col-lg-8 border py-4 bg-light rounded" id="maincontainer">
       <div class="container">
         <!--multisteps-form-->
         <div class="multisteps-form">
-          <div class="row">
+          <button type="button" class="btn btn-link" onclick="window.location.href = 'user.html'"><i class="fa fa-arrow-circle-left align-middle" style="font-size:35px;"></i>Return to Category Selection</button>
+          <div class="row ">
             <!-- Left side -->
-            <div class="col-sm-7 m-auto">
+            <div class="col-sm-8 m-auto">
               <!--progress bar-->
               <div class="row">
                 <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
@@ -152,11 +156,17 @@
                 </div>
               </form>
             </div>
+
+            
             <!-- End of Left Side -->
             
           </div>
+
+          
         </div>
       </div>
+    </div>
+    <div class="col-2"></div>
     </div>
   </div>
 

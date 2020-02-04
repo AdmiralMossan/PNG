@@ -2,6 +2,14 @@
   height: 55vh;
 }
 
+#reportDetails {
+  color: #bd9bff;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 #allReports {
   scrollbar-color: #ad85fc #ccccff;
   scrollbar-width: thin;

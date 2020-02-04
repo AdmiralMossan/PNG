@@ -107,7 +107,7 @@ async function reportsTable() {
 
     //Add Head
     let head =
-        "<table id='reportsTable' class='table table-striped table-responsive h-100 scroll-secondary'>" +
+        "<table id='reportsTable' class='display table table-striped table-responsive'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:15%;'>User</th>" +
@@ -194,7 +194,7 @@ async function reportsTable() {
         }
     });
 
-    $("#allReports > div:last-child").append(head + body + "</tbody></table>");
+    $("#allReports").append(head + body + "</tbody></table>");
 
     $("#categoryCount").text(cat["key"]);
     $("#groupCount").text(group["key"]);
@@ -462,19 +462,21 @@ async function removeCategory(value) {
 
 $(document).ready(function () {
 
-    $('#openBtn').click(function () {
-        $('#myModal').modal({
-            show: true
-        })
+    $(document).on('show.bs.modal', '.modal', function (event) {
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function () {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
     });
 
-        $(document).on('show.bs.modal', '.modal', function (event) {
-            var zIndex = 1040 + (10 * $('.modal:visible').length);
-            $(this).css('z-index', zIndex);
-            setTimeout(function() {
-                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-            }, 0);
-        });
+    $(document).on('show.bs.modal', '.modal', function (event) {
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function () {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
+    });
 
 
 });

@@ -227,5 +227,23 @@ window.addEventListener("load", () => {
   $('#successModal').modal('hide');      
 });
 </script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
+<link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+<script type="text/javascript">
+  window.centerModalStack = {
+    'dir1': 'down',
+    'firstpos1': 25,
+    'modal': true,
+    'overlayClose': true
+  };
+  PNotify.modules.History.defaults.maxInStack = 3;
+</script>
 
 </html>

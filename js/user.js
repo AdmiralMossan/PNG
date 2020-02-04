@@ -43,8 +43,8 @@ function initializeButtons(){
     for(let i=0; i<buttons.length; i++){
         let j = i==buttons.length - 1 ? 0 : i+1;
         buttons[i].onclick = function(){disabledButtons(i, buttons[j])};
-        buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
-        buttons[i].onmouseout = function(){removeDesc()};
+       // buttons[i].onmouseover = function(){updateDesc(i,buttons[i] )};
+       // buttons[i].onmouseout = function(){removeDesc()};
     }
 }
 

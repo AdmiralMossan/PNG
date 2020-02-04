@@ -1,0 +1,4 @@
+#sidebar.active div > div,
+div > strong {
+  margin: auto;
+}

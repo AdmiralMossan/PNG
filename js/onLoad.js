@@ -7,7 +7,6 @@ window.addEventListener("load", async () => {
   });
   generateColors(1);
 
-  initSearchValue();
   loadData(1).then(function () {
     drawVisualization(data);
     drawPie(1);

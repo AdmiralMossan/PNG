@@ -1,7 +1,10 @@
+window.addEventListener("load", async () => {
+    isloaded = true;
+    showCategories.apply();
+});
+
 async function showCategories() {
     let tempCategories = [];
-
-    $('#showCategoriesModal div').html("");
 
     await db
         .collection("categories")
@@ -12,6 +15,9 @@ async function showCategories() {
                 tempCategories.push(doc.data());
             });
         });
+    
+    $('#showCategoriesModal div').html("");
+    
     //Add body
     let head =
         "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
@@ -35,10 +41,187 @@ async function showCategories() {
             category.description +
             "</td>" +
             "<td class='d-flex'>" +
-            "<div class='p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=editCategory" + category.id + " onClick= updateCategory(" + category.id + ")><i class='fas fa-edit'></i></a></div>" +
-            "<div class='p-1 m-1 cursor-pointer'><a class='cursor-pointer' id=deleteCategory" + category.id + " onClick= removeCategory(" + category.id + ")><i class='fas fa-trash-alt'></i></a></div>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteCategory'" + category.id + " onClick='removeCategory(" + category.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
             "</td>";
     });
 
     $("#showCategoriesModal > div:last-child").append(head + body + "</tbody></table>");
 }
+
+async function addCategory() {
+    
+    let name = document.getElementById("catName").value;
+    let desc = document.getElementById("catDesc").value;
+    
+    if (name == "" || desc == "")
+        return
+    let size = 0;
+
+    await db.collection("ids").get().then(function (querySnapshot) {
+        size = querySnapshot.docs[0].data().categoryID + 1;
+        querySnapshot.forEach(function (doc) {
+            let newID = doc.data().categoryID + 1
+            db.collection("ids").doc(doc.id).update({
+                categoryID: newID
+            });
+        });
+    });
+
+    db.collection("categories").doc().set({
+        id: size,
+        name: name,
+        description: desc
+    })
+    .then(async function () {
+        console.log("Document successfully written!");
+        sessionStorage.removeItem("category");
+
+        PNotify.success({
+            title: "Successfully added Category",
+            delay: 2000,
+            modules: {
+                Buttons: {
+                    closer: true,
+                    closerHover: true,
+                    sticker: false
+                },
+                Mobile: {
+                    swipeDismiss: true,
+                    styling: true
+                }
+            }
+        });
+
+        showCategories();
+        document.getElementById("catName").value = "";
+        document.getElementById("catDesc").value = "";
+
+    })
+    .catch(function (error) {
+        console.error("Error writing document: ", error);
+    });
+
+    $('#categoryModal').modal('hide');
+}
+
+async function updateCategory(value) {
+    
+    let newName = document.getElementById("catName").value;
+    let newDesc = document.getElementById("catDesc").value;
+
+    if (newName == "" || newDesc == "")
+        return
+
+    db.collection("categories")
+        .where("id", "==", value)
+        .get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                doc.ref.update({
+                    name: newName,
+                    description: newDesc
+                });
+            });
+        
+        PNotify.success({
+            title: "Update Successful!",
+            delay: 2000,
+            modules: {
+                Buttons: {
+                    closer: true,
+                    closerHover: true,
+                    sticker: false
+                },
+                Mobile: {
+                    swipeDismiss: true,
+                    styling: true
+                }
+            }
+        });
+        
+        showCategories();
+        document.getElementById("catName").value = "";
+        document.getElementById("catDesc").value = "";
+        
+        })
+        .catch(function (error){
+            console.error("Error category deletion: ", error);
+        });
+    
+        $('#categoryModal').modal('hide');
+}
+
+async function removeCategory(value) {
+    const notice = PNotify.notice({
+        title: "Delete Category",
+        text: "Confirm Delete?",
+        icon: "fas fa-question-circle",
+        hide: false,
+        modules: {
+            Confirm: {
+                confirm: true,
+            },
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Desktop: {
+                desktop: true,
+                fallback: true,
+                icon: null
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
+
+    notice.on('pnotify.confirm', () => {
+        db.collection("categories")
+            .where("id", "==", value)
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    doc.ref.delete();
+                });
+            
+            PNotify.success({
+                title: "Delete Successful!",
+                delay: 2000,
+                modules: {
+                    Buttons: {
+                        closer: true,
+                        closerHover: true,
+                        sticker: false
+                    },
+                    Mobile: {
+                        swipeDismiss: true,
+                        styling: true
+                    }
+                }
+            });
+            
+            showCategories();
+            
+            })
+            .catch(function (error){
+                console.error("Error category deletion: ", error);
+            });
+    });
+    
+}
+
+// $(document).ready(function () {
+
+//     $(document).on('show.bs.modal', '.modal', function (event) {
+//         var zIndex = 1040 + (10 * $('.modal:visible').length);
+//         $(this).css('z-index', zIndex);
+//         setTimeout(function() {
+//             $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+//         }, 0);
+//     });
+
+// });

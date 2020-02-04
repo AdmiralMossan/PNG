@@ -108,6 +108,8 @@ $(document).ready(function() {
         initializeButtons();
     });
     
+    console.log($('[data-toggle="popover"]').popover()); 
+
     $("#picture").click(function(){
         if (jQuery('#picture')[0].hasAttribute('disabled')) {
             $('#picture').attr('src', "Images/buttonD.jpg");

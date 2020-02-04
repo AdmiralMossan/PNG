@@ -122,11 +122,6 @@ async function updateCategory(value) {
                     name: newName,
                     description: newDesc
                 });
-                // db.collection("categories").doc(doc.id).update({
-                //     name: newName,
-                //     description: newDesc
-                // });
-                // console.log(doc.id);
             });
         
         PNotify.success({

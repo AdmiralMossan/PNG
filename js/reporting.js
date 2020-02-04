@@ -96,7 +96,7 @@ function notifyReport(report) {
 async function reportsTable() {
 
     $('#allReports div').html("");
-    $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+    $('#notifDropdown').html('<i class="fas fa-bell"></i>')
     $('#notifItem').html('<div class="dropdown-item py-0"><hr><div class="row"><p class="col-12 m-0 text-success p-0">All reports are read.</p></div><hr></div>')
 
     let cat = {};
@@ -107,7 +107,7 @@ async function reportsTable() {
 
     //Add Head
     let head =
-        "<table id='reportsTable' class='table table-striped table-responsive h-100 scroll-secondary'>" +
+        "<table id='reportsTable' class='display table table-striped table-responsive'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:15%;'>User</th>" +
@@ -147,7 +147,7 @@ async function reportsTable() {
             report.category +
             "</td>" +
             "<td>" +
-            report.created.toDate().toLocaleString("en-US") +
+            report.created.toDate().toLocaleString("en-PH") +
             "</td><td><a class='cursor-pointer' id=" + report.id + " onClick= selectReport(" + report.id + ")> <i class='material-icons'>unfold_more</i ></a ></td > " +
             "</tr>";
 
@@ -174,12 +174,12 @@ async function reportsTable() {
             }
             ctr += 1;
             $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i><span class="badge badge-pill badge-danger p-1">' + ctr + '</span>')
-            $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0"> (' + report.created.toDate().toLocaleString("en-US") + ')</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr class="mt-1"></div>')
+            $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0"> (' + report.created.toDate().toLocaleString("en-PH") + ')</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr class="mt-1"></div>')
         }
     });
     if (notif === false) {
 
-        $('#notifDropdown').html('<i class="material-icons">notifications</i>')
+        $('#notifDropdown').html('<i class="fas fa-bell"></i>')
     }
 
     $.each(cCtr, function (key, value) {
@@ -194,7 +194,7 @@ async function reportsTable() {
         }
     });
 
-    $("#allReports > div:last-child").append(head + body + "</tbody></table>");
+    $("#allReports").append(head + body + "</tbody></table>");
 
     $("#categoryCount").text(cat["key"]);
     $("#groupCount").text(group["key"]);
@@ -270,7 +270,7 @@ async function selectReport(reportID) {
 }
 
 async function loadReportDetails(reportSelected) {
-    $("#reportTitle").text(reportSelected.username + " " + reportSelected.created.toDate());
+    $("#reportTitle").html("<h1>" + reportSelected.username + "<h1><h3> " + reportSelected.created.toDate().toLocaleString("en-PH") + "</h3>");
     $("#sgroup").text("Group: " + reportSelected.group);
     $("#scategory").text("Category: " + reportSelected.category);
     $("#sdateInfo").text("Occurence: " + reportSelected.datInfo);

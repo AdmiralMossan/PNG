@@ -2,10 +2,11 @@ window.addEventListener("load", async () => {
   isloaded = true;
   await getReports();
   await reportsTable();
-  $('#reportsTable').DataTable();
+  $('#reportsTable').DataTable({
+    scrollY: 400
+  });
   generateColors(1);
 
-  initSearchValue();
   loadData(1).then(function () {
     drawVisualization(data);
     drawPie(1);

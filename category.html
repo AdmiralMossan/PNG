@@ -16,10 +16,14 @@
     <link rel="stylesheet" href="css/reportsummary.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/admincontent.css">
+    <link rel="stylesheet" href="css/table.css" >
 
     <!-- Custom styles for this template-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- DataTable CSS -->
+    <link href="css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -139,17 +143,14 @@
                     <div class="row">
                       <div class="col-md h-25">
                         <h2 id="pagetitle" class="text-center my-0">Category Management:</h2>
-                        <p class="lead text-center">
-                          Please select one of the tabs below.
-
                           <!-- Insert user management functions here -->
-                        </p>
-                        <div class="d-flex row text-center align-middle justify-content-center pb-2"></div>
-                            <div class="d-flex text-center">
+                        <div id="showCategoriesTable" class="pt-4">
+                        </div>    
+                        <!-- <div class="d-flex text-center">
                                 <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
                                     onkeypress="" onfocus="this.value=''">
                                 <input id="searchButton" class="material-icons" type="button" value="search" onclick="">
-                                <!-- <label id="addCategoryButtonLabel" for="addCategoryButton">Add Category: </label> -->
+                                <label id="addCategoryButtonLabel" for="addCategoryButton">Add Category: </label>
                                 <input id="addCategoryButton" onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');" 
                                 class="material-icons" type="button" value="add" data-toggle="modal" data-target="#categoryModal">
                             </div>
@@ -159,7 +160,7 @@
                                     <div class="d-flex justify-content-center align-items-center h-100">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -267,7 +268,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
 
-<<<<<<< HEAD
     <!-- PNotify Javascript-->
     <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
     <link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
@@ -288,12 +288,11 @@
       PNotify.modules.History.defaults.maxInStack = 3;
     </script>
     
+    <!-- DataTable JS -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
     <!-- Custom JS -->
     <script src="js/sidebar.js" ></script>
-=======
-    <!-- Custom JS -->
-    <script src="js/sidebar.js"> </script>
->>>>>>> aa603d62e4e62c30dbe3adb7a1642f2321d68db7
     <script src="js/category.js"></script>
     <script src="js/firestore.js"></script>
 </body>

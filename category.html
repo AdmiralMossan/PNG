@@ -120,10 +120,12 @@
                         </p>
                         <div class="d-flex row text-center align-middle justify-content-center pb-2"></div>
                             <div class="d-flex text-center">
-                                <label id="searchBoxLabel" for="searchBox"></label>
                                 <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
-                                    onkeypress="searchBoxField()" onfocus="this.value=''">
-                                <input id="searchButton" class="material-icons" type="button" value="search" onclick="searchBoxField()">
+                                    onkeypress="" onfocus="this.value=''">
+                                <input id="searchButton" class="material-icons" type="button" value="search" onclick="">
+                                <!-- <label id="addCategoryButtonLabel" for="addCategoryButton">Add Category: </label> -->
+                                <input id="addCategoryButton" onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');" 
+                                class="material-icons" type="button" value="add" data-toggle="modal" data-target="#categoryModal">
                             </div>
                             
                             <div id="categoryContainer" class="row scroll-secondary" style="height: 60vh; overflow: auto;">
@@ -137,6 +139,58 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <!-- Add/Update Category Modal-->
+                <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="" autocomplete="off" onsubmit="event.preventDefault();" class="w-100">
+                            <div class="modal-header">
+                                <h5 id="categoryModalTitle" class="modal-title"></h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row pl-4 w-100">
+                                    <div class="col">
+                                    <div class="row">
+                                        <h3 id="categoryModalh3"></h3>
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row pl-4 w-100">
+                                    <div class="row w-100">
+                                    <div class="row pl-4 w-100">
+                                        <label for="catName" class="h6">Name:</label>
+                                    </div>
+                                    <div class="row pl-4 pb-2">
+                                        <input type="text" id="catName" onkeypress="" placeholder="Category Name"
+                                        required/>
+                                    </div>
+                                    <div class="row pl-4 w-100">
+                                        <label for="catDesc" class="h6">Category Description:</label>
+                                    </div>
+                                    <div class="form-row row pl-3 w-75">
+                                        <textarea class="w-100" rows="3" style="resize: none;" id="catDesc"
+                                        placeholder="Input Description for the new Category to be added." required></textarea>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <button id="categoryModalButton" type="submit" class="btn btn-primary"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 </div>
             </div>
 
@@ -181,11 +235,31 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
+
+    <!-- PNotify Javascript-->
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
+    <link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+    <script type="text/javascript">
+      window.centerModalStack = {
+        'dir1': 'down',
+        'firstpos1': 25,
+        'modal': true,
+        'overlayClose': true
+      };
+      PNotify.modules.History.defaults.maxInStack = 3;
+    </script>
     
     <!-- Custom JS -->
-    <script src = "js/sidebar.js" > </script>
+    <script src="js/sidebar.js" ></script>
     <script src="js/category.js"></script>
-    <script src="js/firestore.js"> </script>
+    <script src="js/firestore.js"></script>
 </body>
 
 </html>

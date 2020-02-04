@@ -58,11 +58,22 @@ function generateColors(sortBy) {
   }
 }
 
+function findLongestString(){
+  let longest = categories.reduce(function (a, b) { return a.length > b.length ? a : b; });
+  return longest.length;
+}
+
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
   // specify options
   maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
-
+  let xL = "";
+  let yL = "";
+  let strlen = findLongestString();
+  if (strlen < 7){
+    xL = "Category";
+    yL = "Group";
+  }
   var options = {
     height: "100%",
     width: "100%",
@@ -73,8 +84,8 @@ async function drawVisualization(data) {
     animationPreload: true,
     axisFontType: "arial",
     axisFontSize: 26,
-    xLabel: "Category", //Categories
-    yLabel: "Group", //Groups
+    xLabel: xL, //Categories
+    yLabel: yL, //Groups
     zLabel: "Number", //Number
     xBarWidth: 0.5,
     yBarWidth: 0.5,

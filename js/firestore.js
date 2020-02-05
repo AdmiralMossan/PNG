@@ -73,27 +73,21 @@ async function fileUpload(file_data, reportData) {
 }
 function disableButtons(){
     var sendButton = document.getElementById('sendButton');
-    var quickReport = document.getElementById('quickreport');
     sendButton.classList.remove("btn-success");
     sendButton.classList.add("btn-secondary", "disabled");
-    quickReport.classList.remove("btn-primary");
-    quickReport.classList.add("btn-secondary", "disabled");
+   
 }
 
 function enableButtons(){
     var sendButton = document.getElementById('sendButton');
-    var quickReport = document.getElementById('quickreport');
     sendButton.classList.remove("btn-secondary", "disabled");
     sendButton.classList.add("btn-success");
-    quickReport.classList.remove("btn-secondary", "disabled");
-    quickReport.classList.add("btn-primary");
 }
 
 async function storeData(e, skip) {
     e.preventDefault();
     var sendButton = document.getElementById('sendButton');
-    var quickReport = document.getElementById('quickreport');
-    if(sendButton.classList.contains("disabled") || quickReport.classList.contains("disabled"))
+    if(sendButton.classList.contains("disabled") )
         return;
     category = sessionStorage.getItem("category");
     username = sessionStorage.getItem("isAnonymous") ? "anonymous" : sessionStorage.getItem("username");
@@ -140,12 +134,34 @@ async function sendReport(reportData) {
         .then(function () {
             console.log("Document successfully written!");
             sessionStorage.removeItem("category");
-            $('#successModal').modal('show');
-            enableButtons();
+            sentReportNotify();
         })
         .catch(function (error) {
             console.error("Error writing document: ", error);
         });
+}
+
+function sentReportNotify(){
+    PNotify.success({
+        title: "Report Sent Successfully",
+        delay: 3000,
+        modules: {
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Desktop: {
+                desktop: true,
+                fallback: true,
+                icon: null
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
 }
 
 function getCategory(id) {
@@ -177,8 +193,8 @@ async function logIn(e) {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);
             sessionStorage.setItem("userType", docs[0].userType);
-            // location.href =  "/adminTest.html"; 
-            location.href = "/reportsummary.html";
+            location.href =  "/adminTest.html"; 
+           // location.href = "/reportsummary.html";
         } else {
             sessionStorage.setItem("username", docs[0].username);
             sessionStorage.setItem("group", docs[0].group);

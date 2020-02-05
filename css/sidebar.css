@@ -2,3 +2,7 @@
 div > strong {
   margin: auto;
 }
+
+#notifDropdown {
+  padding: 0;
+}

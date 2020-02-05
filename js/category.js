@@ -1,13 +1,14 @@
 window.addEventListener("load", async () => {
     isloaded = true;
     await showCategories();
-    
+
     $("#categoriesTable").DataTable({
         scrollY: 400
     });
-    
-    showCategories().then(function() {
-        $("#categoriesTable").DataTable();
+
+    showCategories().then(function () {
+        $("#categoriesTable").DataTable({ scrollY: 400 })
+
     });
 });
 
@@ -23,12 +24,12 @@ async function showCategories() {
                 tempCategories.push(doc.data());
             });
         });
-    
+
     $('#showCategoriesTable div').html("");
-    
+
     //Add body
     let head =
-        "<table id='categoriesTable' class='table table-striped table-responsive p-0 scroll-secondary col-12'>" +
+        "<table id='categoriesTable' class='display table table-striped table-responsive'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:25%;'>Category</th>" +
@@ -49,7 +50,7 @@ async function showCategories() {
             category.description +
             "</td>" +
             "<td class='d-flex'>" +
-            "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#catName\").val(`" + category.name + "`);$(\"#catDesc\").val(`" + category.description + "`);$(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteCategory'" + category.id + " onClick='removeCategory(" + category.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
             "</td>";
     });
@@ -58,10 +59,10 @@ async function showCategories() {
 }
 
 async function addCategory() {
-    
+
     let name = document.getElementById("catName").value;
     let desc = document.getElementById("catDesc").value;
-    
+
     if (name == "" || desc == "")
         return
     let size = 0;
@@ -81,40 +82,40 @@ async function addCategory() {
         name: name,
         description: desc
     })
-    .then(async function () {
-        console.log("Document successfully written!");
-        sessionStorage.removeItem("category");
+        .then(async function () {
+            console.log("Document successfully written!");
+            sessionStorage.removeItem("category");
 
-        PNotify.success({
-            title: "Successfully added Category",
-            delay: 2000,
-            modules: {
-                Buttons: {
-                    closer: true,
-                    closerHover: true,
-                    sticker: false
-                },
-                Mobile: {
-                    swipeDismiss: true,
-                    styling: true
+            PNotify.success({
+                title: "Successfully added Category",
+                delay: 2000,
+                modules: {
+                    Buttons: {
+                        closer: true,
+                        closerHover: true,
+                        sticker: false
+                    },
+                    Mobile: {
+                        swipeDismiss: true,
+                        styling: true
+                    }
                 }
-            }
+            });
+
+            showCategories();
+            document.getElementById("catName").value = "";
+            document.getElementById("catDesc").value = "";
+
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
         });
-
-        showCategories();
-        document.getElementById("catName").value = "";
-        document.getElementById("catDesc").value = "";
-
-    })
-    .catch(function (error) {
-        console.error("Error writing document: ", error);
-    });
 
     $('#categoryModal').modal('hide');
 }
 
 async function updateCategory(value) {
-    
+
     let newName = document.getElementById("catName").value;
     let newDesc = document.getElementById("catDesc").value;
 
@@ -124,40 +125,43 @@ async function updateCategory(value) {
     db.collection("categories")
         .where("id", "==", value)
         .get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
                 doc.ref.update({
                     name: newName,
                     description: newDesc
                 });
             });
-        
-        PNotify.success({
-            title: "Update Successful!",
-            delay: 2000,
-            modules: {
-                Buttons: {
-                    closer: true,
-                    closerHover: true,
-                    sticker: false
-                },
-                Mobile: {
-                    swipeDismiss: true,
-                    styling: true
+
+            PNotify.success({
+                title: "Update Successful!",
+                delay: 2000,
+                modules: {
+                    Buttons: {
+                        closer: true,
+                        closerHover: true,
+                        sticker: false
+                    },
+                    Mobile: {
+                        swipeDismiss: true,
+                        styling: true
+                    }
                 }
-            }
-        });
-        
-        showCategories();
-        document.getElementById("catName").value = "";
-        document.getElementById("catDesc").value = "";
-        
+            });
+
+            showCategories().then(function () {
+                $("#categoriesTable").DataTable({ scrollY: 400 })
+
+            });;
+            document.getElementById("catName").value = "";
+            document.getElementById("catDesc").value = "";
+
         })
-        .catch(function (error){
+        .catch(function (error) {
             console.error("Error category deletion: ", error);
         });
-    
-        $('#categoryModal').modal('hide');
+
+    $('#categoryModal').modal('hide');
 }
 
 async function removeCategory(value) {
@@ -191,35 +195,35 @@ async function removeCategory(value) {
         db.collection("categories")
             .where("id", "==", value)
             .get()
-            .then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
                     doc.ref.delete();
                 });
-            
-            PNotify.success({
-                title: "Delete Successful!",
-                delay: 2000,
-                modules: {
-                    Buttons: {
-                        closer: true,
-                        closerHover: true,
-                        sticker: false
-                    },
-                    Mobile: {
-                        swipeDismiss: true,
-                        styling: true
+
+                PNotify.success({
+                    title: "Delete Successful!",
+                    delay: 2000,
+                    modules: {
+                        Buttons: {
+                            closer: true,
+                            closerHover: true,
+                            sticker: false
+                        },
+                        Mobile: {
+                            swipeDismiss: true,
+                            styling: true
+                        }
                     }
-                }
-            });
-            
-            showCategories();
-            
+                });
+
+                showCategories();
+
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.error("Error category deletion: ", error);
             });
     });
-    
+
 }
 
 // $(document).ready(function () {

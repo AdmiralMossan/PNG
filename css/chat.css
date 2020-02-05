@@ -65,7 +65,7 @@
 }
 
 .chat_msg_item_admin p.messageDisplay{
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Roboto';
   font-weight: 500;
   background: rgba(0, 0, 0, 0.03);
@@ -93,34 +93,12 @@
 }
 
 .chat_msg_item_user p.messageDisplay{
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Roboto';
   font-weight: 500;
   background: #42a5f5;
   color: #eceff1;
   padding: 3px;
-}
-
-.send-msg {
-  display: block;
-  float: right;
-  max-width: 60%;
-}
-
-.receive-msg img{
-	border-radius: 100%;
-	height: 30px;
-	width: 12%;
-}
-
-.receive-img{
-	display: inline;
-}
-.receive-msg .receive-msg-desc{
-	display: inline-block;
-}
-.receive-msg .receive-msg-desc p{
-	background: #c1c1c1;
 }
 
 .message-box input{
@@ -164,6 +142,8 @@
   width: 294px;
   background-color: white;
   height: 350px;
+  -webkit-transition: all .1s ease-out;
+  transition: all .1s ease-out;
 }
 
 /* Add styles to the form container */
@@ -182,12 +162,6 @@
   background: #f1f1f1;
   resize: none;
   min-height: 200px;
-}
-
-/* When the textarea gets focus, do something */
-.form-container textarea:focus {
-  background-color: #ddd;
-  outline: none;
 }
 
 .minimize {

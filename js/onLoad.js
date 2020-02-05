@@ -1,7 +1,7 @@
 window.addEventListener("load", async () => {
   isloaded = true;
   await getReports();
-  await reportsTable();
+  await report();
   $('#reportsTable').DataTable({
     scrollY: 400
   });
@@ -60,7 +60,7 @@ window.addEventListener("load", async () => {
               drawPie(displayBy);
               drawVisualization2d(search, displayBy);
             }
-            reportsTable().then(function () {
+            report().then(function () {
               $('#reportsTable').DataTable();
             });
           });

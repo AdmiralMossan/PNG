@@ -1,24 +1,11 @@
-var csvData = [];
-var reportsTable
-
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();
-    await showTables();
-    reportsTable = $('#reportsTable').DataTable({
-        dom: 'Bfrtip',
-        scrollY: 400,
-        buttons: ['csv', 'excel', 'pdf'],
-        responsive: true
-    });
-
+    await reportSummary();
 
 });
 
-async function showTables() {
-    let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-    $('#showCategoriesTable div').html("");
-
+function showLatest() {
     let cat = {};
     let group = {};
     let cCtr = {};
@@ -39,7 +26,8 @@ async function showTables() {
 
     //Add body
     let body = '<tbody class="scroll-secondary">';
-    reports.forEach(function (report) {
+    loop: reports.forEach(function (report) {
+        if (ctr++ == 6) { break loop }
         if (typeof cCtr[report.category] === "undefined") {
             cCtr[report.category] = 0;
         } else {
@@ -50,7 +38,6 @@ async function showTables() {
         } else {
             gCtr[report.group] += 1;
         }
-
         let date = new Date(report.created["seconds"] * 1000);
         body +=
             "<tr ondblclick= selectReport(" + report.id + ")>" +
@@ -68,22 +55,6 @@ async function showTables() {
             "</td>" +
             "</tr>";
 
-        csvData.push({
-            user: report.username,
-            group: report.group,
-            category: report.category,
-            date:
-                date.getMonth() +
-                1 +
-                "-" +
-                date.getDay() +
-                "-" +
-                date.getFullYear() +
-                " " +
-                date.getHours() +
-                ":" +
-                date.getMinutes()
-        });
     });
 
     $.each(cCtr, function (key, value) {
@@ -100,3 +71,47 @@ async function showTables() {
 
     $("#allReports").append(head + body + "</tbody></table>");
 }
+
+async function reportSummary() {
+
+    let cat = {};
+    let group = {};
+    let cCtr = {};
+    let gCtr = {};
+    let ctr = 0;
+
+    reports.forEach(function (report) {
+        if (typeof cCtr[report.category] === "undefined") {
+            cCtr[report.category] = 0;
+        } else {
+            cCtr[report.category] += 1;
+        }
+        if (typeof gCtr[report.group] === "undefined") {
+            gCtr[report.group] = 0;
+        } else {
+            gCtr[report.group] += 1;
+        }
+
+
+    });
+
+    $.each(cCtr, function (key, value) {
+        if (cat["value"] < value || typeof cat["value"] === "undefined") {
+            cat = { key, value };
+        }
+    });
+
+    $.each(gCtr, function (key, value) {
+        if (group["value"] < value || typeof group["value"] === "undefined") {
+            group = { key, value };
+        }
+    });
+
+
+    $("#categoryCount").text(cat["key"]);
+    $("#groupCount").text(group["key"]);
+    $("#reportCount").text(reports.length);
+    showLatest()
+}
+
+

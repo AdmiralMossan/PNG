@@ -1,3 +1,6 @@
+
+// Report array initialization and notification functions
+
 var notif = false;
 var reports = [];
 
@@ -7,6 +10,40 @@ window.addEventListener("load", async () => {
     await showNotif();
 
 });
+function notifyReport(report) {
+    PNotify.info({
+        title: "New Report",
+        text:
+            "Username: " +
+            report.data().username +
+            " Category: " +
+            report.data().category +
+            " Group: " +
+            report.data().group +
+            " " +
+            report
+                .data()
+                .created.toDate()
+                .toLocaleString(),
+        delay: 3000,
+        modules: {
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Desktop: {
+                desktop: true,
+                fallback: true,
+                icon: null
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
+}
 
 async function getReports() {
     let locCat = [];
@@ -26,6 +63,9 @@ async function getReports() {
 }
 
 async function showNotif() {
+
+    let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+
     $('#showCategoriesTable div').html("");
 
     let cat = {};
@@ -42,7 +82,7 @@ async function showNotif() {
             }
             ctr += 1;
             $('#notifDropdown').html('<i class="material-icons text-danger">notifications_active</i><span class="badge badge-pill badge-danger p-1">' + ctr + '</span>')
-            $('#notifItem').append('<div class="dropdown-item py-0"><div class="row"><p class="col-12 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="col-8 text-danger m-0"> (' + report.created.toDate().toLocaleString("en-PH") + ')</p><a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></div><hr class="mt-1"></div>')
+            $('#notifItem').append('<div class="dropdown-item py-0"><div><p class="p-0 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="row text-danger p-0 m-0 justify-content-between"> (' + report.created.toDate().toLocaleString("en-US", options) + ')<a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></p></div><hr class="mt-1"></div>')
         }
     });
     if (notif === false) {

@@ -1,6 +1,3 @@
-/*
-    DEMO STYLE
-*/
 html{
   height:100vh;
 }
@@ -69,10 +66,15 @@ span {
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #d0afff;
+  /* background: #1E3045; */
+
+  background-image: linear-gradient(180deg, #2E6158, #7EAFC0 );
+  
+  background-size: cover;
+
   color: #fff;
   transition: all 0.3s;
-  border-right: 1px solid #47748b !important;
+  border-right: 1px solid #D0DED4 !important;
 }
 
 
@@ -122,8 +124,12 @@ span {
 }
 
 #sidebar .sidebar-header {
+  color: #CEE8D7;
   padding: 20px;
-  background: #bd9bff;
+  background: #223438;
+  /* background-image: linear-gradient(180deg, #517D6C,#223438, #517D6C); */
+  background-size: cover;
+  
 }
 
 #sidebar .sidebar-header strong {
@@ -133,7 +139,7 @@ span {
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+  border-bottom: 1px solid #D0DED4;
 }
 
 #sidebar ul li a {
@@ -143,8 +149,9 @@ span {
 }
 
 #sidebar ul li a:hover {
-  color: #7386d5;
-  background: #fff;
+  color: white;
+  /* background: #fff; */
+  background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC);
 }
 
 #sidebar ul li a i {
@@ -154,7 +161,8 @@ span {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #ad85fc;
+  background: #2E6158;
+  /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
 a[data-toggle="collapse"] {
@@ -172,7 +180,8 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #bd9bff;
+  background: rgb(85, 151, 139);
+  /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
 ul.CTAs {
@@ -187,19 +196,11 @@ ul.CTAs a {
   margin-bottom: 5px;
 }
 
-a.download {
-  background: #fff;
-  color: #7386d5;
-}
-
-a.article,
-a.article:hover {
-  background: #6d7fcc !important;
-  color: #fff !important;
-}
-
 #menubutton {
-  background-color: #f5d1ff;
+  box-shadow: 5px 10px 8px #888888;
+  color: #456C89;
+  /* background-color: #E1DECB; */
+  background-image: linear-gradient(180deg, #EBBEAB, #E1DECB);
 }
 
 #adminname {
@@ -207,7 +208,7 @@ a.article:hover {
 }
 
 #sidebarCollapse {
-  background-color: #efa4f6;
+  background-color: #FEFAED;
 }
 
 .scroll-to-top {
@@ -241,7 +242,8 @@ a.article:hover {
 	top:0;
 	right:0;
 	bottom:0;
-  background-image: linear-gradient(180deg, #efa4f6, white);
+  /* background-image: linear-gradient(180deg, #89C0D5, #CFE6DC, #F4EDDA); */
+  background-image: linear-gradient(180deg, #EEDFB4, #8BB6AD, #25538E, #212B4E);
   background-size: cover;
 }
 

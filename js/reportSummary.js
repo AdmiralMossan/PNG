@@ -1,11 +1,22 @@
+var latestReportsTable
+
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();
     await reportSummary();
-
+    $('#latestReportsTable').DataTable({
+        scrollY: 210,
+        responsive: true,
+        searching: false,
+        lengthChange: false,
+        ordering: false,
+        paging: false,
+        info: false
+    });
 });
 
 function showLatest() {
+    let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
     let cat = {};
     let group = {};
     let cCtr = {};
@@ -14,12 +25,12 @@ function showLatest() {
 
     //Add Head
     let head =
-        "<table id='reportsTable' class='display'>" +
-        "<thead class='thead-inverse bg-custom text-custom'>" +
+        "<table id='latestReportsTable' class='display'>" +
+        "<thead>" +
         "<tr>" +
         "<th style='width:20%;'>User</th>" +
-        "<th style='width:20%;'>Group</th>" +
-        "<th style='width:20%;'>Category</th>" +
+        "<th style='width:10%;'>Group</th>" +
+        "<th style='width:30%;'>Category</th>" +
         "<th style='width:40%;'>Date" +
 
         "</th></tr></thead>";
@@ -27,34 +38,34 @@ function showLatest() {
     //Add body
     let body = '<tbody class="scroll-secondary">';
     loop: reports.forEach(function (report) {
-        if (ctr++ == 6) { break loop }
-        if (typeof cCtr[report.category] === "undefined") {
-            cCtr[report.category] = 0;
-        } else {
-            cCtr[report.category] += 1;
+        if (ctr++ < 5) {
+            if (typeof cCtr[report.category] === "undefined") {
+                cCtr[report.category] = 0;
+            } else {
+                cCtr[report.category] += 1;
+            }
+            if (typeof gCtr[report.group] === "undefined") {
+                gCtr[report.group] = 0;
+            } else {
+                gCtr[report.group] += 1;
+            }
+            let date = new Date(report.created["seconds"] * 1000);
+            body +=
+                "<tr ondblclick= selectReport(" + report.id + ")>" +
+                "<td>" +
+                report.username +
+                "</td>" +
+                "<td>" +
+                report.group +
+                "</td>" +
+                "<td>" +
+                report.category +
+                "</td>" +
+                "<td>" +
+                report.created.toDate().toLocaleString("en-US", options) +
+                "</td>" +
+                "</tr>";
         }
-        if (typeof gCtr[report.group] === "undefined") {
-            gCtr[report.group] = 0;
-        } else {
-            gCtr[report.group] += 1;
-        }
-        let date = new Date(report.created["seconds"] * 1000);
-        body +=
-            "<tr ondblclick= selectReport(" + report.id + ")>" +
-            "<td>" +
-            report.username +
-            "</td>" +
-            "<td>" +
-            report.group +
-            "</td>" +
-            "<td>" +
-            report.category +
-            "</td>" +
-            "<td>" +
-            report.created.toDate().toLocaleString("en-US", options) +
-            "</td>" +
-            "</tr>";
-
     });
 
     $.each(cCtr, function (key, value) {
@@ -69,8 +80,9 @@ function showLatest() {
         }
     });
 
-    $("#allReports").append(head + body + "</tbody></table>");
+    $("#latestReport").append(head + body + "</tbody></table>");
 }
+
 
 async function reportSummary() {
 

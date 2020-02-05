@@ -274,7 +274,6 @@ async function drawPie(groupBy) {
             labels: displayLabel,
             datasets: [
                 {
-                    label: "# of Votes",
                     data: displayData,
                     backgroundColor: pieColors,
                     borderColor: colors,

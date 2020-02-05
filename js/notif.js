@@ -8,6 +8,7 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();
     await showNotif();
+    await reportDetails()
 
 });
 function notifyReport(report) {
@@ -121,4 +122,33 @@ async function loadReportDetails(reportSelected) {
     } else {
         $("#sattachment").html('Link to attachment: <a target=_blank href= ' + reportSelected.attachFile + '>Link</a>');
     }
+}
+
+async function reportDetails() {
+    $('body').append('<div class= "modal fade" id = "reportDetails" tabindex = "-1" role = "dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" > ' +
+        '<div class= "modal-dialog modal-dialog-centered" role = "document" > ' +
+        '<div class= "modal-content" > ' +
+        '<div class= "modal-header" > ' +
+        '<h5 class="modal-title" id="reportTitle"></h5> ' +
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close"> ' +
+        '<span aria-hidden="true">&times;</span> ' +
+        '</button> ' +
+        '</div> ' +
+        ' <div class="modal-body"> ' +
+        ' <ul class="list-unstyled"> ' +
+        ' <li id="sgroup">Group: </li> ' +
+        ' <li id="scategory">Category: </li> ' +
+        ' <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">  Occurance: </li> ' +
+        ' <li id="sotherDetails">Other Details: </li> ' +
+        ' <li id="spersonInfo">Subject: </li> ' +
+        ' <li id="sattachment">Link to attachment: </li> ' +
+        ' </ul> ' +
+        ' </div> ' +
+        ' <div class="modal-footer"> ' +
+        ' <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> ' +
+        ' </div> ' +
+        ' </div> ' +
+        ' </div> ' +
+        ' </div > '
+    )
 }

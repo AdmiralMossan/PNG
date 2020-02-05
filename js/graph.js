@@ -13,6 +13,7 @@ async function loadData(colorBy) {
   var yAxisMax = groups.length;
   var axisStep = axisMax / steps;
   var z = 0;
+  maxZvalue = 0;
 
   dataArray = [];
   for (let i = 0; i < axisMax; i += axisStep) {
@@ -58,7 +59,7 @@ function generateColors(sortBy) {
   }
 }
 
-function findLongestString(){
+function findLongestString() {
   let longest = categories.reduce(function (a, b) { return a.length > b.length ? a : b; });
   return longest.length;
 }
@@ -70,7 +71,7 @@ async function drawVisualization(data) {
   let xL = "";
   let yL = "";
   let strlen = findLongestString();
-  if (strlen < 7){
+  if (strlen < 7) {
     xL = "Category";
     yL = "Group";
   }

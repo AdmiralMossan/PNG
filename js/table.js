@@ -1,4 +1,3 @@
-var csvData = [];
 var reportsTable
 
 window.addEventListener("load", async () => {
@@ -7,7 +6,7 @@ window.addEventListener("load", async () => {
     await showTables();
     reportsTable = $('#reportsTable').DataTable({
         dom: 'Bfrtip',
-        scrollY: 400,
+        scrollY: '40vh',
         buttons: ['csv', 'excel', 'pdf'],
         responsive: true
     });
@@ -68,22 +67,6 @@ async function showTables() {
             "</td>" +
             "</tr>";
 
-        csvData.push({
-            user: report.username,
-            group: report.group,
-            category: report.category,
-            date:
-                date.getMonth() +
-                1 +
-                "-" +
-                date.getDay() +
-                "-" +
-                date.getFullYear() +
-                " " +
-                date.getHours() +
-                ":" +
-                date.getMinutes()
-        });
     });
 
     $.each(cCtr, function (key, value) {

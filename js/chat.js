@@ -8,7 +8,26 @@ function openForm(box) {
     document.getElementById("messageBox").style.display = "block";
     loadMessages();
   }
+}
 
+function searchUser() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('searchUser');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("users");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("span")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
 }
 
 function closeForm(box) {
@@ -83,8 +102,10 @@ function toggleButton() {
 function onMessageFormSubmit(e) {
   e.preventDefault();
   // Check that the user entered a message and is signed in.
-  if (messageInputElement.value) {
-    saveMessage(messageInputElement.value).then(function () {
+  let message = messageInputElement.value;
+  messageInputElement.value = "";
+  if (message) {
+    saveMessage(message).then(function () {
       // Clear message text field and re-enable the SEND button.
       resetMaterialTextfield();
       toggleButton();
@@ -180,26 +201,23 @@ function deleteMessage(id) {
   }
 }
 
-// Template for messages.
-var SENDER_MESSAGE_TEMPLATE = '<li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">' +
-  '<p class="messageDisplay"></p>' +
-  '</li>';
+  var SENDER_MESSAGE_TEMPLATE = ' <div class="chat_msg_item chat_msg_item_user">' +
+'<p class="messageDisplay rounded load">'+
+'</p></div>';
 
-
-var RECEIVER_MESSAGE_TEMPLATE =
-  '<li class="p-1 rounded mb-1">' +
-  '<div class="receive-msg">' +
-  '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png">' +
-  '<div class="receive-msg-desc text-center mt-1 ml-1 pl-2 pr-2">' +
-  '<p class="messageDisplay pl-2 pr-2 rounded"></p>' +
-  '</div>' +
-  '</div>' +
-  '</li>';
+  var RECEIVER_MESSAGE_TEMPLATE =
+  '<span class="chat_msg_item chat_msg_item_admin  ">'+
+  '<div class="chat_avatar">' +
+     '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png"/>' +
+  '</div><p class="messageDisplay rounded"></p></span>' ;
 
 function createAndInsertMessage(id, timestamp, sender) {
   const container = document.createElement('div');
   container.innerHTML = sender ? SENDER_MESSAGE_TEMPLATE : RECEIVER_MESSAGE_TEMPLATE;
-  const div = container.firstChild;
+  console.log(container.innerHTML);
+  console.log(container);
+  const div = container.firstElementChild;;
+  console.log(div);
   div.setAttribute('id', id);
 
   // If timestamp is null, assume we've gotten a brand new message.

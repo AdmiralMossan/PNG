@@ -146,9 +146,6 @@ span {
   display: block;
 }
 
-.arrow_icon{
-  display: none;
-}
 
 /* ------------------------------------------------------
     HOVER ON ITEM ON SIDEBAR
@@ -158,10 +155,6 @@ span {
     /* Use background: color; if no gradient is to be applied */
     background: #498cb9;
     /* background: white url('../Images/hover-item.png'); */
-  }
-  
-  #sidebar ul li a:hover .arrow_icon {
-    display:inline;
   }
 
   #sidebar ul li a i {
@@ -211,6 +204,9 @@ ul.CTAs a {
   margin-bottom: 5px;
 }
 
+/* ------------------------------------------------------
+        NAME OF LOGGED IN ADMIN
+---------------------------------------------------------*/
 #adminname {
   font-size: 20px;
 }

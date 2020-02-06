@@ -154,7 +154,8 @@ html{
   #sidebar ul li a:hover {
     color: white;
     /* Use background: color; if no gradient is to be applied */
-    background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC);
+    background: #0D1C3D;
+    /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
   }
   
   #sidebar ul li a i {
@@ -330,6 +331,6 @@ html{
 ---------------------------------------------------------*/
 #maincontainer {
     background-color: white;
-    color: #BD9BFF;
+    color: #0D1C3D;
     min-width: 50px;
 }

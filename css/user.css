@@ -4,16 +4,35 @@
 
 body {
     color: #013F2A;
-    background-image: linear-gradient(180deg, #F5D1FF, white);
+    background-image: linear-gradient(180deg, #EEDFB4, #8BB6AD, #25538E, #212B4E);
 }
 
 nav{
-    background-color:#EFA4F6;
+    background-image: linear-gradient(180deg, #EBBEAB, #E1DECB);
 }
 
 #maincontainer {
-    background-color: white;
-    color: #BD9BFF;
+    background-image: linear-gradient(to right,
+    #184E96,
+    #A1C6CC,
+    #E8E3CF,
+    #ECE6D0,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    white,
+    #ECE6D0,
+    #E8E3CF, 
+    #A1C6CC, 
+  #184E96);
+  color: #051853;
     min-width: 50px;
 }
 

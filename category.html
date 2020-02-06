@@ -144,7 +144,9 @@
                       <div class="col-md h-25">
                         <h2 id="pagetitle" class="text-center my-0">Category Management:</h2>
                           <!-- Insert user management functions here -->
-                        <div id="showCategoriesTable" class="pt-4">
+                          <input id="addCategoryButton" onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');" 
+                          class="material-icons" type="button" value="add" data-toggle="modal" data-target="#categoryModal">
+                          <div id="showCategoriesTable" class="pt-4">
                         </div>    
                         <!-- <div class="d-flex text-center">
                                 <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""

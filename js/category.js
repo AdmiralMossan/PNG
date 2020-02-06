@@ -51,7 +51,8 @@ async function showCategories() {
             "<td class='d-flex'>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteCategory'" + category.id + " onClick='removeCategory(" + category.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
-            "</td>";
+            "</td>" +
+            "</tr>";
     });
 
     $("#showCategoriesTable").append(head + body + "</tbody></table>");

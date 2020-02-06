@@ -12,26 +12,6 @@ nav{
 }
 
 #maincontainer {
-    background-image: linear-gradient(to right,
-    #184E96,
-    #A1C6CC,
-    #E8E3CF,
-    #ECE6D0,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    white,
-    #ECE6D0,
-    #E8E3CF, 
-    #A1C6CC, 
-  #184E96);
   color: #051853;
     min-width: 50px;
 }

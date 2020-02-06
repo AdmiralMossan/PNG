@@ -5,7 +5,6 @@ window.addEventListener("load", async () => {
     $('#categoriesTable').DataTable({
         dom: 'Bfrtip',
         scrollY: '40vh',
-        buttons: ['csv', 'excel', 'pdf'],
         responsive: true
     });
     
@@ -13,7 +12,6 @@ window.addEventListener("load", async () => {
         $('#categoriesTable').DataTable({
             dom: 'Bfrtip',
             scrollY: '40vh',
-            buttons: ['csv', 'excel', 'pdf'],
             responsive: true
         });
     });
@@ -114,7 +112,6 @@ async function addCategory() {
                 $('#categoriesTable').DataTable({
                     dom: 'Bfrtip',
                     scrollY: '40vh',
-                    buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
             });
@@ -168,7 +165,6 @@ async function updateCategory(value) {
                 $('#categoriesTable').DataTable({
                     dom: 'Bfrtip',
                     scrollY: '40vh',
-                    buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
             });
@@ -239,7 +235,6 @@ async function removeCategory(value) {
                     $('#categoriesTable').DataTable({
                         dom: 'Bfrtip',
                         scrollY: '40vh',
-                        buttons: ['csv', 'excel', 'pdf'],
                         responsive: true
                     });
                 });

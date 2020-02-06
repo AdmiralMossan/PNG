@@ -5,26 +5,7 @@
 }
 
 #maincontainer{
-  background-image: linear-gradient(to right,
-    #184E96,
-    #A1C6CC,
-    #E8E3CF,
-    #ECE6D0,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #EAE2CF,
-    #ECE6D0,
-    #E8E3CF, 
-    #A1C6CC, 
-  #184E96);
+  background: white;
   color: #051853;
   min-width: 50px;
 }

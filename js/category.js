@@ -1,15 +1,14 @@
 window.addEventListener("load", async () => {
     isloaded = true;
     await showCategories();
-
+    
     $('#categoriesTable').DataTable({
         dom: 'Bfrtip',
         scrollY: '40vh',
         buttons: ['csv', 'excel', 'pdf'],
         responsive: true
     });
-
-
+    
     showCategories().then(() => {
         $('#categoriesTable').DataTable({
             dom: 'Bfrtip',
@@ -17,8 +16,7 @@ window.addEventListener("load", async () => {
             buttons: ['csv', 'excel', 'pdf'],
             responsive: true
         });
-    }
-    );
+    });
 });
 
 async function showCategories() {
@@ -119,8 +117,7 @@ async function addCategory() {
                     buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
-            }
-            );
+            });
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -174,8 +171,7 @@ async function updateCategory(value) {
                     buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
-            }
-            );
+            });
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -246,9 +242,7 @@ async function removeCategory(value) {
                         buttons: ['csv', 'excel', 'pdf'],
                         responsive: true
                     });
-                }
-                );
-
+                });
             })
             .catch(function (error) {
                 console.error("Error category deletion: ", error);
@@ -256,15 +250,3 @@ async function removeCategory(value) {
     });
 
 }
-
-// $(document).ready(function () {
-
-//     $(document).on('show.bs.modal', '.modal', function (event) {
-//         var zIndex = 1040 + (10 * $('.modal:visible').length);
-//         $(this).css('z-index', zIndex);
-//         setTimeout(function() {
-//             $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-//         }, 0);
-//     });
-
-// });

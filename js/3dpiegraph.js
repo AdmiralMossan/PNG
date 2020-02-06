@@ -15,15 +15,6 @@ var csvData = [];
 var reportSelected = {};
 var maxZvalue = 0;
 
-
-//2D Graph Globals
-var barGraph = null;
-var search = 0;
-var byGroupCount = [];
-var byCategoryCount = [];
-var maxCategoryCount = 0;
-var maxGroupCount = 0;
-
 function clearValues() {
     categoriesCount = [];
     groupsCount = [];
@@ -48,27 +39,72 @@ function initializeCounts() {
     }
 }
 
-function initArray() {
-    for (let i = 0; i < groups.length; i++) {
-        byGroupCount[i] = [];
-    }
+function generateColors(sortBy) {
+    colors = [];
+    let sortLength = sortBy == 1 ? categories.length : groups.length;
 
-    for (let i = 0; i < categories.length; i++) {
-        byCategoryCount[i] = [];
-    }
-
-    for (let i = 0; i < categories.length; i++) {
-        for (let j = 0; j < groups.length; j++) {
-            byCategoryCount[i][j] = 0;
-        }
-    }
-
-    for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < categories.length; j++) {
-            byGroupCount[i][j] = 0;
-        }
+    for (let i = 0; i < sortLength; i++) {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        stringColor = "rgba(" + r + "," + g + "," + b;
+        colors[i] = stringColor + ",1)";
+        pieColors[i] = stringColor + ",0.4)";
     }
 }
+
+function getData(x, y) {
+    let count = 0;
+    for (let i = 0; i < reports.length; i++) {
+      if (reports[i].category == categories[x] && reports[i].group == y + 1)
+        count += 1;
+    }
+    return count;
+}
+
+function findLongestString() {
+    let longest = categories.reduce(function (a, b) { return a.length > b.length ? a : b; });
+    return longest.length;
+}
+  
+async function loadData(colorBy) {
+    var steps = categories.length;
+    var axisMax = steps;
+    var yAxisMax = groups.length;
+    var axisStep = axisMax / steps;
+    var z = 0;
+    maxZvalue = 0;
+  
+    dataArray = [];
+    for (let i = 0; i < axisMax; i += axisStep) {
+      for (let j = 0; j < yAxisMax; j += axisStep) {
+        z = getData(i, j);
+  
+        maxZvalue = z > maxZvalue ? z : maxZvalue;
+  
+        color = colorBy == 1 ? colors[i] : colors[j];
+        dataArray.push({
+          x: i,
+          y: j,
+          z: z,
+          style: {
+            fill: color,
+            stroke: "#999"
+          }
+        });
+      }
+    }
+  
+    // Create and populate a data table.
+    data = new vis.DataSet();
+  
+    for (let i = 0; i < dataArray.length; i++) {
+      data.add(dataArray[i]);
+    }
+  
+    return dataArray;
+}
+
 async function getGroupsAndCategories() {
     clearValues();
     getReports();
@@ -112,14 +148,13 @@ async function getGroupsAndCategories() {
         }
     }
 
-    initArray();
     return;
 }
 
 
 window.addEventListener("load", async () => {
     isloaded = true;
-    await getGroupsAndCategories()
+    await getGroupsAndCategories();
     generateColors(1);
 
     loadData(1).then(function () {
@@ -134,10 +169,6 @@ window.addEventListener("load", async () => {
         loadData(1).then(function () {
             drawVisualization(data);
             drawPie(1);
-            search = 1;
-            buttonEnabler(search);
-            $('#searchBoxLabel').text("Search by Category: ");
-            drawVisualization2d(search, 1);
         });
     });
 
@@ -146,11 +177,6 @@ window.addEventListener("load", async () => {
         loadData(2).then(function () {
             drawVisualization(data);
             drawPie(2);
-            search = 1;
-            document.getElementById("search").value = search.toString();
-            buttonEnabler(search);
-            $('#searchBoxLabel').text("Search by Group: ");
-            drawVisualization2d(search, 2);
         });
     });
 
@@ -179,78 +205,6 @@ window.addEventListener("load", async () => {
     });
 
 });
-
-
-var barGraph = null;
-var search = 0;
-var byGroupCount = [];
-var byCategoryCount = [];
-var maxCategoryCount = 0;
-var maxGroupCount = 0;
-
-function initArray() {
-    for (let i = 0; i < groups.length; i++) {
-        byGroupCount[i] = [];
-    }
-
-    for (let i = 0; i < categories.length; i++) {
-        byCategoryCount[i] = [];
-    }
-
-    for (let i = 0; i < categories.length; i++) {
-        for (let j = 0; j < groups.length; j++) {
-            byCategoryCount[i][j] = 0;
-        }
-    }
-
-    for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < categories.length; j++) {
-            byGroupCount[i][j] = 0;
-        }
-    }
-}
-
-function findMax() {
-    for (let i = 0; i < categories.length; i++) {
-        for (let j = 0; j < groups.length; j++) {
-            if (maxCategoryCount < byCategoryCount[i][j]) {
-                maxCategoryCount = byCategoryCount[i][j];
-            }
-        }
-    }
-
-    for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < categories.length; j++) {
-            if (maxGroupCount < byGroupCount[i][j]) {
-                maxGroupCount = byGroupCount[i][j];
-            }
-        }
-    }
-}
-
-function byCategory() {
-    for (let i = 0; i < reports.length; i++) {
-        for (let j = 0; j < categories.length; j++) {
-            for (let k = 0; k < groups.length; k++) {
-                if (reports[i].category == categories[j] && reports[i].group == k + 1) {
-                    byCategoryCount[j][k] += 1;
-                }
-            }
-        }
-    }
-}
-
-function byGroup() {
-    for (let i = 0; i < reports.length; i++) {
-        for (let j = 0; j < groups.length; j++) {
-            for (let k = 0; k < categories.length; k++) {
-                if (reports[i].category == categories[k] && reports[i].group == j + 1) {
-                    byGroupCount[j][k] += 1;
-                }
-            }
-        }
-    }
-}
 
 async function drawPie(groupBy) {
     let displayData = [];
@@ -284,82 +238,79 @@ async function drawPie(groupBy) {
     });
 }
 
-
-function findString(value) {
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let displayData = [];
-
-    displayData = sortBy == 1 ? categories.slice() : groups.slice();
-
-    for (i = 0; i < displayData.length; i++) {
-        displayData[i] = displayData[i].toLowerCase();
+// Called when the Visualization API is loaded.
+async function drawVisualization(data) {
+    // specify options
+    maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
+    let xL = "";
+    let yL = "";
+    let strlen = findLongestString();
+    if (strlen < 7) {
+      xL = "Category";
+      yL = "Group";
     }
-
-    displayData.forEach(function (a) {
-        if (typeof (a) === 'string' && a.indexOf(value) > -1) {
-            let index = displayData.indexOf(value) + 1;
-            if (index === 0) {
-
-            } else {
-                document.getElementById("search").value = index.toString();
-                search = index;
-                buttonEnabler(index);
-                drawVisualization2d(index, sortBy);
-            }
+    var options = {
+      height: "100%",
+      width: "100%",
+      style: "bar-color",
+      showPerspective: true,
+      showGrid: true,
+      showShadow: true,
+      animationPreload: true,
+      axisFontType: "arial",
+      axisFontSize: 26,
+      xLabel: xL, //Categories
+      yLabel: yL, //Groups
+      zLabel: "Number", //Number
+      xBarWidth: 0.5,
+      yBarWidth: 0.5,
+      rotateAxisLabels: true,
+      xCenter: "50%",
+      yCenter: "40%",
+      xStep: 1,
+      yStep: 1,
+      zMin: 0,
+      zMax: maxZvalue,
+  
+      tooltip: function (point) {
+        // parameter point contains properties x, y, z
+        return (
+          "Category: <b>" +
+          categories[point.x] +
+          "</b> " +
+          "Group: <b>" +
+          groups[point.y] +
+          "</b> " +
+          "Number: <b>" +
+          point.z +
+          "</b>"
+        );
+      },
+  
+      xValueLabel: function (value) {
+        if (value % 1 == 0) {
+          return "  " + categories[value];
         }
-    });
-}
-
-function buttonEnabler(value) {
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let len = sortBy == 1 ? categories.length : groups.length;
-
-    if (value == len) {
-        $('#next').attr('disabled', true);
-        $('#prev').attr('disabled', false);
-    } else if (value == 1) {
-        $('#prev').attr('disabled', true);
-        $('#next').attr('disabled', false);
-    } else {
-        $('#prev').attr('disabled', false);
-        $('#next').attr('disabled', false);
-    }
-}
-
-function prevButton() {
-    search -= 1;
-    buttonEnabler(search);
-
-    document.getElementById("search").value = search.toString();
-
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-
-    drawVisualization2d(search, sortBy);
-}
-
-function nextButton() {
-    search += 1;
-    buttonEnabler(search);
-
-    document.getElementById("search").value = search.toString();
-
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-
-    drawVisualization2d(search, sortBy);
-}
-
-function searchBoxField() {
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let displayData = [];
-    let searchString = document.getElementById('searchBox').value;
-
-    displayData = sortBy == 1 ? categories : groups;
-
-    $('#searchBox').autocomplete({
-        source: displayData
-    });
-
-    if (event.key === 'Enter' || event.type === 'click') {
-        findString(searchString.toLowerCase());
-    }
+        return "";
+      },
+  
+      yValueLabel: function (value) {
+        if (value % 1 == 0) {
+          return "  " + groups[value];
+        }
+        return "";
+      },
+  
+      zValueLabel: function (value) {
+        return value;
+      },
+  
+      keepAspectRatio: true
+    };
+  
+    // create our graph
+    var container = document.getElementById("mygraph");
+    graph = new vis.Graph3d(container, data, options);
+  
+    graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
 }

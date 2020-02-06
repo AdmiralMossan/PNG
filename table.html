@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="css/admincontent.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/datatables.min.css" />
     <!-- Custom fonts for this template-->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -25,7 +27,6 @@
     <link href="css/admin.css" rel="stylesheet">
     <link href="css/chat.css" rel="stylesheet">
     <link href="css/table.css" rel="stylesheet">
-    <link href="css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -45,9 +46,8 @@
                 <h3>Admin Menu</h3>
                 <strong>AM</strong>
                 <div class="my-auto text-center">
-                    <a class="my-auto btn dropdown-toggle" href="#" id="notifDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                            class="fas fa-bell"></i></a>
+                    <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
                     <!-- Dropdown - Notif Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
                         aria-labelledby="notifDropdown" id="notifItem">
@@ -176,37 +176,6 @@
         </div>
     </div>
 
-    <!-- Report Detail Modal -->
-    <div class="modal fade" id="reportDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="reportTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-unstyled">
-                        <li id="sgroup">Group: </li>
-                        <li id="scategory">Category: </li>
-                        <li id="sdateInfo" data-toggle="tooltip" data-placement="top"
-                            title="Relative to the Report Date">
-                            Occurance:
-                        </li>
-                        <li id="sotherDetails">Other Details: </li>
-                        <li id="spersonInfo">Subject: </li>
-                        <li id="sattachment">Link to attachment: </li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -252,8 +221,10 @@
     </script>
 
     <!-- DataTable JS -->
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/datatables.min.js"></script>
     <!-- Custom JS -->
     <script src="js/sidebar.js"></script>
     <script src="js/notif.js"></script>

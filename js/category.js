@@ -2,14 +2,23 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await showCategories();
 
-    $("#categoriesTable").DataTable({
-        scrollY: 400
+    $('#categoriesTable').DataTable({
+        dom: 'Bfrtip',
+        scrollY: '40vh',
+        buttons: ['csv', 'excel', 'pdf'],
+        responsive: true
     });
 
-    showCategories().then(function () {
-        $("#categoriesTable").DataTable({ scrollY: 400 })
 
-    });
+    showCategories().then(() => {
+        $('#categoriesTable').DataTable({
+            dom: 'Bfrtip',
+            scrollY: '40vh',
+            buttons: ['csv', 'excel', 'pdf'],
+            responsive: true
+        });
+    }
+    );
 });
 
 async function showCategories() {
@@ -29,7 +38,7 @@ async function showCategories() {
 
     //Add body
     let head =
-        "<table id='categoriesTable' class='display table table-striped table-responsive'>" +
+        "<table id='categoriesTable' class='display'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:25%;'>Category</th>" +
@@ -52,7 +61,8 @@ async function showCategories() {
             "<td class='d-flex'>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#catName\").val(`" + category.name + "`);$(\"#catDesc\").val(`" + category.description + "`);$(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteCategory'" + category.id + " onClick='removeCategory(" + category.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
-            "</td>";
+            "</td>" +
+            "</tr>";
     });
 
     $("#showCategoriesTable").append(head + body + "</tbody></table>");
@@ -102,7 +112,15 @@ async function addCategory() {
                 }
             });
 
-            showCategories();
+            showCategories().then(() => {
+                $('#categoriesTable').DataTable({
+                    dom: 'Bfrtip',
+                    scrollY: '40vh',
+                    buttons: ['csv', 'excel', 'pdf'],
+                    responsive: true
+                });
+            }
+            );
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -149,10 +167,15 @@ async function updateCategory(value) {
                 }
             });
 
-            showCategories().then(function () {
-                $("#categoriesTable").DataTable({ scrollY: 400 })
-
-            });;
+            showCategories().then(() => {
+                $('#categoriesTable').DataTable({
+                    dom: 'Bfrtip',
+                    scrollY: '40vh',
+                    buttons: ['csv', 'excel', 'pdf'],
+                    responsive: true
+                });
+            }
+            );
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -216,7 +239,15 @@ async function removeCategory(value) {
                     }
                 });
 
-                showCategories();
+                showCategories().then(() => {
+                    $('#categoriesTable').DataTable({
+                        dom: 'Bfrtip',
+                        scrollY: '40vh',
+                        buttons: ['csv', 'excel', 'pdf'],
+                        responsive: true
+                    });
+                }
+                );
 
             })
             .catch(function (error) {

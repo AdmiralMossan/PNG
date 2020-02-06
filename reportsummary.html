@@ -12,8 +12,15 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="css/reportsummary.css">
+  <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/admincontent.css">
+  <link rel="stylesheet" href="css/chat.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/datatables.min.css" />
+
 
   <!-- Font Awesome JS -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -34,8 +41,8 @@
         <h3>Admin Menu</h3>
         <strong>AM</strong>
         <div class="my-auto text-center pb-1">
-          <a class="my-auto btn dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
+          <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"><i class="fas fa-bell"></i></a>
           <!-- Dropdown - Notif Information -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
             aria-labelledby="notifDropdown" id="notifItem">
@@ -112,7 +119,7 @@
     </nav>
 
     <!-- Page Content  -->
-    <div id="content">
+    <div id="content" style="overflow: auto;">
 
       <nav id="menubutton" class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -166,6 +173,21 @@
             </div>
           </div>
         </div>
+        <div id="card4" class="stats-card col-12 w-50 pt-4">
+          <div class="card shadow h-100 w-75 row mx-auto ">
+            <div class="card-header bg-custom d-flex flex-row align-items-center">
+              <h6 class="m-0 font-weight-bold text-uppercase text-primary m-auto">Latest Reports</h6>
+            </div>
+            <div class="card-body p-0 w-100">
+              <div class="col p-0 d-flex justify-content-center h-100 w-100">
+                <div id="latestReport" class='w-100'></div>
+              </div>
+            </div>
+            <div class="card-footer mx-auto">
+              <a href="/table.html">All Reports</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -190,6 +212,75 @@
     </div>
   </div>
 
+  <!-- Chat  -->
+  <div id="open-button" class="btn btn-raised" onclick="openForm(1)">
+    <div id="chat-overlay"></div>
+    <i class="material-icons" style="font-size: 30px;">message</i>
+</div>
+
+  <div class="chat-popup" id="myForm">
+    <div class="card-header">
+      <button class="minimize" onclick="closeForm(1);" class="cursor-pointer">
+        <i class="material-icons">minimize</i>
+      </button>
+      <div class="input-group">
+        <div id="peopleIcon">
+          <i class="material-icons">people</i>
+        </div>
+        <input onkeyup="searchUser()" id="searchUser" type="text" placeholder="Search..." name="" class="form-control search">
+        <div class="input-group-prepend">
+          <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body contacts_body scroll">
+      <ui id="users" class="contacts">
+      </ui>
+    </div>
+  </div>
+
+  <div class="chat-popup" id="messageBox">
+    <div class="card-header">
+        <button class="minimize" onclick="closeForm(1);">
+          <i class="material-icons">minimize</i>
+        </button>
+        <button onclick="backToContacts();" class="back-button">
+          <i class="material-icons">keyboard_backspace</i>
+        </button>
+      <div class="input-group">
+        <div>
+          <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png"
+            class="rounded-circle user_img">
+        </div>
+        <div class="user_info">
+          <span id="user_name"></span>
+          <p id="user_group"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="messagesList">
+      <!-- <li class="pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1">
+              hiii
+            </li>
+            <li class="p-1 rounded mb-1">
+                <div class="receive-msg">
+                    <img src="http://nicesnippets.com/demo/image1.jpg">
+                    <div class="receive-msg-desc  text-center mt-1 ml-1 pl-2 pr-2">
+                        <p class="pl-2 pr-2 rounded">hello</p>
+                    </div>
+                </div>
+            </li> -->
+    </div>
+    <div class="message-box ">
+      <form id="message-form" action="#" autocomplete="off">
+        <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
+        <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+      </form>
+    </div>
+  </div>
+
+
   <!-- Firebase core Javascript-->
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
@@ -207,11 +298,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
-  <script src="js/sidebar.js"> </script>
-
-  <script src="js/3dpiegraph.js"></script>
-  <script src="js/reporting.js"></script>
-  <script src="js/onLoad.js"></script>
+  <!-- DataTable JS -->
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/notif.js"></script>
+  <script src="js/reportSummary.js"></script>
+  <script src="js/chat.js"></script>
 
 </body>
 

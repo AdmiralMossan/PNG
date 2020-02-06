@@ -148,7 +148,6 @@ span {
 /* ------------------------------------------------------
     HOVER ON ITEM ON SIDEBAR
 ---------------------------------------------------------*/
-<<<<<<< HEAD
   #sidebar ul li a:hover {
     color: white;
     /* Use background: color; if no gradient is to be applied */
@@ -160,24 +159,6 @@ span {
     margin-right: 10px;
   }
   
-=======
-#sidebar ul li a:hover {
-  color: white;
-  /* Use background: color; if no gradient is to be applied */
-  background-image: linear-gradient(
-    to right,
-    #222f51,
-    #28647e,
-    #ccdfcc,
-    #fcf6dc
-  );
-}
-
-#sidebar ul li a i {
-  margin-right: 10px;
-}
-
->>>>>>> 10f1a7a2a2d1d5c4e9535639b46aa34996b1df2f
 /* ------------------------------------------------------
     ACTIVE BUTTON ON SIDEBAR
 ---------------------------------------------------------*/

@@ -1,24 +1,22 @@
 window.addEventListener("load", async () => {
     isloaded = true;
     await showCategories();
-
+    
     $('#categoriesTable').DataTable({
         dom: 'Bfrtip',
-        scrollY: 400,
+        scrollY: '40vh',
         buttons: ['csv', 'excel', 'pdf'],
         responsive: true
     });
-
-
+    
     showCategories().then(() => {
         $('#categoriesTable').DataTable({
             dom: 'Bfrtip',
-            scrollY: 400,
+            scrollY: '40vh',
             buttons: ['csv', 'excel', 'pdf'],
             responsive: true
         });
-    }
-    );
+    });
 });
 
 async function showCategories() {
@@ -61,7 +59,8 @@ async function showCategories() {
             "<td class='d-flex'>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#categoryModal' class='cursor-pointer' title='Edit' id='editCategory'" + category.id + " onclick='$(\"#categoryModalTitle, #categoryModalh3, #categoryModalButton\").text(\"Update Category\"); $(\"#catName\").val(`" + category.name + "`);$(\"#catDesc\").val(`" + category.description + "`);$(\"#categoryModalButton\").attr(\"onclick\", \"updateCategory(" + category.id + ")\"); '><i class='fas fa-edit'></i></a></div>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteCategory'" + category.id + " onClick='removeCategory(" + category.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
-            "</td>";
+            "</td>" +
+            "</tr>";
     });
 
     $("#showCategoriesTable").append(head + body + "</tbody></table>");
@@ -114,12 +113,11 @@ async function addCategory() {
             showCategories().then(() => {
                 $('#categoriesTable').DataTable({
                     dom: 'Bfrtip',
-                    scrollY: 400,
+                    scrollY: '40vh',
                     buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
-            }
-            );
+            });
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -169,12 +167,11 @@ async function updateCategory(value) {
             showCategories().then(() => {
                 $('#categoriesTable').DataTable({
                     dom: 'Bfrtip',
-                    scrollY: 400,
+                    scrollY: '40vh',
                     buttons: ['csv', 'excel', 'pdf'],
                     responsive: true
                 });
-            }
-            );
+            });
             document.getElementById("catName").value = "";
             document.getElementById("catDesc").value = "";
 
@@ -241,13 +238,11 @@ async function removeCategory(value) {
                 showCategories().then(() => {
                     $('#categoriesTable').DataTable({
                         dom: 'Bfrtip',
-                        scrollY: 400,
+                        scrollY: '40vh',
                         buttons: ['csv', 'excel', 'pdf'],
                         responsive: true
                     });
-                }
-                );
-
+                });
             })
             .catch(function (error) {
                 console.error("Error category deletion: ", error);
@@ -255,15 +250,3 @@ async function removeCategory(value) {
     });
 
 }
-
-// $(document).ready(function () {
-
-//     $(document).on('show.bs.modal', '.modal', function (event) {
-//         var zIndex = 1040 + (10 * $('.modal:visible').length);
-//         $(this).css('z-index', zIndex);
-//         setTimeout(function() {
-//             $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-//         }, 0);
-//     });
-
-// });

@@ -65,7 +65,8 @@ span {
   min-width: 250px;
   max-width: 250px;
   /* Background color of Sidebar */
-  background-image: linear-gradient(180deg, #2e6158, #7eafc0);
+  background: #3498db;
+  /* background-image: linear-gradient(180deg, #2e6158, #7eafc0); */
 
   background-size: cover;
 
@@ -145,16 +146,24 @@ span {
   display: block;
 }
 
+.arrow_icon{
+  display: none;
+}
+
 /* ------------------------------------------------------
     HOVER ON ITEM ON SIDEBAR
 ---------------------------------------------------------*/
   #sidebar ul li a:hover {
     color: white;
     /* Use background: color; if no gradient is to be applied */
-    background: #0D1C3D;
-    /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
+    background: #498cb9;
+    /* background: white url('../Images/hover-item.png'); */
   }
   
+  #sidebar ul li a:hover .arrow_icon {
+    display:inline;
+  }
+
   #sidebar ul li a i {
     margin-right: 10px;
   }
@@ -165,7 +174,7 @@ span {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #2e6158;
+  background: #2980b9;
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
@@ -186,7 +195,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: rgb(85, 151, 139);
+  background: rgb(85, 167, 223);
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 

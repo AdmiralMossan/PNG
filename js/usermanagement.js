@@ -52,14 +52,13 @@ window.addEventListener("load", async () => {
 });
 
 async function addusers() {
-    let users = []
-    let userDetails = newUserTable.cells().data()
+    var users = []
+    let userDetails = newUserTable.cells().data();
     for (let i = 0; i < userDetails.length; i += 2) {
         users.push(new User(userDetails[i], userDetails[i + 1]))
     }
-    console.log(users)
     users.forEach(async (user) => {
-        let size
+        let size = 0
         await db.collection("ids").get().then(function (querySnapshot) {
             size = querySnapshot.docs[0].data().userId + 1;
             querySnapshot.forEach(function (doc) {

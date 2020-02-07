@@ -1,3 +1,19 @@
+var data = JSON.stringify(false);
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://account.snatchbot.me/channels/api/api/id90852/appreportbot/apshello123");
+
+xhr.send(data);
+
+
 // Initialize Firebase
 let config = {
     apiKey: "AIzaSyDEtbinbscaxVKpa6GAyrOxh9moQsXO9-U",

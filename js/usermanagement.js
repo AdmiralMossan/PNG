@@ -1,5 +1,6 @@
 var newUserTable
 var locGrps = []
+var clipboard
 class User {
     constructor(name, group) {
         this.name = name;
@@ -17,10 +18,11 @@ window.addEventListener("load", async () => {
         sorting: false,
         searching: false,
         language: {
-            emptyTable: addUserElement()
+            emptyTable: "No new user"
         },
-
     });
+
+    $('#addUsersTable').parent().append(addUserElement(1))
     showUsers().then(() => {
         $('#usersTable').DataTable({
             dom: 'Bfrtip',
@@ -53,6 +55,9 @@ window.addEventListener("load", async () => {
 });
 
 async function addusers() {
+
+    $('#userName').prop('required', false)
+    $('#userGroup').prop('required', false)
     var users = []
     let size = 0
     let userDetails = newUserTable.cells().data();
@@ -72,69 +77,73 @@ async function addusers() {
             username: user.name,
             group: user.group,
             userType: user.type,
-            password: user.password
+            defaultPassword: user.password
         });
     })
-        // .then(async function () {
-            console.log("Document successfully written!");
-            sessionStorage.removeItem("category");
+    // .then(async function () {
+    console.log("Document successfully written!");
+    sessionStorage.removeItem("category");
 
-            PNotify.success({
-                title: "Successfully added User/s",
-                delay: 2000,
-                modules: {
-                    Buttons: {
-                        closer: true,
-                        closerHover: true,
-                        sticker: false
-                    },
-                    Mobile: {
-                        swipeDismiss: true,
-                        styling: true
-                    }
-                }
+    PNotify.success({
+        title: "Successfully added Users",
+        delay: 2000,
+        modules: {
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
+
+    showUsers().then(() => {
+        $('#usersTable').DataTable({
+            dom: 'Bfrtip',
+            scrollY: '40vh',
+            buttons: ['csv', 'excel', 'pdf'],
+            responsive: true
+        });
+    });
+
+    newUserTable.clear().draw();
+    $('#userModal').modal('hide')
+    // })
+    // .catch(function (error) {
+    //     console.error("Error adding users: ", error);
+    // });
+
+    db.collection("ids").get().then(function (querySnapshot) {
+        querySnapshot.forEach(async function (doc) {
+            await db.collection("ids").doc(doc.id).update({
+                userId: size
             });
-
-            showUsers().then(() => {
-                $('#usersTable').DataTable({
-                    dom: 'Bfrtip',
-                    scrollY: '40vh',
-                    buttons: ['csv', 'excel', 'pdf'],
-                    responsive: true
-                });
-            });
-            $('#userModal').modal('hide')
-
-        // })
-        // .catch(function (error) {
-        //     console.error("Error adding user/s: ", error);
-        // });
-
-        db.collection("ids").get().then(function (querySnapshot) {
-            querySnapshot.forEach(async function (doc) {
-                await db.collection("ids").doc(doc.id).update({
-                    userId: size
-                });
-            }); 
-        })
+        });
+    })
 }
 
 function newUser() {
-    newUserTable.row.add([$('#userName').val(), $('#userGroup').val()]).draw();
-    $('#userModalButton').removeClass('disabled')
-    $('#userName').val("")
-    $('#userGroup').val("")
+    $('#userName').prop('required', true)
+    $('#userGroup').prop('required', true)
+
+    if ($('#userName').val() !== "" && $('#userGroup').val() !== "") {
+        newUserTable.row.add([$('#userName').val(), $('#userGroup').val()]).draw();
+        $('#userModalButton').removeClass('disabled')
+        $('#userName').prop('required', false)
+        $('#userGroup').prop('required', false)
+        $('#userName').val("")
+        $('#userGroup').val("")
+    }
 }
 
 function addUserElement(bol) {
-    if (bol === undefined) {
-        return '<div class="text-center" id="newUserDetails"><button class="material-icons rounded-circle text-success border-0 " data-toggle="tooltip" data-placement="top" title="new user" id="addNewUser">add</button></div > '
-    } else {
-        return '<div class="text-center pt-2" id="newUserDetails">' +
-            '<input type="text" placeholder="username" id="userName"></input>' +
-            '<input type="text" placeholder="group" id="userGroup"></input>' +
-            '<button class="material-icons rounded-circle text-success border-0 align-middle ml-2" data-toggle="tooltip" data-placement="top" title="new user" id="addNewUser" onclick=newUser()>add</button></div > '
-    }
+    return '<div class="text-center pt-2" id="newUserDetails">' +
+        '<input type="text" placeholder="username" id="userName" required></input>' +
+        '<input type="text" placeholder="group" id="userGroup" required></input>' +
+        '<button class="material-icons rounded-circle text-success border-0 align-middle ml-2" data-toggle="tooltip" data-placement="top" title="new user" id="addNewUser" onclick=newUser()>add</button></div > '
 }
 
 async function showUsers() {
@@ -159,9 +168,9 @@ async function showUsers() {
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:20%;'>User ID</th>" +
-        "<th style='width:70%;'>Username</th>" +
-        "<th style='width:5%;'>Group</th>" +
-        "<th style='width:5%;'>Actions</th>" +
+        "<th style='width:40%;'>Username</th>" +
+        "<th style='width:30%;'>Group</th>" +
+        "<th style='width:10%;'>Actions</th>" +
         "</tr>" +
         "</thead>";
 
@@ -182,11 +191,34 @@ async function showUsers() {
             "<td class='d-flex'>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#updateUserModal' class='cursor-pointer' title='Edit' id='editUser'" + user.id + " onclick='$(\"#userID\").text(`User ID: " + user.id + "`); $(\"#userName\").text(`Username: " + user.username + "`); $(\"#userGroup\").val(`" + user.group + "`); $(\"#userModalButton\").attr(\"onclick\", \"updateUser(" + user.id + ")\");'><i class='fas fa-edit'></i></a></div>" +
             "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteUser'" + user.id + " onClick='removeUser(" + user.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' data-toggle='tooltip' data-placement='top' title='Default Password' id='viewPassword" + user.id + "' onClick='viewPassword(" + user.id + ")'><i class='fas fa-eye'></i></a></div>" +
             "</td>" +
             "</tr>";
     });
 
     $("#showUsersTable").append(head + body + "</tbody></table>");
+}
+async function viewPassword(userId) {
+
+    if (clipboard) {
+        clipboard.destroy();
+    }
+    await db
+        .collection("users")
+        .where("id", "==", userId)
+        .get()
+        .then(function (qs) {
+            qs.forEach(function (doc) {
+                $('#viewPassword' + userId).popover({ html: true, title: "", content: '<button class="btn password" id="pass' + userId + '" data-clipboard-target="#pass' + userId + '">' + doc.data().defaultPassword + '</button>', placement: 'top' })
+            });
+        });
+    clipboard = new ClipboardJS('#pass' + userId);
+    clipboard.on('success', function (e) {
+        PNotify.success({
+            text: "Copied!",
+            delay: 1000
+        });
+    });
 }
 
 async function updateUser(value) {

@@ -61,7 +61,7 @@ async function initializeUsers() {
       '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png" class="rounded-circle user_img">' +
       '</div>' +
       '<div class="user_info">' +
-      '<span>' + users[i].username + '</span>' +
+      '<span> User ' + users[i].id + '</span>' +
       '<p> Group: ' + users[i].group + '</p>' +
       '</div>' +
       '</div>' +
@@ -76,7 +76,7 @@ function initializeMessages(e) {
   document.getElementById("messagesList").innerHTML = "";
   document.getElementById("messageBox").style.display = "block";
   document.getElementById("myForm").style.display = "none";
-  document.getElementById("user_name").innerHTML = user.username;
+  document.getElementById("user_name").innerHTML = "User " + user.id;
   document.getElementById("user_group").innerHTML = "Group: " + user.group;
   loadMessages();
 }

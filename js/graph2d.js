@@ -57,11 +57,11 @@ function byCategory() {
     }
 }
 
-function byGroup(){
-    for(let i=0; i<reports.length; i++){
-        for(let j=0; j<groups.length; j++){
-            for(let k=0; k<categories.length; k++){
-                if(reports[i].category == categories[k] && reports[i].group == j + 1){
+function byGroup() {
+    for (let i = 0; i < reports.length; i++) {
+        for (let j = 0; j < groups.length; j++) {
+            for (let k = 0; k < categories.length; k++) {
+                if (reports[i].category == categories[k] && reports[i].group == j + 1) {
                     byGroupCount[j][k] += 1;
                 }
             }
@@ -136,6 +136,7 @@ function drawVisualization2d(search, sortBy) {
         },
         options: {
             maintainAspectRatio: false,
+            aspectRatio: 5,
             legend: {
                 position: 'top',
                 labels: {
@@ -174,21 +175,21 @@ function drawVisualization2d(search, sortBy) {
     });
 }
 
-function findString(value){
+function findString(value) {
     let sortBy = document.getElementById('category').checked ? 1 : 2;
     let displayData = [];
-    
+
     displayData = sortBy == 1 ? categories.slice() : groups.slice();
-    
-    for(i = 0; i < displayData.length ;i++){
+
+    for (i = 0; i < displayData.length; i++) {
         displayData[i] = displayData[i].toLowerCase();
     }
 
-    displayData.forEach(function(a){
+    displayData.forEach(function (a) {
 
-        if (typeof(a) === 'string' && a.indexOf(value)>-1) {
+        if (typeof (a) === 'string' && a.indexOf(value) > -1) {
             let index = displayData.indexOf(value) + 1;
-            
+
             document.getElementById("search").value = index.toString();
             search = index;
             buttonEnabler(index);
@@ -197,7 +198,7 @@ function findString(value){
     });
 }
 
-function buttonEnabler(value){
+function buttonEnabler(value) {
     let sortBy = document.getElementById('category').checked ? 1 : 2;
     let len = sortBy == 1 ? categories.length : groups.length;
 
@@ -213,40 +214,40 @@ function buttonEnabler(value){
     }
 }
 
-function prevButton(){
+function prevButton() {
     search -= 1;
     buttonEnabler(search);
 
     document.getElementById("search").value = search.toString();
-    
+
     let sortBy = document.getElementById('category').checked ? 1 : 2;
-    
+
     drawVisualization2d(search, sortBy);
 }
 
-function nextButton(){
+function nextButton() {
     search += 1;
     buttonEnabler(search);
 
     document.getElementById("search").value = search.toString();
 
     let sortBy = document.getElementById('category').checked ? 1 : 2;
-    
+
     drawVisualization2d(search, sortBy);
 }
 
-function searchBoxField(){
+function searchBoxField() {
     let sortBy = document.getElementById('category').checked ? 1 : 2;
     let displayData = [];
     let searchString = document.getElementById('searchBox').value;
-    
+
     displayData = sortBy == 1 ? categories : groups;
 
     $('#searchBox').autocomplete({
         source: displayData
     });
-    
-    if(event.key === 'Enter' || event.type === 'click'){
+
+    if (event.key === 'Enter' || event.type === 'click') {
         findString(searchString.toLowerCase());
     }
 }

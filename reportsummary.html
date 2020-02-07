@@ -122,7 +122,7 @@
     <!-- Page Content  -->
     <div id="content" style="overflow: auto;">
 
-      <nav id="menubutton" class="navbar navbar-expand-lg navbar-light">
+      <nav id="menubutton" class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
 
           <button type="button" id="sidebarCollapse" class="btn">
@@ -136,10 +136,10 @@
 
       <div id="stats-container" class="row w-100 pb-4 justify-content-center">
         <div id="card1" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100">
+          <div class="card shadow h-100 border-info">
             <!-- Card Header - Dropdown -->
             <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase text-primary pt-4">Most Reported Category</h6>
+              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Most Reported Category</h6>
             </div>
             <div class="card-body p-0">
               <div class="col p-0 d-flex justify-content-center align-items-center h-100">
@@ -149,10 +149,10 @@
           </div>
         </div>
         <div id="card2" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100">
+          <div class="card shadow h-100 border-info">
             <!-- Card Header - Dropdown -->
             <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase text-primary pt-4">Group With Most Reports</h6>
+              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Group With Most Reports</h6>
             </div>
             <div class="card-body p-0">
               <div class="col p-0 d-flex justify-content-center align-items-center h-100">
@@ -162,10 +162,10 @@
           </div>
         </div>
         <div id="card3" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100">
+          <div class="card shadow h-100 border-info">
             <!-- Card Header - Dropdown -->
             <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase text-primary pt-4">Total Number of Reports</h6>
+              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Total Number of Reports</h6>
             </div>
             <div class="card-body p-0">
               <div class="col p-0 d-flex justify-content-center align-items-center h-100">
@@ -174,17 +174,30 @@
             </div>
           </div>
         </div>
-        <div id="card4" class="stats-card col-12 w-50 pt-4">
-          <div class="card shadow h-100 w-75 row mx-auto ">
-            <div class="card-header bg-custom d-flex flex-row align-items-center">
-              <h6 class="m-0 font-weight-bold text-uppercase text-primary m-auto pt-3">Latest Reports</h6>
+        <div id="card4" class="stats-card  col-12 w-50 pt-4">
+          <div class="card shadow h-100 w-75 row mx-auto border-info">
+            <!-- Card Header -->
+            <div class="card-header bg-custom">
+              <!-- Main Title of Card Header -->
+              <div class="row">
+                <div class="col text-center">
+                  <h6 class="m-0 font-weight-bold text-uppercase m-auto pt-3">Latest Reports</h6>
+                </div>
+              </div>
+              <!-- Subtitle of Card Header -->
+              <div class="row">
+                <div class="col text-center pt-2">
+                  <h6 class="card-subtitle mb-2 text-muted">Double-click an Item to View Report Details</h6>
+                </div>
+              </div>
             </div>
+            <!-- End of Card Header -->
             <div class="card-body p-0 w-100">
               <div class="col p-0 d-flex justify-content-center h-100 w-100">
                 <div id="latestReport" class='w-100'></div>
               </div>
             </div>
-            <div class="card-footer mx-auto">
+            <div id="all_reports_btn" class="card-footer mx-auto">
               <a href="/table.html">All Reports</a>
             </div>
           </div>

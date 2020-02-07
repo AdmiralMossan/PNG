@@ -65,12 +65,12 @@ span {
   min-width: 250px;
   max-width: 250px;
   /* Background color of Sidebar */
-  background: #3498db;
+  background: #f4d9cc;
   /* background-image: linear-gradient(180deg, #2e6158, #7eafc0); */
 
   background-size: cover;
 
-  color: #fff;
+  color: #42322b;
   transition: all 0.3s;
   border-right: 1px solid #d0ded4 !important;
 }
@@ -124,10 +124,10 @@ span {
     LOGO/HEADER OF SIDEBAR
 ---------------------------------------------------------*/
 #sidebar .sidebar-header {
-  color: #cee8d7;
+  color: #fff;
   padding-top: 15px;
   padding-left: 20px;
-  background: #223438;
+  background: #dab8a8;
 }
 
 #sidebar .sidebar-header strong {
@@ -151,9 +151,9 @@ span {
     HOVER ON ITEM ON SIDEBAR
 ---------------------------------------------------------*/
   #sidebar ul li a:hover {
-    color: white;
+    color: #42322b;
     /* Use background: color; if no gradient is to be applied */
-    background: #498cb9;
+    background: #f8e8e0;
     /* background: white url('../Images/hover-item.png'); */
   }
 
@@ -167,7 +167,7 @@ span {
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #2980b9;
+  background: #dab8a8;
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
@@ -188,7 +188,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: rgb(85, 167, 223);
+  background: #e9cfc3;
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
@@ -215,17 +215,19 @@ ul.CTAs a {
         HEADER OF CONTENT
 ---------------------------------------------------------*/
 #menubutton {
-  box-shadow: 5px 10px 8px #888888;
-  color: #456c89;
-  /* background-color: #E1DECB; */
-  background-image: linear-gradient(180deg, #ebbeab, #e1decb);
+  box-shadow: 5px 10px 8px #8888881f;
+  border-radius: 5px;
+  color: #42322b;
+  background-color: #f4d9cc;
+  /* background-image: linear-gradient(180deg, #ebbeab, #e1decb); */
 }
 
 /* ------------------------------------------------------
         COLLAPSE ADMIN MENU BUTTON
 ---------------------------------------------------------*/
 #sidebarCollapse {
-  background-color: #fefaed;
+  color:#3b2e42;
+  background-color: #e5ccf4;
 }
 
 /* ------------------------------------------------------
@@ -262,7 +264,8 @@ ul.CTAs a {
   top: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(180deg, #eedfb4, #8bb6ad, #25538e, #212b4e);
+  /* background-image: linear-gradient(180deg, #eedfb4, #8bb6ad, #25538e, #212b4e); */
+  background-color: #dbf4cc;
   background-size: cover;
 }
 
@@ -339,4 +342,23 @@ ul.CTAs a {
 #stats-container {
   color: #0D1C3D;;
   min-width: 50px;
+}
+
+/* ------------------------------------------------------
+    CSS FOR CONTENT CARD HEADERS
+---------------------------------------------------------*/
+.bg-custom{
+  color:#42322b;
+  background-color: #f4d9cc;
+}
+
+/* ------------------------------------------------------
+    CSS FOR ALL REPORTS BUTTON
+---------------------------------------------------------*/
+#all_reports_btn{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  color: #3b2e42;
+  background-color: #e5ccf4;
 }

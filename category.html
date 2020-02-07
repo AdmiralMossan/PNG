@@ -61,64 +61,64 @@
 
             <ul class="list-unstyled components">
                 <li>
-                  <a href="reportsummary.html">
-                    <i class="fas fa-home"></i>
-                    Home 
-                  </a>
+                    <a href="reportsummary.html">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
                 </li>
-        
+
                 <li>
-                  <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-chart-bar"></i> 
-                      Charts  
-                    
-                  </a>
-                  <ul class="collapse list-unstyled" id="chartSubmenu">
-                    <li>
-                      <a href="3dpiegraph.html">
-                        <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                          aria-hidden="true"></i><span class="pl-2">3D & Pie Graph  </span></a>
-                    </li>
-                    <li>
-                      <a href="bargraphs.html">
-                        <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                          aria-hidden="true"></i><span class="pl-2">Bar Graphs  </span></a>
-                    </li>
-                  </ul>
+                    <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-chart-bar"></i>
+                        Charts
+
+                    </a>
+                    <ul class="collapse list-unstyled" id="chartSubmenu">
+                        <li>
+                            <a href="3dpiegraph.html">
+                                <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
+                                    aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
+                        </li>
+                        <li>
+                            <a href="bargraphs.html">
+                                <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
+                                    aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
+                        </li>
+                    </ul>
                 </li>
-        
+
                 <li class="active">
-                  <a href="#">
-                    <i class="fas fa-list"></i> Category 
-                  </a>
+                    <a href="#">
+                        <i class="fas fa-list"></i> Category
+                    </a>
                 </li>
-        
+
                 <li>
-                  <a href="usermanagement.html">
-                    <i class="fas fa-user-alt"></i> Users 
-                  </a>
+                    <a href="usermanagement.html">
+                        <i class="fas fa-user-alt"></i> Users
+                    </a>
                 </li>
-        
+
                 <li>
-                  <a href="table.html"><i class="fas fa-table"></i> Table </a>
+                    <a href="table.html"><i class="fas fa-table"></i> Table </a>
                 </li>
-        
+
                 <li>
-                  <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
+                    <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
                 </li>
-              </ul>
-        
-              <ul class="list-unstyled components">
+            </ul>
+
+            <ul class="list-unstyled components">
                 <li id="adminname" class="pl-1">
-                  Admin
+                    Admin
                 </li>
                 <li>
-                  <a href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout 
-                  </a>
+                    <a href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
                 </li>
-              </ul>
+            </ul>
 
         </nav>
 
@@ -139,25 +139,27 @@
 
             <div class="container">
                 <div class="row py-1">
-                  <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
-                    <div class="row">
-                      <div class="col-md h-25">
-                        <h2 id="pagetitle" class="text-center my-0 pt-3">Category Management:</h2>
-                          <!-- Insert user management functions here -->
-                            <div id="showCategoriesTable" class="pt-4">
-                                <input id="addCategoryButton" onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');" 
-                                class="material-icons" type="button" value="add" data-toggle="modal" data-target="#categoryModal">
-                                <label for="addCategoryButton" class="align-middle">Add Category</label>
-                            </div>    
+                    <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
+                        <div class="row">
+                            <div class="col-md h-25">
+                                <h2 id="pagetitle" class="text-center my-0 pt-3">Category Management:</h2>
+                                <!-- Insert user management functions here -->
+                                <div id="showCategoriesTable" class="pt-4">
+                                    <input id="addCategoryButton"
+                                        onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');"
+                                        class="material-icons" type="button" value="add" data-toggle="modal"
+                                        data-target="#categoryModal">
+                                    <label for="addCategoryButton" class="align-middle">Add Category</label>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
-                   </div>
 
                     <!-- Add/Update Category Modal-->
                     <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <form action="" autocomplete="off" onsubmit="event.preventDefault();" class="w-100">
                                     <div class="modal-header">
@@ -283,7 +285,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript"
         src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/datatables.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="js/sidebar.js"></script>
     <script src="js/category.js"></script>

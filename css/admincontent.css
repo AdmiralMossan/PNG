@@ -361,4 +361,9 @@ ul.CTAs a {
   border-radius: 5px;
   color: #3b2e42;
   background-color: #e5ccf4;
+/* ------------------------------------------------------  
+    CSS FOR userGroup Search
+---------------------------------------------------------*/
+.ui-front {
+  z-index: 9999999 !important;
 }

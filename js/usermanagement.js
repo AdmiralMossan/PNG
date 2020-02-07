@@ -209,7 +209,7 @@ async function viewPassword(userId) {
         .get()
         .then(function (qs) {
             qs.forEach(function (doc) {
-                $('#viewPassword' + userId).popover({ html: true, title: "", content: '<button class="btn password" id="pass' + userId + '" data-clipboard-target="#pass' + userId + '">' + doc.data().defaultPassword + '</button>', placement: 'top' })
+                $('#viewPassword' + userId).popover({ html: true, title: "", content: '<button class="btn password" id="pass' + userId + '" data-clipboard-target="#pass' + userId + '" data-clipboard-text=' + doc.data().defaultPassword + '>' + doc.data().defaultPassword + '</button>', placement: 'top' })
             });
         });
     clipboard = new ClipboardJS('#pass' + userId);

@@ -42,7 +42,8 @@ window.addEventListener("load", async () => {
 
 
     $('#userModalButton').click(() => {
-        addusers()
+        if (!$('#userModalButton').hasClass('disabled'))
+            addusers()
     })
     $('#addNewUser').click(() => {
         $('#newUserDetails').remove()
@@ -53,23 +54,18 @@ window.addEventListener("load", async () => {
 
 async function addusers() {
     var users = []
+    let size = 0
     let userDetails = newUserTable.cells().data();
     for (let i = 0; i < userDetails.length; i += 2) {
         users.push(new User(userDetails[i], userDetails[i + 1]))
     }
+    console.log(userDetails)
+    console.log(users)
+    await db.collection("ids").get().then(function (querySnapshot) {
+        size = querySnapshot.docs[0].data().userId;
+    })
     users.forEach(async (user) => {
-        let size = 0
-        await db.collection("ids").get().then(function (querySnapshot) {
-            size = querySnapshot.docs[0].data().userId + 1;
-            querySnapshot.forEach(function (doc) {
-                let newID = doc.data().userId + 1
-                db.collection("ids").doc(doc.id).update({
-                    userId: newID
-                });
-            });
-        })
-        console.log(size)
-        console.log(user)
+        size += 1;
         db.collection("users").doc().set({
             id: size,
             dateCreated: firebase.firestore.FieldValue.serverTimestamp(),
@@ -77,11 +73,9 @@ async function addusers() {
             group: user.group,
             userType: user.type,
             password: user.password
-        })
-
-
+        });
     })
-        .then(async function () {
+        // .then(async function () {
             console.log("Document successfully written!");
             sessionStorage.removeItem("category");
 
@@ -111,10 +105,18 @@ async function addusers() {
             });
             $('#userModal').modal('hide')
 
+        // })
+        // .catch(function (error) {
+        //     console.error("Error adding user/s: ", error);
+        // });
+
+        db.collection("ids").get().then(function (querySnapshot) {
+            querySnapshot.forEach(async function (doc) {
+                await db.collection("ids").doc(doc.id).update({
+                    userId: size
+                });
+            }); 
         })
-        .catch(function (error) {
-            console.error("Error adding user/s: ", error);
-        });
 }
 
 function newUser() {

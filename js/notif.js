@@ -138,7 +138,7 @@ async function reportDetails() {
         ' <ul class="list-unstyled"> ' +
         ' <li id="sgroup">Group: </li> ' +
         ' <li id="scategory">Category: </li> ' +
-        ' <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">  Occurance: </li> ' +
+        ' <li id="sdateInfo" data-toggle="tooltip" data-placement="top" title="Relative to the Report Date">  Occurence: </li> ' +
         ' <li id="sotherDetails">Other Details: </li> ' +
         ' <li id="spersonInfo">Subject: </li> ' +
         ' <li id="sattachment">Link to attachment: </li> ' +

@@ -1,6 +1,16 @@
+var locGrps = [];
 window.addEventListener("load", async () => {
     isloaded = true;
     await showUsers();
+    await db
+        .collection("groups")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locGrps.push(doc.data().name);
+            });
+        });
     
     $('#usersTable').DataTable({
         dom: 'Bfrtip',
@@ -40,9 +50,10 @@ async function showUsers() {
         "<table id='usersTable' class='display'>" +
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
-        "<th style='width:25%;'>User ID</th>" +
+        "<th style='width:20%;'>User ID</th>" +
         "<th style='width:70%;'>Username</th>" +
         "<th style='width:5%;'>Group</th>" +
+        "<th style='width:5%;'>Actions</th>" +
         "</tr>" +
         "</thead>";
 
@@ -60,10 +71,10 @@ async function showUsers() {
             "<td style='line-height: 1em;'>" +
             user.group +
             "</td>" +
-            // "<td class='d-flex'>" +
-            // "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#userModal' class='cursor-pointer' title='Edit' id='editUser'" + user.id + " onclick='$(\"#userModalTitle, #userModalh3, #userModalButton\").text(\"Update User\");'><i class='fas fa-edit'></i></a></div>" +
-            // "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteUser'" + user.id + " onClick='removeUser(" + user.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
-            // "</td>" +
+            "<td class='d-flex'>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' data-toggle='modal' data-target='#userModal' class='cursor-pointer' title='Edit' id='editUser'" + user.id + " onclick='$(\"#userID\").text(`User ID: " + user.id + "`); $(\"#userName\").text(`Username: " + user.username + "`); $(\"#userGroup\").val(`" + user.group + "`); $(\"#userModalButton\").attr(\"onclick\", \"updateUser(" + user.id + ")\");'><i class='fas fa-edit'></i></a></div>" +
+            "<div class='p-1 m-1 cursor-pointer'><a href='#' class='cursor-pointer' title='Delete' id='deleteUser'" + user.id + " onClick='removeUser(" + user.id + ")'><i class='fas fa-trash-alt'></i></a></div>" +
+            "</td>" +
             "</tr>";
     });
 
@@ -136,122 +147,147 @@ async function addUser() {
 
 async function updateUser(value) {
 
-    // let newName = document.getElementById("catName").value;
-    // let newDesc = document.getElementById("catDesc").value;
+    let newGroup = document.getElementById("userGroup").value;
 
-    // if (newName == "" || newDesc == "")
-    //     return
+    if (newGroup == "")
+        return
 
-    // db.collection("categories")
-    //     .where("id", "==", value)
-    //     .get()
-    //     .then(function (querySnapshot) {
-    //         querySnapshot.forEach(function (doc) {
-    //             doc.ref.update({
-    //                 name: newName,
-    //                 description: newDesc
-    //             });
-    //         });
+    if(locGrps.includes(newGroup)){
+        db.collection("users")
+        .where("id", "==", value)
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                doc.ref.update({
+                    group: newGroup
+                });
+            });
 
-    //         PNotify.success({
-    //             title: "Update Successful!",
-    //             delay: 2000,
-    //             modules: {
-    //                 Buttons: {
-    //                     closer: true,
-    //                     closerHover: true,
-    //                     sticker: false
-    //                 },
-    //                 Mobile: {
-    //                     swipeDismiss: true,
-    //                     styling: true
-    //                 }
-    //             }
-    //         });
+            PNotify.success({
+                title: "Update Successful!",
+                delay: 2000,
+                modules: {
+                    Buttons: {
+                        closer: true,
+                        closerHover: true,
+                        sticker: false
+                    },
+                    Mobile: {
+                        swipeDismiss: true,
+                        styling: true
+                    }
+                }
+            });
 
-    //         showCategories().then(() => {
-    //             $('#categoriesTable').DataTable({
-    //                 dom: 'Bfrtip',
-    //                 scrollY: '40vh',
-    //                 buttons: ['csv', 'excel', 'pdf'],
-    //                 responsive: true
-    //             });
-    //         });
-    //         document.getElementById("catName").value = "";
-    //         document.getElementById("catDesc").value = "";
+            showUsers().then(() => {
+                $('#usersTable').DataTable({
+                    dom: 'Bfrtip',
+                    scrollY: '40vh',
+                    buttons: ['csv', 'excel', 'pdf'],
+                    responsive: true
+                });
+            });
+            document.getElementById("userGroup").value = "";
 
-    //     })
-    //     .catch(function (error) {
-    //         console.error("Error category deletion: ", error);
-    //     });
+        })
+        .catch(function (error) {
+            console.error("Error User update: ", error);
+        });
 
-    // $('#categoryModal').modal('hide');
+        $('#userModal').modal('hide');
+    } else {
+        PNotify.error({
+            title: "Update Error!",
+            text: "Group does not exist!",
+            delay: 2000,
+            modules: {
+                Buttons: {
+                    closer: true,
+                    closerHover: true,
+                    sticker: false
+                },
+                Mobile: {
+                    swipeDismiss: true,
+                    styling: true
+                }
+            }
+        });
+        return
+    }
 }
 
 async function removeUser(value) {
-    // const notice = PNotify.notice({
-    //     title: "Delete Category",
-    //     text: "Confirm Delete?",
-    //     icon: "fas fa-question-circle",
-    //     hide: false,
-    //     modules: {
-    //         Confirm: {
-    //             confirm: true,
-    //         },
-    //         Buttons: {
-    //             closer: true,
-    //             closerHover: true,
-    //             sticker: false
-    //         },
-    //         Desktop: {
-    //             desktop: true,
-    //             fallback: true,
-    //             icon: null
-    //         },
-    //         Mobile: {
-    //             swipeDismiss: true,
-    //             styling: true
-    //         }
-    //     }
-    // });
+    const notice = PNotify.notice({
+        title: "Delete User",
+        text: "Confirm Delete?",
+        icon: "fas fa-question-circle",
+        hide: false,
+        modules: {
+            Confirm: {
+                confirm: true,
+            },
+            Buttons: {
+                closer: true,
+                closerHover: true,
+                sticker: false
+            },
+            Desktop: {
+                desktop: true,
+                fallback: true,
+                icon: null
+            },
+            Mobile: {
+                swipeDismiss: true,
+                styling: true
+            }
+        }
+    });
 
-    // notice.on('pnotify.confirm', () => {
-    //     db.collection("categories")
-    //         .where("id", "==", value)
-    //         .get()
-    //         .then(function (querySnapshot) {
-    //             querySnapshot.forEach(function (doc) {
-    //                 doc.ref.delete();
-    //             });
+    notice.on('pnotify.confirm', () => {
+        db.collection("users")
+            .where("id", "==", value)
+            .get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    doc.ref.delete();
+                });
 
-    //             PNotify.success({
-    //                 title: "Delete Successful!",
-    //                 delay: 2000,
-    //                 modules: {
-    //                     Buttons: {
-    //                         closer: true,
-    //                         closerHover: true,
-    //                         sticker: false
-    //                     },
-    //                     Mobile: {
-    //                         swipeDismiss: true,
-    //                         styling: true
-    //                     }
-    //                 }
-    //             });
+                PNotify.success({
+                    title: "Delete Successful!",
+                    delay: 2000,
+                    modules: {
+                        Buttons: {
+                            closer: true,
+                            closerHover: true,
+                            sticker: false
+                        },
+                        Mobile: {
+                            swipeDismiss: true,
+                            styling: true
+                        }
+                    }
+                });
 
-    //             showCategories().then(() => {
-    //                 $('#categoriesTable').DataTable({
-    //                     dom: 'Bfrtip',
-    //                     scrollY: '40vh',
-    //                     buttons: ['csv', 'excel', 'pdf'],
-    //                     responsive: true
-    //                 });
-    //             });
-    //         })
-    //         .catch(function (error) {
-    //             console.error("Error category deletion: ", error);
-    //         });
-    // });
+                showUsers().then(() => {
+                    $('#usersTable').DataTable({
+                        dom: 'Bfrtip',
+                        scrollY: '40vh',
+                        buttons: ['csv', 'excel', 'pdf'],
+                        responsive: true
+                    });
+                });
+            })
+            .catch(function (error) {
+                console.error("Error user deletion: ", error);
+            });
+    });
+}
 
+function userGroupSearch(){
+    $('#userGroup').autocomplete({
+        source: locGrps,
+        minLength: 0
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });
 }

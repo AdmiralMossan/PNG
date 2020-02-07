@@ -42,7 +42,8 @@ window.addEventListener("load", async () => {
 
 
     $('#userModalButton').click(() => {
-        addusers()
+        if (!$('#userModalButton').hasClass('disabled'))
+            addusers()
     })
     $('#addNewUser').click(() => {
         $('#newUserDetails').remove()
@@ -57,6 +58,7 @@ async function addusers() {
     for (let i = 0; i < userDetails.length; i += 2) {
         users.push(new User(userDetails[i], userDetails[i + 1]))
     }
+    console.log(userDetails)
     console.log(users)
     users.forEach(async (user) => {
         let size

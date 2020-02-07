@@ -32,8 +32,6 @@ nav{
     color: #013F2A;
 }
 
-
-
 #maincontainer> * {
     grid-column: 2 / -2;
   }

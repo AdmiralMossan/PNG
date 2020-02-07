@@ -177,7 +177,7 @@ async function updateCategory(value) {
 
         })
         .catch(function (error) {
-            console.error("Error category deletion: ", error);
+            console.error("Error category update: ", error);
         });
 
     $('#categoryModal').modal('hide');

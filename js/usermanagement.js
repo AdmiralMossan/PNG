@@ -80,7 +80,8 @@ async function addusers() {
             username: user.name,
             group: user.group,
             userType: user.type,
-            defaultPassword: user.password
+            defaultPassword: user.password,
+            password: user.password
         });
     })
     // .then(async function () {

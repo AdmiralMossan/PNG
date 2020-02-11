@@ -182,7 +182,7 @@ async function logIn(e) {
         var password = document.getElementById("password").value;
     }
     docs = []
-    await db.collection("users").where("username", "==", username).where("password", "==", password).get().then(function (querySnapshot) {
+    await db.collection("users").where("username", "==", username).where("defaultPassword", "==", password).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             docs.push(doc.data());
             console.log(doc.id, " => ", doc.data());

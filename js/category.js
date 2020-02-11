@@ -164,26 +164,6 @@ async function updateCategory(value) {
     
     if (newName == "" || newDesc == "")
         return
-    
-    if (categories.includes(newName)){
-        PNotify.notice({
-            title: "Category Already Exists!",
-            delay: 2000,
-            modules: {
-                Buttons: {
-                    closer: true,
-                    closerHover: true,
-                    sticker: false
-                },
-                Mobile: {
-                    swipeDismiss: true,
-                    styling: true
-                }
-            }
-        });
-        
-        return;
-    }
 
     db.collection("categories")
         .where("id", "==", value)

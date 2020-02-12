@@ -1,7 +1,12 @@
+var ctx2d;
+
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+
+    ctx2d = document.getElementById('graph2d').getContext('2d');
+
     isloaded = true;
     await getGroupsAndCategories();
     initSearchValue();

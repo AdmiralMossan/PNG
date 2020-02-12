@@ -1,4 +1,5 @@
 async function changePassword(){
+    var bcrypt = dcodeIO.bcrypt;
     var salt =genSaltSync(10);
     let username = sessionStorage.getItem("username");
     let user = null;

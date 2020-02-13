@@ -30,7 +30,7 @@ window.addEventListener("load", async () => {
     barGraph = new Chart(ctx1, drawVisualization2d(search, 1));
     barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 1));
     barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 1));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
+    //barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
 
     $('#category').change(function () {
         generateColors(1);
@@ -74,6 +74,8 @@ function graphDestroy(graphD){
         graphD.destroy();
     }
 }
+
+function render
 
 function drawVisualization2d(search, sortBy) {
     let displayLabel = [];

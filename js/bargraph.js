@@ -1,7 +1,9 @@
+
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+
     isloaded = true;
     await getGroupsAndCategories();
     initSearchValue();

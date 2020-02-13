@@ -44,10 +44,10 @@ window.addEventListener("load", async () => {
         graphDestroy(barGraph3);
         graphDestroy(barGraph4);
 
-        barGraph = new Chart(ctx1, drawVisualization2d(search, 1));
-        barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 1));
-        barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 1));
-        barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
+        barGraph = new Chart(ctx1, drawVisualization2d(search*4 - 3, 1));
+        barGraph2 = new Chart(ctx2, drawVisualization2d(search*4 - 2, 1));
+        barGraph3 = new Chart(ctx3, drawVisualization2d(search *4 -1, 1));
+        barGraph4 = new Chart(ctx4, drawVisualization2d(search*4, 1));
     });
   
     $('#group').change(function () {
@@ -90,7 +90,8 @@ function drawVisualization2d(search, sortBy) {
     displayData = sortBy == 1 ? byCategoryCount[index] : byGroupCount[index];
     displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
     displayMax = Math.ceil((displayMax + 1) / 10) * 10;
-
+    if(index >= arrayLabel.length)
+        return
     let graphData = {
         type: 'bar',
         data: {
@@ -220,10 +221,10 @@ function prevButton(){
     graphDestroy(barGraph3);
     graphDestroy(barGraph4);
 
-    barGraph = new Chart(ctx1, drawVisualization2d(search, sortBy));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, sortBy));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, sortBy));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, sortBy));
+    barGraph = new Chart(ctx1, drawVisualization2d(search*4 - 3, sortBy));
+    barGraph2 = new Chart(ctx2, drawVisualization2d(search*4 - 2, sortBy));
+    barGraph3 = new Chart(ctx3, drawVisualization2d(search *4 -1,sortBy));
+    barGraph4 = new Chart(ctx4, drawVisualization2d(search*4, sortBy));
 }
 
 function nextButton(){
@@ -239,8 +240,8 @@ function nextButton(){
     graphDestroy(barGraph3);
     graphDestroy(barGraph4);
 
-    barGraph = new Chart(ctx1, drawVisualization2d(search, sortBy));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, sortBy));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, sortBy));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, sortBy));
+    barGraph = new Chart(ctx1, drawVisualization2d(search*4 - 3, sortBy));
+    barGraph2 = new Chart(ctx2, drawVisualization2d(search*4 - 2, sortBy));
+    barGraph3 = new Chart(ctx3, drawVisualization2d(search *4 -1,sortBy));
+    barGraph4 = new Chart(ctx4, drawVisualization2d(search*4, sortBy));
 }

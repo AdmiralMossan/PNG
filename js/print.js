@@ -1,7 +1,7 @@
-var ctx1;
-var ctx2;
-var ctx3;
-var ctx4;
+let ctx1;
+let ctx2;
+let ctx3;
+let ctx4;
 
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
@@ -138,6 +138,31 @@ function drawVisualization2d(search, sortBy) {
                         labelString: labelStr
                     }
                 }]
+            },
+            events: false,
+            tooltips: {
+                enabled: false
+            },
+            hover: {
+                animationDuration: 0
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];                            
+                            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                        });
+                    });
+                }
             }
         }
     }
@@ -146,10 +171,17 @@ function drawVisualization2d(search, sortBy) {
 }
 
 function printGraphs() {
-    var pdf = new jsPDF("p", "pt", "letter");
-	pdf.addHTML($('#graphCollection'), 30, 30, function() {
-	  pdf.save('div.pdf');
-	});
+    let docText = document.getElementById('category').checked ? 'Category ' : 'Group ';
+    html2canvas($("#graphCollection"), {
+        onrendered: function(canvas) {         
+            var imgData = canvas.toDataURL(
+                'image/png');              
+            var doc = new jsPDF('p', 'mm', 'letter');
+            doc.text(docText + "Reports", 105, 15, null, null, "center");
+            doc.addImage(imgData, 'PNG', 40, 20);
+            doc.save(docText + "Graphs");
+        }
+    });
 }
 
 // function findString(value){

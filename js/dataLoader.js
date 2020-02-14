@@ -9,6 +9,9 @@ var colors = [];
 var loaded = false;
 
 var barGraph = null;
+var barGraph2 = null;
+var barGraph3 = null;
+var barGraph4 = null;
 var search = 0;
 var byGroupCount = [];
 var byCategoryCount = [];

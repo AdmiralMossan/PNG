@@ -13,6 +13,14 @@
   <link href="css/chat.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -57,6 +65,10 @@
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
+          <i class="fas fa-lock mr-2"></i>
+          Change Password
+        </a>
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
           Logout
@@ -143,38 +155,77 @@
           </div>
         </div>
       </div>
-      <!-- Logout Modal-->
-      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+      <!-- Change Password Modal-->
+      <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <div class="row w-100 mb-1">
+                  <label for="currentPass" class="col-6">Current Password:</label>
+                  <input id="currentPass" type="password" class="col-6" autocomplete="current-password">
+                </div>
+                <div class="row w-100 mb-1">
+                  <label for="newPass" class="col-6">New Password:</label>
+                  <input id="newPass" type="password" class="col-6" autocomplete="new-password"
+                    pattern="[0-9a-fA-F]{4,12}">
+                </div>
+                <div class="row w-100 mb-1">
+                  <label for="confirmNewPass" class="col-6">Confirm New Password:</label>
+                  <input id="confirmNewPass" type="password" class="col-6" autocomplete="new-password"
+                    pattern="[0-9a-fA-F]{4,12}">
+                </div>
+              </div>
+            </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="Login.html" onclick="logOut()">Logout</a>
+              <a class="btn btn-primary" href="#" onclick="changePassword()">Save Changes</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Chat  -->
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="Login.html" onclick="logOut()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat  -->
   <div id="open-button" class="btn btn-raised" onclick="openForm(2)">
     <div id="chat-overlay"></div>
     <i class="material-icons" style="font-size: 30px;">message</i>
- </div>
- <div class="chat-popup" id="messageBox">
+  </div>
+  <div class="chat-popup" id="messageBox">
     <div class="card-header">
-        <button class="minimize" onclick="closeForm(2);">
-          <i class="material-icons">minimize</i>
-        </button>
-        <!-- <button onclick="backToContacts();" class="back-button">
+      <button class="minimize" onclick="closeForm(2);">
+        <i class="material-icons">minimize</i>
+      </button>
+      <!-- <button onclick="backToContacts();" class="back-button">
           <i class="material-icons">keyboard_backspace</i>
         </button> -->
       <div class="input-group">

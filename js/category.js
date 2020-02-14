@@ -1,3 +1,4 @@
+let categories = [];
 window.addEventListener("load", async () => {
     isloaded = true;
     await showCategories();
@@ -33,7 +34,9 @@ async function showCategories() {
         });
 
     $('#showCategoriesTable div').html("");
-
+    
+    categories.length = 0;
+    categories = tempCategories.map(a => a.name);
     //Add body
     let head =
         "<table id='categoriesTable' class='display'>" +
@@ -70,9 +73,32 @@ async function addCategory() {
 
     let name = document.getElementById("catName").value;
     let desc = document.getElementById("catDesc").value;
+    document.getElementById("catName").value = "";
+    document.getElementById("catDesc").value = "";
 
     if (name == "" || desc == "")
         return
+    
+    if (categories.includes(name)){
+        PNotify.notice({
+            title: "Category Already Exists!",
+            delay: 2000,
+            modules: {
+                Buttons: {
+                    closer: true,
+                    closerHover: true,
+                    sticker: false
+                },
+                Mobile: {
+                    swipeDismiss: true,
+                    styling: true
+                }
+            }
+        });
+
+        return;
+    }
+    
     let size = 0;
 
     await db.collection("ids").get().then(function (querySnapshot) {
@@ -90,41 +116,41 @@ async function addCategory() {
         name: name,
         description: desc
     })
-        .then(async function () {
-            console.log("Document successfully written!");
-            sessionStorage.removeItem("category");
+    .then(async function () {
+        console.log("Document successfully written!");
+        sessionStorage.removeItem("category");
 
-            PNotify.success({
-                title: "Successfully added Category",
-                delay: 2000,
-                modules: {
-                    Buttons: {
-                        closer: true,
-                        closerHover: true,
-                        sticker: false
-                    },
-                    Mobile: {
-                        swipeDismiss: true,
-                        styling: true
-                    }
+        PNotify.success({
+            title: "Successfully added Category",
+            delay: 2000,
+            modules: {
+                Buttons: {
+                    closer: true,
+                    closerHover: true,
+                    sticker: false
+                },
+                Mobile: {
+                    swipeDismiss: true,
+                    styling: true
                 }
-            });
-
-            showCategories().then(() => {
-                $('#categoriesTable').DataTable({
-                    dom: 'Bfrtip',
-                    scrollY: '40vh',
-                    buttons: ['csv', 'excel', 'pdf'],
-                    responsive: true
-                });
-            });
-            document.getElementById("catName").value = "";
-            document.getElementById("catDesc").value = "";
-
-        })
-        .catch(function (error) {
-            console.error("Error writing document: ", error);
+            }
         });
+
+        showCategories().then(() => {
+            $('#categoriesTable').DataTable({
+                dom: 'Bfrtip',
+                scrollY: '40vh',
+                buttons: ['csv', 'excel', 'pdf'],
+                responsive: true
+            });
+        });
+        document.getElementById("catName").value = "";
+        document.getElementById("catDesc").value = "";
+
+    })
+    .catch(function (error) {
+        console.error("Error writing document: ", error);
+    });
 
     $('#categoryModal').modal('hide');
 }
@@ -133,7 +159,9 @@ async function updateCategory(value) {
 
     let newName = document.getElementById("catName").value;
     let newDesc = document.getElementById("catDesc").value;
-
+    document.getElementById("catName").value = "";
+    document.getElementById("catDesc").value = "";
+    
     if (newName == "" || newDesc == "")
         return
 

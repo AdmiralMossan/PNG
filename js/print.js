@@ -27,10 +27,10 @@ window.addEventListener("load", async () => {
     graphDestroy(barGraph3);
     graphDestroy(barGraph4);
 
-    barGraph = new Chart(ctx1, drawVisualization2d(search, 1));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 1));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 1));
-    //barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
+    barGraph = new Chart(ctx1, drawVisualization2d(search*4 - 3, 1));
+    barGraph2 = new Chart(ctx2, drawVisualization2d(search*4 - 2, 1));
+    barGraph3 = new Chart(ctx3, drawVisualization2d(search *4 -1, 1));
+    barGraph4 = new Chart(ctx4, drawVisualization2d(search*4, 1));
 
     $('#category').change(function () {
         generateColors(1);
@@ -62,10 +62,10 @@ window.addEventListener("load", async () => {
         graphDestroy(barGraph3);
         graphDestroy(barGraph4);
 
-        barGraph = new Chart(ctx1, drawVisualization2d(search, 2));
-        barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 2));
-        barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 2));
-        barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 2));
+        barGraph = new Chart(ctx1, drawVisualization2d(search*4 - 3, 2));
+        barGraph2 = new Chart(ctx2, drawVisualization2d(search*4 - 2, 2));
+        barGraph3 = new Chart(ctx3, drawVisualization2d(search *4 -1, 2));
+        barGraph4 = new Chart(ctx4, drawVisualization2d(search*4, 2));
     });  
 });
 
@@ -74,8 +74,6 @@ function graphDestroy(graphD){
         graphD.destroy();
     }
 }
-
-function render
 
 function drawVisualization2d(search, sortBy) {
     let displayLabel = [];
@@ -179,9 +177,9 @@ function printGraphs() {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL(
                 'image/png');              
-            var doc = new jsPDF('p', 'mm', 'letter');
-            doc.text(docText + "Reports", 105, 15, null, null, "center");
-            doc.addImage(imgData, 'PNG', 40, 20);
+            var doc = new jsPDF('l', 'mm', 'legal');
+            doc.text(docText + "Reports", 180, 15, null, null, "center");
+            doc.addImage(imgData, 'PNG', 40, 40);
             doc.save(docText + "Graphs");
         }
     });
@@ -228,7 +226,7 @@ function printGraphs() {
 
 function buttonEnabler(value){
     let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let len = sortBy == 1 ? categories.length : groups.length;
+    let len = sortBy == 1 ? Math.ceil(categories.length/4) : Math.ceil(groups.length/4);
 
     if (value == len) {
         $('#next').attr('disabled', true);

@@ -110,10 +110,10 @@ async function drawVisualization2d(search, sortBy) {
                 animationDuration: 0
             },
             animation: {
-                duration: 1,
+                duration: 700,
                 onComplete: function () {
                     var chartInstance = this.chart,
-                        ctx = chartInstance.ctx;
+                    ctx = chartInstance.ctx;
                     ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';

@@ -1,6 +1,5 @@
 let ctx = [];
 let barG = [];
-let current;
 
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
@@ -58,15 +57,14 @@ function renderGraphs(){
 
 
     $("#graphCollection").append(body);
-    current = search;
-    for (let i = current - 1 ; i < 4 ; i++, search++){
+    for (let i = search ; i < 4 ; i++, search++){
         ctx[i] = document.getElementById('graph' + i).getContext('2d');
         graphDestroy(barG[i]);
         if(search <= len){
-            barG[i] = new Chart(ctx[i], drawVisualization2d(search, sortBy));
+            barG[i] = new Chart(ctx[i], drawVisualization2d(search + i + 1, sortBy));
         }
     }
-    console.log(current);
+
 }
 
 function drawVisualization2d(search, sortBy) {
@@ -170,52 +168,13 @@ function printGraphs() {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL(
                 'image/png');              
-            var doc = new jsPDF('l', 'mm', 'letter');
+            var doc = new jsPDF('l', 'mm', 'legal');
             doc.text(docText + "Reports", 105, 15, null, null, "center");
             doc.addImage(imgData, 'PNG', 40, 20);
             doc.save(docText + "Graphs");
         }
     });
 }
-
-// function findString(value){
-//     let sortBy = document.getElementById('category').checked ? 1 : 2;
-//     let displayData = [];
-    
-//     displayData = sortBy == 1 ? categories.slice() : groups.slice();
-    
-//     for(i = 0; i < displayData.length ;i++){
-//         displayData[i] = displayData[i].toLowerCase();
-//     }
-
-//     displayData.forEach(function(a){
-
-//         if (typeof(a) === 'string' && a.indexOf(value)>-1) {
-//             let index = displayData.indexOf(value) + 1;
-            
-//             document.getElementById("search").value = index.toString();
-//             search = index;
-//             buttonEnabler(index);
-//             drawVisualization2d(ctx1, index, sortBy);
-//         }
-//     });
-// }
-
-// function searchBoxField(){
-//     let sortBy = document.getElementById('category').checked ? 1 : 2;
-//     let displayData = [];
-//     let searchString = document.getElementById('searchBox').value;
-    
-//     displayData = sortBy == 1 ? categories : groups;
-
-//     $('#searchBox').autocomplete({
-//         source: displayData
-//     });
-    
-//     if(event.key === 'Enter' || event.type === 'click'){
-//         findString(searchString.toLowerCase());
-//     }
-// }
 
 function buttonEnabler(value){
     let sortBy = document.getElementById('category').checked ? 1 : 2;
@@ -243,7 +202,7 @@ function prevButton(){
 }
 
 function nextButton(){
-    search += 1 * 4;
+    search += 1;
     buttonEnabler(search);
 
     document.getElementById("search").value = search.toString();

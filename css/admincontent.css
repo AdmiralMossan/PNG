@@ -1,8 +1,7 @@
 html {
   height: 100vh;
 }
-
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Roboto&display=swap";
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
@@ -217,9 +216,19 @@ ul.CTAs a {
 #menubutton {
   box-shadow: 5px 10px 8px #8888881f;
   border-radius: 5px;
-  color: #42322b;
   background-color: lightskyblue;
   /* background-image: linear-gradient(180deg, #ebbeab, #e1decb); */
+}
+
+#header_text{
+  /* font-family: Catamaran;
+  font-weight: bold; */
+  /* color: #050122; */
+  color: white;
+  font-family: Avenir,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 900;
+  letter-spacing: 2.2px;
 }
 
 /* ------------------------------------------------------
@@ -265,7 +274,7 @@ ul.CTAs a {
   right: 0;
   bottom: 0;
   /* background-image: linear-gradient(180deg, #eedfb4, #8bb6ad, #25538e, #212b4e); */
-  background-color: white;
+  background-color: whitesmoke;
   background-size: cover;
 }
 
@@ -348,6 +357,8 @@ ul.CTAs a {
     CSS FOR CONTENT CARD HEADERS
 ---------------------------------------------------------*/
 .bg-custom{
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: bold;
   color:white;
   background-color: skyblue;
 }

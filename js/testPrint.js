@@ -1,17 +1,11 @@
-let ctx1;
-let ctx2;
-let ctx3;
-let ctx4;
+let ctx = [];
+let barG = [];
+let current;
 
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
-
-    ctx1 = document.getElementById('graph1').getContext('2d');
-    ctx2 = document.getElementById('graph2').getContext('2d');
-    ctx3 = document.getElementById('graph3').getContext('2d');
-    ctx4 = document.getElementById('graph4').getContext('2d');
 
     isloaded = true;
     await getGroupsAndCategories();
@@ -21,16 +15,8 @@ window.addEventListener("load", async () => {
     byGroup();
     findMax();
     generateColors(1);
-    
-    graphDestroy(barGraph);
-    graphDestroy(barGraph2);
-    graphDestroy(barGraph3);
-    graphDestroy(barGraph4);
 
-    barGraph = new Chart(ctx1, drawVisualization2d(search, 1));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 1));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 1));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
+    renderGraphs();
 
     $('#category').change(function () {
         generateColors(1);
@@ -39,15 +25,7 @@ window.addEventListener("load", async () => {
         buttonEnabler(search);
         $('#searchBoxLabel').text("Search by Category: ");
         
-        graphDestroy(barGraph);
-        graphDestroy(barGraph2);
-        graphDestroy(barGraph3);
-        graphDestroy(barGraph4);
-
-        barGraph = new Chart(ctx1, drawVisualization2d(search, 1));
-        barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 1));
-        barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 1));
-        barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 1));
+        renderGraphs();
     });
   
     $('#group').change(function () {
@@ -57,15 +35,7 @@ window.addEventListener("load", async () => {
         buttonEnabler(search);
         $('#searchBoxLabel').text("Search by Group: ");
         
-        graphDestroy(barGraph);
-        graphDestroy(barGraph2);
-        graphDestroy(barGraph3);
-        graphDestroy(barGraph4);
-
-        barGraph = new Chart(ctx1, drawVisualization2d(search, 2));
-        barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, 2));
-        barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, 2));
-        barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, 2));
+        renderGraphs();
     });  
 });
 
@@ -76,7 +46,27 @@ function graphDestroy(graphD){
 }
 
 function renderGraphs(){
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    let len = sortBy == 1 ? categories.length : groups.length;
+    let body = '';
 
+    $('#graphCollection div').html("");
+
+    for (let i = 0 ; i < 4 ; i++){
+        body += "<div class='col-6'><canvas id='graph"+ i + "'></canvas></div>";
+    }
+
+
+    $("#graphCollection").append(body);
+    current = search;
+    for (let i = current - 1 ; i < 4 ; i++, search++){
+        ctx[i] = document.getElementById('graph' + i).getContext('2d');
+        graphDestroy(barG[i]);
+        if(search <= len){
+            barG[i] = new Chart(ctx[i], drawVisualization2d(search, sortBy));
+        }
+    }
+    console.log(current);
 }
 
 function drawVisualization2d(search, sortBy) {
@@ -180,7 +170,7 @@ function printGraphs() {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL(
                 'image/png');              
-            var doc = new jsPDF('p', 'mm', 'letter');
+            var doc = new jsPDF('l', 'mm', 'letter');
             doc.text(docText + "Reports", 105, 15, null, null, "center");
             doc.addImage(imgData, 'PNG', 40, 20);
             doc.save(docText + "Graphs");
@@ -249,34 +239,14 @@ function prevButton(){
 
     document.getElementById("search").value = search.toString();
     
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    
-    graphDestroy(barGraph);
-    graphDestroy(barGraph2);
-    graphDestroy(barGraph3);
-    graphDestroy(barGraph4);
-
-    barGraph = new Chart(ctx1, drawVisualization2d(search, sortBy));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, sortBy));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, sortBy));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, sortBy));
+    renderGraphs();
 }
 
 function nextButton(){
-    search += 1;
+    search += 1 * 4;
     buttonEnabler(search);
 
     document.getElementById("search").value = search.toString();
-
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
     
-    graphDestroy(barGraph);
-    graphDestroy(barGraph2);
-    graphDestroy(barGraph3);
-    graphDestroy(barGraph4);
-
-    barGraph = new Chart(ctx1, drawVisualization2d(search, sortBy));
-    barGraph2 = new Chart(ctx2, drawVisualization2d(search + 2, sortBy));
-    barGraph3 = new Chart(ctx3, drawVisualization2d(search + 3, sortBy));
-    barGraph4 = new Chart(ctx4, drawVisualization2d(search + 4, sortBy));
+    renderGraphs();
 }

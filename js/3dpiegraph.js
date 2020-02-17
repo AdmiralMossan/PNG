@@ -44,9 +44,9 @@ function generateColors(sortBy) {
     let sortLength = sortBy == 1 ? categories.length : groups.length;
 
     for (let i = 0; i < sortLength; i++) {
-        var r = Math.floor(Math.random() * 127);
-        var g = Math.floor(Math.random() * 127);
-        var b = Math.floor(Math.random() * 127);
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
         stringColor = "rgba(" + r + "," + g + "," + b;
         colors[i] = stringColor + ",1)";
         pieColors[i] = stringColor + ",0.4)";

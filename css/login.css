@@ -1,3 +1,4 @@
+/* Final CSS after initial login animation */
 #backgroundimage3:before {
 	content: "";
 	position: fixed;
@@ -22,7 +23,15 @@
 #maincontent{
 	animation: fadein .5s ease 0s forwards;
 }
-  
+
+.title_text{
+	font-family: Avenir,Helvetica,Arial,sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-size: 8vh;
+	font-weight: 900;
+	letter-spacing: 2.2px;
+}
+
 #title{
 	background-color: rgba(0, 0, 0, 0.2);
 	color: white;

@@ -1,3 +1,5 @@
+let ctx = [];
+let barG = [];
 
 window.addEventListener("load", async () => {
     $('#sidebarCollapse').on('click', function () {
@@ -13,7 +15,7 @@ window.addEventListener("load", async () => {
     findMax();
     generateColors(1);
 
-    drawVisualization2d(search, 1);
+    renderGraphs();
 
     $('#category').change(function () {
         generateColors(1);
@@ -21,7 +23,8 @@ window.addEventListener("load", async () => {
         document.getElementById("search").value = search.toString();
         buttonEnabler(search);
         $('#searchBoxLabel').text("Search by Category: ");
-        drawVisualization2d(search, 1);
+        
+        renderGraphs();
     });
   
     $('#group').change(function () {
@@ -30,11 +33,41 @@ window.addEventListener("load", async () => {
         document.getElementById("search").value = search.toString();
         buttonEnabler(search);
         $('#searchBoxLabel').text("Search by Group: ");
-        drawVisualization2d(search, 2);
+        
+        renderGraphs();
     });  
 });
 
-async function drawVisualization2d(search, sortBy) {
+function graphDestroy(graphD){
+    if (graphD != null) {
+        graphD.destroy();
+    }
+}
+
+function renderGraphs(){
+    let sortBy = document.getElementById('category').checked ? 1 : 2;
+    let len = sortBy == 1 ? categories.length : groups.length;
+    let body = '';
+
+    $('#graphCollection div').html("");
+
+    for (let i = 0 ; i < 4 ; i++){
+        body += "<div class='col-6'><canvas id='graph"+ i + "'></canvas></div>";
+    }
+
+
+    $("#graphCollection").append(body);
+    for (let i = search ; i < 4 ; i++, search++){
+        ctx[i] = document.getElementById('graph' + i).getContext('2d');
+        graphDestroy(barG[i]);
+        if(search <= len){
+            barG[i] = new Chart(ctx[i], drawVisualization2d(search + i + 1, sortBy));
+        }
+    }
+
+}
+
+function drawVisualization2d(search, sortBy) {
     let displayLabel = [];
     let displayData = [];
     let arrayLabel = [];
@@ -50,11 +83,7 @@ async function drawVisualization2d(search, sortBy) {
     displayMax = sortBy == 1 ? maxCategoryCount : maxGroupCount;
     displayMax = Math.ceil((displayMax + 1) / 10) * 10;
 
-    if (barGraph != null) {
-        barGraph.destroy();
-    }
-
-    barGraph = new Chart(ctx2d, {
+    let graphData = {
         type: 'bar',
         data: {
             labels: displayLabel,
@@ -110,10 +139,10 @@ async function drawVisualization2d(search, sortBy) {
                 animationDuration: 0
             },
             animation: {
-                duration: 700,
+                duration: 1,
                 onComplete: function () {
                     var chartInstance = this.chart,
-                    ctx = chartInstance.ctx;
+                        ctx = chartInstance.ctx;
                     ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'bottom';
@@ -128,28 +157,21 @@ async function drawVisualization2d(search, sortBy) {
                 }
             }
         }
-    });
-}
-
-function findString(value){
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let displayData = [];
-    
-    displayData = sortBy == 1 ? categories.slice() : groups.slice();
-    
-    for(i = 0; i < displayData.length ;i++){
-        displayData[i] = displayData[i].toLowerCase();
     }
 
-    displayData.forEach(function(a){
+    return graphData;
+}
 
-        if (typeof(a) === 'string' && a.indexOf(value)>-1) {
-            let index = displayData.indexOf(value) + 1;
-            
-            document.getElementById("search").value = index.toString();
-            search = index;
-            buttonEnabler(index);
-            drawVisualization2d(index, sortBy);
+function printGraphs() {
+    let docText = document.getElementById('category').checked ? 'Category ' : 'Group ';
+    html2canvas($("#graphCollection"), {
+        onrendered: function(canvas) {         
+            var imgData = canvas.toDataURL(
+                'image/png');              
+            var doc = new jsPDF('l', 'mm', 'legal');
+            doc.text(docText + "Reports", 105, 15, null, null, "center");
+            doc.addImage(imgData, 'PNG', 40, 20);
+            doc.save(docText + "Graphs");
         }
     });
 }
@@ -176,9 +198,7 @@ function prevButton(){
 
     document.getElementById("search").value = search.toString();
     
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    
-    drawVisualization2d(search, sortBy);
+    renderGraphs();
 }
 
 function nextButton(){
@@ -186,24 +206,6 @@ function nextButton(){
     buttonEnabler(search);
 
     document.getElementById("search").value = search.toString();
-
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
     
-    drawVisualization2d(search, sortBy);
-}
-
-function searchBoxField(){
-    let sortBy = document.getElementById('category').checked ? 1 : 2;
-    let displayData = [];
-    let searchString = document.getElementById('searchBox').value;
-    
-    displayData = sortBy == 1 ? categories : groups;
-
-    $('#searchBox').autocomplete({
-        source: displayData
-    });
-    
-    if(event.key === 'Enter' || event.type === 'click'){
-        findString(searchString.toLowerCase());
-    }
+    renderGraphs();
 }

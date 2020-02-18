@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Print Report</title>
+    <title>Bar Graphs</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -62,7 +62,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-chart-bar"></i>
                         Charts
@@ -75,7 +75,7 @@
                                     aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
                         </li>
                         <li class="active">
-                            <a href="bargraphs.html">
+                            <a href="#">
                                 <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                                     aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
                         </li>
@@ -98,7 +98,7 @@
                     <a href="table.html"><i class="fas fa-table"></i> Table </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
                 </li>
             </ul>
@@ -128,7 +128,7 @@
                         <span>Admin Menu</span>
                     </button>
 
-                    <h4 id="header_text" class="mb-0">Print Report</h4 id="header_text">
+                    <h4 id="header_text" class="mb-0">Bar Graphs</h4 id="header_text">
                 </div>
             </nav>
 
@@ -137,20 +137,20 @@
                     <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
                         <div class="row">
                             <div class="col-md h-25">
-                                <h2 id="pagetitle" class="text-center my-0">Print Graphs:</h2>
+                                <h2 id="pagetitle" class="text-center my-0">Specific Bar Graphs:</h2>
                                 <!-- Bar Graph -->
                                 <div id="bargraph" class="container h-100">
                                     <div class="barContainer">
                                         <div class="d-flex flex-row justify-content-center">
                                             <div id="buttons" class="p-2 d-flex row justify-content-center">
                                                 <!-- Container for search bar and search button -->
-                                                <!-- <div class="d-flex">
+                                                <div class="d-flex">
                                                     <input id="searchBox" type="text" size="15"
                                                         style="text-align: left;" placeholder="Search" value=""
                                                         onkeypress="searchBoxField()" onfocus="this.value=''">
                                                     <input id="searchButton" class="material-icons" type="button"
                                                         value="search" onclick="searchBoxField()">
-                                                </div> -->
+                                                </div>
                                                 <!-- End of Search Bar and Search Button -->
 
                                                 <!-- Container for Change Bar Graph Page Buttons -->
@@ -158,7 +158,8 @@
                                                     <input id="prev" class="material-icons" type="button"
                                                         value="chevron_left" onclick="prevButton()" disabled="true">
                                                     <input id="search" type="text" size="1" disabled
-                                                        style="text-align: center;" placeholder="Search" value="1">
+                                                        style="text-align: center;" placeholder="Search" value="1"
+                                                        hidden>
                                                     <input id="next" class="material-icons" type="button"
                                                         value="chevron_right" onclick="nextButton()">
                                                 </div>
@@ -180,32 +181,12 @@
                                                             <label class="form-check-label" for="group">Group</label>
                                                         </div>
                                                     </h6>
-                                                    <h6 class="pl-2 m-1 font-weight-bold text-primary ">
-                                                        <div class="form-check form-check-inline mr-0">
-                                                            <input id="print_icon" class="material-icons" type="button"
-                                                                value="print" onclick="printGraphs()">
-                                                            <label class="form-check-label pl-1" for="print">Print</label>
-                                                        </div>
-                                                    </h6>
                                                 </div>
                                                 <!-- End of Change Bar Graph Type Radio Buttons -->
 
                                             </div>
                                         </div>
-                                        <div id="graphCollection" class="row">
-                                            
-                                            <div class="col">
-                                                <canvas id="graph1"></canvas>
-                                                <canvas id="graph2"></canvas>
-                                            </div>
-            
-                                            <div class="col">
-                                                <canvas id="graph3"></canvas>
-                                                <canvas id="graph4"></canvas>
-                                            </div>
-                                
-                                        </div>
-                                        
+                                        <canvas id="graph2d"></canvas>
                                     </div>
                                 </div>
                                 <!-- End of Bar Graph -->
@@ -292,14 +273,15 @@
 
     </script>
 
-    <!-- jsPDF Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
-
     <!-- Page Custom script-->
     <script type="text/javascript" src="js/notif.js"></script>
     <script type="text/javascript" src="js/dataLoader.js"></script>
-    <script type="text/javascript" src="js/testPrint.js"></script>
+    <script type="text/javascript" src="js/bargraph.js"></script>
+
+
+    <script>
+        var ctx2d = document.getElementById('graph2d').getContext('2d');
+    </script>
 
 </body>
 

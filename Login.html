@@ -26,17 +26,25 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="js/firestore.js"></script>
     <script src="js/login.js"></script>
-    <link href="css/login.css" rel="stylesheet" />
+
+    <!-- css for login animations on load -->
+    <link rel="stylesheet" href="css/loginBG1.css" id="bg1"/>
+    <link rel="stylesheet" href="css/loginBG2.css" id="bg2" media="none"/>
+    <!-- final login CSS -->    
+    <link href="css/login.css" rel="stylesheet" id="bg3" media="none"/>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
 
-  <body>
+  <body onload="load_BG()">
     <div id="backgroundimage"></div>
+    <div id="backgroundimage2"></div>
+    <div id="backgroundimage3"></div>
 
-    <div id="maincontent" class="pb-4">
+    <div id="maincontent" class="pb-4" style="display: none;">
       <!-- Logo and Title -->
-      <div class="d-flex w-100 mx-0 justify-content-center row" >
+      <div class="d-flex w-100 mx-0 justify-content-center row">
         <div class="col text-center w-100 py-4 px-0">
           <div class="container py-4"  id="title">
             <h1 class="display-4">Report Application</h1>

@@ -65,7 +65,7 @@ function removeDesc(){
 
 function disabledButtons(i, j){
     if(j.hasAttribute('disabled')){
-        $('#picture').attr('src', "Images/buttonD.jpg");
+        $('#picture').attr('src', "Images/buttonD.png");
         $('#picture').attr('disabled', true);
         $('#picture').attr('data-toggle', false);
         for(let k=0; k<buttons.length; k++){
@@ -76,7 +76,7 @@ function disabledButtons(i, j){
         buttons[i].classList.add("btn-outline-primary");
         isClicked = false;
     }else{
-        $('#picture').attr('src', "Images/buttonA.jpg");
+        $('#picture').attr('src', "Images/buttonA.png");
         $('#picture').attr('data-toggle', "modal");
         $('#picture').attr('disabled', false);
         for(let k=0; k<buttons.length; k++){

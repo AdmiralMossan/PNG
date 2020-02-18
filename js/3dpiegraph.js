@@ -44,11 +44,11 @@ function generateColors(sortBy) {
     let sortLength = sortBy == 1 ? categories.length : groups.length;
 
     for (let i = 0; i < sortLength; i++) {
-        var r = Math.floor(Math.random() * 127);
-        var g = Math.floor(Math.random() * 127);
-        var b = Math.floor(Math.random() * 127);
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
         stringColor = "rgba(" + r + "," + g + "," + b;
-        colors[i] = stringColor + ",1)";
+        colors[i] = stringColor + ",0.7)";
         pieColors[i] = stringColor + ",0.4)";
     }
 }
@@ -261,8 +261,8 @@ async function drawVisualization(data) {
       xLabel: xL, //Categories
       yLabel: yL, //Groups
       zLabel: "Number", //Number
-      xBarWidth: 0.5,
-      yBarWidth: 0.5,
+      xBarWidth: 0.78,
+      yBarWidth: 0.78,
       rotateAxisLabels: true,
       xCenter: "50%",
       yCenter: "40%",

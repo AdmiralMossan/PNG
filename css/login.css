@@ -1,4 +1,4 @@
-#maincontent:before {
+#backgroundimage3:before {
 	content: "";
 	position: fixed;
 	left: 0;
@@ -6,7 +6,7 @@
 	z-index: -1;
 	
 	display: block;
-	background-image: url("../Images/BG2.jpg");
+	background-image: url("../Images/BG3.jpg");
 	height: 100%;
 	
 	-webkit-filter: blur(8px);
@@ -16,7 +16,12 @@
 	filter: blur(8px);
 	background-repeat: no-repeat;
 	background-size: cover;
+	animation: fadein .5s ease 0s forwards;
   }
+
+#maincontent{
+	animation: fadein .5s ease 0s forwards;
+}
   
 #title{
 	background-color: rgba(0, 0, 0, 0.2);

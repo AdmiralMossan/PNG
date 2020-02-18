@@ -123,6 +123,7 @@ span {
   padding-top: 15px;
   padding-left: 20px;
   background: lightskyblue;
+  min-height: 90px;
 }
 
 #sidebar .sidebar-header strong {
@@ -146,7 +147,7 @@ span {
     HOVER ON ITEM ON SIDEBAR
 ---------------------------------------------------------*/
   #sidebar ul li a:hover {
-    color: #42322b;
+    color: white;
     /* Use background: color; if no gradient is to be applied */
     background: lightskyblue;
     /* background: white url('../Images/hover-item.png'); */
@@ -183,7 +184,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: skyblue;
+  background: lightskyblue;
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
@@ -374,4 +375,13 @@ ul.CTAs a {
 ---------------------------------------------------------*/
 .ui-front {
   z-index: 9999999 !important;
+}
+
+/* ------------------------------------------------------  
+    CSS For Fade in Animation
+---------------------------------------------------------*/
+@keyframes fadein{
+	0% {opacity: 0;}
+	100% {opacity: 1;
+		display: none;}
 }

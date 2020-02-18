@@ -134,71 +134,115 @@
         </div>
       </nav>
 
-      <div id="stats-container" class="row w-100 pb-2 justify-content-center mx-0">
-        <div id="card1" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100 border-info">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Most Reported Category</h6>
-            </div>
-            <div class="card-body p-0">
-              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                <h3 id="categoryCount" class="text-danger pt-3"></h3>
+      <div id="stats-container" class="container-fluid w-100 pb-2 justify-content-center mx-0 border">
+        <!-- Row for trend cards -->
+        <div class="row">
+          <!-- Card for most reported Category -->
+          <div id="card1" class=" col stats-card px-2 pt-2">
+            <div class="card shadow h-100 border-info">
+              <!-- Card Header -->
+              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px;  max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Most Reported Category</h6>
               </div>
-            </div>
-          </div>
-        </div>
-        <div id="card2" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100 border-info">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Group With Most Reports</h6>
-            </div>
-            <div class="card-body p-0">
-              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                <h3 id="groupCount" class="text-danger pt-3"></h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="card3" class="stats-card px-4 pt-4">
-          <div class="card shadow h-100 border-info">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-uppercase pt-4">Total Number of Reports</h6>
-            </div>
-            <div class="card-body p-0">
-              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
-                <h3 id="reportCount" class="text-danger pt-3"></h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="card4" class="stats-card  col-12 w-50 pt-2">
-          <div class="card shadow h-100 w-75 row mx-auto border-info">
-            <!-- Card Header -->
-            <div class="card-header bg-custom">
-              <!-- Main Title of Card Header -->
-              <div class="row">
-                <div class="col text-center">
-                  <h6 class="m-0 font-weight-bold text-uppercase m-auto pt-3">Latest Reports</h6>
+              <!-- End of Card Header -->
+
+              <!-- Card Body -->
+              <div class="card-body p-0">
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                  <h3 id="categoryCount" class="text-danger pt-3"></h3>
                 </div>
               </div>
-              <!-- Subtitle of Card Header -->
-              <div class="row">
-                <div class="col text-center pt-2">
-                  <h6 class="card-subtitle mb-2 text-muted">Double-click an Item to View Report Details</h6>
+              <!-- End of Card Body -->
+            </div>
+          </div>
+          <!-- End of Card for most reported category -->
+
+          <!-- Card for group with most reports -->
+          <div id="card2" class="col stats-card px-2 pt-2">
+            <div class="card shadow h-100 border-info">
+              <!-- Card Header -->
+              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center  pt-4">Group With Most Reports</h6>
+              </div>
+              <!-- End of Card Header -->
+
+              <!-- Card Body -->
+              <div class="card-body p-0">
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                  <h3 id="groupCount" class="text-danger pt-3"></h3>
                 </div>
               </div>
+              <!-- End of Card Body -->
             </div>
-            <!-- End of Card Header -->
-            <div class="card-body p-0 w-100">
-              <div class="col p-0 d-flex justify-content-center h-100 w-100">
-                <div id="latestReport" class='w-100'></div>
+          </div>
+          <!-- End of Card for Group with most Reports -->
+
+          <!-- Card for Total Reports -->
+          <div id="card3" class="col stats-card px-2 pt-2">
+            <div class="card shadow h-100 border-info">
+              <!-- Card Header -->
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Total Reports</h6>
+              </div>
+              <!-- End of Card Header -->
+
+              <!-- Card Body -->
+              <div class="card-body p-0">
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                  <h3 id="reportCount" class="text-info pt-3"></h3>
+                </div>
+              </div>
+              <!-- End of Card Body -->
+            </div>
+          </div>
+          <!-- End of Card for Total Reports -->
+
+          <div id="card3" class="col stats-card px-2 pt-2">
+            <div class="card shadow h-100 border-info">
+              <!-- Card Header - Dropdown -->
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Reports Today</h6>
+              </div>
+              <div class="card-body p-0">
+                <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                  <h3 id="reportToday" class="text-info pt-3"></h3>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- End of row for trend cards -->
+        
+        <!-- Start of row for recent reports -->
+        <div class="row">
+          <div id="card4" class="stats-card  col pt-2">
+            <div class="card shadow h-100 row mx-2 border-info">
+              <!-- Card Header -->
+              <div class="card-header bg-custom">
+                <!-- Main Title of Card Header -->
+                <div class="row">
+                  <div class="col text-center">
+                    <h6 class="m-0 font-weight-bold text-uppercase m-auto pt-3">Most Recent Reports</h6>
+                  </div>
+                </div>
+                <!-- Subtitle of Card Header -->
+                <div class="row">
+                  <div class="col text-center pt-2">
+                    <h6 class="card-subtitle mb-2 text-muted">Double-click an Item to View Report Details</h6>
+                  </div>
+                </div>
+              </div>
+              <!-- End of Card Header -->
+              <div class="card-body p-0 w-100">
+                <div class="col p-0 d-flex justify-content-center h-100 w-100">
+                  <div id="latestReport" class='w-100'></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of row for recent reports -->
+        
       </div>
     </div>
 

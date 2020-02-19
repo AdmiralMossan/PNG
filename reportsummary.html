@@ -233,7 +233,7 @@
           </div>
           <!-- End of Card for Total Reports -->
 
-          <div id="card3" class="col stats-card px-2 pt-2">
+          <div id="card4" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header - Dropdown -->
               <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
@@ -252,7 +252,7 @@
 
         <!-- Start of row for recent reports -->
         <div class="row">
-          <div id="card4" class="stats-card  col pt-2">
+          <div id="card5" class="stats-card  col pt-2">
             <div class="card shadow h-100 row mx-2 border-info">
               <!-- Card Header -->
               <div class="card-header bg-custom pb-0">
@@ -281,26 +281,28 @@
         <!-- End of row for recent reports -->
 
         <!-- Start row for number of reports weekly  -->
-        <div id="card4" class="stats-card  col pt-2">
-          <div class="card shadow h-100 row mx-2 border-info">
-            <!-- Card Header -->
-            <div class="card-header bg-custom pb-3 justify-content-center">
-              <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Weekly Reports</h6>
-            </div>
-            <div class="card-body p-0">
-              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+        <div class="row">
+          <div id="card6" class="stats-card  col pt-2">
+            <div class="card shadow h-100 row mx-2 border-info">
+              <!-- Card Header -->
+              <div class="card-header bg-custom pb-0">
+                <!-- Main Title of Card Header -->
+                <div class="row">
+                  <div class="col text-center">
+                    <h6 class="m-0 font-weight-bold text-uppercase m-auto py-2">Weekly Reports</h6>
+                  </div>
+                </div>
+              </div>
+              <!-- End of Card Header -->
+              <div class="card-body p-0 w-100">
                 <div class="chartContainer" style="position: relative; height:50vh; width:70vw">
                   <canvas id="weeklyReports"></canvas>
                 </div>
               </div>
             </div>
-              
           </div>
         </div>
-        <!-- End row for number of reports weekly -->
-        
-        </div>
-        
+        <!-- End of row for Reports Weekly -->
 
       </div>
     </div>
@@ -387,7 +389,7 @@
             </li> -->
       </div>
       <div class="message-box ">
-        <form id="message-form" action="#" autocomplete="off">
+        <form id="message-form" action="#" autocomplete="off" class="row justify-content-between mx-2">
           <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
           <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
         </form>

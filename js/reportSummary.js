@@ -13,7 +13,12 @@ window.addEventListener("load", async () => {
         paging: false,
         info: false
     });
+
+
+
 });
+
+
 
 function showLatest() {
     let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };

@@ -3,14 +3,36 @@
 
 var notif = false;
 var reports = [];
+var loaded = false;
 
 window.addEventListener("load", async () => {
-    isloaded = true;
+    
+    let isloaded = false;
     await getReports();
     await showNotif();
     await reportDetails()
 
+  await db
+    .collection('reports')
+    .orderBy('created', 'desc')
+    .onSnapshot(async function(querySnapshot) {
+      if (isloaded) {
+        querySnapshot.docChanges().forEach(async function(change) {
+          if (change.type === 'added') {  
+            await getReports();
+            showNotif()
+            $('#reportCount').text(reports.length);
+            notifyReport(querySnapshot.docs[0]);
+          }
+        });
+      } else {
+        isloaded = true;
+      }
+    });
+
 });
+
+
 function notifyReport(report) {
     PNotify.info({
         title: "New Report",

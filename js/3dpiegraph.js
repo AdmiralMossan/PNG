@@ -10,7 +10,6 @@ var categories = [];
 var groups = [];
 var colors = [];
 var pieColors = [];
-var loaded = false;
 var csvData = [];
 var reportSelected = {};
 var maxZvalue = 0;
@@ -191,7 +190,6 @@ window.addEventListener("load", async () => {
 
                     $("#reportCount").text(reports.length);
                     loadData(displayBy).then(function () {
-                        notifyReport(querySnapshot.docs[0]);
                         drawVisualization(data);
                         drawPie(displayBy);
                     });

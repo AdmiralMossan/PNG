@@ -14,6 +14,7 @@
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/admincontent.css">
   <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/reportsummary.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -335,8 +336,7 @@
       </div>
     </div>
 
-
-    <!-- Firebase core Javascript-->
+       <!-- Firebase core Javascript-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
@@ -353,6 +353,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
       integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
       crossorigin="anonymous"></script>
+
+<!-- PNotify Javascript-->
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
+<link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+<script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+<script type="text/javascript">
+  window.centerModalStack = {
+    'dir1': 'down',
+    'firstpos1': 25,
+    'modal': true,
+    'overlayClose': true
+  };
+  PNotify.modules.History.defaults.maxInStack = 3;
+
+</script>
+
     <!-- DataTable JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
     <script src="js/sidebar.js"></script>

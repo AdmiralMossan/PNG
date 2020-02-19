@@ -48,7 +48,16 @@
         <div class="col text-center w-100 py-4 px-0">
           <div class="container py-4"  id="title">
             <h1 class="display-4 title_text">レポートアプリ</h1>
-            <p class="lead">Let your voice be heard and create a report now!</p>
+            <div class="row">
+              <div class="col">
+                <p class="lead">新しいレポートを作れ！</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                言語を変え: <a href="../login.html">英語</a> / 日本語
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -66,7 +75,7 @@
             <form onsubmit="logIn(event);">
             <!-- Username field -->
             <div class="form-group mx-auto align-middle pt-4">
-              <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="Username" required/>
+              <input type="username" class="form-control" id="username" aria-describedby="username_extra" placeholder="ユーザー名" required/>
             </div>
             <!-- End of Username field -->
 
@@ -93,7 +102,7 @@
                     class="btn btn-primary "
                     onclick="logInJp(event)"
                   >
-                    Submit
+                    ログイン
                   </button>
                 </div>
                 <div class="col-sm"></div>
@@ -152,7 +161,7 @@
                     class="form-control"
                     id="usernameanon"
                     aria-describedby="username_extra"
-                    placeholder="Username"
+                    placeholder="ユーザー名"
                   />
                 </div>
 
@@ -163,7 +172,7 @@
                     class="form-control text-black bg-light"
                     id="passwordanon"
                     aria-describedby="password_extra"
-                    placeholder="Password"
+                    placeholder="パスワード"
                   />
                 </div>
 

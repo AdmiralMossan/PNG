@@ -34,7 +34,7 @@
 
 </head>
 
-<body>
+<body style="overflow: hidden;">
 
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -120,30 +120,30 @@
                 </li>
                 <li>
                     <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                      <i class="fas fa-language"></i>
-                      言語
+                        <i class="fas fa-language"></i>
+                        言語
                     </a>
                     <ul class="collapse list-unstyled" id="language">
-                      <li>
-                        <a href="../category.html">
-                          <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
+                        <li>
+                            <a href="../category.html">
+                                <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">英語 </span></a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
+                                <span class="pl-2">英語 </span></a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">日本語 </span></a>
-                      </li>
+                                <span class="pl-2">日本語 </span></a>
+                        </li>
                     </ul>
-                  </li>
+                </li>
             </ul>
 
         </nav>
 
         <!-- Page Content  -->
-        <div id="content">
+        <div id="content" style="overflow: auto;">
 
             <nav id="menubutton" class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
@@ -204,16 +204,15 @@
                                                     <label for="catName" class="h6">カテゴリー名:</label>
                                                 </div>
                                                 <div class="row pl-4 pb-2">
-                                                    <input type="text" id="catName" onkeypress=""
-                                                        placeholder="カテゴリー名" required />
+                                                    <input type="text" id="catName" onkeypress="" placeholder="カテゴリー名"
+                                                        required />
                                                 </div>
                                                 <div class="row pl-4 w-100">
                                                     <label for="catDesc" class="h6">カテゴリーの説明:</label>
                                                 </div>
                                                 <div class="form-row row pl-3 w-75">
                                                     <textarea class="w-100" rows="3" style="resize: none;" id="catDesc"
-                                                        placeholder="新しいカテゴリーの説明を入力してください。"
-                                                        required></textarea>
+                                                        placeholder="新しいカテゴリーの説明を入力してください。" required></textarea>
                                                 </div>
                                             </div>
                                         </div>

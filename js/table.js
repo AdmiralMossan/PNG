@@ -12,6 +12,8 @@ window.addEventListener("load", async () => {
     });
 
 
+
+
 });
 
 async function showTables() {
@@ -33,7 +35,7 @@ async function showTables() {
         "<th style='width:20%;'>Group</th>" +
         "<th style='width:20%;'>Category</th>" +
         "<th style='width:40%;'>Date" +
-
+        "<th style='width:40%;'>Status" + 
         "</th></tr></thead>";
 
     //Add body
@@ -64,6 +66,9 @@ async function showTables() {
             "</td>" +
             "<td>" +
             report.created.toDate().toLocaleString("en-US", options) +
+            "</td>" +
+            "<td>" +
+            report.status +
             "</td>" +
             "</tr>";
 

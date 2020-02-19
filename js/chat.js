@@ -201,15 +201,15 @@ function deleteMessage(id) {
   }
 }
 
-  var SENDER_MESSAGE_TEMPLATE = ' <div class="chat_msg_item chat_msg_item_user">' +
+  var SENDER_MESSAGE_TEMPLATE = '<div class="chat_msg_item chat_msg_item_user"><span class="time"></span>' +
 '<p class="messageDisplay rounded load">'+
 '</p></div>';
 
   var RECEIVER_MESSAGE_TEMPLATE =
-  '<span class="chat_msg_item chat_msg_item_admin  ">'+
+  '<span class="chat_msg_item chat_msg_item_admin">'+
   '<div class="chat_avatar">' +
      '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png"/>' +
-  '</div><p class="messageDisplay rounded"></p></span>' ;
+  '</div><span class="time"></span><p class="messageDisplay rounded"></p></span>' ;
 
 function createAndInsertMessage(id, timestamp, sender) {
   const container = document.createElement('div');
@@ -260,9 +260,14 @@ function displayMessage(id, timestamp, name, text, sender) {
   // if (!sender)
   //   div.querySelector('.nameDisplay').textContent = name;
   var messageElement = div.querySelector('.messageDisplay');
-
+  var time = div.querySelector('.time');
   if (text) { // If the message is text.
     messageElement.textContent = text;
+    var messageDate = moment(timestamp.toDate());
+    if(messageDate.isSame(moment(), 'd'))
+      time.textContent = moment(timestamp.toDate()).format('HH:mm');
+    else 
+      time.textContent = moment(timestamp.toDate()).calendar(moment(  ));
     // Replace all line breaks by <br>.
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   }

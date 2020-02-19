@@ -4,18 +4,20 @@ window.addEventListener("load", async () => {
     await showCategories();
     
     $('#categoriesTable').DataTable({
-        dom: 'Bfrtip',
-        scrollY: '40vh',
-        buttons: ['csv', 'excel', 'pdf'],
-        responsive: true
+      dom: 'Bfrtip',
+      scrollY: '40vh',
+      buttons: ['csv', 'excel', 'pdf'],
+      responsive: true,
+      columnDefs: [{ orderable: false, targets: 2 }]
     });
     
     showCategories().then(() => {
         $('#categoriesTable').DataTable({
-            dom: 'Bfrtip',
-            scrollY: '40vh',
-            buttons: ['csv', 'excel', 'pdf'],
-            responsive: true
+          dom: 'Bfrtip',
+          scrollY: '40vh',
+          buttons: ['csv', 'excel', 'pdf'],
+          responsive: true,
+          columnDefs: [{ orderable: false, targets: 2 }]
         });
     });
 });
@@ -138,10 +140,11 @@ async function addCategory() {
 
         showCategories().then(() => {
             $('#categoriesTable').DataTable({
-                dom: 'Bfrtip',
-                scrollY: '40vh',
-                buttons: ['csv', 'excel', 'pdf'],
-                responsive: true
+              dom: 'Bfrtip',
+              scrollY: '40vh',
+              buttons: ['csv', 'excel', 'pdf'],
+              responsive: true,
+              columnDefs: [{ orderable: false, targets: 2 }]
             });
         });
         document.getElementById("catName").value = "";
@@ -194,10 +197,11 @@ async function updateCategory(value) {
 
             showCategories().then(() => {
                 $('#categoriesTable').DataTable({
-                    dom: 'Bfrtip',
-                    scrollY: '40vh',
-                    buttons: ['csv', 'excel', 'pdf'],
-                    responsive: true
+                  dom: 'Bfrtip',
+                  scrollY: '40vh',
+                  buttons: ['csv', 'excel', 'pdf'],
+                  responsive: true,
+                  columnDefs: [{ orderable: false, targets: 2 }]
                 });
             });
             document.getElementById("catName").value = "";
@@ -265,10 +269,11 @@ async function removeCategory(value) {
 
                 showCategories().then(() => {
                     $('#categoriesTable').DataTable({
-                        dom: 'Bfrtip',
-                        scrollY: '40vh',
-                        buttons: ['csv', 'excel', 'pdf'],
-                        responsive: true
+                      dom: 'Bfrtip',
+                      scrollY: '40vh',
+                      buttons: ['csv', 'excel', 'pdf'],
+                      responsive: true,
+                      columnDefs: [{ orderable: false, targets: 2 }]
                     });
                 });
             })

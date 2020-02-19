@@ -13,22 +13,23 @@ class User {
 window.addEventListener("load", async () => {
     isloaded = true;
     newUserTable = $('#addUsersTable').DataTable({
-        paging: false,
-        info: false,
-        sorting: false,
-        searching: false,
-        language: {
-            emptyTable: "No new user"
-        },
+      paging: false,
+      info: false,
+      sorting: false,
+      searching: false,
+      language: {
+        emptyTable: 'No new user'
+      }
     });
 
     $('#addUsersTable').parent().append(addUserElement(1))
     showUsers().then(() => {
         $('#usersTable').DataTable({
-            dom: 'Bfrtip',
-            scrollY: '40vh',
-            buttons: ['csv', 'excel', 'pdf'],
-            responsive: true
+          dom: 'Bfrtip',
+          scrollY: '40vh',
+          buttons: ['csv', 'excel', 'pdf'],
+          responsive: true,
+          columnDefs: [{ orderable: false, targets: 3 }]
         });
     })
 
@@ -262,10 +263,11 @@ async function updateUser(value) {
 
                 showUsers().then(() => {
                     $('#usersTable').DataTable({
-                        dom: 'Bfrtip',
-                        scrollY: '40vh',
-                        buttons: ['csv', 'excel', 'pdf'],
-                        responsive: true
+                      dom: 'Bfrtip',
+                      scrollY: '40vh',
+                      buttons: ['csv', 'excel', 'pdf'],
+                      responsive: true,
+                      columnDefs: [{ orderable: false, targets: 3 }]
                     });
                 });
                 document.getElementById("userGroup").value = "";
@@ -351,10 +353,11 @@ async function removeUser(value) {
 
                 showUsers().then(() => {
                     $('#usersTable').DataTable({
-                        dom: 'Bfrtip',
-                        scrollY: '40vh',
-                        buttons: ['csv', 'excel', 'pdf'],
-                        responsive: true
+                      dom: 'Bfrtip',
+                      scrollY: '40vh',
+                      buttons: ['csv', 'excel', 'pdf'],
+                      responsive: true,
+                      columnDefs: [{ orderable: false, targets: 3 }]
                     });
                 });
             })

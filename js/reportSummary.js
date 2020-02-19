@@ -13,7 +13,12 @@ window.addEventListener("load", async () => {
         paging: false,
         info: false
     });
+
+
+
 });
+
+
 
 function showLatest() {
     let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -81,7 +86,7 @@ function showLatest() {
     });
 
     $("#latestReport").append(head + body + "</tbody></table>");
-    $('#card4 > div').append('<div class="card-footer mx-auto"><a href="/table.html"> All Reports</a></div>')
+    $('#card4 > div').append('<div class="card-footer mx-auto py-1"><a href="/table.html"> All Reports</a></div>')
 }
 
 

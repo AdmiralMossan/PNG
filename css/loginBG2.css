@@ -1,3 +1,4 @@
+/* CSS for second keyframe of login animation */
 #backgroundimage2:before {
 	content: "";
 	position: fixed;
@@ -19,7 +20,8 @@
     animation: fadein .5s ease 0s forwards;
   }
 
-  @keyframes fadein{
+/* Fade in animation */
+@keyframes fadein{
 	0% {opacity: 0;}
 	100% {opacity: 1;
 		display: none;}

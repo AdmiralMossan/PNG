@@ -10,9 +10,11 @@ var categories = [];
 var groups = [];
 var colors = [];
 var pieColors = [];
+var loaded = false;
 var csvData = [];
 var reportSelected = {};
 var maxZvalue = 0;
+let temp = [];
 
 function clearValues() {
     categoriesCount = [];
@@ -67,40 +69,32 @@ function findLongestString() {
 }
   
 async function loadData(colorBy) {
-    var steps = categories.length;
-    var axisMax = steps;
-    var yAxisMax = groups.length;
-    var axisStep = axisMax / steps;
-    var z = 0;
+    let xAxis = categories.length;
+    let zAxis = groups.length;
+    let y = 0;
+    
     maxZvalue = 0;
   
     dataArray = [];
-    for (let i = 0; i < axisMax; i += axisStep) {
-      for (let j = 0; j < yAxisMax; j += axisStep) {
-        z = getData(i, j);
-  
-        maxZvalue = z > maxZvalue ? z : maxZvalue;
-  
-        color = colorBy == 1 ? colors[i] : colors[j];
+
+    for(let i = 0 ; i < zAxis ; i++){
+        let tempData = [];
+        for(let j = 0 ; j < xAxis ; j++){
+            y = getData(j, i);
+            maxZvalue = y > maxZvalue ? y : maxZvalue;
+            tempData.push({
+                x: j,
+                y: y
+            });
+        }
         dataArray.push({
-          x: i,
-          y: j,
-          z: z,
-          style: {
-            fill: color,
-            stroke: "#999"
-          }
+            stack: i,
+            data: tempData
         });
-      }
     }
-  
-    // Create and populate a data table.
-    data = new vis.DataSet();
-  
-    for (let i = 0; i < dataArray.length; i++) {
-      data.add(dataArray[i]);
-    }
-  
+
+    temp = dataArray;
+
     return dataArray;
 }
 
@@ -193,6 +187,7 @@ window.addEventListener("load", async () => {
 
                     $("#reportCount").text(reports.length);
                     loadData(displayBy).then(function () {
+                        notifyReport(querySnapshot.docs[0]);
                         drawVisualization(data);
                         drawPie(displayBy);
                     });
@@ -242,74 +237,114 @@ async function drawPie(groupBy) {
 // Called when the Visualization API is loaded.
 async function drawVisualization(data) {
     // specify options
-    maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
-    let xL = "";
-    let yL = "";
-    let strlen = findLongestString();
-    if (strlen < 7) {
-      xL = "Category";
-      yL = "Group";
-    }
-    var options = {
-      height: "100%",
-      width: "100%",
-      style: "bar-color",
-      showPerspective: true,
-      showGrid: true,
-      showShadow: true,
-      axisFontType: "arial",
-      axisFontSize: 26,
-      xLabel: xL, //Categories
-      yLabel: yL, //Groups
-      zLabel: "Number", //Number
-      xBarWidth: 0.78,
-      yBarWidth: 0.78,
-      rotateAxisLabels: true,
-      xCenter: "50%",
-      yCenter: "40%",
-      xStep: 1,
-      yStep: 1,
-      zMin: 0,
-      zMax: maxZvalue,
-      keepAspectRatio: true,
-  
-      tooltip: function (point) {
-        // parameter point contains properties x, y, z
-        return (
-          "Category: <b>" +
-          categories[point.x] +
-          "</b> " +
-          "Group: <b>" +
-          groups[point.y] +
-          "</b> " +
-          "Number: <b>" +
-          point.z +
-          "</b>"
-        );
-      },
-  
-      xValueLabel: function (value) {
-        if (value % 1 == 0) {
-          return "  " + categories[value];
-        }
-        return "";
-      },
-  
-      yValueLabel: function (value) {
-        if (value % 1 == 0) {
-          return "  " + groups[value];
-        }
-        return "";
-      },
-  
-      zValueLabel: function (value) {
-        return value;
-      },
-    };
-  
-    // create our graph
-    var container = document.getElementById("mygraph");
-    graph = new vis.Graph3d(container, data, options);
-  
-    graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
+    maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10;
+
+    $(function() {
+        const rand = function (from, to) {
+          return Math.round(from + Math.random() * (to - from));
+       };
+       const chart = Highcharts.chart('mygraph', {
+         chart: {
+           type: 'column',
+           options3d: {
+             enabled: true,
+             alpha: 20,
+             beta: 30,
+             depth: 400, // Set depth
+             viewDistance: 5,
+             frame: {
+               bottom: {
+                 size: 1,
+                 color: 'rgba(0,0,0,0.05)'
+               }
+             }
+           }
+         },
+         title: {
+           text: ''
+         },
+         subtitle: {
+           text: ''
+         },
+         yAxis: {
+           min: 0,
+           tickInterval: 10,
+           max: maxZvalue
+         },
+         xAxis: {
+           min: 0, // Set min on xAxis
+           max: categories.length - 1,
+           tickInterval: 1,
+           categories: categories,
+           gridLineWidth: 1
+         },
+         zAxis: {
+           min: 0,
+           max: groups.length - 1,
+           tickInterval: 1,
+           categories: groups,
+           gridLineWidth: 1,
+           labels: {
+               align: 'center'
+           }
+         },
+         plotOptions: {
+           series: {
+             groupZPadding: 10,
+             depth: 75,
+             groupPadding: 0,
+             grouping: false,
+           }
+         },
+          series: temp
+        //   [{
+        //    stack: 0,
+        //    data: [...Array(4)].map((v, i) => ({ x: i, y: rand(0, 10) }))
+        //  }, {
+        //    stack: 1,
+        //    data: [...Array(4)].map((v, i) => ({ x: i, y: rand(0, 10) }))
+        //  }, {
+        //    stack: 2,
+        //    data: [...Array(4)].map((v, i) => ({ x: i, y: rand(0, 10) }))
+        //  },{
+        //    stack: 3,
+        //    data: [...Array(4)].map((v, i) => ({ x: i, y: rand(0, 10) }))
+        //  }],
+       });
+     
+     
+       // Add mouse events for rotation
+       $(chart.container).on('mousedown.hc touchstart.hc', function(eStart) {
+         eStart = chart.pointer.normalize(eStart);
+     
+         var posX = eStart.pageX,
+           posY = eStart.pageY,
+           alpha = chart.options.chart.options3d.alpha,
+           beta = chart.options.chart.options3d.beta,
+           newAlpha,
+           newBeta,
+           sensitivity = 5; // lower is more sensitive
+     
+         $(document).on({
+           'mousemove.hc touchdrag.hc': function(e) {
+             // Run beta
+             newBeta = beta + (posX - e.pageX) / sensitivity;
+             chart.options.chart.options3d.beta = newBeta;
+     
+             // Run alpha
+             newAlpha = alpha + (e.pageY - posY) / sensitivity;
+             if(newAlpha < 0){
+                newAlpha = 0;
+             }
+             chart.options.chart.options3d.alpha = newAlpha;
+     
+             chart.redraw(false);
+           },
+           'mouseup touchend': function() {
+             $(document).off('.hc');
+           }
+         });
+       });
+     
+     });
 }

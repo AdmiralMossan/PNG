@@ -14,6 +14,7 @@
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/admincontent.css">
   <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/reportsummary.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -153,7 +154,8 @@
           <div id="card1" class=" col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px;  max-height: 78px;">
+              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px;  max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Most Reported Category</h6>
               </div>
               <!-- End of Card Header -->
@@ -173,7 +175,8 @@
           <div id="card2" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center  pt-4">Group With Most Reports</h6>
               </div>
               <!-- End of Card Header -->
@@ -193,7 +196,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Total Reports</h6>
               </div>
               <!-- End of Card Header -->
@@ -212,7 +216,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header - Dropdown -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Reports Today</h6>
               </div>
               <div class="card-body p-0">
@@ -224,13 +229,13 @@
           </div>
         </div>
         <!-- End of row for trend cards -->
-        
+
         <!-- Start of row for recent reports -->
         <div class="row">
           <div id="card4" class="stats-card  col pt-2">
             <div class="card shadow h-100 row mx-2 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom">
+              <div class="card-header bg-custom pb-0">
                 <!-- Main Title of Card Header -->
                 <div class="row">
                   <div class="col text-center">
@@ -254,7 +259,7 @@
           </div>
         </div>
         <!-- End of row for recent reports -->
-        
+
       </div>
     </div>
 
@@ -347,7 +352,6 @@
       </div>
     </div>
 
-
     <!-- Firebase core Javascript-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
@@ -365,6 +369,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
       integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
       crossorigin="anonymous"></script>
+
+    <!-- PNotify Javascript-->
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
+    <link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+    <script type="text/javascript">
+      window.centerModalStack = {
+        'dir1': 'down',
+        'firstpos1': 25,
+        'modal': true,
+        'overlayClose': true
+      };
+      PNotify.modules.History.defaults.maxInStack = 3;
+
+    </script>
+
     <!-- DataTable JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
     <script src="js/sidebar.js"></script>

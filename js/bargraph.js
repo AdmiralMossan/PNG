@@ -67,7 +67,7 @@ async function drawVisualization2d(search, sortBy) {
             }]
         },
         options: {
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             legend: {
                 position: 'top',
                 labels: {

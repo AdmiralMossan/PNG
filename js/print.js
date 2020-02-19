@@ -75,10 +75,6 @@ function graphDestroy(graphD){
     }
 }
 
-function renderGraphs(){
-
-}
-
 function drawVisualization2d(search, sortBy) {
     let displayLabel = [];
     let displayData = [];

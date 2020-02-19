@@ -80,6 +80,12 @@
   border-radius: 50%;
 }
 
+.time{
+  font-size: 8px;
+  font-family: 'Roboto';
+  color: rgb(141, 139, 139);
+}
+
 .chat_msg_item.chat_msg_item_admin {
   margin-left: 60px;
   float: left;
@@ -103,24 +109,29 @@
 
 .message-box input{
   border: none;
-  width: 90%;
+  width: 70%;
   font-size: 13px;
   opacity: 0.7;
 }
 .message-box input:focus {
   outline: none;
 }
-.message-box button {
+.message-box .buttons{
+  
+}
+.message-box .buttons button{
   color: #428bca;
   cursor: pointer;
   font-size: 20px;
-  margin-right: 6px;
+  margin-right: 26px;
   position: absolute;
   border: none;
   outline: none;
   background-color: Transparent;
   background-repeat: no-repeat;
+  
 }
+
 
 .message-box button:disabled i {
   color: #a1a1a1;
@@ -251,6 +262,7 @@
   width: 40px;
   border: 1.5px solid #f5f6fa;
 }
+
 .user_img_msg {
   height: 20px;
   width: 20px;
@@ -293,6 +305,7 @@ border:1.5px solid white;
   margin-bottom: auto;
   margin-left: 15px;
 }
+
 .user_info span {
   font-size: 20px;
   color: rgb(24, 23, 23);

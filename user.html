@@ -29,14 +29,14 @@
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+
   <script src="https://unpkg.com/bcrypt@3.0.7/./bcrypt"></script>
   <script src="js/password.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
@@ -52,7 +52,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
-<body>
+<body style="overflow: hidden;">
   <nav id="navbar" class="navbar navbar-expand shadow-sm navbar-light topbar mb-2 pb-0 w-100">
     <!-- Nav Heading -->
     <div class="navbar-brand">
@@ -133,8 +133,8 @@
         <div class="row py-4"></div>
         <!-- Report Button -->
         <div class="row pt-2">
-          <img id="picture" type="image" src="Images/buttonD.png"
-            class="rounded mx-auto d-block px-4" data-target="#detailsModal" alt="Submit" disabled>
+          <img id="picture" type="image" src="Images/buttonD.png" class="rounded mx-auto d-block px-4"
+            data-target="#detailsModal" alt="Submit" disabled>
         </div>
       </div>
 
@@ -155,9 +155,23 @@
             <div class="modal-footer">
               <button id="closemodal" type="button" class="btn btn-primary" onclick="toDetails()" alt="Submit">Add
                 Details</button>
-              <button id="sendButton" type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button id="sendButton" type="button" class="btn btn-secondary" 
                 onclick="storeData(event, true)">Skip</button>
             </div>
+            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+    <path fill="grey" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+      <animateTransform 
+         attributeName="transform" 
+         attributeType="XML" 
+         type="rotate"
+         dur="1s" 
+         from="0 50 50"
+         to="360 50 50" 
+         repeatCount="indefinite" />
+  </path>
+</svg>
+
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ function generateColors(sortBy) {
         var g = Math.floor(Math.random() * 255);
         var b = Math.floor(Math.random() * 255);
         stringColor = "rgba(" + r + "," + g + "," + b;
-        colors[i] = stringColor + ",0.7)";
+        colors[i] = stringColor + ",0.5)";
         pieColors[i] = stringColor + ",0.4)";
     }
 }
@@ -158,14 +158,14 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await getGroupsAndCategories();
     generateColors(1);
-
+   
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
     });
 
     $("#reportCount").text(reports.length);
-
+    
     $('#category').change(function () {
         generateColors(1);
         loadData(1).then(function () {
@@ -255,7 +255,7 @@ async function drawVisualization(data) {
       width: "100%",
       style: "bar-color",
       showPerspective: true,
-      showGrid: true,
+      showGrid: false,
       showShadow: true,
       axisFontType: "arial",
       axisFontSize: 26,

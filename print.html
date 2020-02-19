@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
+
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -35,14 +35,14 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header row justify-content-between align-items-center m-0">
-                <h3>Admin Menu</h3>
-                <strong>AM</strong>
+                <h3 class="mx-auto">Admin Menu</h3>
+                <strong class="mx-auto">AM</strong>
                 <div class="my-auto text-center">
                     <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
                     <!-- Dropdown - Notif Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
-                        aria-labelledby="notifDropdown" id="notifItem">
+                        aria-labelledby="notifDropdown" id="notifItem" style="max-height:40vh;overflow: auto;">
                         <div class="dropdown-item py-0">
                             <hr>
                             <div class="row">
@@ -113,6 +113,26 @@
                         Logout
                     </a>
                 </li>
+                <li>
+                    <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                      <i class="fas fa-language"></i>
+                      Language
+                    </a>
+                    <ul class="collapse list-unstyled" id="language">
+                      <li>
+                        <a href="">
+                          <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
+                            aria-hidden="true"></i> -->
+                            <span class="pl-2">English </span></a>
+                      </li>
+                      <li>
+                        <a href="JP/print.html">
+                          <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
+                            aria-hidden="true"></i> -->
+                            <span class="pl-2">Japanese </span></a>
+                      </li>
+                    </ul>
+                  </li>
             </ul>
 
         </nav>
@@ -179,12 +199,18 @@
                                                                 name="inlineRadioOptions" id="group" value="2">
                                                             <label class="form-check-label" for="group">Group</label>
                                                         </div>
+                                                        <div class="form-check form-check-inline mr-0">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="inlineRadioOptions" id="3dgraph" value="3">
+                                                            <label class="form-check-label" for="3dgraph">3D Graph</label>
+                                                        </div>
                                                     </h6>
                                                     <h6 class="pl-2 m-1 font-weight-bold text-primary ">
                                                         <div class="form-check form-check-inline mr-0">
                                                             <input id="print_icon" class="material-icons" type="button"
                                                                 value="print" onclick="printGraphs()">
-                                                            <label class="form-check-label pl-1" for="print">Print</label>
+                                                            <label class="form-check-label pl-1"
+                                                                for="print">Print</label>
                                                         </div>
                                                     </h6>
                                                 </div>
@@ -194,18 +220,8 @@
                                         </div>
                                         <div id="graphCollection" class="row">
                                             
-                                            <div class="col">
-                                                <canvas id="graph1"></canvas>
-                                                <canvas id="graph2"></canvas>
-                                            </div>
-            
-                                            <div class="col">
-                                                <canvas id="graph3"></canvas>
-                                                <canvas id="graph4"></canvas>
-                                            </div>
-                                
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- End of Bar Graph -->
@@ -260,7 +276,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-    
+
+    <!-- VisJs core JavaScript-->
+    <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
+
     <!-- Chart js -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
@@ -293,8 +312,10 @@
     </script>
 
     <!-- jsPDF Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+        integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
+        integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
 
     <!-- Page Custom script-->
     <script type="text/javascript" src="js/notif.js"></script>

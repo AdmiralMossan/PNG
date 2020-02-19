@@ -63,20 +63,16 @@ span {
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  /* Background color of Sidebar */
   background: white;
-  /* background-image: linear-gradient(180deg, #2e6158, #7eafc0); */
-
   background-size: cover;
-
   color: black;
   transition: all 0.3s;
   border-right: 1px solid #d0ded4 !important;
 }
 
 #sidebar.active {
-  min-width: 80px;
-  max-width: 80px;
+  min-width: 100px;
+  max-width: 100px;
   text-align: center;
 }
 
@@ -126,7 +122,8 @@ span {
   color: #fff;
   padding-top: 15px;
   padding-left: 20px;
-  background: skyblue;
+  background: lightskyblue;
+  min-height: 90px;
 }
 
 #sidebar .sidebar-header strong {
@@ -135,7 +132,8 @@ span {
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
+  padding: 10px 0;
+  margin-bottom: 0;
   /* border-bottom: 1px solid #d0ded4; */
 }
 
@@ -150,7 +148,7 @@ span {
     HOVER ON ITEM ON SIDEBAR
 ---------------------------------------------------------*/
   #sidebar ul li a:hover {
-    color: #42322b;
+    color: white;
     /* Use background: color; if no gradient is to be applied */
     background: lightskyblue;
     /* background: white url('../Images/hover-item.png'); */
@@ -187,7 +185,7 @@ a[data-toggle="collapse"] {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: skyblue;
+  background: lightskyblue;
   /* background-image: linear-gradient(to right, #222F51, #28647E, #CCDFCC, #FCF6DC); */
 }
 
@@ -378,4 +376,13 @@ ul.CTAs a {
 ---------------------------------------------------------*/
 .ui-front {
   z-index: 9999999 !important;
+}
+
+/* ------------------------------------------------------  
+    CSS For Fade in Animation
+---------------------------------------------------------*/
+@keyframes fadein{
+	0% {opacity: 0;}
+	100% {opacity: 1;
+		display: none;}
 }

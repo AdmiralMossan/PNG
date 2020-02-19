@@ -1,9 +1,12 @@
-var latestReportsTable
+// import { decodeBase64 } from "bcryptjs";
+
+// var latestReportsTable
 
 window.addEventListener("load", async () => {
     isloaded = true;
     await getReports();
     await reportSummary();
+    getWeeklyReport();
     $('#latestReportsTable').DataTable({
         scrollY: 210,
         responsive: true,
@@ -13,6 +16,7 @@ window.addEventListener("load", async () => {
         paging: false,
         info: false
     });
+
 });
 
 function showLatest() {
@@ -49,7 +53,7 @@ function showLatest() {
             } else {
                 gCtr[report.group] += 1;
             }
-            let date = new Date(report.created["seconds"] * 1000);
+            
             body +=
                 "<tr ondblclick= selectReport(" + report.id + ")>" +
                 "<td>" +
@@ -81,7 +85,7 @@ function showLatest() {
     });
 
     $("#latestReport").append(head + body + "</tbody></table>");
-    $('#card4 > div').append('<div class="card-footer mx-auto"><a href="/table.html"> All Reports</a></div>')
+    $('#card4 > div').append('<div class="card-footer mx-auto py-1"><a href="/table.html"> All Reports</a></div>')
 }
 
 
@@ -91,7 +95,6 @@ async function reportSummary() {
     let group = {};
     let cCtr = {};
     let gCtr = {};
-    let ctr = 0;
 
     reports.forEach(function (report) {
         if (typeof cCtr[report.category] === "undefined") {
@@ -104,8 +107,6 @@ async function reportSummary() {
         } else {
             gCtr[report.group] += 1;
         }
-
-
     });
 
     $.each(cCtr, function (key, value) {
@@ -127,4 +128,79 @@ async function reportSummary() {
     showLatest()
 }
 
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
 
+Date.prototype.subtractDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() - days);
+    return date;
+}
+
+function getDates(startDate, stopDate) {
+    let options = { month: '2-digit', day: '2-digit', year: 'numeric'};
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push((new Date (currentDate)).toLocaleString("en-US", options));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
+
+
+function getWeeklyReport(){
+    let options = { month: '2-digit', day: '2-digit', year: 'numeric'};
+
+    let date = new Date();
+
+    var ctx = document.getElementById("weeklyReports").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: getDates(date.subtractDays(6), date),
+            datasets: [
+            {
+                label: 'Series 1', // Name the series
+                data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
+                fill: false,
+                borderColor: '#2196f3', // Add custom color border (Line)
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                borderWidth: 1.5 // Specify bar border width
+            },
+            {
+                label: 'Series 2', // Name the series
+                data: [520,	60,	224,	1040,	4141,	411,	454,	47,	555, 811], // Specify the data values array
+                fill: false,
+                borderColor: 'red', // Add custom color border (Line)
+                backgroundColor: 'red', // Add custom color background (Points and Fill)
+                borderWidth: 1.5 // Specify bar border width
+            }
+            ]},
+        options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+        }
+    });
+
+    // console.log(date.subtractDays(7));
+    console.log(getDates(date.subtractDays(6), date));
+    let tmpDate = date.subtractDays(5).toLocaleString("en-US", options);
+    
+    //console.log(date.toLocaleString("en-US", options));
+
+    // date.setDate(date.getDate() + 7);
+
+    // console.log(date);
+    
+    // for(let i = 0 ; i < reports.length ; i++){
+    //     if (reports[i].created.toDate().toLocaleString("en-US", options) === tmpDate){
+    //         console.log(reports[i].created.toDate().toLocaleString("en-US", options));
+    //     }
+    // }
+}

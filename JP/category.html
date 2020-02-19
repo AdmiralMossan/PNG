@@ -13,8 +13,8 @@
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/admincontent.css">
-    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="../css/admincontent.css">
+    <link rel="stylesheet" href="../css/table.css">
 
     <!-- Custom styles for this template-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -40,14 +40,14 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header row justify-content-between align-items-center m-0">
-                <h3 class="mx-auto">Admin Menu</h3>
-                <strong class="mx-auto">AM</strong>
+                <h3>アドミンメニュー</h3>
+                <strong>AM</strong>
                 <div class="my-auto text-center">
                     <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
                     <!-- Dropdown - Notif Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
-                        aria-labelledby="notifDropdown" id="notifItem" style="max-height:40vh;overflow: auto;">
+                        aria-labelledby="notifDropdown" id="notifItem">
                         <div class="dropdown-item py-0">
                             <hr>
                             <div class="row">
@@ -63,78 +63,78 @@
                 <li>
                     <a href="reportsummary.html">
                         <i class="fas fa-home"></i>
-                        Home
+                        ホーム
                     </a>
                 </li>
 
                 <li>
                     <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-chart-bar"></i>
-                        Charts
+                        チャート
 
                     </a>
                     <ul class="collapse list-unstyled" id="chartSubmenu">
                         <li>
                             <a href="3dpiegraph.html">
                                 <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　３Ｄと円グラフ</span></a>
                         </li>
                         <li>
                             <a href="bargraphs.html">
                                 <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　棒グラフ </span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="active">
                     <a href="#">
-                        <i class="fas fa-list"></i> Category
+                        <i class="fas fa-list"></i> カテゴリー
                     </a>
                 </li>
 
                 <li>
                     <a href="usermanagement.html">
-                        <i class="fas fa-user-alt"></i> Users
+                        <i class="fas fa-user-alt"></i> ユーザー
                     </a>
                 </li>
 
                 <li>
-                    <a href="table.html"><i class="fas fa-table"></i> Table </a>
+                    <a href="table.html"><i class="fas fa-table"></i> レポートリスト </a>
                 </li>
 
                 <li>
-                    <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
+                    <a href="print.html"><i class="fas fa-print"></i> プリント </a>
                 </li>
             </ul>
 
             <ul class="list-unstyled components">
                 <li id="adminname" class="pl-1">
-                    Admin
+                    アドミン
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt"></i>
-                        Logout
+                        ログアウト
                     </a>
                 </li>
                 <li>
                     <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                       <i class="fas fa-language"></i>
-                      Language
+                      言語
                     </a>
                     <ul class="collapse list-unstyled" id="language">
                       <li>
-                        <a href="">
+                        <a href="../category.html">
                           <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">English </span></a>
+                            <span class="pl-2">英語 </span></a>
                       </li>
                       <li>
-                        <a href="JP/category.html">
+                        <a href="">
                           <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">Japanese </span></a>
+                            <span class="pl-2">日本語 </span></a>
                       </li>
                     </ul>
                   </li>
@@ -150,26 +150,26 @@
 
                     <button type="button" id="sidebarCollapse" class="btn">
                         <i class="fas fa-align-left"></i>
-                        <span>Admin Menu</span>
+                        <span>アドミンメニュー</span>
                     </button>
 
-                    <h4 id="header_text" class="mb-0">Category</h4 id="header_text">
+                    <h4 id="header_text" class="mb-0">カテゴリー</h4 id="header_text">
                 </div>
             </nav>
 
             <div class="container">
                 <div class="row py-1">
-                    <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-2">
+                    <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
                         <div class="row">
                             <div class="col-md h-25">
-                                <h2 id="pagetitle" class="text-center my-0 pt-3">Category Management:</h2>
+                                <h2 id="pagetitle" class="text-center my-0 pt-3">カテゴリーマネジメント:</h2>
                                 <!-- Insert user management functions here -->
                                 <div id="showCategoriesTable" class="pt-2">
                                     <input id="addCategoryButton"
                                         onclick="$('#categoryModalTitle, #categoryModalh3, #categoryModalButton').text('Add Category'); $('#categoryModalButton').attr('onclick','addCategory()');"
                                         class="material-icons" type="button" value="add" data-toggle="modal"
                                         data-target="#categoryModal">
-                                    <label for="addCategoryButton" class="align-middle">Add Category</label>
+                                    <label for="addCategoryButton" class="align-middle">カテゴリーを追加</label>
                                 </div>
 
                             </div>
@@ -201,18 +201,18 @@
                                         <div class="row pl-4 w-100">
                                             <div class="row w-100">
                                                 <div class="row pl-4 w-100">
-                                                    <label for="catName" class="h6">Name:</label>
+                                                    <label for="catName" class="h6">カテゴリー名:</label>
                                                 </div>
                                                 <div class="row pl-4 pb-2">
                                                     <input type="text" id="catName" onkeypress=""
-                                                        placeholder="Category Name" required />
+                                                        placeholder="カテゴリー名" required />
                                                 </div>
                                                 <div class="row pl-4 w-100">
-                                                    <label for="catDesc" class="h6">Category Description:</label>
+                                                    <label for="catDesc" class="h6">カテゴリーの説明:</label>
                                                 </div>
                                                 <div class="form-row row pl-3 w-75">
                                                     <textarea class="w-100" rows="3" style="resize: none;" id="catDesc"
-                                                        placeholder="Input Description for the new Category to be added."
+                                                        placeholder="新しいカテゴリーの説明を入力してください。"
                                                         required></textarea>
                                                 </div>
                                             </div>
@@ -222,7 +222,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button"
-                                            data-dismiss="modal">Cancel</button>
+                                            data-dismiss="modal">キャンセル</button>
                                         <button id="categoryModalButton" type="submit" class="btn btn-primary"></button>
                                     </div>
                                 </form>
@@ -241,15 +241,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">ログアウトしますか？</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">このアカウントからログアウトしますか？</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" onclick="logOut()">Logout</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+                    <button class="btn btn-primary" onclick="logOutJp()">ログアウト</button>
                 </div>
             </div>
         </div>
@@ -307,10 +307,10 @@
         src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/datatables.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/sidebar.js"></script>
-    <script src="js/category.js"></script>
-    <script src="js/firestore.js"></script>
-    <script src="js/notif.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/category.js"></script>
+    <script src="../js/firestore.js"></script>
+    <script src="../js/notif.js"></script>
 </body>
 
 </html>

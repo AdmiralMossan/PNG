@@ -19,7 +19,6 @@ window.addEventListener("load", async () => {
       if (isloaded) {
         querySnapshot.docChanges().forEach(async function(change) {
           if (change.type === 'added') {  
-            await getReports();
             showNotif()
             $('#reportCount').text(reports.length);
             notifyReport(querySnapshot.docs[0]);
@@ -86,10 +85,9 @@ async function getReports() {
 }
 
 async function showNotif() {
-
+    await getReports();
     let options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
 
-    $('#showCategoriesTable div').html("");
 
     let cat = {};
     let group = {};
@@ -108,9 +106,11 @@ async function showNotif() {
             $('#notifItem').append('<div class="dropdown-item py-0"><div><p class="p-0 text-danger m-0">New category "' + report.category + '" incident was reported.</p><p class="row text-danger p-0 m-0 justify-content-between"> (' + report.created.toDate().toLocaleString("en-US", options) + ')<a class="ml-auto py-0" href="#" onClick= selectReport(' + report.id + ')>more details...</a></p></div><hr class="mt-1"></div>')
         }
     });
-    if (notif === false) {
-
-        $('#notifDropdown').html('<i class="fas fa-bell"></i>')
+    if (ctr === 0) {
+      $('#notifDropdown').html('<i class="fas fa-bell"></i>');
+      $('#notifItem').html(
+        '<div class="dropdown-item py-0"><hr><div class="row"><p class="col-12 m-0 text-success p-0">All reports are read.</p></div><hr></div>'
+      );
     }
 
 }
@@ -127,6 +127,8 @@ async function selectReport(reportID) {
             });
             loadReportDetails(report).then(() => {
                 $('#reportDetails').modal('show');
+            }).then(()=>{
+                showNotif()
             })
         }
     })

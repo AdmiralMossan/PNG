@@ -209,8 +209,53 @@ async function logIn(e) {
 
 }
 
+// JP Version of Login Function
+async function logInJp(e) {
+    var anon = false;
+    if (e == 0) {
+        var username = document.getElementById("usernameanon").value.trim();
+        var password = document.getElementById("passwordanon").value;
+        anon = true;
+    } else {
+        e.preventDefault();
+        var username = document.getElementById("username").value.trim();
+        var password = document.getElementById("password").value;
+    }
+    docs = []
+    await db.collection("users").where("username", "==", username).where("password", "==", password).get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            docs.push(doc.data());
+            console.log(doc.id, " => ", doc.data());
+        });
+    });
+    if (docs.length == 1) {
+        if (docs[0].userType == 1) {
+            sessionStorage.setItem("username", docs[0].username);
+            sessionStorage.setItem("group", docs[0].group);
+            sessionStorage.setItem("userType", docs[0].userType);
+           location.href = "/JP/reportsummary.html";
+        } else {
+            sessionStorage.setItem("username", docs[0].username);
+            sessionStorage.setItem("group", docs[0].group);
+            sessionStorage.setItem("userType", docs[0].userType);
+            sessionStorage.setItem("userId", docs[0].id);
+            if (anon)
+                sessionStorage.setItem("isAnonymous", true);
+            location.href = "/JP/user.html";
+        }
+    } else
+        alert("Incorrect username or password")
+
+}
+
 function logOut() {
     location.href = "/login.html";
+    sessionStorage.clear();
+}
+
+// JP version of log out function
+function logOutJp() {
+    location.href = "/JP/login.html";
     sessionStorage.clear();
 }
 

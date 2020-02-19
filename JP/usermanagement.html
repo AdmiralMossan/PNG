@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/admincontent.css">
-    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="../css/admincontent.css">
+    <link rel="stylesheet" href="../css/chat.css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -37,14 +37,14 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header row justify-content-between align-items-center m-0">
-                <h3 class="mx-auto">Admin Menu</h3>
-                <strong class="mx-auto">AM</strong>
+                <h3>アドミンメニュー</h3>
+                <strong>AM</strong>
                 <div class="my-auto text-center">
                     <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
                     <!-- Dropdown - Notif Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
-                        aria-labelledby="notifDropdown" id="notifItem" style="max-height:40vh;overflow: auto;">
+                        aria-labelledby="notifDropdown" id="notifItem">
                         <div class="dropdown-item py-0">
                             <hr>
                             <div class="row">
@@ -61,78 +61,78 @@
                 <li>
                     <a href="reportsummary.html">
                         <i class="fas fa-home"></i>
-                        Home
+                        ホーム
                     </a>
                 </li>
 
                 <li>
                     <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-chart-bar"></i>
-                        Charts
+                        チャート
 
                     </a>
                     <ul class="collapse list-unstyled" id="chartSubmenu">
                         <li>
                             <a href="3dpiegraph.html">
                                 <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">3D & Pie Graph</span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　３Ｄと円グラフ</span></a>
                         </li>
                         <li>
                             <a href="bargraphs.html">
                                 <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">Bar Graphs</span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　棒グラフ　</span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="category.html">
-                        <i class="fas fa-list"></i> Category
+                        <i class="fas fa-list"></i> カテゴリー
                     </a>
                 </li>
 
                 <li class="active">
                     <a href="#">
-                        <i class="fas fa-user-alt"></i> Users
+                        <i class="fas fa-user-alt"></i> ユーザー
                     </a>
                 </li>
 
                 <li>
-                    <a href="table.html"><i class="fas fa-table"></i> Table</a>
+                    <a href="table.html"><i class="fas fa-table"></i> レポートリスト</a>
                 </li>
 
                 <li>
-                    <a href="print.html"><i class="fas fa-print"></i> Print Report</a>
+                    <a href="print.html"><i class="fas fa-print"></i> プリント</a>
                 </li>
             </ul>
 
             <ul class="list-unstyled components">
                 <li id="adminname" class="pl-1">
-                    Admin
+                    アドミン
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt"></i>
-                        Logout
+                        ログアウト
                     </a>
                 </li>
                 <li>
                     <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                       <i class="fas fa-language"></i>
-                      Language
+                      言語
                     </a>
                     <ul class="collapse list-unstyled" id="language">
                       <li>
-                        <a href="">
+                        <a href="../usermanagement.html">
                           <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">English </span></a>
+                            <span class="pl-2">英語 </span></a>
                       </li>
                       <li>
-                        <a href="JP/usermanagement.html">
+                        <a href="">
                           <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">Japanese </span></a>
+                            <span class="pl-2">日本語 </span></a>
                       </li>
                     </ul>
                   </li>
@@ -148,10 +148,10 @@
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn">
                         <i class="fas fa-align-left"></i>
-                        <span>Admin Menu</span>
+                        <span>アドミンメニュー</span>
                     </button>
 
-                    <h4 id="header_text" class="mb-0">Users</h4 id="header_text">
+                    <h4 id="header_text" class="mb-0">ユーザー</h4 id="header_text">
                 </div>
             </nav>
 
@@ -160,7 +160,7 @@
                     <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
                         <div class="row">
                             <div class="col-md h-25">
-                                <h2 id="pagetitle" class="text-center my-0">User Management:</h2>
+                                <h2 id="pagetitle" class="text-center my-0">ユーザーマネジメント:</h2>
                                 <button id="addUserButton" class="material-icons" type="button" data-toggle="modal"
                                     data-target="#userModal" data-toggle="tooltip" data-placement="top"
                                     title="Add Users">add</button>
@@ -183,7 +183,7 @@
             <div class="modal-content">
                 <form action="" autocomplete="off" onsubmit="event.preventDefault();" class="w-100">
                     <div class="modal-header">
-                        <h5 id="categoryModalTitle" class="modal-title">Add Users</h5>
+                        <h5 id="categoryModalTitle" class="modal-title">ユーザーを追加</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -193,7 +193,7 @@
                             <thead class='thead-inverse bg-custom text-custom'>
                                 <tr>
                                     <th style='width:50%;'>Username</th>
-                                    <th style='width:50%;'>Group</th>
+                                    <th style='width:50%;'>グループ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -218,7 +218,7 @@
             <div class="modal-content">
                 <form action="" autocomplete="on" onsubmit="event.preventDefault();" class="w-100">
                     <div class="modal-header">
-                        <h5 id="userModalTitle" class="modal-title">Update User</h5>
+                        <h5 id="userModalTitle" class="modal-title">更新</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -228,7 +228,7 @@
                         <div class="row pl-4 pb-4 w-100">
                             <div class="col">
                                 <div class="row">
-                                    <h3 id="userModalh3">Update User</h3>
+                                    <h3 id="userModalh3">ユーザーを更新</h3>
                                 </div>
                             </div>
                         </div>
@@ -236,14 +236,14 @@
                         <div class="row pl-4 w-100">
                             <div class="row w-100">
                                 <ul class="list-unstyled pl-2">
-                                    <li id="userID">User ID: </li>
+                                    <li id="userID">ユーザーＩＤ： </li>
                                     <li id="userName">Username: </li>
                                 </ul>
                                 <div class="row pl-4 w-100">
-                                    <label for="userGroup" class="h6">Group:</label>
+                                    <label for="userGroup" class="h6">グループ:　</label>
                                 </div>
                                 <div class="row pl-4 pb-2">
-                                    <input type="text" id="userGroup" onfocus="userGroupSearch()" placeholder="Group"
+                                    <input type="text" id="userGroup" onfocus="userGroupSearch()" placeholder="グループ"
                                         required />
                                 </div>
                             </div>
@@ -252,8 +252,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button id="userModalButton" type="submit" class="btn btn-primary">Update</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+                        <button id="userModalButton" type="submit" class="btn btn-primary">更新</button>
                     </div>
                 </form>
             </div>
@@ -265,15 +265,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">ログアウトしますか？</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">このアカウントからログアウトしますか？</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" onclick="logOut()">Logout</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+                    <button class="btn btn-primary" onclick="logOutJp()">ログアウト</button>
                 </div>
             </div>
         </div>
@@ -393,11 +393,11 @@
     <!-- DataTable JS -->
     <script type="text/javascript"
         src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
-    <script src="js/sidebar.js"> </script>
-    <script src="js/firestore.js"> </script>
-    <script src="js/notif.js"></script>
-    <script src="js/usermanagement.js"></script>
-    <script src="js/chat.js"></script>
+    <script src="../js/sidebar.js"> </script>
+    <script src="../js/firestore.js"> </script>
+    <script src="../js/notif.js"></script>
+    <script src="../js/usermanagement.js"></script>
+    <script src="../js/chat.js"></script>
 
 
 </body>

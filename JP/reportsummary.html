@@ -12,9 +12,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <!-- Our Custom CSS -->
-  <link rel="stylesheet" href="css/admincontent.css">
-  <link rel="stylesheet" href="css/chat.css">
-  <link rel="stylesheet" href="css/reportsummary.css">
+  <link rel="stylesheet" href="../css/admincontent.css">
+  <link rel="stylesheet" href="../css/chat.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -30,7 +29,7 @@
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
     crossorigin="anonymous"></script>
 
-  <script src="js/admin_animation.js"></script>
+  <script src="../js/admin_animation.js"></script>
 
 </head>
 
@@ -42,7 +41,7 @@
       <div class="sidebar-header row justify-content-between align-items-center m-0">
         <div class="row">
           <div class="col">
-            <h3>Admin Menu</h3>
+            <h3>アドミンメニュー</h3>
             <strong>AM</strong>
           </div>
         </div>
@@ -51,6 +50,8 @@
             <div class="my-auto text-center pb-1">
               <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false"><i class="fas fa-bell"></i></a>
+                
+              
               <!-- Dropdown - Notif Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
                 aria-labelledby="notifDropdown" id="notifItem">
@@ -73,83 +74,81 @@
         <li class="active">
           <a href="#">
             <i class="fas fa-home"></i>
-            Home
+            ホーム
           </a>
         </li>
 
         <li>
           <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
             <i class="fas fa-chart-bar"></i>
-            Charts
-
+            チャート
           </a>
           <ul class="collapse list-unstyled" id="chartSubmenu">
             <li>
               <a href="3dpiegraph.html">
                 <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                  aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
+                  aria-hidden="true"></i><span class="pl-2">３Ｄと円グラフ </span></a>
             </li>
             <li>
               <a href="bargraphs.html">
                 <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                  aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
+                  aria-hidden="true"></i><span class="pl-2">棒グラフ </span></a>
             </li>
           </ul>
         </li>
 
         <li>
           <a href="category.html">
-            <i class="fas fa-list"></i> Category
+            <i class="fas fa-list"></i> カテゴリー
           </a>
         </li>
 
         <li>
           <a href="usermanagement.html">
-            <i class="fas fa-user-alt"></i> Users
+            <i class="fas fa-user-alt"></i> ユーザー
           </a>
         </li>
 
         <li>
-          <a href="table.html"><i class="fas fa-table"></i> Table </a>
+          <a href="table.html"><i class="fas fa-table"></i> レポートリスト </a>
         </li>
 
         <li>
-          <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
+          <a href="print.html"><i class="fas fa-print"></i> プリント </a>
         </li>
       </ul>
 
       <ul class="list-unstyled components">
         <li id="adminname" class="pl-1">
-          Admin
+          アドミン
         </li>
         <li>
           <a href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt"></i>
-            Logout
+            ログアウト
           </a>
         </li>
         <li>
           <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
             <i class="fas fa-language"></i>
-            Language
+            言語
           </a>
           <ul class="collapse list-unstyled" id="language">
             <li>
-              <a href="">
+              <a href="../reportsummary.html">
                 <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">English </span></a>
+                  <span class="pl-2">英語 </span></a>
             </li>
             <li>
-              <a href="JP/reportsummary.html">
+              <a href="">
                 <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">Japanese </span></a>
+                  <span class="pl-2">日本語 </span></a>
             </li>
           </ul>
         </li>
       </ul>
-
     </nav>
 
     <!-- Page Content  -->
@@ -160,10 +159,10 @@
 
           <button type="button" id="sidebarCollapse" class="btn">
             <i class="fas fa-align-left"></i>
-            <span>Admin Menu</span>
+            <span>アドミンメニュー</span>
           </button>
 
-          <h3 id="header_text" class="mb-0">Report Summary</h3>
+          <h3 id="header_text" class="mb-0">ホームページ</h3>
         </div>
       </nav>
 
@@ -174,9 +173,8 @@
           <div id="card1" class=" col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between"
-                style="min-height: 78px;  max-height: 78px;">
-                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Most Reported Category</h6>
+              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px;  max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">一番レポートの数が高いカテゴリー</h6>
               </div>
               <!-- End of Card Header -->
 
@@ -195,9 +193,8 @@
           <div id="card2" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between"
-                style="min-height: 78px; max-height: 78px;">
-                <h6 class="m-0 font-weight-bold text-uppercase text-center  pt-4">Group With Most Reports</h6>
+              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center  pt-4">一番レポートの数が高いグループ</h6>
               </div>
               <!-- End of Card Header -->
 
@@ -216,9 +213,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
-                style="min-height: 78px; max-height: 78px;">
-                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Total Reports</h6>
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">レポートの数</h6>
               </div>
               <!-- End of Card Header -->
 
@@ -236,9 +232,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header - Dropdown -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
-                style="min-height: 78px; max-height: 78px;">
-                <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Reports Today</h6>
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+                <h6 class="text-center m-0 font-weight-bold pt-4">今日のレポート</h6>
               </div>
               <div class="card-body p-0">
                 <div class="col p-0 d-flex justify-content-center align-items-center h-100">
@@ -249,23 +244,23 @@
           </div>
         </div>
         <!-- End of row for trend cards -->
-
+        
         <!-- Start of row for recent reports -->
         <div class="row">
           <div id="card4" class="stats-card  col pt-2">
             <div class="card shadow h-100 row mx-2 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom pb-0">
+              <div class="card-header bg-custom">
                 <!-- Main Title of Card Header -->
                 <div class="row">
                   <div class="col text-center">
-                    <h6 class="m-0 font-weight-bold text-uppercase m-auto pt-3">Most Recent Reports</h6>
+                    <h6 class="m-0 font-weight-bold text-uppercase m-auto pt-3">最近のレポート</h6>
                   </div>
                 </div>
                 <!-- Subtitle of Card Header -->
                 <div class="row">
                   <div class="col text-center pt-2">
-                    <h6 class="card-subtitle mb-2 text-muted">Double-click an Item to View Report Details</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">アイテムをダブルクリックして詳細を表示します。</h6>
                   </div>
                 </div>
               </div>
@@ -279,15 +274,7 @@
           </div>
         </div>
         <!-- End of row for recent reports -->
-
-        <!-- Start row for number of reports weekly  -->
-        <div class="row">
-          <div class="chartContainer" style="position: relative; height:50vh; width:70vw">
-            <canvas id="weeklyReports"></canvas>
-        </div>
-        </div>
-        <!-- End row for number of reports weekly -->
-
+        
       </div>
     </div>
 
@@ -297,15 +284,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">ログアウトしますか？</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">このアカウントからログアウトしますか？</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary" onclick="logOut()">Logout</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+            <button class="btn btn-primary" onclick="logOutJp()">ログアウト</button>
           </div>
         </div>
       </div>
@@ -380,58 +367,30 @@
       </div>
     </div>
 
+
     <!-- Firebase core Javascript-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
-    <script src="js/firestore.js"> </script>
-    
+    <script src="../js/firestore.js"> </script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"></script>
-    
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
       integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
       crossorigin="anonymous"></script>
-    
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
       integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
       crossorigin="anonymous"></script>
-
-    <!-- Chart js -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-
-    <!-- PNotify Javascript-->
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
-    <link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
-    <script type="text/javascript">
-      window.centerModalStack = {
-        'dir1': 'down',
-        'firstpos1': 25,
-        'modal': true,
-        'overlayClose': true
-      };
-      PNotify.modules.History.defaults.maxInStack = 3;
-
-    </script>
-
     <!-- DataTable JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/r-2.2.3/datatables.min.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="js/notif.js"></script>
-    <script src="js/reportSummary.js"></script>
-    <script src="js/chat.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/notif.js"></script>
+    <script src="../js/reportSummary.js"></script>
+    <script src="../js/chat.js"></script>
 
 </body>
 

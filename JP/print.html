@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Bar Graphs</title>
+    <title>Print Report</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -14,11 +14,11 @@
 
 
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/admincontent.css">
+    <link rel="stylesheet" href="../css/admincontent.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -35,14 +35,14 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header row justify-content-between align-items-center m-0">
-                <h3 class="mx-auto">Admin Menu</h3>
-                <strong class="mx-auto">AM</strong>
+                <h3>アドミンメニュー</h3>
+                <strong>AM</strong>
                 <div class="my-auto text-center">
                     <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
                     <!-- Dropdown - Notif Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
-                        aria-labelledby="notifDropdown" id="notifItem" style="max-height:40vh;overflow: auto;">
+                        aria-labelledby="notifDropdown" id="notifItem">
                         <div class="dropdown-item py-0">
                             <hr>
                             <div class="row">
@@ -58,78 +58,78 @@
                 <li>
                     <a href="reportsummary.html">
                         <i class="fas fa-home"></i>
-                        Home
+                        ホーム
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-chart-bar"></i>
-                        Charts
+                        チャート
 
                     </a>
                     <ul class="collapse list-unstyled" id="chartSubmenu">
                         <li>
                             <a href="3dpiegraph.html">
                                 <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　３Ｄと円グラフ </span></a>
                         </li>
                         <li class="active">
-                            <a href="#">
+                            <a href="bargraphs.html">
                                 <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                                    aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
+                                    aria-hidden="true"></i><span class="pl-2">　棒グラフ </span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="category.html">
-                        <i class="fas fa-list"></i> Category
+                        <i class="fas fa-list"></i> カテゴリー
                     </a>
                 </li>
 
                 <li>
                     <a href="usermanagement.html">
-                        <i class="fas fa-user-alt"></i> Users
+                        <i class="fas fa-user-alt"></i> ユーザー
                     </a>
                 </li>
 
                 <li>
-                    <a href="table.html"><i class="fas fa-table"></i> Table </a>
+                    <a href="table.html"><i class="fas fa-table"></i> レポートリスト </a>
                 </li>
 
-                <li>
-                    <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
+                <li class="active">
+                    <a href="print.html"><i class="fas fa-print"></i> プリント </a>
                 </li>
             </ul>
 
             <ul class="list-unstyled components">
                 <li id="adminname" class="pl-1">
-                    Admin
+                    アドミン
                 </li>
                 <li>
                     <a href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt"></i>
-                        Logout
+                        ログアウト
                     </a>
                 </li>
                 <li>
                     <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                       <i class="fas fa-language"></i>
-                      Language
+                      言語
                     </a>
                     <ul class="collapse list-unstyled" id="language">
                       <li>
-                        <a href="">
+                        <a href="../print.html">
                           <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">English </span></a>
+                            <span class="pl-2">英語 </span></a>
                       </li>
                       <li>
-                        <a href="JP/bargraphs.html">
+                        <a href="">
                           <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">Japanese </span></a>
+                            <span class="pl-2">日本語 </span></a>
                       </li>
                     </ul>
                   </li>
@@ -145,10 +145,10 @@
 
                     <button type="button" id="sidebarCollapse" class="btn">
                         <i class="fas fa-align-left"></i>
-                        <span>Admin Menu</span>
+                        <span>アドミンメニュー</span>
                     </button>
 
-                    <h4 id="header_text" class="mb-0">Bar Graphs</h4 id="header_text">
+                    <h4 id="header_text" class="mb-0">プリント</h4 id="header_text">
                 </div>
             </nav>
 
@@ -157,20 +157,20 @@
                     <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
                         <div class="row">
                             <div class="col-md h-25">
-                                <h2 id="pagetitle" class="text-center my-0">Specific Bar Graphs:</h2>
+                                <h2 id="pagetitle" class="text-center my-0">グラフをプリント:</h2>
                                 <!-- Bar Graph -->
                                 <div id="bargraph" class="container h-100">
                                     <div class="barContainer">
                                         <div class="d-flex flex-row justify-content-center">
                                             <div id="buttons" class="p-2 d-flex row justify-content-center">
                                                 <!-- Container for search bar and search button -->
-                                                <div class="d-flex">
+                                                <!-- <div class="d-flex">
                                                     <input id="searchBox" type="text" size="15"
                                                         style="text-align: left;" placeholder="Search" value=""
                                                         onkeypress="searchBoxField()" onfocus="this.value=''">
                                                     <input id="searchButton" class="material-icons" type="button"
                                                         value="search" onclick="searchBoxField()">
-                                                </div>
+                                                </div> -->
                                                 <!-- End of Search Bar and Search Button -->
 
                                                 <!-- Container for Change Bar Graph Page Buttons -->
@@ -178,8 +178,7 @@
                                                     <input id="prev" class="material-icons" type="button"
                                                         value="chevron_left" onclick="prevButton()" disabled="true">
                                                     <input id="search" type="text" size="1" disabled
-                                                        style="text-align: center;" placeholder="Search" value="1"
-                                                        hidden>
+                                                        style="text-align: center;" placeholder="Search" value="1">
                                                     <input id="next" class="material-icons" type="button"
                                                         value="chevron_right" onclick="nextButton()">
                                                 </div>
@@ -193,12 +192,19 @@
                                                                 name="inlineRadioOptions" id="category" value="1"
                                                                 checked="checked">
                                                             <label class="form-check-label"
-                                                                for="category">Category</label>
+                                                                for="category">カテゴリー</label>
                                                         </div>
                                                         <div class="form-check form-check-inline mr-0">
                                                             <input class="form-check-input" type="radio"
                                                                 name="inlineRadioOptions" id="group" value="2">
-                                                            <label class="form-check-label" for="group">Group</label>
+                                                            <label class="form-check-label" for="group">グループ</label>
+                                                        </div>
+                                                    </h6>
+                                                    <h6 class="pl-2 m-1 font-weight-bold text-primary ">
+                                                        <div class="form-check form-check-inline mr-0">
+                                                            <input id="print_icon" class="material-icons" type="button"
+                                                                value="print" onclick="printGraphs()">
+                                                            <label class="form-check-label pl-1" for="print">Print</label>
                                                         </div>
                                                     </h6>
                                                 </div>
@@ -206,9 +212,20 @@
 
                                             </div>
                                         </div>
-                                        <div class="chartContainer" style="position: relative; height:50vh; width:70vw">
-                                            <canvas id="graph2d"></canvas>
+                                        <div id="graphCollection" class="row">
+                                            
+                                            <div class="col">
+                                                <canvas id="graph1"></canvas>
+                                                <canvas id="graph2"></canvas>
+                                            </div>
+            
+                                            <div class="col">
+                                                <canvas id="graph3"></canvas>
+                                                <canvas id="graph4"></canvas>
+                                            </div>
+                                
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- End of Bar Graph -->
@@ -227,15 +244,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">ログアウトしますか？</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">このアカウントからログアウトしますか？</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" onclick="logOut()">Logout</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+                        <button class="btn btn-primary" onclick="logOutJp()">ログアウト</button>
                     </div>
                 </div>
             </div>
@@ -263,7 +280,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-
+    
     <!-- Chart js -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
@@ -272,7 +289,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"></script>
-    <script src="js/firestore.js"></script>
+    <script src="../js/firestore.js"></script>
 
     <!-- PNotify Javascript-->
     <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
@@ -295,15 +312,14 @@
 
     </script>
 
+    <!-- jsPDF Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
+
     <!-- Page Custom script-->
-    <script type="text/javascript" src="js/notif.js"></script>
-    <script type="text/javascript" src="js/dataLoader.js"></script>
-    <script type="text/javascript" src="js/bargraph.js"></script>
-
-
-    <script>
-        var ctx2d = document.getElementById('graph2d').getContext('2d');
-    </script>
+    <script type="text/javascript" src="../js/notif.js"></script>
+    <script type="text/javascript" src="../js/dataLoader.js"></script>
+    <script type="text/javascript" src="../js/testPrint.js"></script>
 
 </body>
 

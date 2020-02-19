@@ -24,6 +24,9 @@ window.addEventListener("load", async () => {
     renderGraphs();
 
     $('#category').change(function () {
+        $('#next').show();
+        $('#search').show();
+        $('#prev').show();
         generateColors(1);
         search = 1;
         document.getElementById("search").value = search.toString();
@@ -34,6 +37,9 @@ window.addEventListener("load", async () => {
     });
   
     $('#group').change(function () {
+        $('#next').show();
+        $('#search').show();
+        $('#prev').show();
         generateColors(2);
         search = 1;
         document.getElementById("search").value = search.toString();
@@ -44,6 +50,9 @@ window.addEventListener("load", async () => {
     });
 
     $('#3dgraph').change(function () {
+        $('#next').hide();
+        $('#search').hide();
+        $('#prev').hide();
         loadData(1).then(function () {
             drawVisualization(data);
         });
@@ -304,15 +313,22 @@ async function drawVisualization(data) {
 }
 
 function printGraphs() {
-    let docText = document.getElementById('category').checked ? 'Category ' : 'Group ';
+    let docText = '';
+    if(document.getElementById('category').checked){
+        docText = 'Category Reports';
+    } else if(document.getElementById('group').checked){
+        docText = 'Group Reports';
+    } else {
+        docText = '3D Graph';
+    }
     html2canvas($("#graphCollection"), {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL(
                 'image/png');              
-            var doc = new jsPDF('l', 'mm', 'legal');
-            doc.text(docText + "Reports", 105, 15, null, null, "center");
-            doc.addImage(imgData, 'PNG', 40, 20);
-            doc.save(docText + "Graphs");
+            var doc = new jsPDF('l', 'mm', 'letter');
+            doc.text(docText, 140, 25, null, null, "center");
+            doc.addImage(imgData, 'PNG', 10, 40);
+            doc.save(docText);
         }
     });
 }

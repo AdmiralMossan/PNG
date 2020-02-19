@@ -201,18 +201,18 @@
                                         <div class="row pl-4 w-100">
                                             <div class="row w-100">
                                                 <div class="row pl-4 w-100">
-                                                    <label for="catName" class="h6">Name:</label>
+                                                    <label for="catName" class="h6">カテゴリー名:</label>
                                                 </div>
                                                 <div class="row pl-4 pb-2">
                                                     <input type="text" id="catName" onkeypress=""
-                                                        placeholder="Category Name" required />
+                                                        placeholder="カテゴリー名" required />
                                                 </div>
                                                 <div class="row pl-4 w-100">
-                                                    <label for="catDesc" class="h6">Category Description:</label>
+                                                    <label for="catDesc" class="h6">カテゴリーの説明:</label>
                                                 </div>
                                                 <div class="form-row row pl-3 w-75">
                                                     <textarea class="w-100" rows="3" style="resize: none;" id="catDesc"
-                                                        placeholder="Input Description for the new Category to be added."
+                                                        placeholder="新しいカテゴリーの説明を入力してください。"
                                                         required></textarea>
                                                 </div>
                                             </div>
@@ -222,7 +222,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button"
-                                            data-dismiss="modal">Cancel</button>
+                                            data-dismiss="modal">キャンセル</button>
                                         <button id="categoryModalButton" type="submit" class="btn btn-primary"></button>
                                     </div>
                                 </form>
@@ -241,15 +241,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">ログアウトしますか？</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">このアカウントからログアウトしますか？</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" onclick="logOutJp()">Logout</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+                    <button class="btn btn-primary" onclick="logOutJp()">ログアウト</button>
                 </div>
             </div>
         </div>

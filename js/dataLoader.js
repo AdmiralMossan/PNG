@@ -39,7 +39,7 @@ function generateColors(sortBy) {
         var g = Math.floor(Math.random() * 127);
         var b = Math.floor(Math.random() * 127);
         stringColor = "rgba(" + r + "," + g + "," + b;
-        colors[i] = stringColor + ",1)";
+        colors[i] = stringColor + ",0.7)";
         pieColors[i] = stringColor + ",0.4)";
     }
 }
@@ -92,7 +92,7 @@ function byCategory() {
     for (let i = 0; i < reports.length; i++) {
         for (let j = 0; j < categories.length; j++) {
             for (let k = 0; k < groups.length; k++) {
-                if (reports[i].category == categories[j] && reports[i].group == k + 1) {
+                if (reports[i].category == categories[j] && (reports[i].group == k + 1 || reports[i].group == groups[k])){
                     byCategoryCount[j][k] += 1;
                 }
             }
@@ -104,7 +104,7 @@ function byGroup(){
     for(let i=0; i<reports.length; i++){
         for(let j=0; j<groups.length; j++){
             for(let k=0; k<categories.length; k++){
-                if(reports[i].category == categories[k] && reports[i].group == j + 1){
+                if(reports[i].category == categories[k] && (reports[i].group == j + 1 || reports[i].group == groups[j])){
                     byGroupCount[j][k] += 1;
                 }
             }

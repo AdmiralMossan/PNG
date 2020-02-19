@@ -112,20 +112,20 @@ $(document).ready(function() {
 
     $("#picture").click(function(){
         if (jQuery('#picture')[0].hasAttribute('disabled')) {
-            $('#picture').attr('src', "Images/buttonD.jpg");
+            $('#picture').attr('src', "Images/buttonD.png");
             $('#picture').attr('data-toggle', false);
             $('#picture').attr('disabled', true);
             disableAll();
         }else{
             $('#picture').attr('data-toggle', "modal");
-            $('#picture').attr('src', "Images/buttonD.jpg");
+            $('#picture').attr('src', "Images/buttonD.png");
             $('#picture').attr('disabled', true);
             disableAll();
         }
     });
 
     $("#closemodal").click(function(){
-        $('#picture').attr('src', "Images/buttonD.jpg");
+        $('#picture').attr('src', "Images/buttonD.png");
         $('#picture').attr('data-toggle', false);
         $('#picture').attr('disabled', true);
         disableAll();

@@ -16,6 +16,7 @@ let buttonId = -1
 
 var buttons = document.getElementsByTagName("button");
 var buttonsCount = buttons.length;
+var details = false
 // Enable offline capabilities
 firebase.firestore().enablePersistence()
     .then(function () {
@@ -73,22 +74,22 @@ async function fileUpload(file_data, reportData) {
 }
 function disableButtons(){
     var sendButton = document.getElementById('sendButton');
-    sendButton.classList.remove("btn-success");
-    sendButton.classList.add("btn-secondary", "disabled");
+    sendButton.classList.add("disabled");
    
 }
 
 function enableButtons(){
     var sendButton = document.getElementById('sendButton');
-    sendButton.classList.remove("btn-secondary", "disabled");
-    sendButton.classList.add("btn-success");
+    sendButton.classList.remove("disabled");
 }
 
 async function storeData(e, skip) {
     e.preventDefault();
+    details = !skip
     var sendButton = document.getElementById('sendButton');
     if(sendButton.classList.contains("disabled") )
         return;
+    document.getElementById("L9").style.display = "inline-block";
     category = sessionStorage.getItem("category");
     username = sessionStorage.getItem("isAnonymous") ? "anonymous" : sessionStorage.getItem("username");
     group = sessionStorage.getItem("group");
@@ -98,7 +99,8 @@ async function storeData(e, skip) {
     var attachFile = "";
     var created = "";
     var read = false;
-    var reportData = { category, username, group, created, dateInfo, personInfo, otherDetails, attachFile, read }
+    var status = "pending"
+    var reportData = { category, username, group, created, dateInfo, personInfo, otherDetails, attachFile, read, status}
     if (!skip) {
         disableButtons();
         reportData.dateInfo = $("input[name='date']").is(':checked') ? $("input[name='date']:checked").val() : "NA";
@@ -134,7 +136,13 @@ async function sendReport(reportData) {
         .then(function () {
             console.log("Document successfully written!");
             sessionStorage.removeItem("category");
+            document.getElementById("L9").style.display = "none";
+            $('#detailsModal').modal('hide');
+            enableButtons();
             sentReportNotify();
+            if(details)
+                location.href = "/user.html";
+                
         })
         .catch(function (error) {
             console.error("Error writing document: ", error);
@@ -211,6 +219,6 @@ async function logIn(e) {
 
 function logOut() {
     location.href = "/login.html";
-    sessionStorage.clear();
+    sessionStorage.clear();    
 }
 

@@ -33,7 +33,7 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
     crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
 </head>
 
 <body>
@@ -240,8 +240,12 @@
     <div class="message-box ">
       <form id="message-form" action="#" autocomplete="off">
         <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
-        <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+        <div class="buttons">
+          <button id="submitImage" type="submit" disabled><i class="material-icons">image</i></button>
+          <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+        </div>
       </form>
+     
     </div>
   </div>
 

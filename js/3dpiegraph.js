@@ -48,7 +48,7 @@ function generateColors(sortBy) {
         var g = Math.floor(Math.random() * 255);
         var b = Math.floor(Math.random() * 255);
         stringColor = "rgba(" + r + "," + g + "," + b;
-        colors[i] = stringColor + ",0.7)";
+        colors[i] = stringColor + ",0.5)";
         pieColors[i] = stringColor + ",0.4)";
     }
 }
@@ -56,7 +56,7 @@ function generateColors(sortBy) {
 function getData(x, y) {
     let count = 0;
     for (let i = 0; i < reports.length; i++) {
-      if (reports[i].category == categories[x] && reports[i].group == y + 1)
+      if (reports[i].category == categories[x] && (reports[i].group == y + 1 || reports[i].group == groups[y]))
         count += 1;
     }
     return count;
@@ -156,14 +156,14 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await getGroupsAndCategories();
     generateColors(1);
-
+   
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
     });
 
     $("#reportCount").text(reports.length);
-
+    
     $('#category').change(function () {
         generateColors(1);
         loadData(1).then(function () {
@@ -254,7 +254,7 @@ async function drawVisualization(data) {
       width: "100%",
       style: "bar-color",
       showPerspective: true,
-      showGrid: true,
+      showGrid: false,
       showShadow: true,
       axisFontType: "arial",
       axisFontSize: 26,

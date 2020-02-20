@@ -243,3 +243,15 @@ function getWeeklyReport(){
     });
 
 }
+
+function downloadPNG(){
+    html2canvas($("#chartContainer"), {
+        onrendered: function(canvas) {         
+            var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+            let link  = document.createElement('a');
+            link.download = "Weekly Report.png";
+            link.href = imgData;
+            link.click();
+        }
+    });
+}

@@ -297,6 +297,10 @@
                   <div class="col text-center">
                     <h6 class="m-0 font-weight-bold text-uppercase m-auto py-2">Weekly Reports</h6>
                   </div>
+                  <div class="col align-left">
+                    <input id="download_icon" class="material-icons" type="button"
+                      value="vertical_align_bottom" onclick="downloadPNG()">
+                  </div>
                 </div>
               </div>
               <!-- End of Card Header -->
@@ -431,6 +435,10 @@
     <!-- Chart js -->
     <script type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    
+    <!-- Html2Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
+        integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
 
     <!-- PNotify Javascript-->
     <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>

@@ -238,14 +238,54 @@ function getWeeklyReport(){
         },
         options: {
             responsive: true, // Instruct chart js to respond nicely.
-            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+            title: {
+                display: true,
+                text: 'Number of Reports per Day',
+                position: 'top',
+                fontSize: 16,
+                fontStyle: 'bold',
+                fontFamily: 'helvetica neue'
+            },
+            legend: {
+                position: 'top',
+                labels: {
+                    fontSize: 12,
+                    fontStyle: 'bold',
+                    fontFamily: 'arial',
+                    boxWidth: 15
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Number of Reports',
+                        fontSize: 14,
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        fontSize: 14,
+                        display: true,
+                        labelString: 'Day'
+                    }
+                }]
+            }
         }
     });
 
 }
 
 function downloadPNG(){
-    html2canvas($("#chartContainer"), {
+    html2canvas($("#weeklyReports"), {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
             let link  = document.createElement('a');

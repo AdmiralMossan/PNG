@@ -36,7 +36,7 @@
   <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
 </head>
 
-<body>
+<body style="overflow: hidden;">
 
   <div class="wrapper">
     <!-- Sidebar  -->
@@ -130,13 +130,13 @@
               <a href="">
                 <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">English </span></a>
+                <span class="pl-2">English </span></a>
             </li>
             <li>
               <a href="JP/table.html">
                 <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">Japanese </span></a>
+                <span class="pl-2">Japanese </span></a>
             </li>
           </ul>
         </li>
@@ -145,7 +145,7 @@
     </nav>
 
     <!-- Page Content  -->
-    <div id="content">
+    <div id="content" style="overflow: auto;">
 
       <nav id="menubutton" class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -258,14 +258,14 @@
             </li> -->
     </div>
     <div class="message-box ">
-      <form id="message-form" action="#" autocomplete="off">
+      <form id="message-form" action="#" autocomplete="off" class="row justify-content-between mx-2">
         <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
         <div class="buttons">
           <button id="submitImage" type="submit" disabled><i class="material-icons">image</i></button>
           <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
         </div>
       </form>
-     
+
     </div>
   </div>
 

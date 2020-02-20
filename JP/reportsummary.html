@@ -14,6 +14,7 @@
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="../css/admincontent.css">
   <link rel="stylesheet" href="../css/chat.css">
+  <link rel="stylesheet" href="../css/reportsummary.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -33,7 +34,7 @@
 
 </head>
 
-<body onload="load_content()">
+<body onload="load_content()" style="overflow: hidden;">
 
   <div class="wrapper">
     <!-- Sidebar  -->
@@ -48,18 +49,18 @@
         <div class="row">
           <div class="col">
             <div class="my-auto text-center pb-1">
-              <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"><i class="fas fa-bell"></i></a>
-                
-              
+              <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
+
+
               <!-- Dropdown - Notif Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
                 aria-labelledby="notifDropdown" id="notifItem">
                 <div class="dropdown-item py-0">
                   <hr>
-                    <div class="row">
-                      <p class="col-12 m-0 text-success p-0">All reports are read.</p>
-                    </div>
+                  <div class="row">
+                    <p class="col-12 m-0 text-success p-0">All reports are read.</p>
+                  </div>
                   <hr>
                 </div>
               </div>
@@ -67,7 +68,7 @@
           </div>
         </div>
 
-        
+
       </div>
 
       <ul class="list-unstyled components">
@@ -138,13 +139,13 @@
               <a href="../reportsummary.html">
                 <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">英語 </span></a>
+                <span class="pl-2">英語 </span></a>
             </li>
             <li>
               <a href="">
                 <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                   aria-hidden="true"></i> -->
-                  <span class="pl-2">日本語 </span></a>
+                <span class="pl-2">日本語 </span></a>
             </li>
           </ul>
         </li>
@@ -173,7 +174,8 @@
           <div id="card1" class=" col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px;  max-height: 78px;">
+              <div class="card-header bg-custom py-3 px-4 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px;  max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">一番レポートの数が高いカテゴリー</h6>
               </div>
               <!-- End of Card Header -->
@@ -193,7 +195,8 @@
           <div id="card2" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex px-4 flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center  pt-4">一番レポートの数が高いグループ</h6>
               </div>
               <!-- End of Card Header -->
@@ -213,7 +216,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">レポートの数</h6>
               </div>
               <!-- End of Card Header -->
@@ -232,7 +236,8 @@
           <div id="card3" class="col stats-card px-2 pt-2">
             <div class="card shadow h-100 border-info">
               <!-- Card Header - Dropdown -->
-              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between" style="min-height: 78px; max-height: 78px;">
+              <div class="card-header bg-custom py-3 d-flex flex-row align-items-center justify-content-between"
+                style="min-height: 78px; max-height: 78px;">
                 <h6 class="text-center m-0 font-weight-bold pt-4">今日のレポート</h6>
               </div>
               <div class="card-body p-0">
@@ -244,7 +249,7 @@
           </div>
         </div>
         <!-- End of row for trend cards -->
-        
+
         <!-- Start of row for recent reports -->
         <div class="row">
           <div id="card4" class="stats-card  col pt-2">
@@ -274,7 +279,25 @@
           </div>
         </div>
         <!-- End of row for recent reports -->
-        
+
+        <!-- Start row for number of reports weekly  -->
+        <div id="card4" class="stats-card  col pt-2">
+          <div class="card shadow h-100 row mx-2 border-info">
+            <!-- Card Header -->
+            <div class="card-header bg-custom pb-3 justify-content-center">
+              <h6 class="m-0 font-weight-bold text-uppercase text-center pt-4">Weekly Reports</h6>
+            </div>
+            <div class="card-body p-0">
+              <div class="col p-0 d-flex justify-content-center align-items-center h-100">
+                <div class="chartContainer" style="position: relative; height:50vh; width:70vw">
+                  <canvas id="weeklyReports"></canvas>
+                </div>
+              </div>
+            </div>
+              
+          </div>
+        </div>
+        <!-- End row for number of reports weekly -->
       </div>
     </div>
 
@@ -360,19 +383,43 @@
             </li> -->
       </div>
       <div class="message-box ">
-        <form id="message-form" action="#" autocomplete="off">
+        <form id="message-form" action="#" autocomplete="off" class="row justify-content-between mx-2">
           <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
           <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
         </form>
       </div>
     </div>
 
+    <!-- Chart js -->
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 
     <!-- Firebase core Javascript-->
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
     <script src="../js/firestore.js"> </script>
+
+    <!-- PNotify Javascript-->
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotify.js"></script>
+    <link href="../node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+    <script type="text/javascript">
+      window.centerModalStack = {
+        'dir1': 'down',
+        'firstpos1': 25,
+        'modal': true,
+        'overlayClose': true
+      };
+      PNotify.modules.History.defaults.maxInStack = 3;
+    </script>
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

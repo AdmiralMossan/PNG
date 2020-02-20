@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
+
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body style="overflow: hidden;">
 
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -115,30 +115,30 @@
                 </li>
                 <li>
                     <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                      <i class="fas fa-language"></i>
-                      言語
+                        <i class="fas fa-language"></i>
+                        言語
                     </a>
                     <ul class="collapse list-unstyled" id="language">
-                      <li>
-                        <a href="../print.html">
-                          <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
+                        <li>
+                            <a href="../print.html">
+                                <!-- <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">英語 </span></a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
+                                <span class="pl-2">英語 </span></a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <!-- <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
                             aria-hidden="true"></i> -->
-                            <span class="pl-2">日本語 </span></a>
-                      </li>
+                                <span class="pl-2">日本語 </span></a>
+                        </li>
                     </ul>
-                  </li>
+                </li>
             </ul>
 
         </nav>
 
         <!-- Page Content  -->
-        <div id="content">
+        <div id="content" style="overflow: auto;">
 
             <nav id="menubutton" class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
@@ -191,8 +191,7 @@
                                                             <input class="form-check-input" type="radio"
                                                                 name="inlineRadioOptions" id="category" value="1"
                                                                 checked="checked">
-                                                            <label class="form-check-label"
-                                                                for="category">カテゴリー</label>
+                                                            <label class="form-check-label" for="category">カテゴリー</label>
                                                         </div>
                                                         <div class="form-check form-check-inline mr-0">
                                                             <input class="form-check-input" type="radio"
@@ -204,7 +203,8 @@
                                                         <div class="form-check form-check-inline mr-0">
                                                             <input id="print_icon" class="material-icons" type="button"
                                                                 value="print" onclick="printGraphs()">
-                                                            <label class="form-check-label pl-1" for="print">Print</label>
+                                                            <label class="form-check-label pl-1"
+                                                                for="print">Print</label>
                                                         </div>
                                                     </h6>
                                                 </div>
@@ -213,19 +213,19 @@
                                             </div>
                                         </div>
                                         <div id="graphCollection" class="row">
-                                            
+
                                             <div class="col">
                                                 <canvas id="graph1"></canvas>
                                                 <canvas id="graph2"></canvas>
                                             </div>
-            
+
                                             <div class="col">
                                                 <canvas id="graph3"></canvas>
                                                 <canvas id="graph4"></canvas>
                                             </div>
-                                
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- End of Bar Graph -->
@@ -280,7 +280,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-    
+
     <!-- Chart js -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
@@ -292,15 +292,15 @@
     <script src="../js/firestore.js"></script>
 
     <!-- PNotify Javascript-->
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotify.js"></script>
-    <link href="node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
-    <script type="text/javascript" src="node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotify.js"></script>
+    <link href="../node_modules/pnotify/dist/PNotifyBrightTheme.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyCallbacks.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyMobile.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyHistory.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyDesktop.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyConfirm.js"></script>
+    <script type="text/javascript" src="../node_modules/pnotify/dist/iife/PNotifyReference.js"></script>
     <script type="text/javascript">
         window.centerModalStack = {
             'dir1': 'down',
@@ -313,8 +313,10 @@
     </script>
 
     <!-- jsPDF Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"
+        integrity="sha256-gJWdmuCRBovJMD9D/TVdo4TIK8u5Sti11764sZT1DhI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
+        integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
 
     <!-- Page Custom script-->
     <script type="text/javascript" src="../js/notif.js"></script>

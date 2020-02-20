@@ -3,6 +3,8 @@
 
 var notif = false;
 var reports = [];
+var categories = [];
+var groups = [];
 var loaded = false;
 
 window.addEventListener("load", async () => {
@@ -80,8 +82,30 @@ async function getReports() {
                 locReps.push(doc.data());
             });
         });
+    
+    await db
+        .collection("categories")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locCat.push(doc.data().name);
+            });
+        });
+
+    await db
+        .collection("groups")
+        .orderBy("id")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                locGrps.push(doc.data().name);
+            });
+        });
 
     reports = locReps;
+    categories = locCat;
+    groups = locGrps;
 }
 
 async function showNotif() {

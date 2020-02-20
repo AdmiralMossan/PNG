@@ -24,6 +24,9 @@ window.addEventListener("load", async () => {
     renderGraphs();
 
     $('#category').change(function () {
+        $('#next').show();
+        $('#search').show();
+        $('#prev').show();
         generateColors(1);
         search = 1;
         document.getElementById("search").value = search.toString();
@@ -34,6 +37,9 @@ window.addEventListener("load", async () => {
     });
   
     $('#group').change(function () {
+        $('#next').show();
+        $('#search').show();
+        $('#prev').show();
         generateColors(2);
         search = 1;
         document.getElementById("search").value = search.toString();
@@ -44,9 +50,9 @@ window.addEventListener("load", async () => {
     });
 
     $('#3dgraph').change(function () {
-        $('#graphCollection div').html("");
-        let body = "<div class='card-body h-75 w-80 py-0'><div id='graph3d' class='container px-0 h-100'><div id='mygraph' class='h-100'></div></div></div>";
-        $("#graphCollection").append(body);
+        $('#next').hide();
+        $('#search').hide();
+        $('#prev').hide();
         loadData(1).then(function () {
             drawVisualization(data);
         });
@@ -64,12 +70,11 @@ function renderGraphs(){
     let len = sortBy == 1 ? categoryLength : groupLength;
     let body = '';
 
-    $('#graphCollection div').html("");
+    $('#graphCollection').html("");
 
     for (let i = 0 ; i < 4 ; i++){
         body += "<div class='col-6'><canvas id='graph"+ i + "'></canvas></div>";
     }
-
 
     $("#graphCollection").append(body);
     
@@ -231,6 +236,9 @@ async function loadData(colorBy) {
 }
 
 async function drawVisualization(data) {
+    $('#graphCollection').html("");
+    let body = "<div class='card-body h-100 w-80 py-0'><div id='graph3d' class='container px-0 h-100'><div id='mygraph' style='height: 60vh'></div></div></div>";
+    $("#graphCollection").append(body);
     // specify options
     maxZvalue = Math.ceil((maxZvalue + 1) / 10) * 10
     let xL = "";
@@ -301,19 +309,26 @@ async function drawVisualization(data) {
     var container = document.getElementById("mygraph");
     graph = new vis.Graph3d(container, data, options);
   
-    graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
+    graph.setCameraPosition({ horizontal: -0.5, vertical: 0.5, distance: 2.3 }); // restore camera position
 }
 
 function printGraphs() {
-    let docText = document.getElementById('category').checked ? 'Category ' : 'Group ';
+    let docText = '';
+    if(document.getElementById('category').checked){
+        docText = 'Category Reports';
+    } else if(document.getElementById('group').checked){
+        docText = 'Group Reports';
+    } else {
+        docText = '3D Graph';
+    }
     html2canvas($("#graphCollection"), {
         onrendered: function(canvas) {         
             var imgData = canvas.toDataURL(
                 'image/png');              
-            var doc = new jsPDF('l', 'mm', 'legal');
-            doc.text(docText + "Reports", 105, 15, null, null, "center");
-            doc.addImage(imgData, 'PNG', 40, 20);
-            doc.save(docText + "Graphs");
+            var doc = new jsPDF('l', 'mm', 'letter');
+            doc.text(docText, 140, 25, null, null, "center");
+            doc.addImage(imgData, 'PNG', 10, 40);
+            doc.save(docText);
         }
     });
 }

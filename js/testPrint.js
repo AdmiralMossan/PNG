@@ -312,7 +312,7 @@ async function drawVisualization(data) {
     graph.setCameraPosition({ horizontal: -0.5, vertical: 0.5, distance: 2.3 }); // restore camera position
 }
 
-function printGraphs() {
+function printGraphs(value) {
     let docText = '';
     if(document.getElementById('category').checked){
         docText = 'Category Reports';
@@ -321,47 +321,43 @@ function printGraphs() {
     } else {
         docText = '3D Graph';
     }
-    
-    html2canvas($("#graphCollection"), {
-        onrendered: function(canvas) {         
-            var imgData = canvas.toDataURL('image/bmp').replace("image/bmp", "image/octet-stream");
-            let link  = document.createElement('a');
-            link.download = "something.bmp";
-            link.href = imgData;
-            link.click();
-        }
-    });
 
-    // html2canvas($("#graphCollection"), {
-    //     onrendered: function(canvas) {         
-    //         var imgData = canvas.toDataURL('image/jpg').replace("image/jpg", "image/octet-stream");
-    //         let link  = document.createElement('a');
-    //         link.download = "something.jpg";
-    //         link.href = imgData;
-    //         link.click();
-    //     }
-    // });
-
-    // html2canvas($("#graphCollection"), {
-    //     onrendered: function(canvas) {         
-    //         var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-    //         let link  = document.createElement('a');
-    //         link.download = "something.png";
-    //         link.href = imgData;
-    //         link.click();
-    //     }
-    // });
-    
-    // html2canvas($("#graphCollection"), {
-    //     onrendered: function(canvas) {         
-    //         var imgData = canvas.toDataURL(
-    //             'image/png');              
-    //         var doc = new jsPDF('l', 'mm', 'letter');
-    //         doc.text(docText, 140, 25, null, null, "center");
-    //         doc.addImage(imgData, 'PNG', 10, 40);
-    //         doc.save(docText);
-    //     }
-    // });
+    switch(value){
+        case 0:
+            html2canvas($("#graphCollection"), {
+                onrendered: function(canvas) {         
+                    var imgData = canvas.toDataURL(
+                        'image/png');              
+                    var doc = new jsPDF('l', 'mm', 'letter');
+                    doc.text(docText, 140, 25, null, null, "center");
+                    doc.addImage(imgData, 'PNG', 10, 40);
+                    doc.save(docText);
+                }
+            });
+            break;
+        case 1:
+            html2canvas($("#graphCollection"), {
+                onrendered: function(canvas) {         
+                    var imgData = canvas.toDataURL('image/jpg').replace("image/jpg", "image/octet-stream");
+                    let link  = document.createElement('a');
+                    link.download = "something.jpg";
+                    link.href = imgData;
+                    link.click();
+                }
+            });
+            break;
+        case 2:
+            html2canvas($("#graphCollection"), {
+                onrendered: function(canvas) {         
+                    var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+                    let link  = document.createElement('a');
+                    link.download = "something.png";
+                    link.href = imgData;
+                    link.click();
+                }
+            });
+            break;
+    }
 }
 
 function buttonEnabler(value){

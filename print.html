@@ -208,10 +208,16 @@
                                                     </h6>
                                                     <h6 class="pl-2 m-1 font-weight-bold text-primary ">
                                                         <div class="form-check form-check-inline mr-0">
-                                                            <input id="print_icon" class="material-icons" type="button"
-                                                                value="print" onclick="printGraphs()">
-                                                            <label class="form-check-label pl-1"
-                                                                for="print">Print</label>
+                                                            <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Download as
+                                                            </button>
+                                                            <div id="dropdownMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                <a class="dropdown-item" href="#" onclick="printGraphs(0)">PDF</a>
+                                                                <a class="dropdown-item" href="#" onclick="printGraphs(1)">JPG</a>
+                                                                <a class="dropdown-item" href="#" onclick="printGraphs(2)">PNG</a>
+                                                            </div>
+                                                            <!-- <input id="download_icon" class="material-icons" type="button"
+                                                                value="vertical_align_bottom" onclick="printGraphs()"> -->
                                                         </div>
                                                     </h6>
                                                 </div>

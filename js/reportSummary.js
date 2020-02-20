@@ -85,7 +85,7 @@ function showLatest() {
     });
 
     $("#latestReport").append(head + body + "</tbody></table>");
-    $('#card5 > div').append('<div class="card-footer mx-auto py-1"><a href="/table.html"> All Reports</a></div>')
+    $('#card5 > div').append('<div class="card-footer mx-auto py-1"><a href="/table.html">All Reports</a></div>')
 }
 
 

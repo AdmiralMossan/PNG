@@ -321,16 +321,47 @@ function printGraphs() {
     } else {
         docText = '3D Graph';
     }
+    
     html2canvas($("#graphCollection"), {
         onrendered: function(canvas) {         
-            var imgData = canvas.toDataURL(
-                'image/png');              
-            var doc = new jsPDF('l', 'mm', 'letter');
-            doc.text(docText, 140, 25, null, null, "center");
-            doc.addImage(imgData, 'PNG', 10, 40);
-            doc.save(docText);
+            var imgData = canvas.toDataURL('image/bmp').replace("image/bmp", "image/octet-stream");
+            let link  = document.createElement('a');
+            link.download = "something.bmp";
+            link.href = imgData;
+            link.click();
         }
     });
+
+    // html2canvas($("#graphCollection"), {
+    //     onrendered: function(canvas) {         
+    //         var imgData = canvas.toDataURL('image/jpg').replace("image/jpg", "image/octet-stream");
+    //         let link  = document.createElement('a');
+    //         link.download = "something.jpg";
+    //         link.href = imgData;
+    //         link.click();
+    //     }
+    // });
+
+    // html2canvas($("#graphCollection"), {
+    //     onrendered: function(canvas) {         
+    //         var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+    //         let link  = document.createElement('a');
+    //         link.download = "something.png";
+    //         link.href = imgData;
+    //         link.click();
+    //     }
+    // });
+    
+    // html2canvas($("#graphCollection"), {
+    //     onrendered: function(canvas) {         
+    //         var imgData = canvas.toDataURL(
+    //             'image/png');              
+    //         var doc = new jsPDF('l', 'mm', 'letter');
+    //         doc.text(docText, 140, 25, null, null, "center");
+    //         doc.addImage(imgData, 'PNG', 10, 40);
+    //         doc.save(docText);
+    //     }
+    // });
 }
 
 function buttonEnabler(value){

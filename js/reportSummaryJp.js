@@ -34,7 +34,7 @@ function showLatest() {
         "<th style='width:20%;　writing-mode: horizontal-tb;'>ユーザー名</th>" +
         "<th style='width:1５%;'>グループ</th>" +
         "<th style='width:２５%;'>カテゴリー</th>" +
-        "<th style='width:40%;'>Date" +
+        "<th style='width:40%;'>日付" +
 
         "</th></tr></thead>";
 
@@ -84,7 +84,7 @@ function showLatest() {
     });
 
     $("#latestReport").append(head + body + "</tbody></table>");
-    $('#card4 > div').append('<div class="card-footer mx-auto py-1"><a href="../JP/table.html"> レポートリスト</a></div>')
+    $('#card5 > div').append('<div class="card-footer mx-auto py-1"><a href="../JP/table.html"> レポートリスト</a></div>')
 }
 
 

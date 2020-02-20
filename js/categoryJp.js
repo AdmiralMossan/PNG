@@ -45,8 +45,8 @@ async function showCategories() {
         "<thead class='thead-inverse bg-custom text-custom'>" +
         "<tr>" +
         "<th style='width:25%;'>カテゴリー名</th>" +
-        "<th style='width:70%;'>カテゴリーの説明</th>" +
-        "<th style='width:5%;'>変化</th>" +
+        "<th style='width:65%;'>カテゴリーの説明</th>" +
+        "<th style='width:10%;'>変化</th>" +
         "</tr>" +
         "</thead>";
 

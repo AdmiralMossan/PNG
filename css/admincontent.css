@@ -81,6 +81,14 @@ span {
   display: none;
 }
 
+#sidebar.active .sidebartext{
+  display:none
+}
+
+#sidebar.active .sidebaricon{
+  font-size: 23px;
+}
+
 #sidebar.active .sidebar-header strong {
   display: block;
 }

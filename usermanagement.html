@@ -28,7 +28,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
 </head>
 
 <body style="overflow: hidden;">
@@ -342,7 +342,11 @@
         <div class="message-box ">
             <form id="message-form" action="#" autocomplete="off" class="row justify-content-between mx-2">
                 <input id="messageInput" type="text" class="pl-1 pr-0" placeholder="Type a message..." />
-                <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+                <div class="buttons">
+                    <input id="mediaCapture" type="file" accept="image/*" capture="camera">
+                    <button id="submitImage"><i class="material-icons">image</i></button>
+                    <button id="submitMessage" type="submit" disabled><i class="material-icons">send</i></button>
+                </div>
             </form>
         </div>
     </div>
@@ -350,6 +354,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-messaging.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

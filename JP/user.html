@@ -56,28 +56,24 @@
   <nav id="navbar" class="navbar navbar-expand shadow-sm navbar-light topbar mb-2 pb-0 w-100">
     <!-- Nav Heading -->
     <div class="navbar-brand">
-      <h1 class="h3 mb-0 title_text pb-2">Report Creation</h1>
+      <h1 class="h3 mb-0 title_text pb-2">レポート作成</h1>
     </div>
 
     <!-- Nav Item - User Information -->
     <div class="ml-auto">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <h3 id="userName" class="mr-2 d-none d-inline whitetext">User</h3>さん
+        <h3 id="userName" class="mr-2 d-none d-inline whitetext">User</h3><h3 class="mr-2 d-none d-inline whitetext">さん</h3>
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
           <i class="fas fa-lock mr-2"></i>
-          Change Password
+          パスワードを変更する
         </a>
         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
           ログアウト
-        </a>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
-          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
-          Change Password
         </a>
       </div>
     </div>
@@ -88,15 +84,15 @@
       <div id="maincontainer" class="col-md rounded shadow-sm pt-2 pb-4">
         <div class="row">
           <div class="col-md h-25">
-            <h2 id="pagetitle" class="text-center my-0">Select a Report:</h2>
+            <h2 id="pagetitle" class="text-center my-0">レポートを選択：</h2>
             <p class="lead text-center">
-              Create a new report by pressing one of the report categories and pressing the report button below.
+              作りたいレポートのカテゴリーのボタンを下で押して下さい。
             </p>
             <div class="d-flex flex-column mx-auto min-vh-50 w-100 pb-2" style="max-width: 500px;">
               <div class="d-flex row text-center align-middle justify-content-center">
                 <div class="d-flex text-center">
                   <label id="searchBoxLabel" for="searchBox"></label>
-                  <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="Search" value=""
+                  <input id="searchBox" type="text" size="15" style="text-align: left;" placeholder="サーチ" value=""
                     onkeypress="searchBoxField()" onfocus="this.value=''">
                   <input id="searchButton" class="material-icons" type="button" value="search"
                     onclick="searchBoxField()">
@@ -104,12 +100,12 @@
                 <div class="dropdown pl-4">
                   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Sort Categories
+                    カテゴリーを並べ替える
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(0)">並べ替え (A-Z)</a>
-                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(1)">並べ替え (Z-A)</a>
-                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(2)">Sort by Most Reported</a>
+                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(0)">カテゴリー名 (A-Z)</a>
+                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(1)">カテゴリー名 (Z-A)</a>
+                    <a class="dropdown-item" href="#" onclick="changeDropdownLabel(2)">一番レポートした</a>
                   </div>
                 </div>
               </div>
@@ -128,7 +124,7 @@
           </div>
         </div>
         <div class="row" style="height: 30px;">
-          <h6 class="text-center mx-auto py-4">Press the chosen category again to cancel selection.</h6>
+          <h6 class="text-center mx-auto py-4">選択をキャンセルするには、選択したカテゴリーをもう一度押して下さい。</h6>
         </div>
         <div class="row py-4"></div>
         <!-- Report Button -->
@@ -168,7 +164,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+              <h5 class="modal-title" id="exampleModalLabel">パスワード変更</h5>
               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -176,24 +172,24 @@
             <div class="modal-body">
               <div class="input-group mb-3">
                 <div class="row w-100 mb-1">
-                  <label for="currentPass" class="col-6">Current Password:</label>
+                  <label for="currentPass" class="col-6">以前のパスワード：</label>
                   <input id="currentPass" type="password" class="col-6" autocomplete="current-password">
                 </div>
                 <div class="row w-100 mb-1">
-                  <label for="newPass" class="col-6">New Password:</label>
+                  <label for="newPass" class="col-6">新しいパスワード：</label>
                   <input id="newPass" type="password" class="col-6" autocomplete="new-password"
                     pattern="[0-9a-fA-F]{4,12}">
                 </div>
                 <div class="row w-100 mb-1">
-                  <label for="confirmNewPass" class="col-6">Confirm New Password:</label>
+                  <label for="confirmNewPass" class="col-6">新しいパスワードを確認：</label>
                   <input id="confirmNewPass" type="password" class="col-6" autocomplete="new-password"
                     pattern="[0-9a-fA-F]{4,12}">
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="#" onclick="changePassword()">Save Changes</a>
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">キャンセル</button>
+              <a class="btn btn-primary" href="#" onclick="changePassword()">パスワードを変更</a>
             </div>
           </div>
         </div>

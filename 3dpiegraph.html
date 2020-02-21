@@ -40,20 +40,28 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header row justify-content-between align-items-center m-0">
-        <h3 class="mx-auto">Admin Menu</h3>
-        <strong class="mx-auto">AM</strong>
-        <div class="my-auto text-center">
-          <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"><i class="fas fa-bell"></i></a>
-          <!-- Dropdown - Notif Information -->
-          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
-            aria-labelledby="notifDropdown" id="notifItem" style="max-height:40vh;overflow: auto;">
-            <div class="dropdown-item py-0">
-              <hr>
-              <div class="row">
-                <p class="col-12 m-0 text-success p-0">All reports are read.</p>
+        <div class="row">
+          <div class="col">
+            <h3>Admin Menu</h3>
+            <strong>AM</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="my-auto text-center pb-1">
+              <a class="my-auto btn" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i></a>
+              <!-- Dropdown - Notif Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in scroll-secondary"
+                aria-labelledby="notifDropdown" id="notifItem">
+                <div class="dropdown-item py-0">
+                  <hr>
+                  <div class="row">
+                    <p class="col-12 m-0 text-success p-0">All reports are read.</p>
+                  </div>
+                  <hr>
+                </div>
               </div>
-              <hr>
             </div>
           </div>
         </div>
@@ -62,49 +70,48 @@
       <ul class="list-unstyled components">
         <li>
           <a href="reportsummary.html">
-            <i class="fas fa-home"></i>
-            Home
+            <i class="fas fa-home sidebaricon"></i>
+            <span class="sidebartext"> Home</span>
           </a>
         </li>
 
         <li class="active">
           <a href="#chartSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="fas fa-chart-bar"></i>
-            Charts
-
+            <i class="fas fa-chart-bar sidebaricon"></i>
+            <span class="sidebartext"> Charts</span>
           </a>
           <ul class="collapse list-unstyled" id="chartSubmenu">
             <li class="active">
               <a href="#">
-                <i class="fas fa-cube" data-toggle="tooltip" data-placement="top" title="3d"
-                  aria-hidden="true"></i><span class="pl-2">3D & Pie Graph </span></a>
+                <i class="fas fa-cube sidebaricon" data-toggle="tooltip" data-placement="top" title="3d"
+                  aria-hidden="true"></i><span class="pl-2 sidebartext">3D & Pie Graph </span></a>
             </li>
             <li>
               <a href="bargraphs.html">
-                <i class="fas fa-chart-bar" data-toggle="tooltip" data-placement="top" title="3d"
-                  aria-hidden="true"></i><span class="pl-2">Bar Graphs </span></a>
+                <i class="fas fa-chart-bar sidebaricon" data-toggle="tooltip" data-placement="top" title="3d"
+                  aria-hidden="true"></i><span class="pl-2 sidebartext">Bar Graphs </span></a>
             </li>
           </ul>
         </li>
 
         <li>
           <a href="category.html">
-            <i class="fas fa-list"></i> Category
+            <i class="fas fa-list sidebaricon"></i><span class="sidebartext"> Category</span>
           </a>
         </li>
 
         <li>
           <a href="usermanagement.html">
-            <i class="fas fa-user-alt"></i> Users
+            <i class="fas fa-user-alt sidebaricon"></i><span class="sidebartext"> Users</span>
           </a>
         </li>
 
         <li>
-          <a href="table.html"><i class="fas fa-table"></i> Table </a>
+          <a href="table.html"><i class="fas fa-table sidebaricon"></i><span class="sidebartext"> Table </span></a>
         </li>
 
         <li>
-          <a href="print.html"><i class="fas fa-print"></i> Print Report </a>
+          <a href="print.html"><i class="fas fa-print sidebaricon"></i><span class="sidebartext"> Print Report</span></a>
         </li>
       </ul>
 
@@ -113,15 +120,9 @@
           Admin
         </li>
         <li>
-          <a href="#" data-toggle="modal" data-target="#logoutModal">
-            <i class="fas fa-sign-out-alt"></i>
-            Logout
-          </a>
-        </li>
-        <li>
           <a href="#language" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="fas fa-language"></i>
-            Language
+            <i class="fas fa-language sidebaricon"></i>
+            <span class="sidebartext"> Language</span>
           </a>
           <ul class="collapse list-unstyled" id="language">
             <li>
@@ -137,6 +138,12 @@
                 <span class="pl-2">Japanese </span></a>
             </li>
           </ul>
+        </li>
+        <li>
+          <a href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt sidebaricon"></i>
+            <span class="sidebartext"> Logout</span>
+          </a>
         </li>
       </ul>
 

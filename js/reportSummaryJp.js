@@ -1,3 +1,4 @@
+
 // import { decodeBase64 } from "bcryptjs";
 
 // var latestReportsTable
@@ -65,7 +66,7 @@ function showLatest() {
                 report.category +
                 "</td>" +
                 "<td>" +
-                report.created.toDate().toLocaleString('ja-JP', { day: 'numeric', month: 'short', year: 'numeric' }) +
+                report.created.toDate().toLocaleString('ja-JP', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) +
                 "</td>" +
                 "</tr>";
         }
@@ -84,7 +85,7 @@ function showLatest() {
     });
 
     $("#latestReport").append(head + body + "</tbody></table>");
-    $('#card5 > div').append('<div class="card-footer mx-auto py-1"><a href="../JP/table.html"> レポートリスト</a></div>')
+    $('#card5 > div').append('<div class="card-footer mx-auto py-1"><a href="/table.html"> All Reports</a></div>')
 }
 
 
@@ -140,6 +141,7 @@ Date.prototype.subtractDays = function(days) {
 }
 
 function getDates(startDate, stopDate) {
+    
     var dateArray = new Array();
     var currentDate = startDate;
     while (currentDate <= stopDate) {
@@ -149,55 +151,146 @@ function getDates(startDate, stopDate) {
     return dateArray;
 }
 
+function generateColor() {
 
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    let color = "rgba(" + r + "," + g + "," + b + ", 1)";
+
+    return color;
+}
+
+let countReportsByGroup = [];
+let countReportsByCategories = [];
+
+function initArray() {
+    
+    for (let i = 0; i < groups.length; i++) {
+        countReportsByGroup[i] = [];
+    }
+
+    for (let i = 0; i < categories.length; i++) {
+        countReportsByCategories[i] = [];
+    }
+
+    for (let i = 0; i < groups.length; i++) {
+        for (let j = 0; j < 6; j++) {
+            countReportsByGroup[i][j] = 0;
+        }
+    }
+
+    for (let i = 0; i < categories.length; i++) {
+        for (let j = 0; j < 6; j++) {
+            countReportsByCategories[i][j] = 0;
+        }
+    }
+}
+
+function generateDataSet(){
+    let date = new Date();
+    let options = { month: '2-digit', day: '2-digit', year: 'numeric'};
+    let dates = getDates(date.subtractDays(6), date);
+    let dataSet = [];
+
+    for(let i = 0; i < reports.length; i++){
+        for(let j = 0; j < groups.length; j++){
+            for(let k = 0; k < dates.length; k++){
+                let reportDate = reports[i].created.toDate().toLocaleString("en-US", options);
+                if (reports[i].group === groups[j] && reportDate === dates[k]){
+                    countReportsByGroup[j][k] += 1;
+                }
+            }
+        }
+    }
+
+    for(let i = 0; i < groups.length; i++){
+        let color = generateColor();
+        dataSet.push({
+            label: groups[i] + " グループ", // Name the series
+            data: countReportsByGroup[i], // Specify the data values array
+            fill: false,
+            borderColor: color, // Add custom color border (Line)
+            backgroundColor: color, // Add custom color background (Points and Fill)
+            borderWidth: 1.5 // Specify bar border width
+        });
+    }
+    
+    return dataSet;
+}
 
 function getWeeklyReport(){
-
+    let ctx = document.getElementById("weeklyReports").getContext('2d');
+    let dateLabels = [];
     let date = new Date();
+    let dataSet = [];
+    
+    initArray();
+    dataSet = generateDataSet();
 
-    var ctx = document.getElementById("weeklyReports").getContext('2d');
-
+    dateLabels = getDates(date.subtractDays(6), date);
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: getDates(date.subtractDays(6), date),
-            datasets: [
-            {
-                label: 'Series 1', // Name the series
-                data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
-                fill: false,
-                borderColor: '#2196f3', // Add custom color border (Line)
-                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-                borderWidth: 1.5 // Specify bar border width
-            },
-            {
-                label: 'Series 2', // Name the series
-                data: [520,	60,	224,	1040,	4141,	411,	454,	47,	555, 811], // Specify the data values array
-                fill: false,
-                borderColor: 'red', // Add custom color border (Line)
-                backgroundColor: 'red', // Add custom color background (Points and Fill)
-                borderWidth: 1.5 // Specify bar border width
-            }
-            ]},
+            labels: dateLabels,
+            datasets: dataSet,
+        },
         options: {
-        responsive: true, // Instruct chart js to respond nicely.
-        maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+            title: {
+                display: true,
+                text: '1日あたりのレポートの数',
+                position: 'top',
+                fontSize: 16,
+                fontStyle: 'bold',
+                fontFamily: 'helvetica neue'
+            },
+            legend: {
+                position: 'top',
+                labels: {
+                    fontSize: 12,
+                    fontStyle: 'bold',
+                    fontFamily: 'arial',
+                    boxWidth: 15
+                }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'レポートの数',
+                        fontSize: 14,
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        fontSize: 14,
+                        display: true,
+                        labelString: '日付'
+                    }
+                }]
+            }
         }
     });
 
-    // console.log(date.subtractDays(7));
-    console.log(getDates(date.subtractDays(6), date));
-    let tmpDate = date.subtractDays(5).toLocaleString('ja-JP', { day: 'numeric', month: 'short', year: 'numeric' });
-    
-    //console.log(date.toLocaleString("en-US", options));
+}
 
-    // date.setDate(date.getDate() + 7);
-
-    // console.log(date);
-    
-    // for(let i = 0 ; i < reports.length ; i++){
-    //     if (reports[i].created.toDate().toLocaleString("en-US", options) === tmpDate){
-    //         console.log(reports[i].created.toDate().toLocaleString("en-US", options));
-    //     }
-    // }
+function downloadPNG(){
+    html2canvas($("#weeklyReports"), {
+        onrendered: function(canvas) {         
+            var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+            let link  = document.createElement('a');
+            link.download = "Weekly Report.png";
+            link.href = imgData;
+            link.click();
+        }
+    });
 }

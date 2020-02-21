@@ -102,9 +102,11 @@ function onMessageFormSubmit(e) {
   // Check that the user entered a message and is signed in.
   let message = messageInputElement.value;
   messageInputElement.value = "";
+  messageListElement.scrollTop = messageListElement.scrollHeight;
   if (message) {
     saveMessage(message).then(function () {
       // Clear message text field and re-enable the SEND button.
+      
       resetMaterialTextfield();
       toggleButton();
     });
@@ -270,9 +272,16 @@ function displayMessage(id, timestamp, name, text, sender, imageUrl) {
       messageListElement.scrollTop = messageListElement.scrollHeight;
     });
     image.src = imageUrl + '&' + new Date().getTime();
+    if(imageUrl != LOADING_IMAGE_URL)
+      image.className = "imageMessage"
     messageElement.innerHTML = '';
     messageElement.appendChild(image);
     messageElement.style.background = "transparent";
+    var messageDate = moment(timestamp.toDate());
+    if(messageDate.isSame(moment(), 'd'))
+      time.textContent = moment(timestamp.toDate()).format('HH:mm');
+    else 
+      time.textContent = moment(timestamp.toDate()).calendar(moment(  ));
   }
   // Show the card fading-in and scroll to view the new message.
   setTimeout(function () { div.classList.add('visible') }, 1);

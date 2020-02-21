@@ -105,7 +105,7 @@ async function loadData(colorBy) {
 }
 
 async function getGroupsAndCategories() {
-    clearValues();
+    // clearValues();
     getReports();
     let locCat = [];
     let locGrps = [];
@@ -158,7 +158,7 @@ window.addEventListener("load", async () => {
     isloaded = true;
     await getGroupsAndCategories();
     generateColors(1);
-   
+    console.log(reports);
     loadData(1).then(function () {
         drawVisualization(data);
         drawPie(1);
@@ -313,3 +313,43 @@ async function drawVisualization(data) {
   
     graph.setCameraPosition({ horizontal: 0, vertical: 0.5, distance: 1.5 }); // restore camera position
 }
+
+// async function getReports() {
+//     let locCat = [];
+//     let locReps = [];
+//     let locGrps = [];
+//     await db
+//         .collection("reports")
+//         .orderBy("created", "desc")
+//         .get()
+//         .then(function (querySnapshot) {
+//             querySnapshot.forEach(function (doc) {
+//                 locReps.push(doc.data());
+//             });
+//         });
+    
+//     await db
+//         .collection("categories")
+//         .orderBy("id")
+//         .get()
+//         .then(function (querySnapshot) {
+//             querySnapshot.forEach(function (doc) {
+//                 locCat.push(doc.data().name);
+//             });
+//         });
+
+//     await db
+//         .collection("groups")
+//         .orderBy("id")
+//         .get()
+//         .then(function (querySnapshot) {
+//             querySnapshot.forEach(function (doc) {
+//                 locGrps.push(doc.data().name);
+//             });
+//         });
+
+//     reports = locReps;
+   
+//     categories = locCat;
+//     groups = locGrps;
+// }

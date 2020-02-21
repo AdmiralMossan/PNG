@@ -8,7 +8,6 @@ var groups = [];
 var loaded = false;
 
 window.addEventListener("load", async () => {
-    
     let isloaded = false;
     await getReports();
     await showNotif();

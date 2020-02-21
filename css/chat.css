@@ -354,14 +354,18 @@ border:1.5px solid white;
   display: none;
 }
 
-.chat_msg_item.chat_msg_item_admin img {
-  max-width: 300px;
+.chat_msg_item.chat_msg_item_admin img.imageMessage {
+  max-width: 160px;
   max-height: 200px;
   float: left;
+  border:1px solid rgb(219, 216, 216);
+  border-radius: 15%;
 }
 
-.chat_msg_item.chat_msg_item_user img {
-  max-width: 300px;
+.chat_msg_item.chat_msg_item_user img.imageMessage {
+  max-width: 160px;
   max-height: 200px;
   float: right;
+  border:1px solid rgb(219, 216, 216);
+  border-radius: 15%;
 }

@@ -41,8 +41,8 @@ async function drawVisualization2d(search, sortBy) {
     let displayMax = 0;
     let index = search - 1;
 
-    let stringLabel = sortBy == 1 ? ' Category ' : ' Group ';
-    let labelStr = sortBy == 1 ? 'Group' : 'Category';
+    let stringLabel = sortBy == 1 ? ' カテゴリー ' : ' グループ ';
+    let labelStr = sortBy == 1 ? 'グループ' : 'カテゴリー';
 
     arrayLabel = sortBy == 1 ? categories : groups;
     displayLabel = sortBy == 1 ? groups : categories;

@@ -340,7 +340,7 @@ function printGraphs(value) {
                 onrendered: function(canvas) {         
                     var imgData = canvas.toDataURL('image/jpg').replace("image/jpg", "image/octet-stream");
                     let link  = document.createElement('a');
-                    link.download = "something.jpg";
+                    link.download = "Reports.jpg";
                     link.href = imgData;
                     link.click();
                 }
@@ -351,7 +351,7 @@ function printGraphs(value) {
                 onrendered: function(canvas) {         
                     var imgData = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
                     let link  = document.createElement('a');
-                    link.download = "something.png";
+                    link.download = "Reports.png";
                     link.href = imgData;
                     link.click();
                 }

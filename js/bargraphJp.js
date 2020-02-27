@@ -146,10 +146,12 @@ function findString(value){
         if (typeof(a) === 'string' && a.indexOf(value)>-1) {
             let index = displayData.indexOf(value) + 1;
             
-            document.getElementById("search").value = index.toString();
-            search = index;
-            buttonEnabler(index);
-            drawVisualization2d(index, sortBy);
+            if (index != 0){
+                document.getElementById("search").value = index.toString();
+                search = index;
+                buttonEnabler(index);
+                drawVisualization2d(index, sortBy);
+            }
         }
     });
 }
@@ -203,7 +205,7 @@ function searchBoxField(){
         source: displayData
     });
     
-    if(event.key === 'Enter' || event.type === 'click'){
+    if((event.key === 'Enter' || event.type === 'click') && searchString != ''){
         findString(searchString.toLowerCase());
     }
 }

@@ -5,8 +5,10 @@
 
 window.addEventListener("load", async () => {
     isloaded = true;
+    await deleteRep();
     await getReports();
     await reportSummary();
+
     getWeeklyReport();
     $('#latestReportsTable').DataTable({
         scrollY: 210,
@@ -19,6 +21,20 @@ window.addEventListener("load", async () => {
     });
 
 });
+
+async function deleteRep(){
+    db.collection("reports")
+        .where("status", "==", "pending")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                doc.ref.delete();
+            });
+        })
+        .catch(function (error) {
+            console.error("Error deletion: ", error);
+        });
+}
 
 function showLatest() {
     let cat = {};

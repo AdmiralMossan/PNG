@@ -141,7 +141,7 @@ async function reportSummary() {
     $("#categoryCount").text(cat["key"]);
     $("#groupCount").text(group["key"]);
     $("#reportCount").text(reports.length);
-    showLatest()
+    showLatest();
 }
 
 Date.prototype.addDays = function(days) {

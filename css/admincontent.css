@@ -1,11 +1,11 @@
-html {
+/* html {
   height: 100vh;
-}
+} */
 @import "https://fonts.googleapis.com/css?family=Roboto&display=swap";
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 p {
@@ -25,11 +25,11 @@ a:focus {
 }
 
 .navbar {
-  padding: 15px 10px;
+  padding: 0;
   background: #fff;
   border: none;
   border-radius: 0;
-  margin-bottom: 40px;
+  margin-bottom: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -54,8 +54,155 @@ span {
 /* ---------------------------------------------------
       SIDEBAR STYLE
   ----------------------------------------------------- */
+  *{
+    font-family: Roboto;
+  }
+  
+  #body-row {
+      margin-left:0;
+      margin-right:0;
+  }
+  #sidebar-container {
+      min-height: 100vh;   
+      background-color: #333;
+      padding: 0;
+  }
+  
+  #body-col{
+    padding:0;
+  }
+  
+  .list-group-item{
+    border-radius: 0;
+    border: none;
+  }
+  
+  /* Sidebar sizes when expanded and expanded */
+  .sidebar-expanded {
+      width: 230px;
+  }
+  .sidebar-collapsed {
+      width: 60px;
+  }
+  
+  /* Menu item*/
+  #sidebar-container .list-group a {
+      height: 50px;
+      color: white;
+  }
+  
+  /* Submenu item*/
+  #sidebar-container .list-group .sidebar-submenu a {
+      height: 45px;
+      padding-left: 30px;
+  }
+  .sidebar-submenu {
+      font-size: 0.9rem;
+  }
+  
+  /* Separators */
+  .sidebar-separator-title {
+      background-color: #333;
+      height: 5px;
+  }
+  .sidebar-separator {
+      background-color: #333;
+      height: 25px;
+  }
 
-.wrapper {
+  /* Closed submenu icon */
+  #sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+    content: " \f0d7";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+  }
+  /* Opened submenu icon */
+  #sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+    content: " \f0da";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+  }
+
+  .card.summary_reports, .card.other_displays{
+    /*width: 160px;*/
+    height: 120px;
+  
+    background: #FFFFFF;
+    /*border: 1px solid #8A6E59;*/
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+  }
+  
+  .card-body{
+    position: relative;
+    /*margin: none;*/
+  }
+  
+  .card-text{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 28px;
+    width: 60%;
+    color: #FF9999;
+  }
+  
+  .card_icon{
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    font-size: 55px;
+  }
+  
+  .card-num{
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    /*padding: 10px;*/
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 59px;
+    margin: 0;
+    color: #3D3028;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 4px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr{
+    background-color: #8A6E59;
+  }
+  
+  [type=search]{
+    border: 1px solid #8A6E59;
+    border-radius: 5px;
+  }
+
+  .dt-button.buttons-csv.buttons-html5,.dt-button.buttons-excel.buttons-html5,.dt-button.buttons-pdf.buttons-html5{
+    border: 1px solid #8A6E59;
+    padding: 2px;
+    border-radius: 5px;
+    background-color: #FFFAFA;
+    color: #3D3028;
+  }
+/* .wrapper {
   display: flex;
   align-items: stretch;
 }
@@ -121,7 +268,7 @@ span {
   -webkit-transform: translateX(50%);
   -ms-transform: translateX(50%);
   transform: translateX(50%);
-}
+} */
 
 /* ------------------------------------------------------
     LOGO/HEADER OF SIDEBAR

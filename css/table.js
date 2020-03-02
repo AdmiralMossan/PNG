@@ -6,7 +6,7 @@ window.addEventListener("load", async () => {
     await showTables();
     reportsTable = $('#reportsTable').DataTable({
         paging: false,
-        info: false,
+            info: false,
         dom: 'Bfrtip',
         scrollY: '40vh',
         buttons: ['csv', 'excel', 'pdf'],

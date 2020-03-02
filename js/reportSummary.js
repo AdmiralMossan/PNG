@@ -8,6 +8,8 @@ window.addEventListener("load", async () => {
     await reportSummary();
     getWeeklyReport();
     $('#latestReportsTable').DataTable({
+        paging: false,
+        info: false,
         scrollY: 210,
         responsive: true,
         searching: false,
@@ -240,7 +242,7 @@ function getWeeklyReport(){
             responsive: true, // Instruct chart js to respond nicely.
             maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
             title: {
-                display: true,
+                display: false,
                 text: 'Number of Reports per Day',
                 position: 'top',
                 fontSize: 16,
